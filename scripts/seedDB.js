@@ -5,7 +5,8 @@ const db = require("../models");
 
 mongoose.connect(
   process.env.MONGODB_URI ||
-  "mongodb://localhost/reactreadinglist"
+    "mongodb://user:password1@ds351107.mlab.com:51107/heroku_qmrhm6sk",
+  { useNewUrlParser: true }
 );
 
 const bookSeed = [
@@ -124,7 +125,7 @@ const bookSeed = [
 ];
 
 db.Book
-  .remove({})
+  .deleteMany({})
   .then(() => db.Book.collection.insertMany(bookSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
