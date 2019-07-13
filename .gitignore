@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-node_modules
-.DS_Store
-npm-debug.log
-.env
-=======
 .DS_Store
 node_modules
 npm-debug.log
 .env
->>>>>>> master
