@@ -14,6 +14,7 @@ function App() {
           <Route exact path="/" component={Books} />
           <Route exact path="/books" component={Books} />
           <Route exact path="/books/:id" component={Detail} />
+          <Route exact path="/auth/google" />
           <Route component={NoMatch} />
         </Switch>
       </div>

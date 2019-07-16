@@ -86,6 +86,11 @@ class Books extends Component {
               >
                 Submit Book
               </FormBtn>
+              <div class="button_cont col-12 text-center mb-5 align=center">
+                <a id="g-btn" href="/auth/google" rel="nofollow noopener">
+                  Login with Google
+                </a>
+              </div>
             </form>
           </Col>
           <Col size="md-6 sm-12">
