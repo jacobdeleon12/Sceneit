@@ -1,5 +1,5 @@
 const express = require("express");
-
+require ("dotenv").config();
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
@@ -17,12 +17,12 @@ app.use(routes);
 
 // START GOOGS STUFF ----------------------------------------------------------------------/
 require("./config/passport-setup.js")(app);
-require("./routes/googleRoutes/auth-routes.js")(app);
+require("./routes/google/auth-routes.js")(app);
 // END GOOGLE STUFF -------------------------------------------------------------------------------/
 
 mongoose.connect(
   process.env.MONGODB_URI ||
-    "mongodb://user:password1@ds351107.mlab.com:51107/heroku_qmrhm6sk",
+    `mongodb://${process.env.MDB_USERNAME}:${process.env.MDB_PASSWORD}@ds351107.mlab.com:51107/heroku_qmrhm6sk`,
   { useNewUrlParser: true }
 );
 

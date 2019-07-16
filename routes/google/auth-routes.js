@@ -1,4 +1,5 @@
 var passport = require("passport");
+const router = require("express").Router();
 var cookieParser = require("cookie-parser");
 var cookieSession = require("cookie-session");
 
@@ -11,21 +12,22 @@ module.exports = function(app) {
   );
   app.use(cookieParser());
 
-  app.get(
+  router.route(
     "/auth/google",
     passport.authenticate("google", {
       scope: ["profile", "email"]
-    })
-  );
+    }),
+    console.log("im here")
+    );
 
-  app.get("/auth/logout", function(req, res) {
+  router.get("/auth/logout", function(req, res) {
     //handle with passport
     req.logout();
     req.session = null;
     res.redirect("/");
   });
 
-  app.get("/auth/google/callback", passport.authenticate("google"), function(
+  router.get("/auth/google/callback", passport.authenticate("google"), function(
     req,
     res
   ) {
@@ -52,15 +54,6 @@ module.exports = function(app) {
       next(); // <-- important!
     });
     req.session.token = req.user.token;
-    res.redirect("/students");
-  });
-
-  app.get("/", function(req, res) {
-    res.render("index");
-    if (req.session.token) {
-      res.cookie("token", req.session.token);
-    } else {
-      res.cookie("token", "");
-    }
+    res.redirect("/");
   });
 };
