@@ -5,7 +5,7 @@ const db = require("../models");
 
 mongoose.connect(
   process.env.MONGODB_URI ||
-    "mongodb://user:password1@ds351107.mlab.com:51107/heroku_qmrhm6sk",
+    `mongodb://${process.env.MDB_USERNAME}:${process.env.MDB_PASSWORD}@ds351107.mlab.com:51107/heroku_qmrhm6sk`,
   { useNewUrlParser: true }
 );
 
