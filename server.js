@@ -15,6 +15,11 @@ if (process.env.NODE_ENV === "production") {
 // Add routes, both API and view
 app.use(routes);
 
+// START GOOGS STUFF ----------------------------------------------------------------------/
+require("./config/passport-setup.js")(app);
+require("./routes/googleRoutes/auth-routes.js")(app);
+// END GOOGLE STUFF -------------------------------------------------------------------------------/
+
 mongoose.connect(
   process.env.MONGODB_URI ||
     "mongodb://user:password1@ds351107.mlab.com:51107/heroku_qmrhm6sk",
@@ -23,5 +28,5 @@ mongoose.connect(
 
 // Start the API server
 app.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+  console.log(`API Server now listening on PORT ${PORT}!`);
 });
