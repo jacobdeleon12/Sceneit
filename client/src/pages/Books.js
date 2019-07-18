@@ -13,12 +13,47 @@ class Books extends Component {
     books: [],
     title: "",
     author: "",
-    synopsis: ""
+    synopsis: "",
+    redditHot:[],
+    redditSearch:[]
   };
 
   componentDidMount() {
     this.loadBooks();
+    this.reddit();
   }
+
+  reddit= () => {
+    API.getRedditHot().then(res => {
+
+        let redditdata = res.data.data.children;
+        let YTtitle=[]
+        let YTHotStr=[]
+        for (let i = 0; i < redditdata.length; i++) {
+          // console.log(redditdata[i].data.title);
+          //  console.log(YTtitle);
+          
+          let redditSplit = redditdata[i].data.media_embed.content
+          .split("embed/")[1];
+          if (typeof redditSplit != "undefined"){
+            YTHotStr.push(redditSplit.substring(0, redditSplit.indexOf('?')))
+            YTtitle.push( redditdata[i].data.title)
+          }
+        }
+        // console.log(YTtitle);
+  
+      this.setState({redditHot:{name: YTtitle , YTstr: YTHotStr}})
+      console.log(this.state.redditHot);
+    });
+  };
+
+  // redditSearch = (query) =>{
+  //   API.getRedditSearch().then(res =>{
+      
+  //   })
+  // }
+
+
 
   loadBooks = () => {
     API.getBooks()
@@ -105,8 +140,8 @@ class Books extends Component {
                 ))}
               </List>
             ) : (
-                <h3>No Results to Display</h3>
-              )}
+              <h3>No Results to Display</h3>
+            )}
           </Col>
         </Row>
       </Container>

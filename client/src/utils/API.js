@@ -16,5 +16,14 @@ export default {
   // Saves a book to the database
   saveBook: function(bookData) {
     return axios.post("/api/books", bookData);
+  },
+  //Reddit Api Hot
+  getRedditHot: function(){
+    return axios.get("https://www.reddit.com/r/videos/top.json?limit=30");
+  },
+  //reddit search 
+  getRedditSearch: function(query){
+    return axios.get(`https://www.reddit.com/r/videos/search.json?q=${query}restrict_sr=on&include_over_18=on&sort=relevance&t=all`)
   }
 };
+
