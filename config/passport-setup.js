@@ -4,13 +4,15 @@ var GoogleStrategy = require("passport-google-oauth20");
 var db = require("../models");
 
 module.exports = function(app) {
-  app.use(passport.initialize());
-  app.use(passport.session());
+  // app.use(passport.initialize());
+  // app.use(passport.session());
 
   passport.serializeUser(function(user, done) {
     done(null, user);
   });
   passport.deserializeUser(function(user, done) {
+    console.log("deserial");
+    
     done(null, user);
   });
 

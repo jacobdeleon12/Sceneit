@@ -1,5 +1,6 @@
 const express = require("express");
 require ("dotenv").config();
+var passport = require("passport");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
@@ -14,6 +15,9 @@ if (process.env.NODE_ENV === "production") {
 }
 // Add routes, both API and view
 app.use(routes);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // START GOOGS STUFF ----------------------------------------------------------------------/
 require("./config/passport-setup.js")(app);
