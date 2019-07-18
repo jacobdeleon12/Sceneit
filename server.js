@@ -15,11 +15,6 @@ if (process.env.NODE_ENV === "production") {
 // Add routes, both API and view
 app.use(routes);
 
-// START GOOGS STUFF ----------------------------------------------------------------------/
-require("./config/passport-setup.js")(app);
-require("./routes/google/auth-routes.js")(app);
-// END GOOGLE STUFF -------------------------------------------------------------------------------/
-
 mongoose.connect(
   process.env.MONGODB_URI ||
     `mongodb://${process.env.MDB_USERNAME}:${process.env.MDB_PASSWORD}@ds351107.mlab.com:51107/heroku_qmrhm6sk`,
