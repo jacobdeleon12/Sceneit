@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import DeleteBtn from "../components/DeleteBtn";
+import DeleteBtn from "../components/Buttons/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
-import { Input, TextArea, FormBtn } from "../components/Form";
+import { Input, TextArea } from "../components/Form";
+import { GLogin } from "../components/Buttons/Google/index";
 
 class Books extends Component {
   state = {
@@ -54,6 +55,9 @@ class Books extends Component {
   };
 
   render() {
+    // const responseGoogle = (response) => {
+    //   console.log(response);
+    // }
     return (
       <Container fluid>
         <Row>
@@ -80,18 +84,8 @@ class Books extends Component {
                 name="synopsis"
                 placeholder="Synopsis (Optional)"
               />
-              <FormBtn
-                disabled={!(this.state.author && this.state.title)}
-                onClick={this.handleFormSubmit}
-              >
-                Submit Book
-              </FormBtn>
-              <div class="button_cont col-12 text-center mb-5 align=center">
-                <a id="g-btn" href="/auth/google" rel="nofollow noopener">
-                  Login with Google
-                </a>
-              </div>
             </form>
+            <GLogin />
           </Col>
           <Col size="md-6 sm-12">
             <Jumbotron>
@@ -111,8 +105,8 @@ class Books extends Component {
                 ))}
               </List>
             ) : (
-              <h3>No Results to Display</h3>
-            )}
+                <h3>No Results to Display</h3>
+              )}
           </Col>
         </Row>
       </Container>
