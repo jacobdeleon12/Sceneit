@@ -12,6 +12,7 @@ export function GLogin() {
         <GoogleLogin
             clientId="560748393507-rrhsc621nmf915rp2d99bk38vrgjjpir.apps.googleusercontent.com"
             buttonText="Login"
+            className="Gbutton"
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
             cookiePolicy={'single_host_origin'}

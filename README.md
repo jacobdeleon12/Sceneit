@@ -4,7 +4,7 @@
 
 ## Overview
 
-`< SceneIt ™ >` is a video streaming service that will connect users to many video services as a one stop shop of video enjoyment. 
+`sceneIt™` is a video streaming service that will connect users to many video services as a one stop shop of video enjoyment. 
 
 Jacob -
 “I LOVE internet videos and HATE having multiple tabs/windows open on my browser. I want one place to find all my videos, and to save the ones that I want to view again. “
