@@ -14,10 +14,12 @@ class Main extends Component {
   state = {
     user: {},
     videos: [],
+    movieVideos:[],
     featuredVid: []
   };
   componentDidMount() {
     this.loadVideos();
+    // this.loadMovieInfo("endgame");
   }
 
   loadVideos = () => {
@@ -45,6 +47,33 @@ class Main extends Component {
       this.setState({ videos: reddit });
       //console.log(this.state.featuredVid);
     });
+  }
+
+  //for movie vidoes, and anything else we want to come up with
+  //must .split(" ").join("+") string for query to work correctly.
+  loadMovieInfo = (query)=>{
+    API.getMovieInfo(query).then(res =>{
+      // console.log(res.data.results);
+      const searchResult = res.data.results[0].id;
+      //second call for api video results
+        API.getMovieVideo(searchResult).then(res =>{
+          // console.log(res.data);
+          const videoResults = res.data.results;
+          let YTMovieKey = [];
+          let YTMovieName= [];
+          let movieSearch = [];
+
+          //max of 10 for video search
+          for (let i = 0; i < 10 && i < videoResults.length; i++) {
+            YTMovieKey = videoResults[i].key;
+            YTMovieName=videoResults[i].name
+            movieSearch.push({name:YTMovieName, YTstr:YTMovieKey})
+          }
+          this.setState({movieVideos:movieSearch});
+          // console.log(this.state);
+          
+        })
+    })
   }
 
   handleInputChange = event => {
