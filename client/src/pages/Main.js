@@ -5,25 +5,42 @@ import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 // import MovieCard from "../components/MovieCard";
 import Wrapper from "../components/Wrapper";
-import Navbar from "../components/Nav";
-import { GLogin, GLogout } from "../components/Buttons/Google/login";
-
+import NavBar from "../components/Nav/MainNav";
+import Iframe from "../components/Iframe";
 
 class Main extends Component {
   state = {
-    user: {}
+    user: {},
+    videos: []
   };
   componentDidMount() {
-    this.loadUsers();
+    this.loadVideos();
   }
 
-  loadUsers = () => {
-    API.getUsers()
-      .then(res =>
-        this.setState({ users: res.data, title: "", author: "", synopsis: "" })
-      )
-      .catch(err => console.log(err));
-  };
+  loadVideos = () => {
+    API.getVideos().then(res => {
+      const redditdata = res.data.data.children;
+      let YTtitle = [];
+      let YTHotStr = [];
+      let reddit = [];
+      for (let i = 0; i < redditdata.length; i++) {
+        //getting just the infromaion we need from huge string
+        const redditSplit = redditdata[i].data.media_embed.content.split(
+          "embed/"
+        )[1];
+        if (typeof redditSplit != "undefined") {
+          //title
+          YTtitle = redditdata[i].data.title;
+          //getting just the infromaion we need after ? in string
+          YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
+          //pushing to obj
+          reddit.push({ name: YTtitle, YTstr: YTHotStr });
+        }
+      }
+      this.setState({ videos: reddit });
+      console.log(this.state);
+    });
+  }
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -32,25 +49,10 @@ class Main extends Component {
     });
   };
 
-  handleFormSubmit = event => {
-    event.preventDefault();
-    if (this.state.title && this.state.author) {
-      API.saveUser({
-        title: this.state.title,
-        author: this.state.author,
-        synopsis: this.state.synopsis
-      })
-        .then(res => this.loadUsers())
-        .catch(err => console.log(err));
-    }
-  };
-
   render() {
     return (
       <div>
-        <Navbar>
-        <GLogout />
-        </Navbar>
+        <NavBar />
         <Container fluid>
           <Row>
             <Col size="md-12">
@@ -63,15 +65,12 @@ class Main extends Component {
             </Col>
           </Row>
           <Wrapper>
-            {/* {this.state.friends.map(friend => ( */}
-            {/* <MovieCard
-              remixFriends={this.remixFriends}
-              id={friend.id}
-              key={friend.id}
-              name={friend.name}
-              image={friend.image}
-            /> */}
-            {/* ))} */}
+            {this.state.videos.map(video => (
+              <Iframe
+                key={video.name}
+                YTstr={video.YTstr}
+              />
+            ))};
           </Wrapper>
         </Container>
       </div>

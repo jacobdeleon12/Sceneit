@@ -18,7 +18,7 @@ class Users extends Component {
   };
 
   componentDidMount() {
-    this.loadBooks();
+    this.loadUsers();
     this.reddit();
   }
 
@@ -47,8 +47,8 @@ class Users extends Component {
     });
   };
 
-  loadBooks = () => {
-    API.getBooks()
+  loadUsers = () => {
+    API.getUsers()
     this.loadUsers();
   }
 
