@@ -1,13 +1,13 @@
 import React from "react";
 
-function Nav() {
+function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <a className="navbar-brand" href="/">
-        React Reading List
+        SceneIT
       </a>
     </nav>
   );
 }
 
-export default Nav;
+export default NavBar;
