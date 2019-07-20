@@ -29,6 +29,7 @@
     "if-env": "^1.0.4",
     "moment": "^2.24.0",
     "mongoose": "^5.3.16",
+    "node": "^12.6.0",
     "react-google-login": "^5.0.4"
   },
   "repository": {
