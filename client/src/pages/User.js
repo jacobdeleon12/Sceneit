@@ -46,7 +46,7 @@ class User extends Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <NavBar />
         <Container fluid>
           <Row>
             <Col size="md-12">

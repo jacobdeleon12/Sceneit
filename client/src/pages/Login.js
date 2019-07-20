@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import { GLogin } from "../components/Buttons/Google/index";
+import NavBar from "../components/Nav/index";
 
-class Login extends Component {
+export default function Login() {
 
-
-    render() {
-        // const responseGoogle = (response) => {
-        //   console.log(response);
-        // }
-        return (
+    return (
+        <div>
+            <NavBar />
             <Container fluid>
                 <Row>
                     <Col size="sm-12">
@@ -19,8 +17,6 @@ class Login extends Component {
                     </Col>
                 </Row>
             </Container>
-        );
-    }
+        </div>
+    );
 };
-
-export default Login;

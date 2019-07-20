@@ -7,14 +7,14 @@
 
 import React from "react";
 
-function Nav() {
+function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <a className="navbar-brand" href="/">
-        SceneIT
+        React Reading List
       </a>
     </nav>
   );
 }
 
-export default Nav;
+export default NavBar;

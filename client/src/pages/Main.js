@@ -5,7 +5,7 @@ import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 // import MovieCard from "../components/MovieCard";
 import Wrapper from "../components/Wrapper";
-import Navbar from "../components/Nav";
+import NavBar from "../components/Nav/MainNav";
 
 class Main extends Component {
   state = {
@@ -46,7 +46,7 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <NavBar />
         <Container fluid>
           <Row>
             <Col size="md-12">
