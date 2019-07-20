@@ -52,14 +52,7 @@ class Title extends Component {
                         <Col size="md-12">
                             <Jumbotron>
                                 <Wrapper>
-                                    {/* {this.state.friends.map(friend => ( */}
-                                    {/* <MovieCard remixFriends={this.remixFriends}
-                                        id={friend.id}
-                                        key={friend.id}
-                                        name={friend.name}
-                                        image={friend.image}
-                                    /> */}
-                                    {/* ))} */}
+                                    {/* insert stuffs for the selected movie in here. */}
                                 </Wrapper>
                             </Jumbotron>
                         </Col>
