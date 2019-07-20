@@ -14,8 +14,7 @@ class Books extends Component {
     title: "",
     author: "",
     synopsis: "",
-    redditHot:[],
-    redditSearch:[]
+    redditHot: []
   };
 
   componentDidMount() {
@@ -23,37 +22,30 @@ class Books extends Component {
     this.reddit();
   }
 
-  reddit= () => {
+  reddit = () => {
     API.getRedditHot().then(res => {
-
-        let redditdata = res.data.data.children;
-        let YTtitle=[]
-        let YTHotStr=[]
-        for (let i = 0; i < redditdata.length; i++) {
-          // console.log(redditdata[i].data.title);
-          //  console.log(YTtitle);
-          
-          let redditSplit = redditdata[i].data.media_embed.content
-          .split("embed/")[1];
-          if (typeof redditSplit != "undefined"){
-            YTHotStr.push(redditSplit.substring(0, redditSplit.indexOf('?')))
-            YTtitle.push( redditdata[i].data.title)
-          }
+      const redditdata = res.data.data.children;
+      let YTtitle = [];
+      let YTHotStr = [];
+      let reddit = [];
+      for (let i = 0; i < redditdata.length; i++) {
+        //getting just the infromaion we need from huge string
+        const redditSplit = redditdata[i].data.media_embed.content.split(
+          "embed/"
+        )[1];
+        if (typeof redditSplit != "undefined") {
+          //title
+          YTtitle = redditdata[i].data.title;
+          //getting just the infromaion we need after ? in string
+          YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
+          //pushing to obj
+          reddit.push({ name: YTtitle, YTstr: YTHotStr });
         }
-        // console.log(YTtitle);
-  
-      this.setState({redditHot:{name: YTtitle , YTstr: YTHotStr}})
-      console.log(this.state.redditHot);
+      }
+      this.setState({ redditHot: reddit });
+      console.log(this.state);
     });
   };
-
-  // redditSearch = (query) =>{
-  //   API.getRedditSearch().then(res =>{
-      
-  //   })
-  // }
-
-
 
   loadBooks = () => {
     API.getBooks()
