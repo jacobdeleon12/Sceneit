@@ -7,11 +7,13 @@ import Iframe from "../components/Iframe";
 // import Wrapper from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
 import Iframe from "../components/Iframe";
+import JumboIframe from "../components/JumboIframe"
 
 class Main extends Component {
   state = {
     user: {},
-    videos: []
+    videos: [],
+    featuredVid: []
   };
   componentDidMount() {
     this.loadVideos();
@@ -37,8 +39,10 @@ class Main extends Component {
           reddit.push({ name: YTtitle, YTstr: YTHotStr });
         }
       }
+      this.setState({ featuredVid: reddit[0] });
+      reddit.shift();
       this.setState({ videos: reddit });
-      console.log(this.state);
+      console.log(this.state.featuredVid);
     });
   }
 
@@ -50,6 +54,7 @@ class Main extends Component {
   };
 
   render() {
+
     return (
       <div>
         <NavBar />
@@ -57,10 +62,11 @@ class Main extends Component {
           <Row>
             <Col size="md-12">
               <Jumbotron>
-                <h1>
-                  Featured Title
-              </h1>
-                {/* insert other shit */}
+                <h1>{this.state.featuredVid.name}</h1>
+                <JumboIframe
+                  key={this.state.featuredVid.name}
+                  YTstr={this.state.featuredVid.YTstr}
+                />
               </Jumbotron>
             </Col>
           </Row>
