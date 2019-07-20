@@ -9,16 +9,16 @@ import Wrapper from "../components/Wrapper";
 
 class SearchResults extends Component {
   state = {
-    book: {}
+    user: {}
   };
   componentDidMount() {
-    this.loadBooks();
+    this.loadUsers();
   }
 
-  loadBooks = () => {
-    API.getBooks()
+  loadUsers = () => {
+    API.getUsers()
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+        this.setState({ users: res.data, title: "", author: "", synopsis: "" })
       )
       .catch(err => console.log(err));
   };
@@ -33,12 +33,12 @@ class SearchResults extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.title && this.state.author) {
-      API.saveBook({
+      API.saveUser({
         title: this.state.title,
         author: this.state.author,
         synopsis: this.state.synopsis
       })
-        .then(res => this.loadBooks())
+        .then(res => this.loadUsers())
         .catch(err => console.log(err));
     }
   };
