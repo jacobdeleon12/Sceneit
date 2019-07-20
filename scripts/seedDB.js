@@ -2,12 +2,11 @@ const mongoose = require("mongoose");
 const db = require("../models");
 
 // This file empties the Users collection and inserts the Users below
-
+// ${process.env.MDB_USERNAME}:${process.env.MDB_PASSWORD}
+// user:password1
 mongoose.connect(
   process.env.MONGODB_URI ||
-    `mongodb://
-    ${process.env.MDB_USERNAME}:${process.env.MDB_PASSWORD}
-    @ds351107.mlab.com:51107/heroku_qmrhm6sk`,
+    `mongodb://user:password1@ds351107.mlab.com:51107/heroku_qmrhm6sk`,
   { useNewUrlParser: true }
 );
 
