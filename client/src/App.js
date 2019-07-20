@@ -10,11 +10,11 @@ function App() {
   return (
     <Router>
       <div>
-        {/* <Nav /> */}
+        <Nav />
         <Switch>
           <Route exact path="/" component={Login} />
-          <Route exact path="/users" component={Users} />
-          <Route exact path="/users/:id" component={Main} />
+          <Route exact path="/main" component={Main} />
+          <Route exact path="/main/user/:id" component={Users} />
           <Route component={NoMatch} />
         </Switch>
       </div>
