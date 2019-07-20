@@ -42,7 +42,7 @@ class Main extends Component {
       this.setState({ featuredVid: reddit[0] });
       reddit.shift();
       this.setState({ videos: reddit });
-      console.log(this.state.featuredVid);
+      //console.log(this.state.featuredVid);
     });
   }
 
