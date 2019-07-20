@@ -19,7 +19,7 @@ class Main extends Component {
   };
   componentDidMount() {
     this.loadVideos();
-    // this.loadMovieInfo("endgame")
+    // this.loadMovieInfo("endgame");
   }
 
   loadVideos = () => {
