@@ -10,10 +10,10 @@ import { Input, FrmBtn } from "../components/Form";
 
 class Search extends Component {
   state = {
-    book: {}
+    user: {}
   };
   componentDidMount() {
-    this.loadBooks();
+    this.loadUsers();
   }
 
   handleInputChange = event => {
@@ -26,7 +26,7 @@ class Search extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.title && this.state.author) {
-      API.saveBook({
+      API.saveUser({
         title: this.state.title,
         author: this.state.author,
         synopsis: this.state.synopsis
