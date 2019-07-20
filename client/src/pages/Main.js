@@ -5,13 +5,7 @@ import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 // import MovieCard from "../components/MovieCard";
 import Wrapper from "../components/Wrapper";
-<<<<<<< HEAD
 import NavBar from "../components/Nav/MainNav";
-=======
-import Navbar from "../components/Nav";
-import { GLogin, GLogout } from "../components/Buttons/Google/login";
-
->>>>>>> master
 
 class Main extends Component {
   state = {
@@ -52,13 +46,7 @@ class Main extends Component {
   render() {
     return (
       <div>
-<<<<<<< HEAD
         <NavBar />
-=======
-        <Navbar>
-        <GLogout />
-        </Navbar>
->>>>>>> master
         <Container fluid>
           <Row>
             <Col size="md-12">
