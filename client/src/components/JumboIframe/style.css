@@ -35,7 +35,6 @@
   @media (min-width: 425px) {
     .card {
       height: 20rem;
-      overflow: hidden;
       text-align: center;
       background:#6CADDC;
     }
@@ -44,7 +43,6 @@
   @media (min-width: 768px) {
     .card {
       height: 30rem;
-      overflow: hidden;
       text-align: center;
       background:#6CADDC;
     }
@@ -53,7 +51,6 @@
   @media (min-width: 1024px) {
     .card {
       height: 36rem;
-      overflow: hidden;
       text-align: center;
       background:#6CADDC;
     }

@@ -3,11 +3,11 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import Iframe from "../components/Iframe";
 import Wrapper from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
-
-import JumboIframe from "../components/JumboIframe";
+import Iframe from "../components/Iframe";
+import JumboIframe from "../components/JumboIframe"
+import SaveBtn from "../components/Buttons/SaveBtn";
 
 class Main extends Component {
   state = {
@@ -42,7 +42,7 @@ class Main extends Component {
       this.setState({ featuredVid: reddit[0] });
       reddit.shift();
       this.setState({ videos: reddit });
-      console.log(this.state.featuredVid);
+      //console.log(this.state.featuredVid);
     });
   }
 
@@ -77,19 +77,25 @@ class Main extends Component {
             <Col size="md-12">
               <Jumbotron>
                 <h1>{this.state.featuredVid.name}</h1>
-                <JumboIframe
-                  key={this.state.featuredVid.name}
-                  YTstr={this.state.featuredVid.YTstr}
-                />
+                <div>
+                  <JumboIframe
+                    key={this.state.featuredVid.name}
+                    YTstr={this.state.featuredVid.YTstr}
+                  />
+                  <SaveBtn />
+                </div>
               </Jumbotron>
             </Col>
           </Row>
           <Wrapper>
             {this.state.videos.map(video => (
-              <Iframe
-                key={video.name}
-                YTstr={video.YTstr}
-              />
+              <div className="text-center">
+                <Iframe
+                  key={video.name}
+                  YTstr={video.YTstr}
+                />
+                <SaveBtn />
+              </div>
             ))};
           </Wrapper>
         </Container>
