@@ -1,20 +1,26 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Books from "./pages/Books";
-import Detail from "./pages/Detail";
+import Login from "./pages/Login";
+import Main from "./pages/Main";
+import Search from "./pages/Search";
 import NoMatch from "./pages/NoMatch";
-import Nav from "./components/Nav";
+import SearchResults from "./pages/SearchResults";
+import Title from "./pages/Title";
+import User from "./pages/User";
+import EditUser from "./pages/EditUser";
 
 function App() {
   return (
     <Router>
       <div>
-        <Nav />
         <Switch>
-          <Route exact path="/" component={Books} />
-          <Route exact path="/books" component={Books} />
-          <Route exact path="/books/:id" component={Detail} />
-          <Route exact path="/auth/google" />
+          <Route exact path="/" component={Login} />
+          <Route exact path="/main" component={Main} />
+          <Route exact path="/main/search" component={Search} />
+          <Route exact path="/main/search/results" component={SearchResults} />
+          <Route exact path="/main/title" component={Title} />
+          <Route exact path="/main/user" component={User} />
+          <Route exact path="/main/user/:id" component={EditUser} />
           <Route component={NoMatch} />
         </Switch>
       </div>

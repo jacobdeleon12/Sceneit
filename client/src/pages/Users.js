@@ -8,29 +8,61 @@ import { List, ListItem } from "../components/List";
 import { Input, TextArea } from "../components/Form";
 import { GLogin } from "../components/Buttons/Google/index";
 
-class Books extends Component {
+class Users extends Component {
   state = {
-    books: [],
+    users: [],
     title: "",
     author: "",
-    synopsis: ""
+    synopsis: "",
+    redditHot: []
   };
 
   componentDidMount() {
-    this.loadBooks();
+    this.loadUsers();
+    this.reddit();
   }
 
-  loadBooks = () => {
-    API.getBooks()
+  reddit = () => {
+    API.getRedditHot().then(res => {
+      const redditdata = res.data.data.children;
+      let YTtitle = [];
+      let YTHotStr = [];
+      let reddit = [];
+      for (let i = 0; i < redditdata.length; i++) {
+        //getting just the infromaion we need from huge string
+        const redditSplit = redditdata[i].data.media_embed.content.split(
+          "embed/"
+        )[1];
+        if (typeof redditSplit != "undefined") {
+          //title
+          YTtitle = redditdata[i].data.title;
+          //getting just the infromaion we need after ? in string
+          YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
+          //pushing to obj
+          reddit.push({ name: YTtitle, YTstr: YTHotStr });
+        }
+      }
+      this.setState({ redditHot: reddit });
+      console.log(this.state);
+    });
+  };
+
+  loadUsers = () => {
+    API.getUsers()
+    this.loadUsers();
+  }
+
+  loadUsers = () => {
+    API.getUsers()
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+        this.setState({ users: res.data, title: "", author: "", synopsis: "" })
       )
       .catch(err => console.log(err));
   };
 
-  deleteBook = id => {
-    API.deleteBook(id)
-      .then(res => this.loadBooks())
+  deleteUser = id => {
+    API.deleteUser(id)
+      .then(res => this.loadUsers())
       .catch(err => console.log(err));
   };
 
@@ -44,12 +76,12 @@ class Books extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.title && this.state.author) {
-      API.saveBook({
+      API.saveUser({
         title: this.state.title,
         author: this.state.author,
         synopsis: this.state.synopsis
       })
-        .then(res => this.loadBooks())
+        .then(res => this.loadUsers())
         .catch(err => console.log(err));
     }
   };
@@ -63,7 +95,7 @@ class Books extends Component {
         <Row>
           <Col size="md-6">
             <Jumbotron>
-              <h1>What Books Should I Read?</h1>
+              <h1>What Users Should I Read?</h1>
             </Jumbotron>
             <form>
               <Input
@@ -89,24 +121,24 @@ class Books extends Component {
           </Col>
           <Col size="md-6 sm-12">
             <Jumbotron>
-              <h1>Books On My List</h1>
+              <h1>Users On My List</h1>
             </Jumbotron>
-            {this.state.books.length ? (
+            {this.state.users.length ? (
               <List>
-                {this.state.books.map(book => (
-                  <ListItem key={book._id}>
-                    <Link to={"/books/" + book._id}>
+                {this.state.users.map(user => (
+                  <ListItem key={user._id}>
+                    <Link to={"/users/" + user._id}>
                       <strong>
-                        {book.title} by {book.author}
+                        {user.title} by {user.author}
                       </strong>
                     </Link>
-                    <DeleteBtn onClick={() => this.deleteBook(book._id)} />
+                    <DeleteBtn onClick={() => this.deleteUser(user._id)} />
                   </ListItem>
                 ))}
               </List>
             ) : (
-                <h3>No Results to Display</h3>
-              )}
+              <h3>No Results to Display</h3>
+            )}
           </Col>
         </Row>
       </Container>
@@ -114,4 +146,4 @@ class Books extends Component {
   }
 }
 
-export default Books;
+export default Users;
