@@ -14,11 +14,8 @@ class Main extends Component {
   state = {
     user: {},
     videos: [],
-<<<<<<< HEAD
-    movieVideos:[]
-=======
+    movieVideos:[],
     featuredVid: []
->>>>>>> master
   };
   componentDidMount() {
     this.loadVideos();
@@ -48,11 +45,7 @@ class Main extends Component {
       this.setState({ featuredVid: reddit[0] });
       reddit.shift();
       this.setState({ videos: reddit });
-<<<<<<< HEAD
-      // console.log(this.state);
-=======
       //console.log(this.state.featuredVid);
->>>>>>> master
     });
   }
 
