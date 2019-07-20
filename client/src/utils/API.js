@@ -21,6 +21,9 @@ export default {
   getRedditHot: function(){
     return axios.get("https://www.reddit.com/r/videos/top.json?limit=30");
   },
+  searchYoutube: function(query) {
+    return axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${query}&key=AIzaSyBJpSy55Bx8rlO3A4FyhWyav8uFtC8_r3I`);
+  },
   //reddit search 
   // getRedditSearch: function(query){
   //   return axios.get(`https://www.reddit.com/r/videos/search.json?q=${query}&restrict_sr=on&include_over_18=on&sort=relevance&t=all`)
@@ -30,4 +33,6 @@ export default {
     return axios.post("/api/users", userData);
   }
 };
+
+
 
