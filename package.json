@@ -1,6 +1,9 @@
 {
-  "name": "mern",
+  "name": "sceneit",
   "version": "1.0.0",
+  "engines": {
+    "node": "12.6.0"
+  },
   "description": "Proposal for Project #3\r (Blake Marter, Jacob Deleon, Kai Richardson, Kaleb Merriman)",
   "main": "server.js",
   "scripts": {
@@ -18,6 +21,7 @@
   "devDependencies": {
     "concurrently": "^4.1.0",
     "nodemon": "^1.18.7",
+    "node": "^12.6.0",
     "prettier": "^1.17.1"
   },
   "dependencies": {
