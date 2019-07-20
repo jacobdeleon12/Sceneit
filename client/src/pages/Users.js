@@ -13,10 +13,42 @@ class Users extends Component {
     users: [],
     title: "",
     author: "",
-    synopsis: ""
+    synopsis: "",
+    redditHot: []
   };
 
   componentDidMount() {
+    this.loadUsers();
+    this.reddit();
+  }
+
+  reddit = () => {
+    API.getRedditHot().then(res => {
+      const redditdata = res.data.data.children;
+      let YTtitle = [];
+      let YTHotStr = [];
+      let reddit = [];
+      for (let i = 0; i < redditdata.length; i++) {
+        //getting just the infromaion we need from huge string
+        const redditSplit = redditdata[i].data.media_embed.content.split(
+          "embed/"
+        )[1];
+        if (typeof redditSplit != "undefined") {
+          //title
+          YTtitle = redditdata[i].data.title;
+          //getting just the infromaion we need after ? in string
+          YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
+          //pushing to obj
+          reddit.push({ name: YTtitle, YTstr: YTHotStr });
+        }
+      }
+      this.setState({ redditHot: reddit });
+      console.log(this.state);
+    });
+  };
+
+  loadUsers = () => {
+    API.getUsers()
     this.loadUsers();
   }
 
@@ -105,8 +137,8 @@ class Users extends Component {
                 ))}
               </List>
             ) : (
-                <h3>No Results to Display</h3>
-              )}
+              <h3>No Results to Display</h3>
+            )}
           </Col>
         </Row>
       </Container>

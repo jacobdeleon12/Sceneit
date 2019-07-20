@@ -6,6 +6,8 @@ import API from "../utils/API";
 // import MovieCard from "../components/MovieCard";
 import Wrapper from "../components/Wrapper";
 import Navbar from "../components/Nav";
+import { GLogin, GLogout } from "../components/Buttons/Google/login";
+
 
 class Main extends Component {
   state = {
@@ -46,7 +48,9 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <Navbar>
+        <GLogout />
+        </Navbar>
         <Container fluid>
           <Row>
             <Col size="md-12">
