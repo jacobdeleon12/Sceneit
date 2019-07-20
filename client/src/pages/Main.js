@@ -69,6 +69,7 @@ class Main extends Component {
                     key={this.state.featuredVid.name}
                     YTstr={this.state.featuredVid.YTstr}
                   />
+                  <br />
                   <SaveBtn />
                 </div>
               </Jumbotron>
