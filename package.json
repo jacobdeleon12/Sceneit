@@ -1,6 +1,9 @@
 {
-  "name": "mern",
+  "name": "sceneit",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.15.1"
+  },
   "description": "Proposal for Project #3\r (Blake Marter, Jacob Deleon, Kai Richardson, Kaleb Merriman)",
   "main": "server.js",
   "scripts": {
@@ -29,8 +32,6 @@
     "if-env": "^1.0.4",
     "moment": "^2.24.0",
     "mongoose": "^5.3.16",
-    "passport": "^0.4.0",
-    "passport-google-oauth": "^2.0.0",
     "react-google-login": "^5.0.4"
   },
   "repository": {
