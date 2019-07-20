@@ -4,10 +4,10 @@ import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import Iframe from "../components/Iframe";
-// import Wrapper from "../components/Wrapper";
+import Wrapper from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
-import Iframe from "../components/Iframe";
-import JumboIframe from "../components/JumboIframe"
+
+import JumboIframe from "../components/JumboIframe";
 
 class Main extends Component {
   state = {
@@ -52,6 +52,20 @@ class Main extends Component {
       [name]: value
     });
   };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    if (this.state.title && this.state.author) {
+      API.saveUser({
+        title: this.state.title,
+        author: this.state.author,
+        synopsis: this.state.synopsis
+      })
+        .then(res => this.loadUsers())
+        .catch(err => console.log(err));
+    }
+  };
+
 
   render() {
 

@@ -7,6 +7,7 @@ const userSchema = new Schema({
   familyName: { type: String, required: true },
   email: { type: String, required: true },
   imageUrl: { type: String, required: true },
+  savedVideos: String,
   date: { type: Date, default: Date.now }
 });
 
