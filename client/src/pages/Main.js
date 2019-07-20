@@ -3,22 +3,49 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-// import MovieCard from "../components/MovieCard";
-import Wrapper from "../components/Wrapper";
+import Iframe from "../components/Iframe";
+// import Wrapper from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
 
 class Main extends Component {
   state = {
-    user: {}
+    user: {},
+    redditHot: []
   };
   componentDidMount() {
-    this.loadUsers();
+    // this.loadUsers(); 
+    this.reddit();
   }
+
+  reddit = () => {
+    API.getRedditHot().then(res => {
+      const redditdata = res.data.data.children;
+      let YTtitle = [];
+      let YTHotStr = [];
+      let reddit = [];
+      for (let i = 0; i < redditdata.length; i++) {
+        //getting just the infromaion we need from huge string
+        const redditSplit = redditdata[i].data.media_embed.content.split(
+          "embed/"
+        )[1];
+        if (typeof redditSplit != "undefined") {
+          //title
+          YTtitle = redditdata[i].data.title;
+          //getting just the infromaion we need after ? in string
+          YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
+          //pushing to obj
+          reddit.push({ name: YTtitle, YTstr: YTHotStr });
+        }
+      }
+      this.setState({ redditHot: reddit });
+      console.log(this.state);
+    });
+  };
 
   loadUsers = () => {
     API.getUsers()
       .then(res =>
-        this.setState({ users: res.data, title: "", author: "", synopsis: "" })
+        this.setState({ users: res.data })
       )
       .catch(err => console.log(err));
   };
@@ -58,17 +85,22 @@ class Main extends Component {
               </Jumbotron>
             </Col>
           </Row>
-          <Wrapper>
-            {/* {this.state.friends.map(friend => ( */}
-            {/* <MovieCard
-              remixFriends={this.remixFriends}
-              id={friend.id}
-              key={friend.id}
-              name={friend.name}
-              image={friend.image}
-            /> */}
-            {/* ))} */}
-          </Wrapper>
+          <Container fluid>
+            <Col size="md-3">
+              <Row>
+                {/* <Iframe /> */}
+                {this.state.redditHot.map(video => (
+                  <Iframe
+                    // remixFriends={this.remixFriends}
+                    id={video.YTstr}
+                  // key={video.YTstr}
+                  // name={video.name}
+                  // image={friend.image}
+                  />
+                ))}
+              </ Row>
+            </Col>
+          </Container>
         </Container>
       </div>
     );
