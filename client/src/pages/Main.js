@@ -6,19 +6,19 @@ import API from "../utils/API";
 import Iframe from "../components/Iframe";
 // import Wrapper from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
+import Iframe from "../components/Iframe";
 
 class Main extends Component {
   state = {
     user: {},
-    redditHot: []
+    videos: []
   };
   componentDidMount() {
-    // this.loadUsers(); 
-    this.reddit();
+    this.loadVideos();
   }
 
-  reddit = () => {
-    API.getRedditHot().then(res => {
+  loadVideos = () => {
+    API.getVideos().then(res => {
       const redditdata = res.data.data.children;
       let YTtitle = [];
       let YTHotStr = [];
@@ -37,37 +37,16 @@ class Main extends Component {
           reddit.push({ name: YTtitle, YTstr: YTHotStr });
         }
       }
-      this.setState({ redditHot: reddit });
+      this.setState({ videos: reddit });
       console.log(this.state);
     });
-  };
-
-  loadUsers = () => {
-    API.getUsers()
-      .then(res =>
-        this.setState({ users: res.data })
-      )
-      .catch(err => console.log(err));
-  };
+  }
 
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
-  };
-
-  handleFormSubmit = event => {
-    event.preventDefault();
-    if (this.state.title && this.state.author) {
-      API.saveUser({
-        title: this.state.title,
-        author: this.state.author,
-        synopsis: this.state.synopsis
-      })
-        .then(res => this.loadUsers())
-        .catch(err => console.log(err));
-    }
   };
 
   render() {
@@ -85,22 +64,14 @@ class Main extends Component {
               </Jumbotron>
             </Col>
           </Row>
-          <Container fluid>
-            <Col size="md-3">
-              <Row>
-                {/* <Iframe /> */}
-                {this.state.redditHot.map(video => (
-                  <Iframe
-                    // remixFriends={this.remixFriends}
-                    id={video.YTstr}
-                  // key={video.YTstr}
-                  // name={video.name}
-                  // image={friend.image}
-                  />
-                ))}
-              </ Row>
-            </Col>
-          </Container>
+          <Wrapper>
+            {this.state.videos.map(video => (
+              <Iframe
+                key={video.name}
+                YTstr={video.YTstr}
+              />
+            ))};
+          </Wrapper>
         </Container>
       </div>
     );
