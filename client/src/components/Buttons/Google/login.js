@@ -16,6 +16,10 @@ export function GLogin() {
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
             cookiePolicy={'single_host_origin'}
+            // isSignedIn
+            // uxMode="redirect"
+            redirectUri="https://sceneitapp.herokuapp.com/auth/google/callback"
         />
     );
-};
+}
+
