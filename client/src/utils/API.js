@@ -21,7 +21,14 @@ export default {
   searchYoutube: function (query) {
     return axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${query}&key=AIzaSyBJpSy55Bx8rlO3A4FyhWyav8uFtC8_r3I`);
   },
-
+  //the movie base API
+  getMovieInfo: function (query) {
+    return axios.get(`https://api.themoviedb.org/3/search/movie?api_key=7b07c1ac2c9e9a9f62cfc49a4ec55f99&query=${query}`)
+  },
+  // the movie base Video for youtube
+  getMovieVideo: function (id) {
+    return axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=7b07c1ac2c9e9a9f62cfc49a4ec55f99&language=en-US`)
+  },
   // Saves a user to the database
   saveUser: function (userData) {
     return axios.post("/api/users", userData);
