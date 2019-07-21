@@ -27,12 +27,14 @@ export default {
   // *** External API querys ***
 
   //Reddit Api Hot
-  getRedditVideos: function() {
+  getRedditHot: function() {
     return axios.get("https://www.reddit.com/r/videos/top.json?limit=30");
   },
   //reddit search
-  getRedditSearch: function(query){
-    return axios.get(`https://www.reddit.com/r/videos/search.json?q=${query}&restrict_sr=on&include_over_18=on&sort=relevance&t=all`);
+  getRedditSearch: function(query) {
+    return axios.get(
+      `https://www.reddit.com/r/videos/search.json?q=${query}&restrict_sr=on&include_over_18=on&sort=relevance&t=all`
+    );
   },
   // Youtube api search
   getYoutubeSearch: function(query) {
@@ -41,13 +43,13 @@ export default {
     );
   },
   // the movie base Video for youtube
-  getMovieVideo: function(id) {
+  getTmdbVideo: function(query) {
     return axios.get(
-      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=7b07c1ac2c9e9a9f62cfc49a4ec55f99&language=en-US`
+      `https://api.themoviedb.org/3/movie/${query}/videos?api_key=7b07c1ac2c9e9a9f62cfc49a4ec55f99&language=en-US`
     );
   },
   //the movie base API
-  getMovieSearch: function(query) {
+  getTmdbSearch: function(query) {
     return axios.get(
       `https://api.themoviedb.org/3/search/movie?api_key=7b07c1ac2c9e9a9f62cfc49a4ec55f99&query=${query}`
     );
@@ -55,5 +57,5 @@ export default {
   // Steam api all
   getAllSteam: function(query) {
     return axios.get(`https://api.steampowered.com/ISteamApps/GetAppList/v1/`);
-  },
+  }
 };
