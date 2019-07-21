@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-// import MovieCard from "../components/MovieCard";
 import Wrapper from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
 import Iframe from "../components/Iframe";
@@ -83,6 +82,30 @@ class Main extends Component {
     });
   };
 
+  handleSaveFormSubmit = event => {
+    let selectedVideo = [];
+    this.state.videos.map(video => {
+      if (event.target.value === video.YTstr) {
+        selectedVideo = video;
+      }
+      return video;
+    })
+    console.log(selectedVideo);
+    const vStr = selectedVideo.YTstr;
+    const vName = selectedVideo.name;
+    console.log(this.user);
+
+    event.preventDefault();
+    API.saveVideo({
+      savedVideoStr: vStr,
+      savedVideoName: vName
+    })
+      .then(res => { console.log("this happened") })
+      .catch(err => console.log(err));
+    this.setState({ clicked: true });
+  };
+
+
   render() {
 
     return (
@@ -98,7 +121,10 @@ class Main extends Component {
                     key={this.state.featuredVid.name}
                     YTstr={this.state.featuredVid.YTstr}
                   />
-                  <SaveBtn />
+                  <SaveBtn
+                    value={this.state.featuredVid.YTstr}
+                    name="saveVid"
+                    onClick={this.handleSaveFormSubmit} />
                 </div>
               </Jumbotron>
             </Col>
@@ -110,7 +136,10 @@ class Main extends Component {
                   key={video.name}
                   YTstr={video.YTstr}
                 />
-                <SaveBtn />
+                <SaveBtn
+                  value={video.YTstr}
+                  name="saveVid"
+                  onClick={this.handleSaveFormSubmit} />
               </div>
             ))};
           </Wrapper>

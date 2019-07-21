@@ -1,13 +1,55 @@
 import React from "react";
 import "./style.css";
 import { GoogleLogout, GoogleLogin } from "react-google-login";
+import API from "../../../utils/API";
 
 const clientId =
   "560748393507-rrhsc621nmf915rp2d99bk38vrgjjpir.apps.googleusercontent.com";
 
 const success = response => {
   console.log(response); // eslint-disable-line
-  window.location.replace("https://sceneitapp.herokuapp.com/main");
+  console.log(response.profileObj); // eslint-disable-line
+  const profile = response.profileObj;
+  const profId = profile.googleId;
+  const profGiveName = profile.givenName;
+  const profFamName = profile.familyName;
+  const profImg = profile.imageUrl;
+  const profEmail = profile.email;
+  console.log(profId);
+  console.log(profGiveName);
+  console.log(profFamName);
+  console.log(profImg);
+  console.log(profEmail);
+
+  API.getUser(profId)
+    .then(res => {
+      console.log(res.data);
+      if (res.data === null || res.data.googleId !== profId) {
+        API.saveUser({
+          googleId: profId,
+          givenName: profGiveName,
+          familyName: profFamName,
+          email: profEmail,
+          imageUrl: profImg
+        })
+          .then(res => {
+            console.log("this happened")
+            window.location.replace("/main");
+            // window.location.replace("http://sceneitapp.herokuapp.com/main");
+          })
+          .catch(err => console.log(err))
+      } else {
+        console.log("already exists");
+        window.location.replace("/main");
+        // window.location.replace("https://sceneitapp.herokuapp.com/main");
+      }
+    })
+    .catch(err => console.log(err));
+
+  API.getUsers()
+    .then(res => console.log(res.data))
+    .catch(err => console.log(err));
+
 };
 
 const error = () => {
@@ -40,12 +82,12 @@ export function GLogin() {
     //   redirectUri="https://sceneitapp.herokuapp.com/auth/google/callback"
     // />
     <GoogleLogin
-    clientId={clientId}
-    buttonText="Login"
-    onSuccess={success}
-    onFailure={error}
-    cookiePolicy={'single_host_origin'}
-  />
+      clientId={clientId}
+      buttonText="Login"
+      onSuccess={success}
+      onFailure={error}
+      cookiePolicy={'single_host_origin'}
+    />
   );
 }
 
