@@ -53,17 +53,27 @@ class Main extends Component {
     });
   };
 
-  handleFormSubmit = event => {
+  handleSaveFormSubmit = event => {
+    let selectedVideo = [];
+    this.state.videos.map(video => {
+      if (event.target.value === video.YTstr) {
+        selectedVideo = video;
+      }
+      return video;
+    })
+    console.log(selectedVideo);
+    const vStr = selectedVideo.YTstr;
+    const vName = selectedVideo.name;
+    console.log(this.user);
+
     event.preventDefault();
-    if (this.state.title && this.state.author) {
-      API.saveUser({
-        title: this.state.title,
-        author: this.state.author,
-        synopsis: this.state.synopsis
-      })
-        .then(res => this.loadUsers())
-        .catch(err => console.log(err));
-    }
+    API.saveVideo({
+      savedVideoStr: vStr,
+      savedVideoName: vName
+    })
+      .then(res => { console.log("this happened") })
+      .catch(err => console.log(err));
+    this.setState({ clicked: true });
   };
 
 
@@ -82,7 +92,10 @@ class Main extends Component {
                     key={this.state.featuredVid.name}
                     YTstr={this.state.featuredVid.YTstr}
                   />
-                  <SaveBtn />
+                  <SaveBtn
+                    value={this.state.featuredVid.YTstr}
+                    name="saveVid"
+                    onClick={this.handleSaveFormSubmit} />
                 </div>
               </Jumbotron>
             </Col>
@@ -94,7 +107,10 @@ class Main extends Component {
                   key={video.name}
                   YTstr={video.YTstr}
                 />
-                <SaveBtn />
+                <SaveBtn
+                  value={video.YTstr}
+                  name="saveVid"
+                  onClick={this.handleSaveFormSubmit} />
               </div>
             ))};
           </Wrapper>

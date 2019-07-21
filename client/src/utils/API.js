@@ -10,8 +10,8 @@ export default {
     return axios.get("/api/users/" + id);
   },
   // Deletes the user with the given id
-  deleteUser: function (id) {
-    return axios.delete("/api/users/" + id);
+  deleteUser: function (_id) {
+    return axios.delete("/api/users/" + _id);
   },
   //Reddit Api Hot
   getVideos: function () {
