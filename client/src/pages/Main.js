@@ -29,18 +29,24 @@ class Main extends Component {
       let YTtitle = [];
       let YTHotStr = [];
       let reddit = [];
+      let vimeo = [];
       for (let i = 0; i < redditdata.length; i++) {
-        //getting just the infromaion we need from huge string
-        const redditSplit = redditdata[i].data.media_embed.content.split(
-          "embed/"
-        )[1];
-        if (typeof redditSplit != "undefined") {
-          //title
-          YTtitle = redditdata[i].data.title;
-          //getting just the infromaion we need after ? in string
-          YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
-          //pushing to obj
-          reddit.push({ name: YTtitle, YTstr: YTHotStr });
+        if (redditdata[i].data.domain === "vimeo.com") {
+          vimeo.push(redditdata[i].data.domain);
+          console.log("vimeo isnt supported.")
+        } else if (redditdata[i].data.domain != "vimeo.com") {
+          //getting just the infromaion we need from huge string
+          const redditSplit = redditdata[i].data.media_embed.content.split(
+            "embed/"
+          )[1];
+          if (typeof redditSplit != "undefined") {
+            //title
+            YTtitle = redditdata[i].data.title;
+            //getting just the infromaion we need after ? in string
+            YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
+            //pushing to obj
+            reddit.push({ name: YTtitle, YTstr: YTHotStr });
+          }
         }
       }
       this.setState({ featuredVid: reddit[0] });
@@ -106,7 +112,7 @@ class Main extends Component {
             </Col>
           </Row>
           <Wrapper>
-            {this.state.videos.map((video, i ) => (
+            {this.state.videos.map((video, i) => (
               console.log(i),
               <div className="text-center">
                 <Iframe
