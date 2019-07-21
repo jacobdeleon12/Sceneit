@@ -18,6 +18,45 @@ const userSeed = [
     email: "stealymonk@gmail.com",
     imageUrl:
       "https://lh6.googleusercontent.com/-jyLtxEGfgLU/AAAAAAAAAAI/AAAAAAAAAMo/y_usrbjOAXI/s96-c/photo.jpg",
+    savedVideos: [
+      // Youtube video
+      {
+        name: "Antique Hand Cranked Grinder - Restoration",
+        url: "https://www.youtube.com/embed/pqKyLvjgM1M",
+        comments: [
+          {
+            name: "Keanu Reeves",
+            comment: "Whoa.."
+          }
+        ],
+        date: "2019-07-20 00:37:36.466Z"
+      },
+      // Vimeo video
+      {
+        name: "Funny Cats - Funny vines - Funny Video - Funny Animals Videos",
+        url: "https://player.vimeo.com/video/116046838",
+        comments: [
+          {
+            name: "Robert De Niro",
+            comment: "You think this is funny!?"
+          }
+        ],
+        date: "2019-10-05 00:37:36.466Z"
+      },
+      // Steam video
+      {
+        name: "Cyberpunk 2077",
+        url:
+          "https://steamcdn-a.akamaihd.net/steam/apps/256753426/movie_max.webm?t=1560520757",
+          comments: [
+            {
+              name: "Denzel Washington",
+              comment: "My man!"
+            }
+          ],  
+        date: "2019-04-20 00:37:36.466Z"
+      }
+    ],
     date: new Date(Date.now())
   }
 ];
