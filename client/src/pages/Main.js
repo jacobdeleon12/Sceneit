@@ -13,16 +13,26 @@ class Main extends Component {
   state = {
     user: {},
     videos: [],
-    movieVideos:[],
+    movieVideos: [],
     featuredVid: []
   };
+
   componentDidMount() {
+    // this.loadUsers();
     this.loadVideos();
     // this.loadMovieInfo("endgame");
   }
 
+  loadUsers = () => {
+    API.getUsers()
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
+  }
+
   loadVideos = () => {
     API.getVideos().then(res => {
+      console.log(res.data);
+
       const redditdata = res.data.data.children;
       let YTtitle = [];
       let YTHotStr = [];
@@ -50,28 +60,28 @@ class Main extends Component {
 
   //for movie vidoes, and anything else we want to come up with
   //must .split(" ").join("+") string for query to work correctly.
-  loadMovieInfo = (query)=>{
-    API.getMovieInfo(query).then(res =>{
+  loadMovieInfo = (query) => {
+    API.getMovieInfo(query).then(res => {
       // console.log(res.data.results);
       const searchResult = res.data.results[0].id;
       //second call for api video results
-        API.getMovieVideo(searchResult).then(res =>{
-          // console.log(res.data);
-          const videoResults = res.data.results;
-          let YTMovieKey = [];
-          let YTMovieName= [];
-          let movieSearch = [];
+      API.getMovieVideo(searchResult).then(res => {
+        // console.log(res.data);
+        const videoResults = res.data.results;
+        let YTMovieKey = [];
+        let YTMovieName = [];
+        let movieSearch = [];
 
-          //max of 10 for video search
-          for (let i = 0; i < 10 && i < videoResults.length; i++) {
-            YTMovieKey = videoResults[i].key;
-            YTMovieName=videoResults[i].name
-            movieSearch.push({name:YTMovieName, YTstr:YTMovieKey})
-          }
-          this.setState({movieVideos:movieSearch});
-          // console.log(this.state);
-          
-        })
+        //max of 10 for video search
+        for (let i = 0; i < 10 && i < videoResults.length; i++) {
+          YTMovieKey = videoResults[i].key;
+          YTMovieName = videoResults[i].name
+          movieSearch.push({ name: YTMovieName, YTstr: YTMovieKey })
+        }
+        this.setState({ movieVideos: movieSearch });
+        // console.log(this.state);
+
+      })
     })
   }
 
