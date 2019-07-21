@@ -8,6 +8,7 @@ import NavBar from "../components/Nav/MainNav";
 import Iframe from "../components/Iframe";
 import JumboIframe from "../components/JumboIframe"
 import SaveBtn from "../components/Buttons/SaveBtn";
+//import Carousel from "../components/Carousel"
 
 class Main extends Component {
   state = {
@@ -20,7 +21,7 @@ class Main extends Component {
   componentDidMount() {
     // this.loadUsers();
     this.loadVideos();
-    // this.loadMovieInfo("endgame");
+    this.loadMovieInfo("endgame");
   }
 
   loadUsers = () => {
@@ -38,17 +39,19 @@ class Main extends Component {
       let YTHotStr = [];
       let reddit = [];
       for (let i = 0; i < redditdata.length; i++) {
-        //getting just the infromaion we need from huge string
-        const redditSplit = redditdata[i].data.media_embed.content.split(
-          "embed/"
-        )[1];
-        if (typeof redditSplit != "undefined") {
-          //title
-          YTtitle = redditdata[i].data.title;
-          //getting just the infromaion we need after ? in string
-          YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
-          //pushing to obj
-          reddit.push({ name: YTtitle, YTstr: YTHotStr });
+        if (redditdata[i].data.domain === "youtube.com") {
+          //getting just the infromaion we need from huge string
+          const redditSplit = redditdata[i].data.media_embed.content.split(
+            "embed/"
+          )[1];
+          if (typeof redditSplit != "undefined") {
+            //title
+            YTtitle = redditdata[i].data.title;
+            //getting just the infromaion we need after ? in string
+            YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
+            //pushing to obj
+            reddit.push({ name: YTtitle, YTstr: YTHotStr });
+          }
         }
       }
       this.setState({ featuredVid: reddit[0] });
@@ -146,12 +149,23 @@ class Main extends Component {
                   key={video.name}
                   YTstr={video.YTstr}
                 />
+                <SaveBtn />
+              </div>
+            ))}
+
+            {this.state.movieVideos.map(video => (
+              <div className="text-center">
+                <Iframe
+                  key={video.name}
+                  YTstr={video.YTstr}
+                />
                 <SaveBtn
                   value={video.YTstr}
                   name="saveVid"
                   onClick={this.handleSaveFormSubmit} />
               </div>
             ))};
+
           </Wrapper>
         </Container>
       </div>
