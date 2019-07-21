@@ -6,7 +6,7 @@ import Search from "./pages/Search";
 import NoMatch from "./pages/NoMatch";
 import SearchResults from "./pages/SearchResults";
 import User from "./pages/User";
-import EditUser from "./pages/EditUser";
+// import EditUser from "./pages/EditUser";
 
 function App() {
   return (
