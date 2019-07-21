@@ -8,17 +8,18 @@ import NavBar from "../components/Nav/MainNav";
 import Iframe from "../components/Iframe";
 import JumboIframe from "../components/JumboIframe"
 import SaveBtn from "../components/Buttons/SaveBtn";
+//import Carousel from "../components/Carousel"
 
 class Main extends Component {
   state = {
     user: {},
     videos: [],
-    movieVideos:[],
+    movieVideos: [],
     featuredVid: []
   };
   componentDidMount() {
     this.loadVideos();
-    // this.loadMovieInfo("endgame");
+    this.loadMovieInfo("endgame");
   }
 
   loadVideos = () => {
@@ -28,17 +29,19 @@ class Main extends Component {
       let YTHotStr = [];
       let reddit = [];
       for (let i = 0; i < redditdata.length; i++) {
-        //getting just the infromaion we need from huge string
-        const redditSplit = redditdata[i].data.media_embed.content.split(
-          "embed/"
-        )[1];
-        if (typeof redditSplit != "undefined") {
-          //title
-          YTtitle = redditdata[i].data.title;
-          //getting just the infromaion we need after ? in string
-          YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
-          //pushing to obj
-          reddit.push({ name: YTtitle, YTstr: YTHotStr });
+        if (redditdata[i].data.domain === "youtube.com") {
+          //getting just the infromaion we need from huge string
+          const redditSplit = redditdata[i].data.media_embed.content.split(
+            "embed/"
+          )[1];
+          if (typeof redditSplit != "undefined") {
+            //title
+            YTtitle = redditdata[i].data.title;
+            //getting just the infromaion we need after ? in string
+            YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
+            //pushing to obj
+            reddit.push({ name: YTtitle, YTstr: YTHotStr });
+          }
         }
       }
       this.setState({ featuredVid: reddit[0] });
@@ -50,28 +53,28 @@ class Main extends Component {
 
   //for movie vidoes, and anything else we want to come up with
   //must .split(" ").join("+") string for query to work correctly.
-  loadMovieInfo = (query)=>{
-    API.getMovieInfo(query).then(res =>{
+  loadMovieInfo = (query) => {
+    API.getMovieInfo(query).then(res => {
       // console.log(res.data.results);
       const searchResult = res.data.results[0].id;
       //second call for api video results
-        API.getMovieVideo(searchResult).then(res =>{
-          // console.log(res.data);
-          const videoResults = res.data.results;
-          let YTMovieKey = [];
-          let YTMovieName= [];
-          let movieSearch = [];
+      API.getMovieVideo(searchResult).then(res => {
+        // console.log(res.data);
+        const videoResults = res.data.results;
+        let YTMovieKey = [];
+        let YTMovieName = [];
+        let movieSearch = [];
 
-          //max of 10 for video search
-          for (let i = 0; i < 10 && i < videoResults.length; i++) {
-            YTMovieKey = videoResults[i].key;
-            YTMovieName=videoResults[i].name
-            movieSearch.push({name:YTMovieName, YTstr:YTMovieKey})
-          }
-          this.setState({movieVideos:movieSearch});
-          // console.log(this.state);
-          
-        })
+        //max of 10 for video search
+        for (let i = 0; i < 10 && i < videoResults.length; i++) {
+          YTMovieKey = videoResults[i].key;
+          YTMovieName = videoResults[i].name
+          movieSearch.push({ name: YTMovieName, YTstr: YTMovieKey })
+        }
+        this.setState({ movieVideos: movieSearch });
+        // console.log(this.state);
+
+      })
     })
   }
 
@@ -136,12 +139,23 @@ class Main extends Component {
                   key={video.name}
                   YTstr={video.YTstr}
                 />
+                <SaveBtn />
+              </div>
+            ))}
+
+            {this.state.movieVideos.map(video => (
+              <div className="text-center">
+                <Iframe
+                  key={video.name}
+                  YTstr={video.YTstr}
+                />
                 <SaveBtn
                   value={video.YTstr}
                   name="saveVid"
                   onClick={this.handleSaveFormSubmit} />
               </div>
             ))};
+
           </Wrapper>
         </Container>
       </div>
