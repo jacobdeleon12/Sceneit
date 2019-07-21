@@ -49,7 +49,7 @@ export default {
     );
   },
   //the movie base API
-  getTmdbSearch: function(query) {
+  getTmdbInfo: function(query) {
     return axios.get(
       `https://api.themoviedb.org/3/search/movie?api_key=7b07c1ac2c9e9a9f62cfc49a4ec55f99&query=${query}`
     );

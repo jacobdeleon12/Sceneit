@@ -12,12 +12,13 @@ mongoose.connect(
 
 const userSeed = [
   {
-    googleId: "106273713002496362502",
-    givenName: "Kai",
-    familyName: "Richardson",
     email: "stealymonk@gmail.com",
+    familyName: "Richardson",
+    givenName: "Kai",
+    googleId: "106273713002496362502",
     imageUrl:
-      "https://lh6.googleusercontent.com/-jyLtxEGfgLU/AAAAAAAAAAI/AAAAAAAAAMo/y_usrbjOAXI/s96-c/photo.jpg",
+    "https://lh6.googleusercontent.com/-jyLtxEGfgLU/AAAAAAAAAAI/AAAAAAAAAMo/y_usrbjOAXI/s96-c/photo.jpg",
+    name: "Kai",
     savedVideos: [
       // Youtube video
       {

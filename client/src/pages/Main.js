@@ -23,7 +23,7 @@ class Main extends Component {
   }
 
   loadVideos = () => {
-    API.getVideos().then(res => {
+    API.getRedditHot().then(res => {
       const redditdata = res.data.data.children;
       let YTtitle = [];
       let YTHotStr = [];
@@ -54,11 +54,11 @@ class Main extends Component {
   //for movie vidoes, and anything else we want to come up with
   //must .split(" ").join("+") string for query to work correctly.
   loadMovieInfo = (query) => {
-    API.getMovieInfo(query).then(res => {
+    API.getTmdbInfo(query).then(res => {
       // console.log(res.data.results);
       const searchResult = res.data.results[0].id;
       //second call for api video results
-      API.getMovieVideo(searchResult).then(res => {
+      API.getTmdbVideo(searchResult).then(res => {
         // console.log(res.data);
         const videoResults = res.data.results;
         let YTMovieKey = [];

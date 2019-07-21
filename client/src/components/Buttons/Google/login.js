@@ -1,47 +1,30 @@
-import React from "react";
 import "./style.css";
-import { GoogleLogout, GoogleLogin } from "react-google-login";
 import API from "../../../utils/API";
+import React from "react";
+import { GoogleLogout, GoogleLogin } from "react-google-login";
 
 const clientId =
   "560748393507-rrhsc621nmf915rp2d99bk38vrgjjpir.apps.googleusercontent.com";
 
 const success = response => {
-  console.log(response); // eslint-disable-line
-  console.log(response.profileObj); // eslint-disable-line
-  const profile = response.profileObj;
-  const profId = profile.googleId;
-  const profGiveName = profile.givenName;
-  const profFamName = profile.familyName;
-  const profImg = profile.imageUrl;
-  const profEmail = profile.email;
-  console.log(profId);
-  console.log(profGiveName);
-  console.log(profFamName);
-  console.log(profImg);
-  console.log(profEmail);
+  // console.log(response); // eslint-disable-line
+  // console.log(response.profileObj); // eslint-disable-line
+  
+  const profId = response.profileObj.googleId;
 
   API.getUser(profId)
     .then(res => {
       console.log(res.data);
       if (res.data === null || res.data.googleId !== profId) {
-        API.saveUser({
-          googleId: profId,
-          givenName: profGiveName,
-          familyName: profFamName,
-          email: profEmail,
-          imageUrl: profImg
-        })
+        API.saveUser(response.profileObj)
           .then(res => {
-            console.log("this happened")
+            console.log("New user, info added to DB")
             window.location.replace("/main");
-            // window.location.replace("http://sceneitapp.herokuapp.com/main");
           })
           .catch(err => console.log(err))
       } else {
-        console.log("already exists");
+        console.log("User already exists, info not added to DB");
         window.location.replace("/main");
-        // window.location.replace("https://sceneitapp.herokuapp.com/main");
       }
     })
     .catch(err => console.log(err));
