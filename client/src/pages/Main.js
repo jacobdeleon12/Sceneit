@@ -15,11 +15,12 @@ class Main extends Component {
     user: {},
     videos: [],
     movieVideos:[],
-    featuredVid: []
+    featuredVid: [],
+    popMovieVid:[]
   };
   componentDidMount() {
     this.loadVideos();
-    // this.loadMovieInfo("endgame");
+    this.LoadLandingMovieInfo();
   }
 
   loadVideos = () => {
@@ -33,6 +34,8 @@ class Main extends Component {
         const redditSplit = redditdata[i].data.media_embed.content.split(
           "embed/"
         )[1];
+        console.log(typeof redditSplit);
+        
         if (typeof redditSplit != "undefined") {
           //title
           YTtitle = redditdata[i].data.title;
@@ -74,6 +77,45 @@ class Main extends Component {
           
         })
     })
+  }
+
+  LoadLandingMovieInfo = () =>{
+    API.getMoviePop().then(res=>{
+      const searchResult = res.data.results;
+      let popMovies = [];
+      console.log(searchResult);
+      for (let i = 0; i < 10 && i < searchResult.length; i++) {
+      popMovies.push(searchResult[i].id);
+      }
+      for (let i = 0; i < popMovies.length; i++) {
+        this.popMovies(popMovies[i])
+        
+      }
+    })
+  }
+
+  popMovies = (query) =>{
+    let arr = []
+    let movieSearch = [];
+    API.getMovieVideo(query).then(res =>{
+      // console.log(res.data);
+      const videoResults = res.data.results;
+      let YTMovieKey = [];
+      let YTMovieName= [];
+      
+        YTMovieKey = videoResults[0].key;
+        YTMovieName=videoResults[0].name
+        movieSearch.push({name:YTMovieName, YTstr:YTMovieKey})
+        console.log(movieSearch);
+        this.popMoviesCount(movieSearch)
+      })
+  }
+
+  popMoviesCount = (count)=>{
+
+      let moviearr = [];
+      moviearr.push(count)
+      console.log(moviearr);
   }
 
   handleInputChange = event => {

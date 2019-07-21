@@ -29,6 +29,10 @@ export default {
   getMovieVideo: function(id){
     return axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=7b07c1ac2c9e9a9f62cfc49a4ec55f99&language=en-US`)
   },
+  //TMDB popular for default landing 
+  getMoviePop:function(){
+    return axios.get("https://api.themoviedb.org/3/movie/popular?api_key=7b07c1ac2c9e9a9f62cfc49a4ec55f99&language=en-US&page=1")
+  },
   // Saves a user to the database
   saveUser: function(userData) {
     return axios.post("/api/users", userData);
