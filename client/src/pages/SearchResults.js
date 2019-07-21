@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import Jumbotron from "../components/Jumbotron";
+// import { Link } from "react-router-dom";
+// import { Col, Row, Container } from "../components/Grid";
+import { Container } from "../components/Grid";
+// import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import NavBar from "../components/Nav/SearchResultNav";
-import MovieCard from "../components/Iframe";
 import Wrapper from "../components/Wrapper";
 
 class SearchResults extends Component {
