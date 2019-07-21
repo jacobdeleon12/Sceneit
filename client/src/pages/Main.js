@@ -28,12 +28,8 @@ class Main extends Component {
       let YTtitle = [];
       let YTHotStr = [];
       let reddit = [];
-      let vimeo = [];
       for (let i = 0; i < redditdata.length; i++) {
-        if (redditdata[i].data.domain === "vimeo.com") {
-          vimeo.push(redditdata[i].data.domain);
-          console.log("vimeo isnt supported.")
-        } else if (redditdata[i].data.domain != "vimeo.com") {
+        if (redditdata[i].data.domain === "youtube.com") {
           //getting just the infromaion we need from huge string
           const redditSplit = redditdata[i].data.media_embed.content.split(
             "embed/"
@@ -137,8 +133,7 @@ class Main extends Component {
             </Col>
           </Row>
           <Wrapper>
-            {this.state.videos.map((video, i) => (
-              console.log(i),
+            {this.state.videos.map(video => (
               <div className="text-center">
                 <Iframe
                   key={video.name}
