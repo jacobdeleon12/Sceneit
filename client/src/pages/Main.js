@@ -6,30 +6,36 @@ import API from "../utils/API";
 import Wrapper from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
 import Iframe from "../components/Iframe";
-import JumboIframe from "../components/JumboIframe"
+import JumboIframe from "../components/JumboIframe";
 import SaveBtn from "../components/Buttons/SaveBtn";
-//import Carousel from "../components/Carousel"
+//import Carousel from "../components/Carousel";
 
 class Main extends Component {
   state = {
-    user: {},
+    user: [],
     videos: [],
     movieVideos: [],
-    featuredVid: []
+    featuredVid: [],
+    selectedVideo: [{}]
   };
-
+  // =======================================
   componentDidMount() {
-    // this.loadUsers();
+    this.loadUser();
     this.loadVideos();
-    this.loadMovieInfo("endgame");
-  }
+    // console.log((document.cookie).split("=0; ")[1]);
 
-  loadUsers = () => {
-    API.getUsers()
-      .then(res => console.log(res.data))
+    // this.loadMovieInfo("endgame");
+  };
+  // =======================================
+  loadUser = () => {
+    API.getUser((document.cookie).split("=0; ")[1])
+      .then(res => {
+        // console.log(res.data)
+        this.setState({ user: res.data })
+      })
       .catch(err => console.log(err));
-  }
-
+  };
+  // =======================================
   loadVideos = () => {
     API.getVideos().then(res => {
       console.log(res.data);
@@ -59,8 +65,8 @@ class Main extends Component {
       this.setState({ videos: reddit });
       //console.log(this.state.featuredVid);
     });
-  }
-
+  };
+  // =======================================
   //for movie vidoes, and anything else we want to come up with
   //must .split(" ").join("+") string for query to work correctly.
   loadMovieInfo = (query) => {
@@ -86,40 +92,46 @@ class Main extends Component {
 
       })
     })
-  }
-
+  };
+  // =======================================
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
   };
-
+  // =======================================
   handleSaveFormSubmit = event => {
-    let selectedVideo = [];
-    this.state.videos.map(video => {
-      if (event.target.value === video.YTstr) {
-        selectedVideo = video;
-      }
-      return video;
-    })
-    console.log(selectedVideo);
-    const vStr = selectedVideo.YTstr;
-    const vName = selectedVideo.name;
-    console.log(this.user);
-
     event.preventDefault();
-    API.saveVideo({
-      savedVideoStr: vStr,
-      savedVideoName: vName
+    console.log(this.state.selectedVideo);
+    console.log(event.target.id);
+    console.log(event.target.value);
+
+    console.log(this.state.videos);
+
+    let selectedVid = { id: event.target.value, name: event.target.id };
+    // console.log(selectedVid);
+
+    // let selectedVideo = [];
+    const vStr = selectedVid.id;
+    const vName = selectedVid.name;
+    // console.log(vStr);
+    // console.log(vName);
+
+    console.log(this.state.user);
+
+    API.saveVideo(this.state.user._id, {
+      $push: {
+        savedVideos: { vStr, vName }
+      }
     })
       .then(res => { console.log("this happened") })
       .catch(err => console.log(err));
-    this.setState({ clicked: true });
   };
-
+  // =======================================
 
   render() {
+    // console.log(this.state.selectedVideo);
 
     return (
       <div>
@@ -137,6 +149,7 @@ class Main extends Component {
                   <SaveBtn
                     value={this.state.featuredVid.YTstr}
                     name="saveVid"
+                    key={this.state.featuredVid.YTstr}
                     onClick={this.handleSaveFormSubmit} />
                 </div>
               </Jumbotron>
@@ -149,7 +162,12 @@ class Main extends Component {
                   key={video.name}
                   YTstr={video.YTstr}
                 />
-                <SaveBtn />
+                <SaveBtn
+                  value={video.YTstr}
+                  key={video.name}
+                  id={video.name}
+                  name="saveVid"
+                  onClick={this.handleSaveFormSubmit} />
               </div>
             ))}
 
@@ -161,10 +179,11 @@ class Main extends Component {
                 />
                 <SaveBtn
                   value={video.YTstr}
+                  key={video.name}
                   name="saveVid"
                   onClick={this.handleSaveFormSubmit} />
               </div>
-            ))};
+            ))}
 
           </Wrapper>
         </Container>

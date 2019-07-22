@@ -20,6 +20,9 @@ const success = response => {
   console.log(profFamName);
   console.log(profImg);
   console.log(profEmail);
+  document.cookie = profId;
+  console.log(document.cookie);
+
 
   API.getUser(profId)
     .then(res => {
@@ -46,9 +49,9 @@ const success = response => {
     })
     .catch(err => console.log(err));
 
-  API.getUsers()
-    .then(res => console.log(res.data))
-    .catch(err => console.log(err));
+  // API.getUsers()
+  //   .then(res => console.log(res.data))
+  //   .catch(err => console.log(err));
 
 };
 

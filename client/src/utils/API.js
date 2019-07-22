@@ -34,8 +34,8 @@ export default {
     return axios.post("/api/users", userData);
   },
   // Saves a video to the user model
-  saveVideo: function (videoData) {
-    return axios.post("api/users", videoData)
+  saveVideo: function (id, videoData) {
+    return axios.put("api/users/" + id, videoData)
   }
 };
 
