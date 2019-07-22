@@ -6,8 +6,8 @@ import API from "../utils/API";
 import Wrapper from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
 import Iframe from "../components/Iframe";
-import JumboIframe from "../components/JumboIframe"
-import SaveBtn from "../components/Buttons/SaveBtn";
+import JumboIframe from "../components/JumboIframe";
+import {SaveBtn, DeleteBtn, ViewBtn} from "../components/Buttons/VideoBtns";
 //import Carousel from "../components/Carousel"
 
 class Main extends Component {
@@ -49,11 +49,11 @@ class Main extends Component {
       this.setState({ videos: reddit });
       //console.log(this.state.featuredVid);
     });
-  }
+  };
 
   //for movie vidoes, and anything else we want to come up with
   //must .split(" ").join("+") string for query to work correctly.
-  loadMovieInfo = (query) => {
+  loadMovieInfo = query => {
     API.getTmdbInfo(query).then(res => {
       // console.log(res.data.results);
       const searchResult = res.data.results[0].id;
@@ -68,15 +68,14 @@ class Main extends Component {
         //max of 10 for video search
         for (let i = 0; i < 10 && i < videoResults.length; i++) {
           YTMovieKey = videoResults[i].key;
-          YTMovieName = videoResults[i].name
-          movieSearch.push({ name: YTMovieName, YTstr: YTMovieKey })
+          YTMovieName = videoResults[i].name;
+          movieSearch.push({ name: YTMovieName, YTstr: YTMovieKey });
         }
         this.setState({ movieVideos: movieSearch });
         // console.log(this.state);
-
-      })
-    })
-  }
+      });
+    });
+  };
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -92,7 +91,7 @@ class Main extends Component {
         selectedVideo = video;
       }
       return video;
-    })
+    });
     console.log(selectedVideo);
     const vStr = selectedVideo.YTstr;
     const vName = selectedVideo.name;
@@ -103,14 +102,14 @@ class Main extends Component {
       savedVideoStr: vStr,
       savedVideoName: vName
     })
-      .then(res => { console.log("this happened") })
+      .then(res => {
+        console.log("this happened");
+      })
       .catch(err => console.log(err));
     this.setState({ clicked: true });
   };
 
-
   render() {
-
     return (
       <div>
         <NavBar />
@@ -127,35 +126,35 @@ class Main extends Component {
                   <SaveBtn
                     value={this.state.featuredVid.YTstr}
                     name="saveVid"
-                    onClick={this.handleSaveFormSubmit} />
+                    onClick={this.handleSaveFormSubmit}
+                  />
                 </div>
               </Jumbotron>
             </Col>
           </Row>
+            Reddit Hot
           <Wrapper>
             {this.state.videos.map(video => (
               <div className="text-center">
-                <Iframe
-                  key={video.name}
-                  YTstr={video.YTstr}
-                />
+                <Iframe key={video.name} YTstr={video.YTstr} />
                 <SaveBtn />
+                <ViewBtn />
               </div>
             ))}
-
+          </Wrapper>
+          IMDB Popular
+          <Wrapper>
             {this.state.movieVideos.map(video => (
               <div className="text-center">
-                <Iframe
-                  key={video.name}
-                  YTstr={video.YTstr}
-                />
+                <Iframe key={video.name} YTstr={video.YTstr} />
                 <SaveBtn
                   value={video.YTstr}
                   name="saveVid"
-                  onClick={this.handleSaveFormSubmit} />
+                  onClick={this.handleSaveFormSubmit}
+                />
               </div>
-            ))};
-
+            ))}
+            ;
           </Wrapper>
         </Container>
       </div>

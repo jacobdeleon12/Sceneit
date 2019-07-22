@@ -10,13 +10,13 @@
   overflow: auto;
 } */
 
-div.scrollmenu {
+div.scroll_menu {
   background-color: #333;
   overflow: auto;
   white-space: nowrap;
 }
 
-div.scrollmenu div {
+div.scroll_menu div {
   display: inline-block;
   color: white;
   text-align: center;
@@ -24,6 +24,16 @@ div.scrollmenu div {
   text-decoration: none;
 }
 
-div.scrollmenu div:hover {
+div.scroll_menu div:hover {
   background-color: #777;
+}
+
+::-webkit-scrollbar {
+  height: 4px;
+  width: 0px;
+  background: transparent;
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #ff0000;
 }
