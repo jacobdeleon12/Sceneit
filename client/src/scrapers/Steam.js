@@ -1,44 +1,49 @@
 let cheerio = require("cheerio");
 let axios = require("axios");
 
-let urlResults = [];
-let videoResults = [];
-axios
-  .get("https://store.steampowered.com//search/?filter=popularwishlist&os=win")
-  .then(function(response) {
-    let $ = cheerio.load(response.data);
+function steamScraper() {
+  let urlArray = [];
+  let steamArray = [];
+  let numSkipped = 0;
 
-    $("a.search_result_row").each(function(i, element) {
-      let urlLink = $(element).attr("href");
-      urlArray.push(urlLink);
-    });
-    return urlArray;
-  })
-  .then(
-    // console.log(urlLink);
-    axios.get(urlLink).then(function(response) {
+  axios
+    .get(
+      "https://store.steampowered.com//search/?filter=popularwishlist&os=win"
+    )
+    .then(response => {
       let $ = cheerio.load(response.data);
 
-      let videoUrl = $("video");
-      console.log(videoUrl);
-      // videoResults.push(videoUrl);
-
-      // urlResults.push(urlLink);
+      $("a.search_result_row").each((i, element) => {
+        let urlLink = $(element).attr("href");
+        urlArray.push(urlLink);
+      });
+      return urlArray;
     })
-  );
+    .then(urlArray => {
+      for (let url of urlArray) {
+        axios.get(url).then(response => {
+          let $ = cheerio.load(response.data);
 
-// for (let i = 0; i < urlResults.length; i++) {
-//   // console.log(urlResults[i]);
-//   axios.get(urlResults[i]).then(function(response) {
-//     let $ = cheerio.load(response.data);
+          let vidName = $("div.apphub_AppName").text();
+          let vidUrl = $("div.highlight_movie").attr("data-webm-hd-source");
 
-//     let videoUrl = $("video").attr("src");
-//     videoResults.push(videoUrl);
-//     console.log(videoResults);
+          if (steamArray.length <= 22) {
+            // console.log("push");
+            vidUrl === undefined
+              ? (numSkipped++, console.log(`Skiped ${numSkipped} Steam page`))
+              : steamArray.push({ name: vidName, url: vidUrl });
+          } else {
+            // console.log("done");
+            done();
+          }
+        });
+      }
+    });
 
-//     // $("div#highlight_player_area").each(function(i, element) {
-//     //   let videoUrl = $(element).attr("data-webm-hd-source");
+  function done() {
+    console.log(steamArray);
+    return steamArray;
+  }
+}
 
-//     // });
-//   });
-// }
+export default steamScraper();
