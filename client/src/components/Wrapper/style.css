@@ -1,4 +1,4 @@
-div.scroll_menu {
+.scroll_menu {
   background-color: #333;
   overflow: auto;
   white-space: nowrap;
@@ -7,16 +7,39 @@ div.scroll_menu {
   margin-top: 10px;
 }
 
-div.scroll_menu div {
+.scroll_menu div {
   display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 14px;
+  padding: 5px;
   text-decoration: none;
 }
 
-div.scroll_menu div:hover {
+.scroll_menu div:hover {
   background-color: #777;
+}
+
+#slideLeft {
+  float: left;
+}
+
+#slideRight {
+  float: right;
+}
+
+.scrollBtn {
+  width: 60px;
+  height: 60px;
+  font-size: 20pt;
+  position: relative;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  background-color: rgb(81, 115, 187);
+  opacity: 0.5;
+}
+
+.scrollBtn:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 ::-webkit-scrollbar {

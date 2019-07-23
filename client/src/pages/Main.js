@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import Wrapper from "../components/Wrapper";
+import { Wrapper } from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
 import { JumboIframe, Iframe } from "../components/Iframe";
 import {
@@ -69,6 +69,7 @@ class Main extends Component {
       //console.log(this.state.featuredVid);
     });
   };
+
   //for movie vidoes, and anything else we want to come up with
   //must .split(" ").join("+") string for query to work correctly.
   loadMovieInfo = query => {
