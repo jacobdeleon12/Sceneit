@@ -157,6 +157,7 @@ class User extends Component {
                   key={video.vName}
                   YTstr={video.vStr}
                 />
+                <br />
                 <DeleteBtn onClick={() => this.deleteVideo(video._id)} />
               </div>
             ))}
