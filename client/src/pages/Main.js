@@ -177,7 +177,6 @@ class Main extends Component {
                 />
               </div>
             ))}
-            ;
           </Wrapper>
         </Container>
       </div>
