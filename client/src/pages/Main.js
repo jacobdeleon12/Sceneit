@@ -21,7 +21,7 @@ class Main extends Component {
     videos: [],
     movieVideos: [],
     featuredVid: [],
-    selectedVideo: [{}]
+    selectedVideo: []
   };
   // =======================================
   componentDidMount() {
@@ -79,7 +79,7 @@ class Main extends Component {
       const searchResult = response.data.results[0].id;
       //second call for api video results
       API.getTmdbVideos(searchResult).then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         const videoResults = response.data.results;
         let YTMovieKey = [];
         let YTMovieName = [];
@@ -107,37 +107,28 @@ class Main extends Component {
   // =======================================
   handleSaveFormSubmit = event => {
     event.preventDefault();
-    // let selectedVideo = [];
-    // this.state.videos.map(video => {
-    //   if (event.target.value === video.YTstr) {
-    //     selectedVideo = video;
-    //   }
-    //   return video;
-    // });
-    // console.log(selectedVideo);
-    // const vStr = selectedVideo.YTstr;
-    // const vName = selectedVideo.name;
-    // const vidType = selectedVideo.vidType;
 
-    console.log(this.state.selectedVideo);
+    const vStr = event.target.value;
+    const vName = event.target.name;
+
     console.log(event.target.id);
     console.log(event.target.value);
-    // console.log(this.state.videos);
-    // console.log(this.state.user);
 
-    // API.saveVideo(this.state.user._id, {
-    //   $push: {
-    //     savedVideos: { vStr, vName, vidType }
-    //   }
-    // })
-    //   .then(response => {
-    //     console.log("this happened");
-    //   })
-    //   .catch(err => console.log(err));
+    console.log(this.state.user);
+
+    API.saveVideo(this.state.user._id, {
+      $push: {
+        savedVideos: { vStr, vName }
+      }
+    })
+      .then(response => {
+        console.log("this happened");
+      })
+      .catch(err => console.log(err));
   };
 
   render() {
-    // console.log(this.state.movieVideos);
+    console.log(this.state.selectedVideo);
 
     return (
       <div>
@@ -202,7 +193,7 @@ class Main extends Component {
                   key={video.YTstr + "-save"}
                   id={video.name}
                   name="saveVid"
-                  onClick={(this.handleSaveFormSubmit) && (this.setState({ selectedVideo: video }))}
+                  onClick={this.handleSaveFormSubmit}
                 />
                 <CommentBtn
                   key={video.YTstr + "-comment"}

@@ -171,7 +171,7 @@ class User extends Component {
               </div>
             ))}
           </Wrapper>
-          <h1 className="text-center">IMDB Popular</h1>
+          {/* <h1 className="text-center">IMDB Popular</h1>
           <Wrapper>
             {this.state.movieVideos.map(video => (
               <div className="text-center">
@@ -185,7 +185,7 @@ class User extends Component {
                 />
               </div>
             ))}
-          </Wrapper>
+          </Wrapper> */}
           {/* {this.state.movieVideos.map(video => (
               <div className="text-center">
                 <Iframe
