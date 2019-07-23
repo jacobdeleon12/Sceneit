@@ -30,13 +30,13 @@ class Main extends Component {
     // console.log((document.cookie).split("=0; ")[1]);
 
     // this.loadMovieInfo("endgame");
-  };
+  }
   // =======================================
   loadUser = () => {
-    API.getUser((document.cookie).split("=0; ")[1])
+    API.getUser(document.cookie.split("=0; ")[1])
       .then(res => {
         // console.log(res.data)
-        this.setState({ user: res.data })
+        this.setState({ user: res.data });
       })
       .catch(err => console.log(err));
   };
@@ -177,11 +177,6 @@ class Main extends Component {
             {this.state.videos.map(video => (
               <div className="text-center">
                 <Iframe key={video.name} YTstr={video.YTstr} />
-                <SaveBtn
-                  value={video.YTstr}
-                  name="saveVid"
-                  onClick={this.handleSaveFormSubmit}
-                />
                 <CommentBtn
                   value={this.state.featuredVid.YTstr}
                   name="CommentVid"
