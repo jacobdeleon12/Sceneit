@@ -43,7 +43,7 @@ export default {
     );
   },
   // the movie base Video for youtube
-  getTmdbVideo: function(query) {
+  getTmdbVideos: function(query) {
     return axios.get(
       `https://api.themoviedb.org/3/movie/${query}/videos?api_key=7b07c1ac2c9e9a9f62cfc49a4ec55f99&language=en-US`
     );
