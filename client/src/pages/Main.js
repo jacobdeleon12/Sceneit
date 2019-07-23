@@ -154,7 +154,7 @@ class Main extends Component {
                   name="saveVid"
                   onClick={this.handleSaveFormSubmit} />
               </div>
-            ))};
+            ))}
 
           </Wrapper>
         </Container>
