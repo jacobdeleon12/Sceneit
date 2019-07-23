@@ -6,16 +6,20 @@ import API from "../utils/API";
 import Wrapper from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
 import Iframe from "../components/Iframe";
-// import JumboIframe from "../components/JumboIframe"
-// import SaveBtn from "../components/Buttons/SaveBtn";
+// import JumboIframe from "../components/JumboIframe";
+import {
+  // SaveBtn,
+  DeleteBtn,
+  // ViewBtn,
+  CommentBtn
+} from "../components/Buttons/VideoBtns";
 //import Carousel from "../components/Carousel"
-import { DeleteBtn } from "../components/Buttons/VideoBtns";
 
 class User extends Component {
   state = {
     user: [],
-    videos: []
-    // movieVideos: [],
+    videos: [],
+    movieVideos: []
     // featuredVid: [],
     // selectedVideo: [{}]
   };
@@ -159,10 +163,30 @@ class User extends Component {
                 />
                 <br />
                 <DeleteBtn onClick={() => this.deleteVideo(video._id)} />
+                <CommentBtn
+                  // value={this.state.featuredVid.YTstr}
+                  name="CommentVid"
+                  onClick={this.handleCommentSubmit}
+                />
               </div>
             ))}
-
-            {/* {this.state.movieVideos.map(video => (
+          </Wrapper>
+          {/* <h1 className="text-center">IMDB Popular</h1>
+          <Wrapper>
+            {this.state.movieVideos.map(video => (
+              <div className="text-center">
+                <Iframe key={video.name} YTstr={video.YTstr} />
+                <br />
+                <DeleteBtn onClick={() => this.deleteVideo(video._id)} />
+                <CommentBtn
+                  // value={this.state.featuredVid.YTstr}
+                  name="CommentVid"
+                  onClick={this.handleCommentSubmit}
+                />
+              </div>
+            ))}
+          </Wrapper> */}
+          {/* {this.state.movieVideos.map(video => (
               <div className="text-center">
                 <Iframe
                   key={video.name}
@@ -171,10 +195,8 @@ class User extends Component {
                 <DeleteBtn onClick={() => this.deleteBook(video._id)} />
               </div>
             ))} */}
-
-          </Wrapper>
         </Container>
-      </div>
+      </div >
     );
   }
 }
