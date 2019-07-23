@@ -29,7 +29,7 @@ class Main extends Component {
     this.loadVideos();
     // console.log((document.cookie).split("=0; ")[1]);
 
-    // this.loadMovieInfo("endgame");
+    this.loadMovieInfo("endgame");
   }
   // =======================================
   loadUser = () => {
