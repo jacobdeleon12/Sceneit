@@ -67,7 +67,8 @@ class Main extends Component {
       reddit.shift();
       this.setState({ videos: reddit });
       //console.log(this.state.featuredVid);
-    });
+    })
+      .catch(err => console.log(err));
   };
   //for movie vidoes, and anything else we want to come up with
   //must .split(" ").join("+") string for query to work correctly.
@@ -93,7 +94,8 @@ class Main extends Component {
         this.setState({ movieVideos: movieSearch });
         // console.log(this.state);
       });
-    });
+    })
+      .catch(err => console.log(err));
   };
 
   handleInputChange = event => {
@@ -153,11 +155,13 @@ class Main extends Component {
                   />
                   <br />
                   <SaveBtn
+                    key={this.state.featuredVid.name + "-save"}
                     value={this.state.featuredVid.YTstr}
                     name="saveVid"
                     onClick={this.handleSaveFormSubmit}
                   />
                   <CommentBtn
+                    key={this.state.featuredVid.name + "-comment"}
                     value={this.state.featuredVid.YTstr}
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
@@ -169,17 +173,18 @@ class Main extends Component {
           <h1 className="text-center">Reddit Hot</h1>
           <Wrapper>
             {this.state.videos.map(video => (
-              <div className="text-center">
+              <div className="text-center" key={video.YTstr}>
                 <Iframe key={video.name} YTstr={video.YTstr} />
                 <br />
                 <SaveBtn
                   value={video.YTstr}
-                  key={video.name}
+                  key={video.YTstr + "-save"}
                   id={video.name}
                   name="saveVid"
                   onClick={this.handleSaveFormSubmit}
                 />
                 <CommentBtn
+                  key={video.YTstr + "-comment"}
                   value={this.state.featuredVid.YTstr}
                   name="CommentVid"
                   onClick={this.handleCommentSubmit}
@@ -190,17 +195,18 @@ class Main extends Component {
           <h1 className="text-center">IMDB Popular</h1>
           <Wrapper>
             {this.state.movieVideos.map(video => (
-              <div className="text-center">
-                <Iframe key={video.name} YTstr={video.id} />
+              <div className="text-center" key={video.YTstr}>
+                <Iframe key={video.name} YTstr={video.YTstr} />
                 <br />
                 <SaveBtn
                   value={video.YTstr}
-                  key={video.name}
+                  key={video.YTstr + "-save"}
                   id={video.name}
                   name="saveVid"
                   onClick={this.handleSaveFormSubmit}
                 />
                 <CommentBtn
+                  key={video.YTstr + "-comment"}
                   value={this.state.featuredVid.YTstr}
                   name="CommentVid"
                   onClick={this.handleCommentSubmit}
