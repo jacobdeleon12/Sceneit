@@ -6,7 +6,10 @@ import "./style.css";
 export function DeleteBtn(props) {
   return (
     <button className="vidBtn delete-btn" {...props} tabIndex="0">
-      Delete<span role="img" aria-label="delete">😭</span>
+      Delete
+      <span role="img" aria-label="delete">
+        😭
+      </span>
     </button>
   );
 }
@@ -14,7 +17,10 @@ export function DeleteBtn(props) {
 export function SaveBtn(props) {
   return (
     <button className="vidBtn save-btn" {...props} tabIndex="0">
-      Save<span role="img" aria-label="save">😍</span>
+      Save
+      <span role="img" aria-label="save">
+        😍
+      </span>
     </button>
   );
 }
@@ -22,7 +28,10 @@ export function SaveBtn(props) {
 export function ViewBtn(props) {
   return (
     <button className="vidBtn view-btn" {...props} tabIndex="0">
-      View<span role="img" aria-label="save">🤩</span>
+      View
+      <span role="img" aria-label="save">
+        🤩
+      </span>
     </button>
   );
 }
@@ -30,7 +39,14 @@ export function ViewBtn(props) {
 export function CommentBtn(props) {
   return (
     <button className="vidBtn comment-btn" {...props} tabIndex="0">
-      Comment<span role="img" aria-label="comment">😂</span>
+      Comment
+      <span role="img" aria-label="comment">
+        😂
+      </span>
     </button>
   );
+}
+
+export function BtnContainer({ children }) {
+  return <div className="btnGroup">{children}</div>;
 }

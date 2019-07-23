@@ -1,12 +1,18 @@
 import React from "react";
 import "./style.css";
 
-function Wrapper(props) {
+export function Wrapper(props, ref) {
   return (
-    <nav className="pn-ProductNav">
-      <div className="scroll_menu">{props.children}</div>
-    </nav>
+    <div className="vidContainer">
+      <button id="slideLeft"  className="scrollBtn">
+        &lt;
+      </button>
+      <div  className="scroll_menu">
+        {props.children}
+      </div>
+      <button id="slideRight"  className="scrollBtn">
+        &gt;
+      </button>
+    </div>
   );
 }
-
-export default Wrapper;
