@@ -18,8 +18,9 @@ app.use(routes);
 mongoose.connect(
   process.env.MONGODB_URI ||
   `mongodb://user:password1@ds351107.mlab.com:51107/heroku_qmrhm6sk`,
-  { useNewUrlParser: true }, { useFindAndModify: false }
-);
+  { useNewUrlParser: true, useFindAndModify: false }
+).then(() => console.log("mongoose connected"))
+.catch(err => console.log(err));
 
 // Start the API server
 app.listen(PORT, function () {
