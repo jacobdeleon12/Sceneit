@@ -7,34 +7,16 @@ const clientId =
   "560748393507-rrhsc621nmf915rp2d99bk38vrgjjpir.apps.googleusercontent.com";
 
 const success = response => {
-  console.log(response); // eslint-disable-line
-  console.log(response.profileObj); // eslint-disable-line
-  const profile = response.profileObj;
-  const profId = profile.googleId;
-  const profGiveName = profile.givenName;
-  const profFamName = profile.familyName;
-  const profImg = profile.imageUrl;
-  const profEmail = profile.email;
-  console.log(profId);
-  console.log(profGiveName);
-  console.log(profFamName);
-  console.log(profImg);
-  console.log(profEmail);
+  const profId = response.profileObj.googleId;
+
   document.cookie = profId;
   console.log(document.cookie);
-
 
   API.getUser(profId)
     .then(res => {
       console.log(res.data);
       if (res.data === null || res.data.googleId !== profId) {
-        API.saveUser({
-          googleId: profId,
-          givenName: profGiveName,
-          familyName: profFamName,
-          email: profEmail,
-          imageUrl: profImg
-        })
+        API.saveUser(response.profileObj)
           .then(res => {
             console.log("this happened")
             window.location.replace("/main");
@@ -48,11 +30,6 @@ const success = response => {
       }
     })
     .catch(err => console.log(err));
-
-  // API.getUsers()
-  //   .then(res => console.log(res.data))
-  //   .catch(err => console.log(err));
-
 };
 
 const error = () => {

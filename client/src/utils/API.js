@@ -13,6 +13,10 @@ export default {
   deleteUser: function (_id) {
     return axios.delete("/api/users/" + _id);
   },
+  // Deletes the user with the given id
+  deleteVideo: function (_id) {
+    return axios.delete("/api/users/" + _id);
+  },
   //Reddit Api Hot
   getVideos: function () {
     return axios.get("https://www.reddit.com/r/videos/top.json?limit=30");
