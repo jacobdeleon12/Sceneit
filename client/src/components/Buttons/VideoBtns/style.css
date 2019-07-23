@@ -2,10 +2,11 @@
   position: relative;
   background-color: rgb(158, 132, 132);
   margin: 0;
+  width: 100%;
+  padding: 5px;
 }
 
 .vidBtn {
-  padding: 2px;
   background-color: rgb(223, 39, 39);
   color: beige;
   text-align: center;
@@ -14,8 +15,9 @@
   font-size: 10px;
   outline: none;
   height: 20px;
-  width: 100%;
+  width: 40%;
   position: relative;
+  margin: 2px;
 }
 
 .vidBtn:hover {
