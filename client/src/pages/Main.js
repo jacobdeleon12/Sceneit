@@ -7,7 +7,7 @@ import Wrapper from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
 import Iframe from "../components/Iframe";
 import JumboIframe from "../components/JumboIframe";
-import SaveBtn from "../components/Buttons/SaveBtn";
+import {SaveBtn, DeleteBtn, ViewBtn} from "../components/Buttons/VideoBtns";
 //import Carousel from "../components/Carousel"
 
 class Main extends Component {
@@ -132,14 +132,17 @@ class Main extends Component {
               </Jumbotron>
             </Col>
           </Row>
+            Reddit Hot
           <Wrapper>
             {this.state.videos.map(video => (
               <div className="text-center">
                 <Iframe key={video.name} YTstr={video.YTstr} />
                 <SaveBtn />
+                <ViewBtn />
               </div>
             ))}
           </Wrapper>
+          IMDB Popular
           <Wrapper>
             {this.state.movieVideos.map(video => (
               <div className="text-center">
