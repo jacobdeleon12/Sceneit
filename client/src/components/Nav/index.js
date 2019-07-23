@@ -7,11 +7,13 @@
 
 import React from "react";
 
+const Logo = "<Scene/ IT>"
+
 function NavBar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <a className="navbar-brand" href="/">
-        SceneIT
+        {Logo}
       </a>
     </nav>
   );
