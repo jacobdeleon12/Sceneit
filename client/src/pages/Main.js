@@ -168,17 +168,17 @@ class Main extends Component {
             {this.state.videos.map(video => (
               <div className="text-center">
                 <Iframe key={video.name} YTstr={video.YTstr} />
-                <CommentBtn
-                  value={this.state.featuredVid.YTstr}
-                  name="CommentVid"
-                  onClick={this.handleCommentSubmit}
-                />
                 <SaveBtn
                   value={video.YTstr}
                   key={video.name}
                   id={video.name}
                   name="saveVid"
                   onClick={this.handleSaveFormSubmit}
+                />
+                <CommentBtn
+                  value={this.state.featuredVid.YTstr}
+                  name="CommentVid"
+                  onClick={this.handleCommentSubmit}
                 />
               </div>
             ))}
@@ -191,6 +191,7 @@ class Main extends Component {
                 <SaveBtn
                   value={video.YTstr}
                   key={video.name}
+                  id={video.name}
                   name="saveVid"
                   onClick={this.handleSaveFormSubmit}
                 />
