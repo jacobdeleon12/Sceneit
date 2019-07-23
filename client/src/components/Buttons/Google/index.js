@@ -9,6 +9,9 @@ const clientId =
 const success = response => {
   const profId = response.profileObj.googleId;
 
+  document.cookie = profId;
+  console.log(document.cookie);
+
   API.getUser(profId)
     .then(res => {
       console.log(res.data);
