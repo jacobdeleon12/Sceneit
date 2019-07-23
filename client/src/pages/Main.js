@@ -182,7 +182,6 @@ class Main extends Component {
                 </BtnContainer>
               </div>
             ))}
-            ;
           </Wrapper>
         </Container>
       </div>
