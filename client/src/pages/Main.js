@@ -8,7 +8,8 @@ import NavBar from "../components/Nav/MainNav";
 import { JumboIframe, Iframe } from "../components/Iframe";
 import {
   SaveBtn,
-  DeleteBtn,
+  // DeleteBtn,
+  // ViewBtn,
   CommentBtn,
   BtnContainer
 } from "../components/Buttons/VideoBtns";
@@ -16,16 +17,30 @@ import {
 
 class Main extends Component {
   state = {
-    user: {},
+    user: [],
     videos: [],
     movieVideos: [],
-    featuredVid: []
+    featuredVid: [],
+    selectedVideo: [{}]
   };
+  // =======================================
   componentDidMount() {
+    this.loadUser();
     this.loadVideos();
-    this.loadMovieInfo("endgame");
-  }
+    // console.log((document.cookie).split("=0; ")[1]);
 
+    // this.loadMovieInfo("endgame");
+  }
+  // =======================================
+  loadUser = () => {
+    API.getUser(document.cookie.split("=0; ")[1])
+      .then(res => {
+        // console.log(res.data)
+        this.setState({ user: res.data });
+      })
+      .catch(err => console.log(err));
+  };
+  // =======================================
   loadVideos = () => {
     API.getRedditHot().then(response => {
       const redditdata = response.data.data.children;
@@ -54,7 +69,6 @@ class Main extends Component {
       //console.log(this.state.featuredVid);
     });
   };
-
   //for movie vidoes, and anything else we want to come up with
   //must .split(" ").join("+") string for query to work correctly.
   loadMovieInfo = query => {
@@ -87,7 +101,7 @@ class Main extends Component {
       [name]: value
     });
   };
-
+  // =======================================
   handleSaveFormSubmit = event => {
     let selectedVideo = [];
     this.state.videos.map(video => {
@@ -102,15 +116,32 @@ class Main extends Component {
     console.log(this.user);
 
     event.preventDefault();
-    API.saveVideo({
-      savedVideoStr: vStr,
-      savedVideoName: vName
+    console.log(this.state.selectedVideo);
+    console.log(event.target.id);
+    console.log(event.target.value);
+
+    console.log(this.state.videos);
+
+    // let selectedVid = { id: event.target.value, name: event.target.id };
+    // console.log(selectedVid);
+
+    // let selectedVideo = [];
+    // const vStr = selectedVid.id;
+    // const vName = selectedVid.name;
+    // console.log(vStr);
+    // console.log(vName);
+
+    console.log(this.state.user);
+
+    API.saveVideo(this.state.user._id, {
+      $push: {
+        savedVideos: { vStr, vName }
+      }
     })
       .then(response => {
         console.log("this happened");
       })
       .catch(err => console.log(err));
-    this.setState({ clicked: true });
   };
 
   render() {
@@ -143,7 +174,7 @@ class Main extends Component {
               </Jumbotron>
             </Col>
           </Row>
-          Reddit Hot
+          <h1 className="text-center">Reddit Hot</h1>
           <Wrapper>
             {this.state.videos.map(video => (
               <div className="text-center">
@@ -163,7 +194,7 @@ class Main extends Component {
               </div>
             ))}
           </Wrapper>
-          IMDB Popular
+          <h1 className="text-center">IMDB Popular</h1>
           <Wrapper>
             {this.state.movieVideos.map(video => (
               <div className="text-center">
