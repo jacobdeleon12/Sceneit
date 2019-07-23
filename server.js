@@ -17,11 +17,11 @@ app.use(routes);
 
 mongoose.connect(
   process.env.MONGODB_URI ||
-    `mongodb://user:password1@ds351107.mlab.com:51107/heroku_qmrhm6sk`,
-  { useNewUrlParser: true }
+  `mongodb://user:password1@ds351107.mlab.com:51107/heroku_qmrhm6sk`,
+  { useNewUrlParser: true }, { useFindAndModify: false }
 );
 
 // Start the API server
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log(`API Server now listening on PORT ${PORT}!`);
 });

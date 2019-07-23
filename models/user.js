@@ -7,8 +7,7 @@ const userSchema = new Schema({
   givenName: { type: String, required: true },
   googleId: { type: String, required: true },
   imageUrl: { type: String, required: true },
-  name: { type: String, required: true },
-  savedVideos: [],
+  savedVideos: Object,
   date: { type: Date, default: Date.now }
 });
 
