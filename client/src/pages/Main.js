@@ -7,8 +7,13 @@ import Wrapper from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
 import Iframe from "../components/Iframe";
 import JumboIframe from "../components/JumboIframe";
-import SaveBtn from "../components/Buttons/SaveBtn";
-//import Carousel from "../components/Carousel";
+import {
+  SaveBtn,
+  DeleteBtn,
+  ViewBtn,
+  CommentBtn
+} from "../components/Buttons/VideoBtns";
+//import Carousel from "../components/Carousel"
 
 class Main extends Component {
   state = {
@@ -25,22 +30,20 @@ class Main extends Component {
     // console.log((document.cookie).split("=0; ")[1]);
 
     // this.loadMovieInfo("endgame");
-  };
+  }
   // =======================================
   loadUser = () => {
-    API.getUser((document.cookie).split("=0; ")[1])
+    API.getUser(document.cookie.split("=0; ")[1])
       .then(res => {
         // console.log(res.data)
-        this.setState({ user: res.data })
+        this.setState({ user: res.data });
       })
       .catch(err => console.log(err));
   };
   // =======================================
   loadVideos = () => {
-    API.getVideos().then(res => {
-      console.log(res.data);
-
-      const redditdata = res.data.data.children;
+    API.getRedditHot().then(response => {
+      const redditdata = response.data.data.children;
       let YTtitle = [];
       let YTHotStr = [];
       let reddit = [];
@@ -66,17 +69,16 @@ class Main extends Component {
       //console.log(this.state.featuredVid);
     });
   };
-  // =======================================
   //for movie vidoes, and anything else we want to come up with
   //must .split(" ").join("+") string for query to work correctly.
-  loadMovieInfo = (query) => {
-    API.getMovieInfo(query).then(res => {
-      // console.log(res.data.results);
-      const searchResult = res.data.results[0].id;
+  loadMovieInfo = query => {
+    API.getTmdbInfo(query).then(response => {
+      console.log(response.data.results);
+      const searchResult = response.data.results[0].id;
       //second call for api video results
-      API.getMovieVideo(searchResult).then(res => {
-        // console.log(res.data);
-        const videoResults = res.data.results;
+      API.getTmdbVideos(searchResult).then(response => {
+        // console.log(response.data);
+        const videoResults = response.data.results;
         let YTMovieKey = [];
         let YTMovieName = [];
         let movieSearch = [];
@@ -84,16 +86,15 @@ class Main extends Component {
         //max of 10 for video search
         for (let i = 0; i < 10 && i < videoResults.length; i++) {
           YTMovieKey = videoResults[i].key;
-          YTMovieName = videoResults[i].name
-          movieSearch.push({ name: YTMovieName, YTstr: YTMovieKey })
+          YTMovieName = videoResults[i].name;
+          movieSearch.push({ name: YTMovieName, YTstr: YTMovieKey });
         }
         this.setState({ movieVideos: movieSearch });
         // console.log(this.state);
-
-      })
-    })
+      });
+    });
   };
-  // =======================================
+
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -125,7 +126,9 @@ class Main extends Component {
         savedVideos: { vStr, vName }
       }
     })
-      .then(res => { console.log("this happened") })
+      .then(response => {
+        console.log("this happened");
+      })
       .catch(err => console.log(err));
   };
   // =======================================
@@ -149,42 +152,55 @@ class Main extends Component {
                   <SaveBtn
                     value={this.state.featuredVid.YTstr}
                     name="saveVid"
-                    key={this.state.featuredVid.YTstr}
-                    onClick={this.handleSaveFormSubmit} />
+                    onClick={this.handleSaveFormSubmit}
+                  />
+                  <CommentBtn
+                    value={this.state.featuredVid.YTstr}
+                    name="CommentVid"
+                    onClick={this.handleCommentSubmit}
+                  />
                 </div>
               </Jumbotron>
             </Col>
           </Row>
+          Reddit Hot
           <Wrapper>
             {this.state.videos.map(video => (
               <div className="text-center">
-                <Iframe
-                  key={video.name}
-                  YTstr={video.YTstr}
+                <Iframe key={video.name} YTstr={video.YTstr} />
+                <CommentBtn
+                  value={this.state.featuredVid.YTstr}
+                  name="CommentVid"
+                  onClick={this.handleCommentSubmit}
                 />
                 <SaveBtn
                   value={video.YTstr}
                   key={video.name}
                   id={video.name}
                   name="saveVid"
-                  onClick={this.handleSaveFormSubmit} />
+                  onClick={this.handleSaveFormSubmit}
+                />
               </div>
             ))}
-
+          </Wrapper>
+          IMDB Popular
+          <Wrapper>
             {this.state.movieVideos.map(video => (
               <div className="text-center">
-                <Iframe
-                  key={video.name}
-                  YTstr={video.YTstr}
-                />
+                <Iframe key={video.name} YTstr={video.YTstr} />
                 <SaveBtn
                   value={video.YTstr}
                   key={video.name}
                   name="saveVid"
-                  onClick={this.handleSaveFormSubmit} />
+                  onClick={this.handleSaveFormSubmit}
+                />
+                <CommentBtn
+                  value={this.state.featuredVid.YTstr}
+                  name="CommentVid"
+                  onClick={this.handleCommentSubmit}
+                />
               </div>
             ))}
-
           </Wrapper>
         </Container>
       </div>
