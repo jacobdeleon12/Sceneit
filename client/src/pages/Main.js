@@ -9,8 +9,8 @@ import Iframe from "../components/Iframe";
 import JumboIframe from "../components/JumboIframe";
 import {
   SaveBtn,
-  DeleteBtn,
-  ViewBtn,
+  // DeleteBtn,
+  // ViewBtn,
   CommentBtn
 } from "../components/Buttons/VideoBtns";
 //import Carousel from "../components/Carousel"
@@ -122,12 +122,12 @@ class Main extends Component {
 
     console.log(this.state.videos);
 
-    let selectedVid = { id: event.target.value, name: event.target.id };
+    // let selectedVid = { id: event.target.value, name: event.target.id };
     // console.log(selectedVid);
 
     // let selectedVideo = [];
-    const vStr = selectedVid.id;
-    const vName = selectedVid.name;
+    // const vStr = selectedVid.id;
+    // const vName = selectedVid.name;
     // console.log(vStr);
     // console.log(vName);
 

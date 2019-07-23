@@ -9,7 +9,7 @@ import Iframe from "../components/Iframe";
 // import JumboIframe from "../components/JumboIframe"
 // import SaveBtn from "../components/Buttons/SaveBtn";
 //import Carousel from "../components/Carousel"
-import DeleteBtn from "../components/Buttons/DeleteBtn";
+import { DeleteBtn } from "../components/Buttons/VideoBtns";
 
 class User extends Component {
   state = {
