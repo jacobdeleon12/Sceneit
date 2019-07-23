@@ -109,7 +109,7 @@ class Main extends Component {
     event.preventDefault();
 
     const vStr = event.target.value;
-    const vName = event.target.name;
+    const vName = event.target.id;
 
     console.log(event.target.id);
     console.log(event.target.value);
@@ -147,6 +147,7 @@ class Main extends Component {
                   <SaveBtn
                     key={this.state.featuredVid.name + "-save"}
                     value={this.state.featuredVid.YTstr}
+                    id={this.state.featuredVid.name}
                     name="saveVid"
                     onClick={this.handleSaveFormSubmit}
                   />

@@ -18,8 +18,8 @@ router
 router
   .route("/:id")
   .get(userController.findById)
-  .put(userController.update)
-  .delete(userController.remove);
+  // .put(userController.update)
+  .put(userController.remove);
 
 
 module.exports = router;

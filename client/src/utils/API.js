@@ -15,10 +15,6 @@ export default {
   deleteUser: function (_id) {
     return axios.delete("/api/users/" + _id);
   },
-  // Deletes the user with the given id
-  deleteVideo: function (_id) {
-    return axios.delete("/api/users/" + _id);
-  },
   //Reddit Api Hot
   getRedditHot: function () {
     return axios.get("https://www.reddit.com/r/videos/top.json?limit=30");
@@ -48,6 +44,10 @@ export default {
   // Saves a video to the user model
   saveVideo: function (id, videoData) {
     return axios.put("api/users/" + id, videoData)
+  },
+  // Deletes the video with the given id
+  deleteVideo: function (_id, videoData) {
+    return axios.put("/api/users/" + _id, videoData);
   },
   //the movie base API
   getTmdbInfo: function (query) {

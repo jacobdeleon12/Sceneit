@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import Wrapper from "../components/Wrapper";
+import Userwrap from "../components/Userwrap";
 import NavBar from "../components/Nav/MainNav";
 import Iframe from "../components/Iframe";
 // import JumboIframe from "../components/JumboIframe";
@@ -38,15 +38,7 @@ class User extends Component {
       .catch(err => console.log(err));
   };
 
-  deleteVideo = _id => {
-    API.deleteVideo(
-      this.state.user.savedVideos._id,
-      {
-        useFindAndModify: false
-      })
-      .then(res => this.loadUser())
-      .catch(err => console.log(err));
-  };
+
   loadVideos = () => {
     // API.getVideos().then(res => {
     //   console.log(res.data);
@@ -112,36 +104,24 @@ class User extends Component {
     });
   };
   // =======================================
-  // handleSaveFormSubmit = event => {
-  //   event.preventDefault();
-  //   console.log(this.state.selectedVideo);
-  //   console.log(event.target.id);
-  //   console.log(event.target.value);
+  handleDeleteFormSubmit = event => {
+    event.preventDefault();
+    const vStr = event.target.value;
+    const vName = event.target.id;
+    console.log(vStr);
+    console.log(vName);
 
-  //   console.log(this.state.videos);
-
-  //   let selectedVid = { id: event.target.value, name: event.target.id };
-  //   // console.log(selectedVid);
-
-  //   // let selectedVideo = [];
-  //   const vStr = selectedVid.id;
-  //   const vName = selectedVid.name;
-  //   // console.log(vStr);
-  //   // console.log(vName);
-
-  //   console.log(this.state.user);
-
-  //   API.saveVideo(this.state.user._id, {
-  //     $push: {
-  //       savedVideos: { vStr, vName }
-  //     }
-  //   })
-  //     .then(res => { console.log("this happened") })
-  //     .catch(err => console.log(err));
-  // };
+    API.deleteVideo(this.state.user._id, {
+      $pull: {
+        savedVideos: { vStr }
+      }
+    })
+      .then(res => console.log("deleted video"))
+      .catch(err => console.log(err));
+  };
 
   render() {
-    console.log(this.state);
+    console.log(this.state.videos);
 
     return (
       <div>
@@ -154,7 +134,7 @@ class User extends Component {
               </Jumbotron>
             </Col>
           </Row>
-          <Wrapper>
+          <Userwrap>
             {this.state.videos.map(video => (
               <div className="text-center">
                 <Iframe
@@ -162,7 +142,13 @@ class User extends Component {
                   YTstr={video.vStr}
                 />
                 <br />
-                <DeleteBtn onClick={() => this.deleteVideo(video._id)} />
+                <DeleteBtn
+                  value={video.vStr}
+                  key={video.vStr + "-delete"}
+                  id={video.vName}
+                  name="delVid"
+                  onClick={this.handleDeleteFormSubmit}
+                />
                 <CommentBtn
                   // value={this.state.featuredVid.YTstr}
                   name="CommentVid"
@@ -170,7 +156,7 @@ class User extends Component {
                 />
               </div>
             ))}
-          </Wrapper>
+          </Userwrap>
           {/* <h1 className="text-center">IMDB Popular</h1>
           <Wrapper>
             {this.state.movieVideos.map(video => (
