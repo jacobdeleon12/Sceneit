@@ -10,7 +10,7 @@ import React from "react";
 const name = "<SceneIT/>"
 function NavBar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
       <a className="navbar-brand" href="/">
         {name}
       </a>

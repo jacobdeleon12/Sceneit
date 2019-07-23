@@ -3,29 +3,48 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-// import MovieCard from "../components/MovieCard";
 import Wrapper from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
 import Iframe from "../components/Iframe";
-import JumboIframe from "../components/JumboIframe"
-import SaveBtn from "../components/Buttons/SaveBtn";
+import JumboIframe from "../components/JumboIframe";
+import {
+  SaveBtn,
+  // DeleteBtn,
+  // ViewBtn,
+  CommentBtn
+} from "../components/Buttons/VideoBtns";
+//import Carousel from "../components/Carousel"
 
 class Main extends Component {
   state = {
-    user: {},
+    user: [],
     videos: [],
     movieVideos:[],
     featuredVid: [],
     popMovieVid:[]
   };
+  // =======================================
   componentDidMount() {
+    this.loadUser();
     this.loadVideos();
     // this.LoadLandingMovieInfo();
-  }
+  
 
+    this.loadMovieInfo("endgame");
+  }
+  // =======================================
+  loadUser = () => {
+    API.getUser(document.cookie.split("=0; ")[1])
+      .then(res => {
+        // console.log(res.data)
+        this.setState({ user: res.data });
+      })
+      .catch(err => console.log(err));
+  };
+  // =======================================
   loadVideos = () => {
-    API.getVideos().then(res => {
-      const redditdata = res.data.data.children;
+    API.getRedditHot().then(response => {
+      const redditdata = response.data.data.children;
       let YTtitle = [];
       let YTHotStr = [];
       let reddit = [];
@@ -50,34 +69,32 @@ class Main extends Component {
       this.setState({ videos: reddit });
       //console.log(this.state.featuredVid);
     });
-  }
-
+  };
   //for movie vidoes, and anything else we want to come up with
   //must .split(" ").join("+") string for query to work correctly.
-  loadMovieInfo = (query)=>{
-    API.getMovieInfo(query).then(res =>{
-      // console.log(res.data.results);
-      const searchResult = res.data.results[0].id;
+  loadMovieInfo = query => {
+    API.getTmdbInfo(query).then(response => {
+      console.log(response.data.results);
+      const searchResult = response.data.results[0].id;
       //second call for api video results
-        API.getMovieVideo(searchResult).then(res =>{
-          // console.log(res.data);
-          const videoResults = res.data.results;
-          let YTMovieKey = [];
-          let YTMovieName= [];
-          let movieSearch = [];
+      API.getTmdbVideos(searchResult).then(response => {
+        // console.log(response.data);
+        const videoResults = response.data.results;
+        let YTMovieKey = [];
+        let YTMovieName = [];
+        let movieSearch = [];
 
-          //max of 10 for video search
-          for (let i = 0; i < 10 && i < videoResults.length; i++) {
-            YTMovieKey = videoResults[i].key;
-            YTMovieName=videoResults[i].name
-            movieSearch.push({name:YTMovieName, YTstr:YTMovieKey})
-          }
-          this.setState({movieVideos:movieSearch});
-          // console.log(this.state);
-          
-        })
-    })
-  }
+        //max of 10 for video search
+        for (let i = 0; i < 10 && i < videoResults.length; i++) {
+          YTMovieKey = videoResults[i].key;
+          YTMovieName = videoResults[i].name;
+          movieSearch.push({ name: YTMovieName, YTstr: YTMovieKey });
+        }
+        this.setState({ movieVideos: movieSearch });
+        // console.log(this.state);
+      });
+    });
+  };
 
   LoadLandingMovieInfo = () =>{
     API.getMoviePop().then(res=>{
@@ -124,9 +141,50 @@ class Main extends Component {
       [name]: value
     });
   };
+  // =======================================
+  handleSaveFormSubmit = event => {
+    let selectedVideo = [];
+    this.state.videos.map(video => {
+      if (event.target.value === video.YTstr) {
+        selectedVideo = video;
+      }
+      return video;
+    });
+    console.log(selectedVideo);
+    const vStr = selectedVideo.YTstr;
+    const vName = selectedVideo.name;
+    console.log(this.user);
+
+    event.preventDefault();
+    console.log(this.state.selectedVideo);
+    console.log(event.target.id);
+    console.log(event.target.value);
+
+    console.log(this.state.videos);
+
+    // let selectedVid = { id: event.target.value, name: event.target.id };
+    // console.log(selectedVid);
+
+    // let selectedVideo = [];
+    // const vStr = selectedVid.id;
+    // const vName = selectedVid.name;
+    // console.log(vStr);
+    // console.log(vName);
+
+    console.log(this.state.user);
+
+    API.saveVideo(this.state.user._id, {
+      $push: {
+        savedVideos: { vStr, vName }
+      }
+    })
+      .then(response => {
+        console.log("this happened");
+      })
+      .catch(err => console.log(err));
+  };
 
   render() {
-
     return (
       <div>
         <NavBar />
@@ -140,21 +198,62 @@ class Main extends Component {
                     key={this.state.featuredVid.name}
                     YTstr={this.state.featuredVid.YTstr}
                   />
-                  <SaveBtn />
+                  <br />
+                  <SaveBtn
+                    value={this.state.featuredVid.YTstr}
+                    name="saveVid"
+                    onClick={this.handleSaveFormSubmit}
+                  />
+                  <CommentBtn
+                    value={this.state.featuredVid.YTstr}
+                    name="CommentVid"
+                    onClick={this.handleCommentSubmit}
+                  />
                 </div>
               </Jumbotron>
             </Col>
           </Row>
+          <h1 className="text-center">Reddit Hot</h1>
           <Wrapper>
             {this.state.videos.map(video => (
               <div className="text-center">
-                <Iframe
+                <Iframe key={video.name} YTstr={video.YTstr} />
+                <br />
+                <SaveBtn
+                  value={video.YTstr}
                   key={video.name}
-                  YTstr={video.YTstr}
+                  id={video.name}
+                  name="saveVid"
+                  onClick={this.handleSaveFormSubmit}
                 />
-                <SaveBtn />
+                <CommentBtn
+                  value={this.state.featuredVid.YTstr}
+                  name="CommentVid"
+                  onClick={this.handleCommentSubmit}
+                />
               </div>
-            ))};
+            ))}
+          </Wrapper>
+          <h1 className="text-center">IMDB Popular</h1>
+          <Wrapper>
+            {this.state.movieVideos.map(video => (
+              <div className="text-center">
+                <Iframe key={video.name} YTstr={video.YTstr} />
+                <br />
+                <SaveBtn
+                  value={video.YTstr}
+                  key={video.name}
+                  id={video.name}
+                  name="saveVid"
+                  onClick={this.handleSaveFormSubmit}
+                />
+                <CommentBtn
+                  value={this.state.featuredVid.YTstr}
+                  name="CommentVid"
+                  onClick={this.handleCommentSubmit}
+                />
+              </div>
+            ))}
           </Wrapper>
         </Container>
       </div>

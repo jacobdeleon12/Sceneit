@@ -2,7 +2,11 @@ import React from "react";
 import "./style.css";
 
 function Wrapper(props) {
-  return <div className="wrapper container justify-content-center">{props.children}</div>;
+  return (
+    <nav className="pn-ProductNav">
+      <div className="scroll_menu">{props.children}</div>
+    </nav>
+  );
 }
 
 export default Wrapper;
