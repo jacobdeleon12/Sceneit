@@ -8,6 +8,7 @@
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.3",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-google-login": "^5.0.4",
