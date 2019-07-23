@@ -128,6 +128,7 @@ class Main extends Component {
                     key={this.state.featuredVid.name}
                     YTstr={this.state.featuredVid.YTstr}
                   />
+                  <br />
                   <SaveBtn
                     value={this.state.featuredVid.YTstr}
                     name="saveVid"
@@ -142,11 +143,12 @@ class Main extends Component {
               </Jumbotron>
             </Col>
           </Row>
-          Reddit Hot
+          <h1 className="text-center">Reddit Hot</h1>
           <Wrapper>
             {this.state.videos.map(video => (
               <div className="text-center">
                 <Iframe key={video.name} YTstr={video.YTstr} />
+                <br />
                 <SaveBtn
                   value={video.YTstr}
                   name="saveVid"
@@ -160,11 +162,12 @@ class Main extends Component {
               </div>
             ))}
           </Wrapper>
-          IMDB Popular
+          <h1 className="text-center">IMDB Popular</h1>
           <Wrapper>
             {this.state.movieVideos.map(video => (
               <div className="text-center">
                 <Iframe key={video.name} YTstr={video.YTstr} />
+                <br />
                 <SaveBtn
                   value={video.YTstr}
                   name="saveVid"
