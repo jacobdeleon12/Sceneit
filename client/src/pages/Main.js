@@ -167,19 +167,21 @@ class Main extends Component {
               <div className="text-center" key={video.YTstr}>
                 <Iframe key={video.name} YTstr={video.YTstr} />
                 <br />
-                <SaveBtn
-                  value={video.YTstr}
-                  key={video.YTstr + "-save"}
-                  id={video.name}
-                  name="saveVid"
-                  onClick={this.handleSaveFormSubmit}
-                />
-                <CommentBtn
-                  key={video.YTstr + "-comment"}
-                  value={this.state.featuredVid.YTstr}
-                  name="CommentVid"
-                  onClick={this.handleCommentSubmit}
-                />
+                <BtnContainer>
+                  <SaveBtn
+                    value={video.YTstr}
+                    key={video.YTstr + "-save"}
+                    id={video.name}
+                    name="saveVid"
+                    onClick={this.handleSaveFormSubmit}
+                  />
+                  <CommentBtn
+                    key={video.YTstr + "-comment"}
+                    value={this.state.featuredVid.YTstr}
+                    name="CommentVid"
+                    onClick={this.handleCommentSubmit}
+                  />
+                </BtnContainer>
               </div>
             ))}
           </Wrapper>
@@ -189,19 +191,21 @@ class Main extends Component {
               <div className="text-center" key={video.YTstr}>
                 <Iframe key={video.name} YTstr={video.YTstr} />
                 <br />
-                <SaveBtn
-                  value={video.YTstr}
-                  key={video.YTstr + "-save"}
-                  id={video.name}
-                  name="saveVid"
-                  onClick={this.handleSaveFormSubmit}
-                />
-                <CommentBtn
-                  key={video.YTstr + "-comment"}
-                  value={this.state.featuredVid.YTstr}
-                  name="CommentVid"
-                  onClick={this.handleCommentSubmit}
-                />
+                <BtnContainer>
+                  <SaveBtn
+                    value={video.YTstr}
+                    key={video.YTstr + "-save"}
+                    id={video.name}
+                    name="saveVid"
+                    onClick={this.handleSaveFormSubmit}
+                  />
+                  <CommentBtn
+                    key={video.YTstr + "-comment"}
+                    value={this.state.featuredVid.YTstr}
+                    name="CommentVid"
+                    onClick={this.handleCommentSubmit}
+                  />
+                </BtnContainer>
               </div>
             ))}
           </Wrapper>
