@@ -5,13 +5,12 @@ import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import Wrapper from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
-import Iframe from "../components/Iframe";
-import JumboIframe from "../components/JumboIframe";
+import { JumboIframe, Iframe } from "../components/Iframe";
 import {
   SaveBtn,
   DeleteBtn,
-  ViewBtn,
-  CommentBtn
+  CommentBtn,
+  BtnContainer
 } from "../components/Buttons/VideoBtns";
 //import Carousel from "../components/Carousel"
 
@@ -128,16 +127,18 @@ class Main extends Component {
                     key={this.state.featuredVid.name}
                     YTstr={this.state.featuredVid.YTstr}
                   />
-                  <SaveBtn
-                    value={this.state.featuredVid.YTstr}
-                    name="saveVid"
-                    onClick={this.handleSaveFormSubmit}
-                  />
-                  <CommentBtn
-                    value={this.state.featuredVid.YTstr}
-                    name="CommentVid"
-                    onClick={this.handleCommentSubmit}
-                  />
+                  <BtnContainer>
+                    <SaveBtn
+                      value={this.state.featuredVid.YTstr}
+                      name="saveVid"
+                      onClick={this.handleSaveFormSubmit}
+                    />
+                    <CommentBtn
+                      value={this.state.featuredVid.YTstr}
+                      name="CommentVid"
+                      onClick={this.handleCommentSubmit}
+                    />
+                  </BtnContainer>
                 </div>
               </Jumbotron>
             </Col>
@@ -147,16 +148,18 @@ class Main extends Component {
             {this.state.videos.map(video => (
               <div className="text-center">
                 <Iframe key={video.name} YTstr={video.YTstr} />
-                <SaveBtn
-                  value={video.YTstr}
-                  name="saveVid"
-                  onClick={this.handleSaveFormSubmit}
-                />
-                <CommentBtn
-                  value={this.state.featuredVid.YTstr}
-                  name="CommentVid"
-                  onClick={this.handleCommentSubmit}
-                />
+                <BtnContainer>
+                  <SaveBtn
+                    value={video.YTstr}
+                    name="saveVid"
+                    onClick={this.handleSaveFormSubmit}
+                  />
+                  <CommentBtn
+                    value={this.state.featuredVid.YTstr}
+                    name="CommentVid"
+                    onClick={this.handleCommentSubmit}
+                  />
+                </BtnContainer>
               </div>
             ))}
           </Wrapper>
@@ -165,16 +168,18 @@ class Main extends Component {
             {this.state.movieVideos.map(video => (
               <div className="text-center">
                 <Iframe key={video.name} YTstr={video.YTstr} />
-                <SaveBtn
-                  value={video.YTstr}
-                  name="saveVid"
-                  onClick={this.handleSaveFormSubmit}
-                />
-                <CommentBtn
-                  value={this.state.featuredVid.YTstr}
-                  name="CommentVid"
-                  onClick={this.handleCommentSubmit}
-                />
+                <BtnContainer>
+                  <SaveBtn
+                    value={video.YTstr}
+                    name="saveVid"
+                    onClick={this.handleSaveFormSubmit}
+                  />
+                  <CommentBtn
+                    value={this.state.featuredVid.YTstr}
+                    name="CommentVid"
+                    onClick={this.handleCommentSubmit}
+                  />
+                </BtnContainer>
               </div>
             ))}
             ;

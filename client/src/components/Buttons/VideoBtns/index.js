@@ -34,3 +34,7 @@ export function CommentBtn(props) {
     </button>
   );
 }
+
+export function BtnContainer({ children }) {
+  return <div className="btnGroup">{children}</div>;
+}
