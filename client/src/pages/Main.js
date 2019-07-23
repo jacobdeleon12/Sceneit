@@ -3,15 +3,15 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import Wrapper from "../components/Wrapper";
+import { Wrapper } from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
-import Iframe from "../components/Iframe";
-import JumboIframe from "../components/JumboIframe";
+import { JumboIframe, Iframe } from "../components/Iframe";
 import {
   SaveBtn,
   // DeleteBtn,
   // ViewBtn,
-  CommentBtn
+  CommentBtn,
+  BtnContainer
 } from "../components/Buttons/VideoBtns";
 //import Carousel from "../components/Carousel"
 
@@ -70,6 +70,7 @@ class Main extends Component {
     })
       .catch(err => console.log(err));
   };
+
   //for movie vidoes, and anything else we want to come up with
   //must .split(" ").join("+") string for query to work correctly.
   loadMovieInfo = query => {
