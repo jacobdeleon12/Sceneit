@@ -15,10 +15,6 @@ export default {
   deleteUser: function (_id) {
     return axios.delete("/api/users/" + _id);
   },
-  // Deletes the user with the given id
-  deleteVideo: function (_id) {
-    return axios.delete("/api/users/" + _id);
-  },
   //Reddit Api Hot
   getRedditHot: function () {
     return axios.get("https://www.reddit.com/r/videos/top.json?limit=30");
@@ -41,6 +37,10 @@ export default {
       `https://api.themoviedb.org/3/movie/${query}/videos?api_key=7b07c1ac2c9e9a9f62cfc49a4ec55f99&language=en-US`
     );
   },
+  //TMDB popular for default landing 
+  getMoviePop:function(){
+    return axios.get("https://api.themoviedb.org/3/movie/popular?api_key=7b07c1ac2c9e9a9f62cfc49a4ec55f99&language=en-US&page=1")
+  },
   // Saves a user to the database
   saveUser: function (userData) {
     return axios.post("/api/users", userData);
@@ -48,6 +48,10 @@ export default {
   // Saves a video to the user model
   saveVideo: function (id, videoData) {
     return axios.put("api/users/" + id, videoData)
+  },
+  // Deletes the video with the given id
+  deleteVideo: function (_id, videoData) {
+    return axios.put("/api/users/" + _id, videoData);
   },
   //the movie base API
   getTmdbInfo: function (query) {

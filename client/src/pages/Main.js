@@ -21,7 +21,8 @@ class Main extends Component {
     videos: [],
     movieVideos: [],
     featuredVid: [],
-    selectedVideo: []
+    savedVideos: [],
+    clicked: false
   };
   // =======================================
   componentDidMount() {
@@ -115,17 +116,15 @@ class Main extends Component {
       [name]: value
     });
   };
+
   // =======================================
   handleSaveFormSubmit = event => {
+
     event.preventDefault();
+    // this.refs.savebtn.setAttribute("disabled", "disabled");
 
     const vStr = event.target.value;
-    const vName = event.target.name;
-
-    console.log(event.target.id);
-    console.log(event.target.value);
-
-    console.log(this.state.user);
+    const vName = event.target.id;
 
     API.saveVideo(this.state.user._id, {
       $push: {
@@ -133,13 +132,17 @@ class Main extends Component {
       }
     })
       .then(response => {
-        console.log("this happened");
+        console.log(response);
+        this.setState({ savedVideos: response.data.savedVideos });
       })
       .catch(err => console.log(err));
+    // this.setState({ clicked: true })
+    // console.log(this.state.user);
   };
 
   render() {
-    console.log(this.state.selectedVideo);
+    console.log(this.state);
+    // console.log(typeof this.state.savedVideos);
 
     return (
       <div>
@@ -156,8 +159,10 @@ class Main extends Component {
                   />
                   <br />
                   <SaveBtn
+                    // disabled={this.state.clicked}
                     key={this.state.featuredVid.name + "-save"}
                     value={this.state.featuredVid.YTstr}
+                    id={this.state.featuredVid.name}
                     name="saveVid"
                     onClick={this.handleSaveFormSubmit}
                   />

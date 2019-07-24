@@ -4,6 +4,7 @@
 // export * from "./SearchResultNav";
 // export * from "./TitleNav";
 // export * from "./UserNav";
+import "./style.css"
 
 import React from "react";
 
