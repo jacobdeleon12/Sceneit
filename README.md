@@ -1,17 +1,17 @@
-# Sceneit
+# <Scene/ it>
 
 ##### (Blake Marter, Jacob Deleon, Kai Richardson, Kaleb Merriman)
 
 ## Overview
 
-`sceneIt™` is a video streaming service that will connect users to many video services as a one stop shop of video enjoyment. 
+`<Scene/ it>™` is a video streaming service that will connect users to many video services as a one stop shop of video enjoyment. 
 
 Jacob -
 “I LOVE internet videos and HATE having multiple tabs/windows open on my browser. I want one place to find all my videos, and to save the ones that I want to view again. “
 
 Jacob is a typical internet user that wants an enjoyable experience viewing all of his videos without being interrupted by switching between different sites.
 
-We at sceneIt™ will provide this experience for him and anyone like him. 
+We at <Scene/ it>™ will provide this experience for him and anyone like him. 
 
 
 ## Layout
