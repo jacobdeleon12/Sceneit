@@ -1,6 +1,9 @@
 let axios = require("axios");
+require('dotenv').config()
 
-const apiKey = "7b07c1ac2c9e9a9f62cfc49a4ec55f99";
+// const apiKey = "7b07c1ac2c9e9a9f62cfc49a4ec55f99";
+const apiKey = process.env.REACT_APP_TMDB_API_KEY;
+console.log(apiKey);
 
 axios
   .get(
@@ -24,3 +27,4 @@ axios
         });
     }
   });
+
