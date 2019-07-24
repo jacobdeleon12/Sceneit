@@ -44,6 +44,8 @@ class Main extends Component {
   // =======================================
   loadVideos = () => {
     API.getRedditHot().then(response => {
+      console.log(response.data.data);
+
       const redditdata = response.data.data.children;
       let YTtitle = [];
       let YTHotStr = [];
