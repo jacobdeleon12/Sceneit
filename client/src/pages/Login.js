@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
-import { GLogin, GLogout } from "../components/Buttons/Google";
+import { GLogin} from "../components/Buttons/Google";
 import NavBar from "../components/Nav/index";
 import Background from "../components/splash";
 
