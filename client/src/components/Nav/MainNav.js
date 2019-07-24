@@ -1,4 +1,5 @@
 import React from "react";
+import "./style.css";
 import { GLogout } from "../Buttons/Google";
 
 const Logo = "<Scene/ IT>"
@@ -21,7 +22,7 @@ function NavBar() {
             <a className="nav-link" href="/main/user">Profile</a>
           </li>
           <li className="nav-item">
-            <GLogout />
+            <GLogout/>
           </li>
         </ul>
         <form className="form-inline my-2 my-lg-0" style={{display: "block"}}>
