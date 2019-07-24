@@ -11,15 +11,15 @@ function background({ children }) {
         <Row>
           <Col size="sm-12">
             <div className="m-3 p-3 ">
-              <h1>Are You Ready?</h1>
-              <h2>Its Time to catch up on Trending Videos</h2>
+              <h1 className = "splashHeadder1">Are You Ready?</h1>
+              <h2 className = "splashHeadder2">Its Time to catch up on Trending Videos</h2>
             </div>
           </Col>
         </Row>
         <Row>
           <Col size="sm-12">
             <div className="m-3 p-3 text-center">
-              <img alt="arrow" src={Img} className = "ball"></img>
+              <img className="splashImg" alt="arrow" src={Img} className = "ball"></img>
             </div>
           </Col>
         </Row>

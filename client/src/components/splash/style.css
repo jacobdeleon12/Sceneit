@@ -5,22 +5,23 @@
   width: 100%;
 }
 
-h1{
+.splashHeadder1{
   font-size: 8vh
 }
-h2{
+
+.splashHeadder2{
   font-size: 3vh
 }
 
-img{
+.splashImg{
   height: 5vh;
   margin-top: -3vh;
 }
 
 
-body {
+/* body {
   justify-content: center;
-}
+} */
 
 .ball {
   width: 100px;
@@ -43,36 +44,36 @@ body {
 }
 
 @media (min-width: 425px) {
-  img{
+  .splashImg{
     height: 5vh;
   }
 }
 
 @media (min-width: 768px) {
-  img{
+  .splashImg{
     height: 5vh;
     margin-top: 8vh;
   }
-  h1{
+  .splashHeadder1{
     font-size: 10vh;
     margin-bottom: 3%
   }
-  h2{
+  .splashHeadder2{
     font-size: 3vh
   }
 }
 
 @media (min-width: 1024px) {
-  img{
+  .splashImg{
     height: 5vh;
     margin-top: 10vh;
   }
 
-  h1{
+  .splashHeadder1{
     font-size: 10vh;
     margin-bottom: 3%
   }
-  h2{
+  .splashHeadder2{
     font-size: 3vh
   }
 }
