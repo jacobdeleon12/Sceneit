@@ -111,17 +111,22 @@ class User extends Component {
     console.log(vStr);
     console.log(vName);
 
-    API.deleteVideo(this.state.user._id, {
-      $pull: {
-        savedVideos: { vStr }
-      }
-    })
-      .then(res => console.log("deleted video"))
+    API.deleteVideo(
+      this.state.user._id,
+      {
+        $pull: {
+          savedVideos: { vStr }
+        }
+      })
+      .then(res => {
+        window.location.reload();
+        console.log("deleted video");
+      })
       .catch(err => console.log(err));
   };
 
   render() {
-    console.log(this.state.videos);
+    console.log(this.state);
 
     return (
       <div>
@@ -130,6 +135,21 @@ class User extends Component {
           <Row>
             <Col size="md-12">
               <Jumbotron>
+                <Col size="md-12">
+                  <Container fluid>
+                    <img src={this.state.user.imageUrl} alt="googleImage" />
+                  </Container>
+                </Col>
+                <Col size="md-12">
+                  <Container fluid>
+                    <Row fluid >
+                      <p>{this.state.user.givenName} {this.state.user.familyName}</p>
+                    </Row>
+                    <Row fluid>
+                      <p>{this.state.user.email}</p>
+                    </Row>
+                  </Container>
+                </Col>
 
               </Jumbotron>
             </Col>
@@ -150,7 +170,9 @@ class User extends Component {
                   onClick={this.handleDeleteFormSubmit}
                 />
                 <CommentBtn
-                  // value={this.state.featuredVid.YTstr}
+                  value={video.vStr}
+                  key={video.vStr + "-delete"}
+                  id={video.vName}
                   name="CommentVid"
                   onClick={this.handleCommentSubmit}
                 />

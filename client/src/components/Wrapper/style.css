@@ -1,4 +1,4 @@
-/* .wrapper {
+.wrapper {
   padding-top: 50px;
   background: #ECEFF1;
   height: 100%;
@@ -8,7 +8,7 @@
   justify-content: space-around;
   align-content: flex-start;
   overflow: auto;
-} */
+}
 
 div.scroll_menu {
   background-color: #333;
