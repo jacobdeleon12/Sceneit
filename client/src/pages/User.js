@@ -161,18 +161,23 @@ class User extends Component {
           <Userwrap>
             {this.state.videos.map(video => (
               <div className="text-center">
-                <Iframe key={video.vName} YTstr={video.vStr} />
+
+                <Iframe
+                  key={this.state.user.savedVideos._id}
+                  YTstr={video.vStr}
+                />
+
                 <br />
                 <DeleteBtn
                   value={video.vStr}
-                  key={video.vStr + "-delete"}
+                  key={this.state.user.savedVideos._id + "-delete"}
                   id={video.vName}
                   name="delVid"
                   onClick={this.handleDeleteFormSubmit}
                 />
                 <CommentBtn
                   value={video.vStr}
-                  key={video.vStr + "-delete"}
+                  key={this.state.user.savedVideos._id + "-delete"}
                   id={video.vName}
                   name="CommentVid"
                   onClick={this.handleCommentSubmit}
