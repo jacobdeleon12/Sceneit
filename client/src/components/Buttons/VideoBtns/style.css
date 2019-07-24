@@ -1,16 +1,12 @@
-/* .save-btn {
+.btnGroup {
+  position: relative;
+  background-color: rgb(158, 132, 132);
+  margin: 0;
+  width: 100%;
+  padding: 5px;
 }
-
-.delete-btn {
-  color: #e74944;
-}
-
-.view-btn {
-} */
 
 .vidBtn {
-  padding: 2px;
-  margin: 0 0 0 15px;
   background-color: rgb(223, 39, 39);
   color: beige;
   text-align: center;
@@ -19,16 +15,18 @@
   font-size: 10px;
   outline: none;
   height: 20px;
-  width: 25%;
-  
+  width: 40%;
+  position: relative;
+  margin: 2px;
 }
 
 .vidBtn:hover {
   cursor: pointer;
+  background-color: rgb(141, 38, 38);
 }
 
 .vidBtn:active {
-  background-color: rgb(104, 27, 27);
+  background-color: rgb(94, 24, 24);
   box-shadow: none;
   outline: 0;
 }

@@ -3,50 +3,49 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import Wrapper from "../components/Wrapper";
+import { Wrapper } from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
-import Iframe from "../components/Iframe";
-// import JumboIframe from "../components/JumboIframe"
-// import SaveBtn from "../components/Buttons/SaveBtn";
+import {Iframe} from "../components/Iframe";
+// import JumboIframe from "../components/JumboIframe";
+import {
+  // SaveBtn,
+  DeleteBtn,
+  // ViewBtn,
+  CommentBtn
+} from "../components/Buttons/VideoBtns";
 //import Carousel from "../components/Carousel"
-import { DeleteBtn } from "../components/Buttons/VideoBtns";
 
 class User extends Component {
   state = {
     user: [],
-    videos: []
-    // movieVideos: [],
+    videos: [],
+    movieVideos: []
     // featuredVid: [],
     // selectedVideo: [{}]
   };
   componentDidMount() {
     this.loadUser();
-
-
   }
 
   loadUser = () => {
-    API.getUser((document.cookie).split("=0; ")[1])
+    API.getUser(document.cookie.split("=0; ")[1])
       .then(res => {
         // console.log(res.data)
-        this.setState({ user: res.data, videos: res.data.savedVideos })
+        this.setState({ user: res.data, videos: res.data.savedVideos });
       })
       .catch(err => console.log(err));
   };
 
   deleteVideo = _id => {
-    API.deleteVideo(
-      this.state.user.savedVideos._id,
-      {
-        useFindAndModify: false
-      })
+    API.deleteVideo(this.state.user.savedVideos._id, {
+      useFindAndModify: false
+    })
       .then(res => this.loadUser())
       .catch(err => console.log(err));
   };
   loadVideos = () => {
     // API.getVideos().then(res => {
     //   console.log(res.data);
-
     //   const redditdata = res.data.data.children;
     //   let YTtitle = [];
     //   let YTHotStr = [];
@@ -145,9 +144,7 @@ class User extends Component {
         <Container fluid>
           <Row>
             <Col size="md-12">
-              <Jumbotron>
-
-              </Jumbotron>
+              <Jumbotron></Jumbotron>
             </Col>
           </Row>
           <Wrapper>
@@ -159,10 +156,30 @@ class User extends Component {
                 />
                 <br />
                 <DeleteBtn onClick={() => this.deleteVideo(video._id)} />
+                <CommentBtn
+                  // value={this.state.featuredVid.YTstr}
+                  name="CommentVid"
+                  onClick={this.handleCommentSubmit}
+                />
               </div>
             ))}
-
-            {/* {this.state.movieVideos.map(video => (
+          </Wrapper>
+          {/* <h1 className="text-center">IMDB Popular</h1>
+          <Wrapper>
+            {this.state.movieVideos.map(video => (
+              <div className="text-center">
+                <Iframe key={video.name} YTstr={video.YTstr} />
+                <br />
+                <DeleteBtn onClick={() => this.deleteVideo(video._id)} />
+                <CommentBtn
+                  // value={this.state.featuredVid.YTstr}
+                  name="CommentVid"
+                  onClick={this.handleCommentSubmit}
+                />
+              </div>
+            ))}
+          </Wrapper> */}
+          {/* {this.state.movieVideos.map(video => (
               <div className="text-center">
                 <Iframe
                   key={video.name}
@@ -171,10 +188,8 @@ class User extends Component {
                 <DeleteBtn onClick={() => this.deleteBook(video._id)} />
               </div>
             ))} */}
-
-          </Wrapper>
         </Container>
-      </div>
+      </div >
     );
   }
 }

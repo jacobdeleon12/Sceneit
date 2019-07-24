@@ -3,15 +3,15 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import Wrapper from "../components/Wrapper";
+import { Wrapper } from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
-import Iframe from "../components/Iframe";
-import JumboIframe from "../components/JumboIframe";
+import { JumboIframe, Iframe } from "../components/Iframe";
 import {
   SaveBtn,
   // DeleteBtn,
   // ViewBtn,
-  CommentBtn
+  CommentBtn,
+  BtnContainer
 } from "../components/Buttons/VideoBtns";
 //import Carousel from "../components/Carousel"
 
@@ -21,13 +21,13 @@ class Main extends Component {
     videos: [],
     movieVideos: [],
     featuredVid: [],
-    selectedVideo: [{}]
+    selectedVideo: []
   };
   // =======================================
   componentDidMount() {
     this.loadUser();
     this.loadVideos();
-    // console.log((document.cookie).split("=0; ")[1]);
+    console.log((document.cookie).split("=0; ")[1]);
 
     this.loadMovieInfo("endgame");
   }
@@ -59,7 +59,7 @@ class Main extends Component {
             //getting just the infromaion we need after ? in string
             YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
             //pushing to obj
-            reddit.push({ name: YTtitle, YTstr: YTHotStr });
+            reddit.push({ name: YTtitle, YTstr: YTHotStr, vidType: "youtube" });
           }
         }
       }
@@ -68,13 +68,15 @@ class Main extends Component {
       this.setState({ videos: reddit });
       //console.log(this.state.featuredVid);
     })
-    .catch(err => console.log(err));
+      .catch(err => console.log(err));
   };
+
   //for movie vidoes, and anything else we want to come up with
   //must .split(" ").join("+") string for query to work correctly.
   loadMovieInfo = query => {
     API.getTmdbInfo(query).then(response => {
       console.log(response.data.results);
+      console.log(response.data);
       const searchResult = response.data.results[0].id;
       //second call for api video results
       API.getTmdbVideos(searchResult).then(response => {
@@ -88,13 +90,13 @@ class Main extends Component {
         for (let i = 0; i < 10 && i < videoResults.length; i++) {
           YTMovieKey = videoResults[i].key;
           YTMovieName = videoResults[i].name;
-          movieSearch.push({ name: YTMovieName, YTstr: YTMovieKey });
+          movieSearch.push({ name: YTMovieName, YTstr: YTMovieKey, vidType: "omdb" });
         }
         this.setState({ movieVideos: movieSearch });
         // console.log(this.state);
       });
     })
-    .catch(err => console.log(err));
+      .catch(err => console.log(err));
   };
 
   handleInputChange = event => {
@@ -105,33 +107,13 @@ class Main extends Component {
   };
   // =======================================
   handleSaveFormSubmit = event => {
-    let selectedVideo = [];
-    this.state.videos.map(video => {
-      if (event.target.value === video.YTstr) {
-        selectedVideo = video;
-      }
-      return video;
-    });
-    console.log(selectedVideo);
-    const vStr = selectedVideo.YTstr;
-    const vName = selectedVideo.name;
-    console.log(this.user);
-
     event.preventDefault();
-    console.log(this.state.selectedVideo);
+
+    const vStr = event.target.value;
+    const vName = event.target.name;
+
     console.log(event.target.id);
     console.log(event.target.value);
-
-    console.log(this.state.videos);
-
-    // let selectedVid = { id: event.target.value, name: event.target.id };
-    // console.log(selectedVid);
-
-    // let selectedVideo = [];
-    // const vStr = selectedVid.id;
-    // const vName = selectedVid.name;
-    // console.log(vStr);
-    // console.log(vName);
 
     console.log(this.state.user);
 
@@ -147,6 +129,8 @@ class Main extends Component {
   };
 
   render() {
+    console.log(this.state.selectedVideo);
+
     return (
       <div>
         <NavBar />
@@ -168,7 +152,7 @@ class Main extends Component {
                     onClick={this.handleSaveFormSubmit}
                   />
                   <CommentBtn
-                     key={this.state.featuredVid.name + "-comment"}
+                    key={this.state.featuredVid.name + "-comment"}
                     value={this.state.featuredVid.YTstr}
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
@@ -183,19 +167,21 @@ class Main extends Component {
               <div className="text-center" key={video.YTstr}>
                 <Iframe key={video.name} YTstr={video.YTstr} />
                 <br />
-                <SaveBtn
-                  value={video.YTstr}
-                  key={video.YTstr + "-save"}
-                  id={video.name}
-                  name="saveVid"
-                  onClick={this.handleSaveFormSubmit}
-                />
-                <CommentBtn
-                  key={video.YTstr + "-comment"}
-                  value={this.state.featuredVid.YTstr}
-                  name="CommentVid"
-                  onClick={this.handleCommentSubmit}
-                />
+                <BtnContainer>
+                  <SaveBtn
+                    value={video.YTstr}
+                    key={video.YTstr + "-save"}
+                    id={video.name}
+                    name="saveVid"
+                    onClick={this.handleSaveFormSubmit}
+                  />
+                  <CommentBtn
+                    key={video.YTstr + "-comment"}
+                    value={this.state.featuredVid.YTstr}
+                    name="CommentVid"
+                    onClick={this.handleCommentSubmit}
+                  />
+                </BtnContainer>
               </div>
             ))}
           </Wrapper>
@@ -205,19 +191,21 @@ class Main extends Component {
               <div className="text-center" key={video.YTstr}>
                 <Iframe key={video.name} YTstr={video.YTstr} />
                 <br />
-                <SaveBtn
-                  value={video.YTstr}
-                  key={video.YTstr + "-save"}
-                  id={video.name}
-                  name="saveVid"
-                  onClick={this.handleSaveFormSubmit}
-                />
-                <CommentBtn
-                  key={video.YTstr + "-comment"}
-                  value={this.state.featuredVid.YTstr}
-                  name="CommentVid"
-                  onClick={this.handleCommentSubmit}
-                />
+                <BtnContainer>
+                  <SaveBtn
+                    value={video.YTstr}
+                    key={video.YTstr + "-save"}
+                    id={video.name}
+                    name="saveVid"
+                    onClick={this.handleSaveFormSubmit}
+                  />
+                  <CommentBtn
+                    key={video.YTstr + "-comment"}
+                    value={this.state.featuredVid.YTstr}
+                    name="CommentVid"
+                    onClick={this.handleCommentSubmit}
+                  />
+                </BtnContainer>
               </div>
             ))}
           </Wrapper>
