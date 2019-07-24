@@ -10,17 +10,17 @@ class Login extends Component {
       <div>
         <NavBar />
         <Background>
+        </Background>
           <Container fluid>
             <Row>
               <Col size="sm-12">
                 <div className="m-3 p-3 text-center">
                     <GLogin />
-                  <GLogout />
+                  
                 </div>
               </Col>
             </Row>
           </Container>
-        </Background>
       </div>
     );
   }

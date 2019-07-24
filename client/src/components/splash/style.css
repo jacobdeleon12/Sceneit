@@ -1,4 +1,80 @@
 .background{
   background: #343a40;
-  height: 100vh
+  height: 50vh;
+  color: deepskyblue;
+  width: 100%;
 }
+
+h1{
+  font-size: 8vh
+}
+h2{
+  font-size: 3vh
+}
+
+img{
+  height: 5vh;
+  margin-top: -3vh;
+}
+
+
+body {
+  justify-content: center;
+}
+
+.ball {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  animation: bounce 0.5s;
+  animation-direction: alternate;
+  animation-timing-function: cubic-bezier(.5,0.05,1,.5);
+  animation-iteration-count: infinite;
+}
+
+@keyframes bounce {
+  from { transform: translate3d(0, 0, 0);     }
+  to   { transform: translate3d(0, 30px, 0); }
+}
+
+@-webkit-keyframes bounce {
+  from { -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
+  to   { -webkit-transform: translate3d(0, 30px, 0); transform: translate3d(0, 200px, 0); }
+}
+
+@media (min-width: 425px) {
+  img{
+    height: 5vh;
+  }
+}
+
+@media (min-width: 768px) {
+  img{
+    height: 5vh;
+    margin-top: 8vh;
+  }
+  h1{
+    font-size: 10vh;
+    margin-bottom: 3%
+  }
+  h2{
+    font-size: 3vh
+  }
+}
+
+@media (min-width: 1024px) {
+  img{
+    height: 5vh;
+    margin-top: 10vh;
+  }
+
+  h1{
+    font-size: 10vh;
+    margin-bottom: 3%
+  }
+  h2{
+    font-size: 3vh
+  }
+}
+
+
