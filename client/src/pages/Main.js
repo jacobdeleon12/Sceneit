@@ -3,15 +3,15 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import Wrapper from "../components/Wrapper";
+import { Wrapper } from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
-import Iframe from "../components/Iframe";
-import JumboIframe from "../components/JumboIframe";
+import { JumboIframe, Iframe } from "../components/Iframe";
 import {
   SaveBtn,
   // DeleteBtn,
   // ViewBtn,
-  CommentBtn
+  CommentBtn,
+  BtnContainer
 } from "../components/Buttons/VideoBtns";
 //import Carousel from "../components/Carousel"
 
@@ -71,6 +71,7 @@ class Main extends Component {
     })
       .catch(err => console.log(err));
   };
+
   //for movie vidoes, and anything else we want to come up with
   //must .split(" ").join("+") string for query to work correctly.
   loadMovieInfo = query => {
@@ -171,20 +172,21 @@ class Main extends Component {
               <div className="text-center" key={video.YTstr}>
                 <Iframe key={video.name} YTstr={video.YTstr} />
                 <br />
-                <SaveBtn
-                  // disabled={this.state.clicked}
-                  value={video.YTstr}
-                  key={video.YTstr + "-save"}
-                  id={video.name}
-                  name="saveVid"
-                  onClick={this.handleSaveFormSubmit}
-                />
-                <CommentBtn
-                  key={video.YTstr + "-comment"}
-                  value={this.state.featuredVid.YTstr}
-                  name="CommentVid"
-                  onClick={this.handleCommentSubmit}
-                />
+                <BtnContainer>
+                  <SaveBtn
+                    value={video.YTstr}
+                    key={video.YTstr + "-save"}
+                    id={video.name}
+                    name="saveVid"
+                    onClick={this.handleSaveFormSubmit}
+                  />
+                  <CommentBtn
+                    key={video.YTstr + "-comment"}
+                    value={this.state.featuredVid.YTstr}
+                    name="CommentVid"
+                    onClick={this.handleCommentSubmit}
+                  />
+                </BtnContainer>
               </div>
             ))}
           </Wrapper>
@@ -194,20 +196,21 @@ class Main extends Component {
               <div className="text-center" key={video.YTstr}>
                 <Iframe key={video.name} YTstr={video.YTstr} />
                 <br />
-                <SaveBtn
-                  // disabled={this.state.clicked}
-                  value={video.YTstr}
-                  key={video.YTstr + "-save"}
-                  id={video.name}
-                  name="saveVid"
-                  onClick={this.handleSaveFormSubmit}
-                />
-                <CommentBtn
-                  key={video.YTstr + "-comment"}
-                  value={this.state.featuredVid.YTstr}
-                  name="CommentVid"
-                  onClick={this.handleCommentSubmit}
-                />
+                <BtnContainer>
+                  <SaveBtn
+                    value={video.YTstr}
+                    key={video.YTstr + "-save"}
+                    id={video.name}
+                    name="saveVid"
+                    onClick={this.handleSaveFormSubmit}
+                  />
+                  <CommentBtn
+                    key={video.YTstr + "-comment"}
+                    value={this.state.featuredVid.YTstr}
+                    name="CommentVid"
+                    onClick={this.handleCommentSubmit}
+                  />
+                </BtnContainer>
               </div>
             ))}
           </Wrapper>

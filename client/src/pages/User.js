@@ -4,8 +4,9 @@ import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import Userwrap from "../components/Userwrap";
+// import { Wrapper } from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
-import Iframe from "../components/Iframe";
+import { Iframe } from "../components/Iframe";
 // import JumboIframe from "../components/JumboIframe";
 import {
   // SaveBtn,
@@ -25,24 +26,27 @@ class User extends Component {
   };
   componentDidMount() {
     this.loadUser();
-
-
   }
 
   loadUser = () => {
-    API.getUser((document.cookie).split("=0; ")[1])
+    API.getUser(document.cookie.split("=0; ")[1])
       .then(res => {
         // console.log(res.data)
-        this.setState({ user: res.data, videos: res.data.savedVideos })
+        this.setState({ user: res.data, videos: res.data.savedVideos });
       })
       .catch(err => console.log(err));
   };
 
-
+  deleteVideo = _id => {
+    API.deleteVideo(this.state.user.savedVideos._id, {
+      useFindAndModify: false
+    })
+      .then(res => this.loadUser())
+      .catch(err => console.log(err));
+  };
   loadVideos = () => {
     // API.getVideos().then(res => {
     //   console.log(res.data);
-
     //   const redditdata = res.data.data.children;
     //   let YTtitle = [];
     //   let YTHotStr = [];

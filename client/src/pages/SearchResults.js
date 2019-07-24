@@ -5,7 +5,7 @@ import { Container } from "../components/Grid";
 // import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import NavBar from "../components/Nav/SearchResultNav";
-import Wrapper from "../components/Wrapper";
+import {Wrapper} from "../components/Wrapper";
 
 class SearchResults extends Component {
   state = {
