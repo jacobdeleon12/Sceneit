@@ -3,9 +3,10 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import { Wrapper } from "../components/Wrapper";
+import Userwrap from "../components/Userwrap";
+// import { Wrapper } from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
-import {Iframe} from "../components/Iframe";
+import { Iframe } from "../components/Iframe";
 // import JumboIframe from "../components/JumboIframe";
 import {
   // SaveBtn,
@@ -107,33 +108,26 @@ class User extends Component {
     });
   };
   // =======================================
-  // handleSaveFormSubmit = event => {
-  //   event.preventDefault();
-  //   console.log(this.state.selectedVideo);
-  //   console.log(event.target.id);
-  //   console.log(event.target.value);
+  handleDeleteFormSubmit = event => {
+    event.preventDefault();
+    const vStr = event.target.value;
+    const vName = event.target.id;
+    console.log(vStr);
+    console.log(vName);
 
-  //   console.log(this.state.videos);
-
-  //   let selectedVid = { id: event.target.value, name: event.target.id };
-  //   // console.log(selectedVid);
-
-  //   // let selectedVideo = [];
-  //   const vStr = selectedVid.id;
-  //   const vName = selectedVid.name;
-  //   // console.log(vStr);
-  //   // console.log(vName);
-
-  //   console.log(this.state.user);
-
-  //   API.saveVideo(this.state.user._id, {
-  //     $push: {
-  //       savedVideos: { vStr, vName }
-  //     }
-  //   })
-  //     .then(res => { console.log("this happened") })
-  //     .catch(err => console.log(err));
-  // };
+    API.deleteVideo(
+      this.state.user._id,
+      {
+        $pull: {
+          savedVideos: { vStr }
+        }
+      })
+      .then(res => {
+        window.location.reload();
+        console.log("deleted video");
+      })
+      .catch(err => console.log(err));
+  };
 
   render() {
     console.log(this.state);
@@ -144,10 +138,27 @@ class User extends Component {
         <Container fluid>
           <Row>
             <Col size="md-12">
-              <Jumbotron></Jumbotron>
+              <Jumbotron>
+                <Col size="md-12">
+                  <Container fluid>
+                    <img src={this.state.user.imageUrl} alt="googleImage" />
+                  </Container>
+                </Col>
+                <Col size="md-12">
+                  <Container fluid>
+                    <Row fluid >
+                      <p>{this.state.user.givenName} {this.state.user.familyName}</p>
+                    </Row>
+                    <Row fluid>
+                      <p>{this.state.user.email}</p>
+                    </Row>
+                  </Container>
+                </Col>
+
+              </Jumbotron>
             </Col>
           </Row>
-          <Wrapper>
+          <Userwrap>
             {this.state.videos.map(video => (
               <div className="text-center">
                 <Iframe
@@ -155,15 +166,23 @@ class User extends Component {
                   YTstr={video.vStr}
                 />
                 <br />
-                <DeleteBtn onClick={() => this.deleteVideo(video._id)} />
+                <DeleteBtn
+                  value={video.vStr}
+                  key={video.vStr + "-delete"}
+                  id={video.vName}
+                  name="delVid"
+                  onClick={this.handleDeleteFormSubmit}
+                />
                 <CommentBtn
-                  // value={this.state.featuredVid.YTstr}
+                  value={video.vStr}
+                  key={video.vStr + "-delete"}
+                  id={video.vName}
                   name="CommentVid"
                   onClick={this.handleCommentSubmit}
                 />
               </div>
             ))}
-          </Wrapper>
+          </Userwrap>
           {/* <h1 className="text-center">IMDB Popular</h1>
           <Wrapper>
             {this.state.movieVideos.map(video => (
