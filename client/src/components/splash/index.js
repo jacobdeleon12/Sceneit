@@ -6,6 +6,7 @@ import Img from "./img/down-arrow2.png";
 function background({ children }) {
   return (
     <div className="background">
+      {children}
       <Container>
         <Row>
           <Col size="sm-12">
@@ -23,7 +24,6 @@ function background({ children }) {
           </Col>
         </Row>
       </Container>
-      {children}
     </div>
   );
 }
