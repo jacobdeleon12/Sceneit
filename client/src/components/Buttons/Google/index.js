@@ -46,7 +46,7 @@ const error = () => {
 
 const logout = () => {
   console.log("logout"); // eslint-disable-line
-  window.location.replace("https://sceneitapp.herokuapp.com/");
+  window.location.replace("/");
 };
 
 export function GLogin() {
