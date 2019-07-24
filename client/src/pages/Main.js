@@ -14,6 +14,7 @@ import {
   BtnContainer
 } from "../components/Buttons/VideoBtns";
 //import Carousel from "../components/Carousel"
+import Alert from "../components/alert/index"
 
 class Main extends Component {
   state = {
@@ -22,7 +23,9 @@ class Main extends Component {
     movieVideos: [],
     featuredVid: [],
     savedVideos: [],
-    clicked: false
+    clicked: false,
+    alertMessage:"",
+    alertFade:"",
   };
   // =======================================
   componentDidMount() {
@@ -125,7 +128,14 @@ class Main extends Component {
     })
       .then(response => {
         console.log(response);
-        this.setState({ savedVideos: response.data.savedVideos });
+        const alertMessage = "Saved Video"
+        const alertFade = "fade"
+        this.setState({ 
+          savedVideos: response.data.savedVideo,
+          alertMessage: alertMessage, 
+          alertFade:alertFade 
+        });
+        
       })
       .catch(err => console.log(err));
     // this.setState({ clicked: true })
@@ -164,6 +174,12 @@ class Main extends Component {
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
                   />
+                <Alert
+                type={"success"}
+                fade={this.state.alertFade}
+                >
+                 Video Saved
+                </Alert>
                 </div>
               </Jumbotron>
             </Col>
