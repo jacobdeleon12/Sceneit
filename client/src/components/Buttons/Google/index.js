@@ -18,10 +18,10 @@ const success = response => {
       if (res.data === null || res.data.googleId !== profId) {
         API.saveUser(response.profileObj)
           .then(res => {
-            console.log("New user, info added to DB")
+            console.log("New user, info added to DB");
             window.location.replace("/main");
           })
-          .catch(err => console.log(err))
+          .catch(err => console.log(err));
       } else {
         console.log("User already exists, info not added to DB");
         window.location.replace("/main");
@@ -32,7 +32,6 @@ const success = response => {
   API.getUsers()
     .then(res => console.log(res.data))
     .catch(err => console.log(err));
-
 };
 
 const error = () => {
@@ -56,18 +55,18 @@ export function GLogin() {
       buttonText="Login"
       onSuccess={success}
       onFailure={error}
-      cookiePolicy={'single_host_origin'}
+      cookiePolicy={"single_host_origin"}
     />
   );
 }
 
 export function GLogout() {
   return (
-    <GoogleLogout
-      client_Id={clientId}
-      buttonText="Logout"
-      onLogoutSuccess={logout}
-      redirectUri="https://sceneitapp.herokuapp.com/"
-    />
+    <logout
+    // client_Id={clientId}
+    // buttonText="Logout"
+    // onLogoutSuccess={logout}
+    onClick={logout}
+    ><i class="fab fa-google"></i> logout</logout>
   );
 }

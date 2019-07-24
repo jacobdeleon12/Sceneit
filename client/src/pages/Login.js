@@ -14,7 +14,6 @@ class Login extends Component {
                         <Col size="sm-12">
                             <div className="m-3 p-3 text-center">
                                 <GLogin />
-                                <GLogout />
                             </div>
                         </Col>
                     </Row>
