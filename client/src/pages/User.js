@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
+import Wrapper from "../components/Wrapper";
 import Userwrap from "../components/Userwrap";
-// import { Wrapper } from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
 import { Iframe } from "../components/Iframe";
 // import JumboIframe from "../components/JumboIframe";
@@ -161,10 +161,12 @@ class User extends Component {
           <Userwrap>
             {this.state.videos.map(video => (
               <div className="text-center">
+
                 <Iframe
                   key={this.state.user.savedVideos._id}
                   YTstr={video.vStr}
                 />
+
                 <br />
                 <DeleteBtn
                   value={video.vStr}
@@ -208,7 +210,7 @@ class User extends Component {
               </div>
             ))} */}
         </Container>
-      </div >
+      </div>
     );
   }
 }

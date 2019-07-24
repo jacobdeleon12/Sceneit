@@ -1,3 +1,12 @@
-.Gbutton {
-    width: 10%;
+logout {
+  padding: 5px 10px;
+  background-color: white;
+  color: gray;
+}
+
+logout:hover {
+    cursor: pointer;
+    background-color: rgb(236, 236, 236);
+  color: rgb(102, 102, 102);
+
 }
