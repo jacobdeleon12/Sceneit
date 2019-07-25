@@ -41,13 +41,13 @@ Math.easeInOutQuad = function(t, b, c, d) {
 function Wrapper(props) {
   return (
     <div className="wrapper">
-      <div id="left-button" className="scrollBtn" onClick={left}>
+      <div className="scrollBtn" id="left-button" onClick={left}>
         &lt;
       </div>
       <div className="scroll_menu" id="content">
         {props.children}
       </div>
-      <div id="right-button" className="scrollBtn" onClick={right}>
+      <div className="scrollBtn" id="right-button" onClick={right}>
         &gt;
       </div>
     </div>
