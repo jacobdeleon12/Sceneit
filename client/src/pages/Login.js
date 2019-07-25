@@ -13,11 +13,11 @@ class Login extends Component {
         </Background>
           <Container fluid>
             <Row>
-              <Col size="sm-12">
+              <div className="col-sm-12 splash">
                 <div className="m-3 p-3 text-center">
                   <GLogin />
                 </div>
-              </Col>
+              </div>
             </Row>
           </Container>
       </div>
