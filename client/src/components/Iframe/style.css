@@ -1,7 +1,6 @@
-.card {
+.iFrame {
     background: #fff;
     border-radius: 2px;
-    height: 195px;
     margin: 1rem;
     position: relative;
     box-shadow: 0 3px 6px #999, 0 3px 6px #999;
@@ -38,7 +37,6 @@
     .card {
       height: 20rem;
       text-align: center;
-      background:#6CADDC;
     }
   }
 
@@ -46,7 +44,6 @@
     .card {
       height: 30rem;
       text-align: center;
-      background:#6CADDC;
     }
   }
 
@@ -54,12 +51,9 @@
     .card {
       height: 36rem;
       text-align: center;
-      background:#6CADDC;
     }
   }
 
-  /* .iFrame {
-    width: 18rem; 
-    height: 152px; 
-    
-  } */
+  .iFrame { 
+    height: 162px; 
+  }

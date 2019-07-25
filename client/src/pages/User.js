@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import Wrapper from "../components/Wrapper";
 import Userwrap from "../components/Userwrap";
 import NavBar from "../components/Nav/MainNav";
 import { Iframe } from "../components/Iframe";
@@ -183,7 +182,7 @@ class User extends Component {
                 />
                 <CommentBtn
                   value={video.vStr}
-                  key={this.state.user.savedVideos._id + "-delete"}
+                  key={this.state.user.savedVideos._id + "-comment"}
                   id={video.vName}
                   name="CommentVid"
                   onClick={this.handleCommentSubmit}
