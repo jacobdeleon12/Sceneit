@@ -14,7 +14,7 @@ import {
   BtnContainer
 } from "../components/Buttons/VideoBtns";
 //import Carousel from "../components/Carousel"
-import Alert from "../components/alert/index"
+import Alert from "../components/alert/index";
 
 class Main extends Component {
   state = {
@@ -115,7 +115,6 @@ class Main extends Component {
 
   // =======================================
   handleSaveFormSubmit = event => {
-
     event.preventDefault();
     // this.refs.savebtn.setAttribute("disabled", "disabled");
     console.log("event", event);
@@ -137,20 +136,56 @@ class Main extends Component {
         let alertFade = "fade";
         this.setState({
           savedVideos: response.data.savedVideo,
-          clicked: true,
           alertMessage: alertMessage,
           alertFade: alertFade
-        })
+        });
         // reset state to have Alert work again
         setTimeout(() => {
           this.setState({ alertFade: "" });
-        }, 2000)
-
+        }, 2000);
       })
       .catch(err => console.log(err));
     // this.setState({ clicked: true })
     // console.log(this.state.user);
   };
+
+  // left = () => {
+  //   scrollLeft(document.getElementById("content"), -1500, 1000);
+  // };
+
+  // right = () => {
+  //   scrollLeft(document.getElementById("content"), 1500, 1000);
+  // };
+
+  // scrollLeft = (element, change, duration) => {
+  //   var start = element.scrollLeft,
+  //     currentTime = 0,
+  //     increment = 20;
+
+  //   console.log(start);
+
+  //   var animateScroll = function() {
+  //     currentTime += increment;
+  //     var val = Math.easeInOutQuad(currentTime, start, change, duration);
+  //     element.scrollLeft = val;
+  //     if (currentTime < duration) {
+  //       setTimeout(animateScroll, increment);
+  //     }
+  //   };
+  //   animateScroll();
+  // }
+
+  // //t = current time
+  // //b = start value
+  // //c = change in value
+  // //d = duration
+  // Math.easeInOutQuad = function(t, b, c, d) {
+  //   t /= d / 2;
+  //   if (t < 1) return (c / 2) * t * t + b;
+  //   t--;
+  //   return (-c / 2) * (t * (t - 2) - 1) + b;
+  // };
+
 
   render() {
     // console.log(this.state);
@@ -199,7 +234,7 @@ class Main extends Component {
             </Col>
           </Row>
           <h1 className="text-center">Reddit Hot</h1>
-          <Wrapper>
+          <Wrapper >
             {this.state.videos.map(video => (
               <div className="text-center" key={video.YTstr}>
                 <Iframe key={video.name} YTstr={video.YTstr} />
@@ -208,13 +243,13 @@ class Main extends Component {
                   <SaveBtn
                     disabled={video.clicked}
                     value={video.YTstr}
-                    key={video.YTstr + "-save"}
+                    key={`${video.YTstr}-save`}
                     id={video.name}
                     name="saveVid"
                     onClick={this.handleSaveFormSubmit}
                   />
                   <CommentBtn
-                    key={video.YTstr + "-comment"}
+                    key={`${video.YTstr}-comment`}
                     value={this.state.featuredVid.YTstr}
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
@@ -233,13 +268,13 @@ class Main extends Component {
                   <SaveBtn
                     disabled={video.clicked}
                     value={video.YTstr}
-                    key={video.YTstr + "-save"}
+                    key={`${video.YTstr}-save`}
                     id={video.name}
                     name="saveVid"
                     onClick={this.handleSaveFormSubmit}
                   />
                   <CommentBtn
-                    key={video.YTstr + "-comment"}
+                    key={`${video.YTstr}-comment`}
                     value={this.state.featuredVid.YTstr}
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
