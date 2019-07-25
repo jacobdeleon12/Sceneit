@@ -67,6 +67,6 @@ export function GLogout() {
     // buttonText="Logout"
     // onLogoutSuccess={logout}
     onClick={logout}
-    ><i class="fab fa-google"></i> logout</logout>
+    ><i className="fab fa-google"></i> logout</logout>
   );
 }
