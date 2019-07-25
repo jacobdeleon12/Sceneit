@@ -24,8 +24,8 @@ class Main extends Component {
     featuredVid: [],
     savedVideos: [],
     clicked: false,
-    alertMessage:"",
-    alertFade:"",
+    alertMessage: "",
+    alertFade: "",
   };
   // =======================================
   componentDidMount() {
@@ -138,12 +138,12 @@ class Main extends Component {
         console.log(response);
         const alertMessage = "Saved Video"
         const alertFade = "fade"
-        this.setState({ 
+        this.setState({
           savedVideos: response.data.savedVideo,
-          alertMessage: alertMessage, 
-          alertFade:alertFade 
+          alertMessage: alertMessage,
+          alertFade: alertFade
         });
-        
+
       })
       .catch(err => console.log(err));
     // this.setState({ clicked: true })
@@ -168,25 +168,27 @@ class Main extends Component {
                     YTstr={this.state.featuredVid.YTstr}
                   />
                   <br />
-                  <SaveBtn
-                    // disabled={this.state.clicked}
-                    key={this.state.featuredVid.name + "-save"}
-                    value={this.state.featuredVid.YTstr}
-                    id={this.state.featuredVid.name}
-                    name="saveVid"
-                    onClick={this.handleSaveFormSubmit}
-                  />
-                  <CommentBtn
-                    key={this.state.featuredVid.name + "-comment"}
-                    value={this.state.featuredVid.YTstr}
-                    name="CommentVid"
-                    onClick={this.handleCommentSubmit}
-                  />
-                <Alert
-                type={"success"}
-                fade={this.state.alertFade}
-                >
-                 Video Saved
+                  <BtnContainer>
+                    <SaveBtn
+                      // disabled={this.state.clicked}
+                      key={this.state.featuredVid.name + "-save"}
+                      value={this.state.featuredVid.YTstr}
+                      id={this.state.featuredVid.name}
+                      name="saveVid"
+                      onClick={this.handleSaveFormSubmit}
+                    />
+                    <CommentBtn
+                      key={this.state.featuredVid.name + "-comment"}
+                      value={this.state.featuredVid.YTstr}
+                      name="CommentVid"
+                      onClick={this.handleCommentSubmit}
+                    />
+                  </BtnContainer>
+                  <Alert
+                    type={"success"}
+                    fade={this.state.alertFade}
+                  >
+                    Video Saved
                 </Alert>
                 </div>
               </Jumbotron>
