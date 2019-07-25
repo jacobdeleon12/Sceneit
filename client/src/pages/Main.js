@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import { Wrapper } from "../components/Wrapper";
+import Wrapper from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
 import { JumboIframe, Iframe } from "../components/Iframe";
 import {
@@ -24,8 +24,8 @@ class Main extends Component {
     featuredVid: [],
     savedVideos: [],
     clicked: false,
-    alertMessage:"",
-    alertFade:"",
+    alertMessage: "",
+    alertFade: "",
   };
   // =======================================
   componentDidMount() {
@@ -120,6 +120,8 @@ class Main extends Component {
 
     const vStr = event.target.value;
     const vName = event.target.id;
+    console.log(event.target.value);
+    console.log(event.target.id);
 
     API.saveVideo(this.state.user._id, {
       $push: {
@@ -127,15 +129,15 @@ class Main extends Component {
       }
     })
       .then(response => {
-        console.log(response);
-        const alertMessage = "Saved Video"
-        const alertFade = "fade"
-        this.setState({ 
-          savedVideos: response.data.savedVideo,
-          alertMessage: alertMessage, 
-          alertFade:alertFade 
+        console.log("success response", response);
+        // const alertMessage = "Saved Video";
+        // const alertFade = "fade";
+        this.setState({
+          savedVideos: response.data.savedVideos
+          // alertMessage: alertMessage,
+          // alertFade: alertFade
         });
-        
+
       })
       .catch(err => console.log(err));
     // this.setState({ clicked: true })
@@ -144,7 +146,7 @@ class Main extends Component {
 
   render() {
     console.log(this.state);
-    // console.log(typeof this.state.savedVideos);
+    console.log(this.state.savedVideos);
 
     return (
       <div>
@@ -174,11 +176,11 @@ class Main extends Component {
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
                   />
-                <Alert
-                type={"success"}
-                fade={this.state.alertFade}
-                >
-                 Video Saved
+                  <Alert
+                    type={"success"}
+                    fade={this.state.alertFade}
+                  >
+                    Video Saved
                 </Alert>
                 </div>
               </Jumbotron>
