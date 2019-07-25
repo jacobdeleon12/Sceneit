@@ -31,7 +31,7 @@ class Main extends Component {
   componentDidMount() {
     this.loadUser();
     this.loadVideos();
-    console.log((document.cookie).split("=0; ")[1]);
+    // console.log(document.cookie.split("=0; ")[1]);
 
     this.loadMovieInfo("endgame");
   }
@@ -80,28 +80,29 @@ class Main extends Component {
   //for movie vidoes, and anything else we want to come up with
   //must .split(" ").join("+") string for query to work correctly.
   loadMovieInfo = query => {
-    API.getTmdbInfo(query).then(response => {
-      console.log("getTmdbInfo", response.data.results);
-      // console.log(response.data);
-      const searchResult = response.data.results[0].id;
-      //second call for api video results
-      API.getTmdbVideos(searchResult).then(response => {
+    API.getTmdbInfo(query)
+      .then(response => {
+        console.log("getTmdbInfo", response.data.results);
         // console.log(response.data);
-        const videoResults = response.data.results;
-        let YTMovieKey = [];
-        let YTMovieName = [];
-        let movieSearch = [];
+        const searchResult = response.data.results[0].id;
+        //second call for api video results
+        API.getTmdbVideos(searchResult).then(response => {
+          // console.log(response.data);
+          const videoResults = response.data.results;
+          let YTMovieKey = [];
+          let YTMovieName = [];
+          let movieSearch = [];
 
-        //max of 10 for video search
-        for (let i = 0; i < 10 && i < videoResults.length; i++) {
-          YTMovieKey = videoResults[i].key;
-          YTMovieName = videoResults[i].name;
-          movieSearch.push({ name: YTMovieName, YTstr: YTMovieKey, vidType: "omdb" });
-        }
-        this.setState({ movieVideos: movieSearch });
-        // console.log(this.state);
-      });
-    })
+          //max of 10 for video search
+          for (let i = 0; i < 10 && i < videoResults.length; i++) {
+            YTMovieKey = videoResults[i].key;
+            YTMovieName = videoResults[i].name;
+            movieSearch.push({ name: YTMovieName, YTstr: YTMovieKey, vidType: "omdb" });
+          }
+          this.setState({ movieVideos: movieSearch });
+          // console.log(this.state);
+        });
+      })
       .catch(err => console.log(err));
   };
 
@@ -129,14 +130,20 @@ class Main extends Component {
       }
     })
       .then(response => {
-        console.log("success response", response.data.savedVideos);
-        // const alertMessage = "Saved Video";
-        // const alertFade = "fade";
+        // console.log(response);
+        // adding in alert in the save function
+        const alertMessage = "Saved Video";
+        let alertFade = "fade";
         this.setState({
-          savedVideos: response.data.savedVideos
-          // alertMessage: alertMessage,
-          // alertFade: alertFade
-        });
+          savedVideos: response.data.savedVideo,
+          clicked: true,
+          alertMessage: alertMessage,
+          alertFade: alertFade
+        })
+        // reset state to have Alert work again
+        setTimeout(() => {
+          this.setState({ alertFade: "", clicked: false });
+        }, 2000)
 
       })
       .catch(err => console.log(err));
@@ -146,7 +153,7 @@ class Main extends Component {
 
   render() {
     // console.log(this.state);
-    // console.log(this.state.savedVideos);
+    // console.log(typeof this.state.savedVideos);
 
     return (
       <div>
@@ -163,7 +170,7 @@ class Main extends Component {
                   />
                   <br />
                   <SaveBtn
-                    // disabled={this.state.clicked}
+                    disabled={this.state.clicked}
                     key={this.state.featuredVid.name + "-save"}
                     value={this.state.featuredVid.YTstr}
                     id={this.state.featuredVid.name}
@@ -194,6 +201,7 @@ class Main extends Component {
                 <br />
                 <BtnContainer>
                   <SaveBtn
+                    disabled={this.state.clicked}
                     value={video.YTstr}
                     key={video.YTstr + "-save"}
                     id={video.name}
@@ -218,6 +226,7 @@ class Main extends Component {
                 <br />
                 <BtnContainer>
                   <SaveBtn
+                    disabled={this.state.clicked}
                     value={video.YTstr}
                     key={video.YTstr + "-save"}
                     id={video.name}
