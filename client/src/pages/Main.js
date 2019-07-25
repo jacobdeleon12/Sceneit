@@ -47,7 +47,7 @@ class Main extends Component {
   // =======================================
   loadVideos = () => {
     API.getRedditHot().then(response => {
-      console.log(response.data.data);
+      console.log("getRedditHot", response.data.data);
 
       const redditdata = response.data.data.children;
       let YTtitle = [];
@@ -81,8 +81,8 @@ class Main extends Component {
   //must .split(" ").join("+") string for query to work correctly.
   loadMovieInfo = query => {
     API.getTmdbInfo(query).then(response => {
-      console.log(response.data.results);
-      console.log(response.data);
+      console.log("getTmdbInfo", response.data.results);
+      // console.log(response.data);
       const searchResult = response.data.results[0].id;
       //second call for api video results
       API.getTmdbVideos(searchResult).then(response => {
@@ -129,7 +129,7 @@ class Main extends Component {
       }
     })
       .then(response => {
-        console.log("success response", response);
+        console.log("success response", response.data.savedVideos);
         // const alertMessage = "Saved Video";
         // const alertFade = "fade";
         this.setState({
@@ -145,8 +145,8 @@ class Main extends Component {
   };
 
   render() {
-    console.log(this.state);
-    console.log(this.state.savedVideos);
+    // console.log(this.state);
+    // console.log(this.state.savedVideos);
 
     return (
       <div>
