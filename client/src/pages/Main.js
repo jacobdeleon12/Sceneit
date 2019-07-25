@@ -24,7 +24,6 @@ class Main extends Component {
     featuredVid: [],
     savedVideos: [],
     clicked: false,
-    alertMessage:"",
     alertFade:"",
   };
   // =======================================
@@ -137,11 +136,9 @@ class Main extends Component {
       .then(response => {
         // console.log(response);
         // adding in alert in the save function
-        const alertMessage = "Saved Video";
         let alertFade = "fade";
         this.setState({ 
           savedVideos: response.data.savedVideo,
-          alertMessage: alertMessage, 
           alertFade:alertFade
         })
         // reset state to have Alert work again
