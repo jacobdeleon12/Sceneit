@@ -65,7 +65,7 @@ class Main extends Component {
             //getting just the infromaion we need after ? in string
             YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
             //pushing to obj
-            reddit.push({ name: YTtitle, YTstr: YTHotStr, vidType: "youtube" });
+            reddit.push({ name: YTtitle, YTstr: YTHotStr, vidType: "youtube", clicked: false });
           }
         }
       }
@@ -97,7 +97,7 @@ class Main extends Component {
           for (let i = 0; i < 10 && i < videoResults.length; i++) {
             YTMovieKey = videoResults[i].key;
             YTMovieName = videoResults[i].name;
-            movieSearch.push({ name: YTMovieName, YTstr: YTMovieKey, vidType: "omdb" });
+            movieSearch.push({ name: YTMovieName, YTstr: YTMovieKey, vidType: "omdb", clicked: false });
           }
           this.setState({ movieVideos: movieSearch });
           // console.log(this.state);
@@ -118,6 +118,7 @@ class Main extends Component {
 
     event.preventDefault();
     // this.refs.savebtn.setAttribute("disabled", "disabled");
+    console.log("event", event);
 
     const vStr = event.target.value;
     const vName = event.target.id;
@@ -142,7 +143,7 @@ class Main extends Component {
         })
         // reset state to have Alert work again
         setTimeout(() => {
-          this.setState({ alertFade: "", clicked: false });
+          this.setState({ alertFade: "" });
         }, 2000)
 
       })
@@ -153,7 +154,9 @@ class Main extends Component {
 
   render() {
     // console.log(this.state);
-    // console.log(typeof this.state.savedVideos);
+    // console.log(this.state.savedVideos);
+    // console.log(this.state.);
+    // console.log(this.state.);
 
     return (
       <div>
@@ -171,7 +174,7 @@ class Main extends Component {
                   <br />
                   <BtnContainer>
                     <SaveBtn
-                      // disabled={this.state.clicked}
+                      disabled={this.state.featuredVid.clicked}
                       key={this.state.featuredVid.name + "-save"}
                       value={this.state.featuredVid.YTstr}
                       id={this.state.featuredVid.name}
@@ -203,7 +206,7 @@ class Main extends Component {
                 <br />
                 <BtnContainer>
                   <SaveBtn
-                    disabled={this.state.clicked}
+                    disabled={video.clicked}
                     value={video.YTstr}
                     key={video.YTstr + "-save"}
                     id={video.name}
@@ -228,7 +231,7 @@ class Main extends Component {
                 <br />
                 <BtnContainer>
                   <SaveBtn
-                    disabled={this.state.clicked}
+                    disabled={video.clicked}
                     value={video.YTstr}
                     key={video.YTstr + "-save"}
                     id={video.name}
