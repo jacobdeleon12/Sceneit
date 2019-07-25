@@ -126,7 +126,7 @@ class Main extends Component {
 
     API.saveVideo(this.state.user._id, {
       $push: {
-        savedVideos: { vStr, vName }
+        savedVideos: { vStr, vName, clicked: true }
       }
     })
       .then(response => {
