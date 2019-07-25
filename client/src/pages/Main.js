@@ -31,7 +31,7 @@ class Main extends Component {
   componentDidMount() {
     this.loadUser();
     this.loadVideos();
-    console.log(document.cookie.split("=0; ")[1]);
+    // console.log(document.cookie.split("=0; ")[1]);
 
     this.loadMovieInfo("endgame");
   }
@@ -85,8 +85,8 @@ class Main extends Component {
   loadMovieInfo = query => {
     API.getTmdbInfo(query)
       .then(response => {
-        console.log(response.data.results);
-        console.log(response.data);
+        // console.log(response.data.results);
+        // console.log(response.data);
         const searchResult = response.data.results[0].id;
         //second call for api video results
         API.getTmdbVideos(searchResult).then(response => {
@@ -135,6 +135,7 @@ class Main extends Component {
       }
     })
       .then(response => {
+<<<<<<< HEAD
         console.log(response);
         const alertMessage = "Saved Video"
         const alertFade = "fade"
@@ -143,6 +144,21 @@ class Main extends Component {
           alertMessage: alertMessage,
           alertFade: alertFade
         });
+=======
+        // console.log(response);
+        // adding in alert in the save function
+        const alertMessage = "Saved Video";
+        let alertFade = "fade";
+        this.setState({ 
+          savedVideos: response.data.savedVideo,
+          alertMessage: alertMessage, 
+          alertFade:alertFade
+        })
+        // reset state to have Alert work again
+        setTimeout(() => {
+          this.setState({alertFade: ""});
+        }, 2000)
+>>>>>>> master
 
       })
       .catch(err => console.log(err));
@@ -151,7 +167,7 @@ class Main extends Component {
   };
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     // console.log(typeof this.state.savedVideos);
 
     return (
