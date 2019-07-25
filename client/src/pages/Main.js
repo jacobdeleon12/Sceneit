@@ -14,7 +14,7 @@ import {
   BtnContainer
 } from "../components/Buttons/VideoBtns";
 //import Carousel from "../components/Carousel"
-import Alert from "../components/alert/index"
+import Alert from "../components/alert/index";
 
 class Main extends Component {
   state = {
@@ -24,8 +24,8 @@ class Main extends Component {
     featuredVid: [],
     savedVideos: [],
     clicked: false,
-    alertMessage:"",
-    alertFade:"",
+    alertMessage: "",
+    alertFade: ""
   };
   // =======================================
   componentDidMount() {
@@ -122,7 +122,6 @@ class Main extends Component {
 
   // =======================================
   handleSaveFormSubmit = event => {
-
     event.preventDefault();
     // this.refs.savebtn.setAttribute("disabled", "disabled");
 
@@ -139,16 +138,15 @@ class Main extends Component {
         // adding in alert in the save function
         const alertMessage = "Saved Video";
         let alertFade = "fade";
-        this.setState({ 
+        this.setState({
           savedVideos: response.data.savedVideo,
-          alertMessage: alertMessage, 
-          alertFade:alertFade
-        })
+          alertMessage: alertMessage,
+          alertFade: alertFade
+        });
         // reset state to have Alert work again
         setTimeout(() => {
-          this.setState({alertFade: ""});
-        }, 2000)
-
+          this.setState({ alertFade: "" });
+        }, 2000);
       })
       .catch(err => console.log(err));
     // this.setState({ clicked: true })
@@ -187,12 +185,9 @@ class Main extends Component {
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
                   />
-                <Alert
-                type={"success"}
-                fade={this.state.alertFade}
-                >
-                 Video Saved
-                </Alert>
+                  <Alert type={"success"} fade={this.state.alertFade}>
+                    Video Saved
+                  </Alert>
                 </div>
               </Jumbotron>
             </Col>
