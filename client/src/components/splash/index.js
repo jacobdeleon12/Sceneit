@@ -2,6 +2,7 @@ import "./style.css";
 import React from "react";
 import { Col, Row, Container } from "../Grid/index";
 import Img from "./img/down-arrow2.png";
+import { GLogin} from "../Buttons/Google/index";
 
 function background({ children }) {
   return (
@@ -20,6 +21,9 @@ function background({ children }) {
           <Col size="sm-12">
             <div className="m-3 p-3 text-center">
               <img className="splashImg" alt="arrow" src={Img} className = "ball"></img>
+              <br />
+              <br />
+              <GLogin />
             </div>
           </Col>
         </Row>
