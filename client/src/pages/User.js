@@ -183,7 +183,7 @@ class User extends Component {
                 />
                 <CommentBtn
                   value={video.vStr}
-                  key={this.state.user.savedVideos._id + "-delete"}
+                  key={this.state.user.savedVideos._id + "-comment"}
                   id={video.vName}
                   name="CommentVid"
                   onClick={this.handleCommentSubmit}

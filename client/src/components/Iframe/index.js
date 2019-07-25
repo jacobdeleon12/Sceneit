@@ -18,7 +18,7 @@ export function JumboIframe(props) {
 
 export function Iframe(props) {
   return (
-    <div className="iFrame pb-0 text-center">
+    <div className="iFrame card pb-0 text-center">
       <iframe
         title={props.name}
         src={"https://www.youtube.com/embed/" + props.YTstr}
