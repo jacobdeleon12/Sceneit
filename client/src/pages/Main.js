@@ -135,16 +135,6 @@ class Main extends Component {
       }
     })
       .then(response => {
-<<<<<<< HEAD
-        console.log(response);
-        const alertMessage = "Saved Video"
-        const alertFade = "fade"
-        this.setState({
-          savedVideos: response.data.savedVideo,
-          alertMessage: alertMessage,
-          alertFade: alertFade
-        });
-=======
         // console.log(response);
         // adding in alert in the save function
         const alertMessage = "Saved Video";
@@ -158,7 +148,6 @@ class Main extends Component {
         setTimeout(() => {
           this.setState({alertFade: ""});
         }, 2000)
->>>>>>> master
 
       })
       .catch(err => console.log(err));
