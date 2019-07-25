@@ -139,21 +139,27 @@ class User extends Component {
           <Row>
             <Col size="md-12">
               <Jumbotron>
-                <Col size="md-12">
-                  <Container fluid>
-                    <img src={this.state.user.imageUrl} alt="googleImage" />
-                  </Container>
-                </Col>
-                <Col size="md-12">
-                  <Container fluid>
-                    <Row fluid >
-                      <p>{this.state.user.givenName} {this.state.user.familyName}</p>
-                    </Row>
-                    <Row fluid>
-                      <p>{this.state.user.email}</p>
-                    </Row>
-                  </Container>
-                </Col>
+                <div className="row justify-content-center">
+                  <Col size="md-2">
+                    <Container fluid>
+                      <img src={this.state.user.imageUrl} alt="googleImage" />
+                    </Container>
+                  </Col>
+                  <Col size="md-3">
+                    <Container fluid>
+                      <Row fluid >
+                        <Col size="md-12">
+                          <h4>{this.state.user.givenName + " " + this.state.user.familyName}</h4>
+                        </Col>
+                      </Row>
+                      <Row fluid>
+                        <Col size="md-12">
+                          <h5>{this.state.user.email}</h5>
+                        </Col>
+                      </Row>
+                    </Container>
+                  </Col>
+                </div>
 
               </Jumbotron>
             </Col>
