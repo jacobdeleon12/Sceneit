@@ -170,25 +170,27 @@ class Main extends Component {
                     YTstr={this.state.featuredVid.YTstr}
                   />
                   <br />
-                  <SaveBtn
-                    // disabled={this.state.clicked}
-                    key={this.state.featuredVid.name + "-save"}
-                    value={this.state.featuredVid.YTstr}
-                    id={this.state.featuredVid.name}
-                    name="saveVid"
-                    onClick={this.handleSaveFormSubmit}
-                  />
-                  <CommentBtn
-                    key={this.state.featuredVid.name + "-comment"}
-                    value={this.state.featuredVid.YTstr}
-                    name="CommentVid"
-                    onClick={this.handleCommentSubmit}
-                  />
-                <Alert
-                type={"success"}
-                fade={this.state.alertFade}
-                >
-                 Video Saved
+                  <BtnContainer>
+                    <SaveBtn
+                      // disabled={this.state.clicked}
+                      key={this.state.featuredVid.name + "-save"}
+                      value={this.state.featuredVid.YTstr}
+                      id={this.state.featuredVid.name}
+                      name="saveVid"
+                      onClick={this.handleSaveFormSubmit}
+                    />
+                    <CommentBtn
+                      key={this.state.featuredVid.name + "-comment"}
+                      value={this.state.featuredVid.YTstr}
+                      name="CommentVid"
+                      onClick={this.handleCommentSubmit}
+                    />
+                  </BtnContainer>
+                  <Alert
+                    type={"success"}
+                    fade={this.state.alertFade}
+                  >
+                    Video Saved
                 </Alert>
                 </div>
               </Jumbotron>
