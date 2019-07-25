@@ -20,7 +20,7 @@ function background({ children }) {
         <Row>
           <Col size="sm-12">
             <div className="m-3 p-3 text-center">
-              <img className="splashImg" alt="arrow" src={Img} className = "ball"></img>
+              <img className="splashImg ball" alt="arrow" src={Img} ></img>
               <br />
               <br />
               <GLogin />
