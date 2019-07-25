@@ -5,6 +5,8 @@
   position: relative;
   margin: 0px auto;
   margin-top: 10px;
+  position: relative;
+  text-align: center;
 }
 
 .scroll_menu div {
@@ -19,31 +21,40 @@
 
 #slideLeft {
   float: left;
+  left: 0;
 }
 
 #slideRight {
   float: right;
+  right: 0;
 }
 
 .scrollBtn {
-  width: 60px;
-  height: 60px;
+  line-height: 180px;
+  white-space: nowrap;
+  width: 30px;
+  height: 100%;
   font-size: 20pt;
   position: relative;
-  border-radius: 50%;
-  border: none;
-  outline: none;
+  color: beige;
   background-color: rgb(81, 115, 187);
   opacity: 0.5;
+  z-index: 10;
+  position: absolute;
+  top: 0;
 }
 
 .scrollBtn:hover {
   cursor: pointer;
-  opacity: 0.8;
+  opacity: 0.7;
+}
+
+.scrollBtn:active {
+  opacity: 0.9;
 }
 
 ::-webkit-scrollbar {
-  height: 7px;
+  height: 5px;
   width: 0px;
   background: transparent;
 }
