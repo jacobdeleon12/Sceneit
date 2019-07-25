@@ -1,3 +1,11 @@
+.wrapper {
+  background-color: #333;
+  overflow: auto;
+  white-space: nowrap;
+  position: relative;
+  text-align: center;
+}
+
 .scroll_menu {
   background-color: #333;
   overflow: auto;
@@ -5,6 +13,7 @@
   position: relative;
   margin: 0px auto;
   margin-top: 10px;
+  text-align: center;
 }
 
 .scroll_menu div {
@@ -17,33 +26,40 @@
   background-color: #777;
 }
 
-#slideLeft {
-  float: left;
+#left-button {
+  left: 0;
 }
 
-#slideRight {
-  float: right;
+#right-button {
+  right: 0;
 }
 
 .scrollBtn {
-  width: 60px;
-  height: 60px;
+  line-height: 240px;
+  white-space: nowrap;
+  width: 30px;
+  height: 100%;
   font-size: 20pt;
   position: relative;
-  border-radius: 50%;
-  border: none;
-  outline: none;
+  color: beige;
   background-color: rgb(81, 115, 187);
   opacity: 0.5;
+  z-index: 10;
+  position: absolute;
+  top: 0;
 }
 
 .scrollBtn:hover {
   cursor: pointer;
-  opacity: 0.8;
+  opacity: 0.7;
+}
+
+.scrollBtn:active {
+  opacity: 0.9;
 }
 
 ::-webkit-scrollbar {
-  height: 7px;
+  height: 5px;
   width: 0px;
   background: transparent;
 }
