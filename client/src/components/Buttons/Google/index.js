@@ -66,18 +66,10 @@ export function GLogin() {
 export function GLogout() {
   return (
     <logout
-<<<<<<< HEAD
       // client_Id={clientId}
       // buttonText="Logout"
       // onLogoutSuccess={logout}
       onClick={logout}
-    ><i class="fab fa-google"></i> logout</logout>
-=======
-    // client_Id={clientId}
-    // buttonText="Logout"
-    // onLogoutSuccess={logout}
-    onClick={logout}
     ><i className="fab fa-google"></i> logout</logout>
->>>>>>> master
   );
 }
