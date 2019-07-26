@@ -2,9 +2,9 @@ let cheerio = require("cheerio");
 let axios = require("axios");
 
 function steamScraper() {
-  let urlArray = [];
   let steamArray = [];
   let numSkipped = 0;
+  let urlArray = [];
 
   axios
     .get(
@@ -15,25 +15,21 @@ function steamScraper() {
 
       $("a.search_result_row").each((i, element) => {
         let urlLink = $(element).attr("href");
-        urlArray.push(urlLink);
+        steamArray.push(urlLink);
       });
-      return urlArray;
+      return steamArray;
     })
-    .then(urlArray => {
-      for (let url of urlArray) {
+    .then(steamArray => {
+      for (let url of steamArray) {
         axios.get(url).then(response => {
           let $ = cheerio.load(response.data);
 
           let vidName = $("div.apphub_AppName").text();
           let vidUrl = $("div.highlight_movie").attr("data-webm-hd-source");
 
-          if (steamArray.length <= 22) {
-            // console.log("push");
-            vidUrl === undefined
-              ? (numSkipped++, console.log(`Skiped ${numSkipped} Steam page`))
-              : steamArray.push({ name: vidName, url: vidUrl });
-          } else {
-            // console.log("done");
+          vidUrl && urlArray.push({ name: vidName, url: vidUrl });
+          // console.log({ name: vidName, url: vidUrl });
+          if (urlArray.length === 10) {
             done();
           }
         });
@@ -41,9 +37,11 @@ function steamScraper() {
     });
 
   function done() {
-    console.log(steamArray);
-    return steamArray;
+    console.log(urlArray);
+    return urlArray;
   }
 }
 
-export default steamScraper();
+steamScraper();
+
+// export default steamScraper();

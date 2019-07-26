@@ -25,7 +25,7 @@ class Main extends Component {
     savedVideos: [],
     clicked: false,
     alertMessage: "",
-    alertFade: "",
+    alertFade: ""
   };
   // =======================================
   componentDidMount() {
@@ -153,48 +153,9 @@ class Main extends Component {
     // console.log(this.state.user);
   };
 
-  // left = () => {
-  //   scrollLeft(document.getElementById("content"), -1500, 1000);
-  // };
-  
-  // right = () => {
-  //   scrollLeft(document.getElementById("content"), 1500, 1000);
-  // };
-  
-  // scrollLeft = (element, change, duration) => {
-  //   var start = element.scrollLeft,
-  //     currentTime = 0,
-  //     increment = 20;
-  
-  //   console.log(start);
-  
-  //   var animateScroll = function() {
-  //     currentTime += increment;
-  //     var val = Math.easeInOutQuad(currentTime, start, change, duration);
-  //     element.scrollLeft = val;
-  //     if (currentTime < duration) {
-  //       setTimeout(animateScroll, increment);
-  //     }
-  //   };
-  //   animateScroll();
-  // }
-  
-  // //t = current time
-  // //b = start value
-  // //c = change in value
-  // //d = duration
-  // Math.easeInOutQuad = function(t, b, c, d) {
-  //   t /= d / 2;
-  //   if (t < 1) return (c / 2) * t * t + b;
-  //   t--;
-  //   return (-c / 2) * (t * (t - 2) - 1) + b;
-  // };
-  
 
+  
   render() {
-    // console.log(this.state);
-    // console.log(typeof this.state.savedVideos);
-
     return (
       <div>
         <NavBar />
@@ -225,18 +186,15 @@ class Main extends Component {
                       onClick={this.handleCommentSubmit}
                     />
                   </BtnContainer>
-                  <Alert
-                    type={"success"}
-                    fade={this.state.alertFade}
-                  >
+                  <Alert type={"success"} fade={this.state.alertFade}>
                     Video Saved
-                </Alert>
+                  </Alert>
                 </div>
               </Jumbotron>
             </Col>
           </Row>
           <h1 className="text-center">Reddit Hot</h1>
-          <Wrapper >
+          <Wrapper>
             {this.state.videos.map(video => (
               <div className="text-center" key={video.YTstr}>
                 <Iframe key={video.name} YTstr={video.YTstr} />
@@ -268,7 +226,31 @@ class Main extends Component {
                 <BtnContainer>
                   <SaveBtn
                     value={video.YTstr}
-                    key={`${video.YTstr}-save`}                    
+                    key={`${video.YTstr}-save`}
+                    id={video.name}
+                    name="saveVid"
+                    onClick={this.handleSaveFormSubmit}
+                  />
+                  <CommentBtn
+                    key={`${video.YTstr}-comment`}
+                    value={this.state.featuredVid.YTstr}
+                    name="CommentVid"
+                    onClick={this.handleCommentSubmit}
+                  />
+                </BtnContainer>
+              </div>
+            ))}
+          </Wrapper>
+          <h1 className="text-center">Top Steam Wishlists</h1>
+          <Wrapper>
+            {this.state.movieVideos.map(video => (
+              <div className="text-center" key={video.YTstr}>
+                <Iframe key={video.name} YTstr={video.YTstr} />
+                <br />
+                <BtnContainer>
+                  <SaveBtn
+                    value={video.YTstr}
+                    key={`${video.YTstr}-save`}
                     id={video.name}
                     name="saveVid"
                     onClick={this.handleSaveFormSubmit}
