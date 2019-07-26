@@ -1,7 +1,7 @@
 import "./style.css";
 import API from "../../../utils/API";
 import React from "react";
-import { GoogleLogout, GoogleLogin } from "react-google-login";
+import { GoogleLogin } from "react-google-login";
 
 const clientId =
   "560748393507-rrhsc621nmf915rp2d99bk38vrgjjpir.apps.googleusercontent.com";
@@ -63,10 +63,12 @@ export function GLogin() {
 export function GLogout() {
   return (
     <logout
-    // client_Id={clientId}
-    // buttonText="Logout"
-    // onLogoutSuccess={logout}
-    onClick={logout}
-    ><i className="fab fa-google"></i> logout</logout>
+      // client_Id={clientId}
+      // buttonText="Logout"
+      // onLogoutSuccess={logout}
+      onClick={logout}
+    >
+      <i className="fab fa-google"></i> logout
+    </logout>
   );
 }
