@@ -26,7 +26,7 @@ export default {
     return axios.put("/api/users/" + _id, videoData);
   },
   // Saves a video to the user model
-  saveVideoObj: function(videoData) {
-    return axios.put("/api/video/" + videoData);
+  saveVideoObj: function(_id, videoData) {
+    return axios.put("/api/video/" + _id, videoData);
   },
 };

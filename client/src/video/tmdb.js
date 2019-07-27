@@ -1,5 +1,4 @@
 import axios from "axios";
-import API from "../utils/API";
 
 const apiKey = "7b07c1ac2c9e9a9f62cfc49a4ec55f99";
 
