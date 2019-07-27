@@ -2,6 +2,8 @@ import "./style.css";
 import React from "react";
 import { Col, Row, Container } from "../Grid/index";
 import Img from "./img/down-arrow2.png";
+import { GLogin } from "../Buttons/Google/index";
+
 
 function background({ children }) {
   const Logo = "<Scene/ IT>"
@@ -24,6 +26,7 @@ function background({ children }) {
               <img className="splashImg ball" alt="arrow" src={Img} />
               <br />
               <br />
+              <GLogin/>
             </div>
           </Col>
         </Row>

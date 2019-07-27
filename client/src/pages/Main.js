@@ -12,7 +12,17 @@ import {
   CommentBtn,
   BtnContainer
 } from "../components/Buttons/VideoBtns";
-import Alert from "../components/alert/index";
+//import Carousel from "../components/Carousel"
+
+//NPM alert options
+import { positions, Provider, transitions } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
+
+const options = {
+  timeout: 3000,
+  position: positions.BOTTOM_CENTER,
+  transition: transitions.SCALE
+};
 
 class Main extends Component {
   state = {
@@ -22,7 +32,6 @@ class Main extends Component {
     featuredVid: [],
     savedVideos: [],
     clicked: false,
-    alertMessage: "",
     alertFade: ""
   };
 
@@ -48,72 +57,76 @@ class Main extends Component {
   // =======================================
 
   loadVideos = () => {
-    // API.redditHot()
-    //   .then(response => {
-    //     const redditdata = response.data.data.children;
-    //     let YTtitle = [];
-    //     let YTHotStr = [];
-    //     let reddit = [];
-    //     for (let i = 0; i < redditdata.length; i++) {
-    //       if (redditdata[i].data.domain === "youtube.com") {
-    //         //getting just the infromaion we need from huge string
-    //         const redditSplit = redditdata[i].data.media_embed.content.split(
-    //           "embed/"
-    //         )[1];
-    //         if (typeof redditSplit != "undefined") {
-    //           //title
-    //           YTtitle = redditdata[i].data.title;
-    //           //getting just the infromaion we need after ? in string
-    //           YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
-    //           //pushing to obj
-    //           reddit.push({
-    //             name: YTtitle,
-    //             YTstr: YTHotStr,
-    //             vidType: "youtube"
-    //           });
-    //         }
-    //       }
-    //     }
-    //     this.setState({ featuredVid: reddit[0] });
-    //     reddit.shift();
-    //     this.setState({ videos: reddit });
-    //     //console.log(this.state.featuredVid);
-    //   })
-    //   .catch(err => console.log(err));
+    API.getRedditHot()
+      .then(response => {
+        console.log("getRedditHot", response.data.data);
+
+        const redditdata = response.data.data.children;
+        let YTtitle = [];
+        let YTHotStr = [];
+        let reddit = [];
+        for (let i = 0; i < redditdata.length; i++) {
+          if (redditdata[i].data.domain === "youtube.com") {
+            //getting just the infromaion we need from huge string
+            const redditSplit = redditdata[i].data.media_embed.content.split(
+              "embed/"
+            )[1];
+            if (typeof redditSplit != "undefined") {
+              //title
+              YTtitle = redditdata[i].data.title;
+              //getting just the infromaion we need after ? in string
+              YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
+              //pushing to obj
+              reddit.push({
+                name: YTtitle,
+                YTstr: YTHotStr,
+                vidType: "youtube",
+                clicked: false
+              });
+            }
+          }
+        }
+        this.setState({ featuredVid: reddit[0] });
+        reddit.shift();
+        this.setState({ videos: reddit });
+        //console.log(this.state.featuredVid);
+      })
+      .catch(err => console.log(err));
   };
 
   //for movie vidoes, and anything else we want to come up with
   //must .split(" ").join("+") string for query to work correctly.
-  // loadMovieInfo = query => {
-  //   API.getTmdbInfo(query)
-  //     .then(response => {
-  //       // console.log(response.data.results);
-  //       // console.log(response.data);
-  //       const searchResult = response.data.results[0].id;
-  //       //second call for api video results
-  //       API.getTmdbVideos(searchResult).then(response => {
-  //         // console.log(response.data);
-  //         const videoResults = response.data.results;
-  //         let YTMovieKey = [];
-  //         let YTMovieName = [];
-  //         let movieSearch = [];
+  loadMovieInfo = query => {
+    API.getTmdbInfo(query)
+      .then(response => {
+        console.log("getTmdbInfo", response.data.results);
+        // console.log(response.data);
+        const searchResult = response.data.results[0].id;
+        //second call for api video results
+        API.getTmdbVideos(searchResult).then(response => {
+          // console.log(response.data);
+          const videoResults = response.data.results;
+          let YTMovieKey = [];
+          let YTMovieName = [];
+          let movieSearch = [];
 
-  //         //max of 10 for video search
-  //         for (let i = 0; i < 10 && i < videoResults.length; i++) {
-  //           YTMovieKey = videoResults[i].key;
-  //           YTMovieName = videoResults[i].name;
-  //           movieSearch.push({
-  //             name: YTMovieName,
-  //             YTstr: YTMovieKey,
-  //             vidType: "omdb"
-  //           });
-  //         }
-  //         this.setState({ movieVideos: movieSearch });
-  //         // console.log(this.state);
-  //       });
-  //     })
-  //     .catch(err => console.log(err));
-  // };
+          //max of 10 for video search
+          for (let i = 0; i < 10 && i < videoResults.length; i++) {
+            YTMovieKey = videoResults[i].key;
+            YTMovieName = videoResults[i].name;
+            movieSearch.push({
+              name: YTMovieName,
+              YTstr: YTMovieKey,
+              vidType: "omdb",
+              clicked: false
+            });
+          }
+          this.setState({ movieVideos: movieSearch });
+          // console.log(this.state);
+        });
+      })
+      .catch(err => console.log(err));
+  };
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -124,10 +137,7 @@ class Main extends Component {
 
   // =======================================
 
-
-
   // =======================================
-
 
   handleSaveFormSubmit = event => {
     event.preventDefault();
@@ -146,18 +156,10 @@ class Main extends Component {
     })
       .then(response => {
         // console.log(response);
-        // adding in alert in the save function
-        const alertMessage = "Saved Video";
-        let alertFade = "fade";
+
         this.setState({
-          savedVideos: response.data.savedVideo,
-          alertMessage: alertMessage,
-          alertFade: alertFade
+          savedVideos: response.data.savedVideo
         });
-        // reset state to have Alert work again
-        setTimeout(() => {
-          this.setState({ alertFade: "" });
-        }, 2000);
       })
       .catch(err => console.log(err));
 
@@ -168,7 +170,6 @@ class Main extends Component {
   //   // event.preventDefault();
   //   console.log(event.target.disabled);
   //   event.target.disabled = true;
-
 
   // }
 
@@ -209,13 +210,11 @@ class Main extends Component {
   //   return (-c / 2) * (t * (t - 2) - 1) + b;
   // };
 
-
   render() {
     // console.log(this.state);
     console.log(this.state.savedVideos);
     // console.log(this.state.);
     // console.log(this.state.);
-
 
     return (
       <div>
@@ -232,13 +231,16 @@ class Main extends Component {
                   />
                   <br />
                   <BtnContainer>
-                    <SaveBtn
-                      key={this.state.featuredVid.name + "-save"}
-                      value={this.state.featuredVid.YTstr}
-                      id={this.state.featuredVid.name}
-                      name="saveVid"
-                      onClick={this.handleSaveFormSubmit}
-                    />
+                    {/* provider is for alert. must encompass  button */}
+                    <Provider template={AlertTemplate} {...options}>
+                      <SaveBtn
+                        key={this.state.featuredVid.name + "-save"}
+                        value={this.state.featuredVid.YTstr}
+                        id={this.state.featuredVid.name}
+                        name="saveVid"
+                        onClick={this.handleSaveFormSubmit}
+                      />
+                    </Provider>
                     <CommentBtn
                       key={this.state.featuredVid.name + "-comment"}
                       value={this.state.featuredVid.YTstr}
@@ -246,9 +248,6 @@ class Main extends Component {
                       onClick={this.handleCommentSubmit}
                     />
                   </BtnContainer>
-                  <Alert type={"success"} fade={this.state.alertFade}>
-                    Video Saved
-                  </Alert>
                 </div>
               </Jumbotron>
             </Col>
@@ -260,13 +259,15 @@ class Main extends Component {
                 <Iframe key={video.name} YTstr={video.YTstr} />
                 <br />
                 <BtnContainer>
-                  <SaveBtn
-                    value={video.YTstr}
-                    key={`${video.YTstr}-save`}
-                    id={video.name}
-                    name="saveVid"
-                    onClick={this.handleSaveFormSubmit}
-                  />
+                  <Provider template={AlertTemplate} {...options}>
+                    <SaveBtn
+                      value={video.YTstr}
+                      key={`${video.YTstr}-save`}
+                      id={video.name}
+                      name="saveVid"
+                      onClick={this.handleSaveFormSubmit}
+                    />
+                  </Provider>
                   <CommentBtn
                     key={`${video.YTstr}-comment`}
                     value={this.state.featuredVid.YTstr}
@@ -284,13 +285,15 @@ class Main extends Component {
                 <Iframe key={video.name} YTstr={video.YTstr} />
                 <br />
                 <BtnContainer>
-                  <SaveBtn
-                    value={video.YTstr}
-                    key={`${video.YTstr}-save`}
-                    id={video.name}
-                    name="saveVid"
-                    onClick={this.handleSaveFormSubmit}
-                  />
+                  <Provider template={AlertTemplate} {...options}>
+                    <SaveBtn
+                      value={video.YTstr}
+                      key={`${video.YTstr}-save`}
+                      id={video.name}
+                      name="saveVid"
+                      onClick={this.handleSaveFormSubmit}
+                    />
+                  </Provider>
                   <CommentBtn
                     key={`${video.YTstr}-comment`}
                     value={this.state.featuredVid.YTstr}
@@ -302,7 +305,7 @@ class Main extends Component {
             ))}
           </Wrapper>
         </Container>
-      </div >
+      </div>
     );
   }
 }
