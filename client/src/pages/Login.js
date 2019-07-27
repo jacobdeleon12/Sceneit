@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import {
+  // Col, 
+  Row,
+  Container
+} from "../components/Grid";
 import NavBar from "../components/Nav/index";
 import Background from "../components/splash";
 
@@ -8,7 +13,17 @@ class Login extends Component {
     return (
       <div>
         <NavBar />
-        <Background/>
+        <Background>
+        </Background>
+        <Container fluid>
+          <Row>
+            <div className="col-sm-12 splash">
+              <div className="m-3 p-3 text-center">
+                {/* <GLogin /> */}
+              </div>
+            </div>
+          </Row>
+        </Container>
       </div>
     );
   }
