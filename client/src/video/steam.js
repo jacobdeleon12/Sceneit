@@ -4,7 +4,7 @@ let axios = require("axios");
 export default {
   // try "popularwishlist"
   // Scrapes list page, returns 10 videos
-  searchList: function(query) {
+  searchList: async function(query) {
     let steamArray = [];
     let urlArray = [];
     axios
@@ -18,9 +18,8 @@ export default {
           let urlLink = $(element).attr("href");
           steamArray.push(urlLink);
         });
-        return steamArray;
       })
-      .then(steamArray => {
+      .then(response => {
         for (let url of steamArray) {
           axios.get(url).then(response => {
             let $ = cheerio.load(response.data);
@@ -35,8 +34,8 @@ export default {
                 url: vidUrl
               });
             if (urlArray.length === 10) {
-              console.log(urlArray);
-              return urlArray;
+              // console.log(urlArray);
+              return await urlArray;
             }
           });
         }

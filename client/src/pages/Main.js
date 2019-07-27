@@ -3,17 +3,15 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
+
 import Wrapper from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
 import { JumboIframe, Iframe } from "../components/Iframe";
 import {
   SaveBtn,
-  // DeleteBtn,
-  // ViewBtn,
   CommentBtn,
   BtnContainer
 } from "../components/Buttons/VideoBtns";
-//import Carousel from "../components/Carousel"
 import Alert from "../components/alert/index";
 
 class Main extends Component {
@@ -27,6 +25,7 @@ class Main extends Component {
     alertMessage: "",
     alertFade: ""
   };
+
   // =======================================
   componentDidMount() {
     this.loadUser();
@@ -35,6 +34,7 @@ class Main extends Component {
 
     // this.loadMovieInfo("endgame");
   }
+
   // =======================================
   loadUser = () => {
     API.getUser(document.cookie.split("=0; ")[1])
@@ -44,40 +44,42 @@ class Main extends Component {
       })
       .catch(err => console.log(err));
   };
+
   // =======================================
+
   loadVideos = () => {
-    API.redditHot()
-      .then(response => {
-        const redditdata = response.data.data.children;
-        let YTtitle = [];
-        let YTHotStr = [];
-        let reddit = [];
-        for (let i = 0; i < redditdata.length; i++) {
-          if (redditdata[i].data.domain === "youtube.com") {
-            //getting just the infromaion we need from huge string
-            const redditSplit = redditdata[i].data.media_embed.content.split(
-              "embed/"
-            )[1];
-            if (typeof redditSplit != "undefined") {
-              //title
-              YTtitle = redditdata[i].data.title;
-              //getting just the infromaion we need after ? in string
-              YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
-              //pushing to obj
-              reddit.push({
-                name: YTtitle,
-                YTstr: YTHotStr,
-                vidType: "youtube"
-              });
-            }
-          }
-        }
-        this.setState({ featuredVid: reddit[0] });
-        reddit.shift();
-        this.setState({ videos: reddit });
-        //console.log(this.state.featuredVid);
-      })
-      .catch(err => console.log(err));
+    // API.redditHot()
+    //   .then(response => {
+    //     const redditdata = response.data.data.children;
+    //     let YTtitle = [];
+    //     let YTHotStr = [];
+    //     let reddit = [];
+    //     for (let i = 0; i < redditdata.length; i++) {
+    //       if (redditdata[i].data.domain === "youtube.com") {
+    //         //getting just the infromaion we need from huge string
+    //         const redditSplit = redditdata[i].data.media_embed.content.split(
+    //           "embed/"
+    //         )[1];
+    //         if (typeof redditSplit != "undefined") {
+    //           //title
+    //           YTtitle = redditdata[i].data.title;
+    //           //getting just the infromaion we need after ? in string
+    //           YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
+    //           //pushing to obj
+    //           reddit.push({
+    //             name: YTtitle,
+    //             YTstr: YTHotStr,
+    //             vidType: "youtube"
+    //           });
+    //         }
+    //       }
+    //     }
+    //     this.setState({ featuredVid: reddit[0] });
+    //     reddit.shift();
+    //     this.setState({ videos: reddit });
+    //     //console.log(this.state.featuredVid);
+    //   })
+    //   .catch(err => console.log(err));
   };
 
   //for movie vidoes, and anything else we want to come up with
@@ -152,8 +154,6 @@ class Main extends Component {
     // this.setState({ clicked: true })
     // console.log(this.state.user);
   };
-
-
 
   render() {
     return (
