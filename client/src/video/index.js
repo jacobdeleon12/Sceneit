@@ -27,7 +27,10 @@ async function addToDb() {
     // const REDDITarr = await REDDIT.searchName("speed");
     // const YOUTUBEarr = await YOUTUBE.searchName("speed");
 
-    API.saveVideoObj(TMDBarr)
+    API.saveVideoObj({
+      vidType: "tmdb",
+      videos: TMDBarr
+    })
     .then(res => {
       // console.log("New user, info added to DB");
       console.log(res);
