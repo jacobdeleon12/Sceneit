@@ -24,14 +24,13 @@ class Main extends Component {
     featuredVid: [],
     savedVideos: [],
     clicked: false,
-    alertMessage:"",
     alertFade:"",
   };
   // =======================================
   componentDidMount() {
     this.loadUser();
     this.loadVideos();
-    console.log(document.cookie.split("=0; ")[1]);
+    // console.log(document.cookie.split("=0; ")[1]);
 
     this.loadMovieInfo("endgame");
   }
@@ -85,8 +84,8 @@ class Main extends Component {
   loadMovieInfo = query => {
     API.getTmdbInfo(query)
       .then(response => {
-        console.log(response.data.results);
-        console.log(response.data);
+        // console.log(response.data.results);
+        // console.log(response.data);
         const searchResult = response.data.results[0].id;
         //second call for api video results
         API.getTmdbVideos(searchResult).then(response => {
@@ -135,15 +134,18 @@ class Main extends Component {
       }
     })
       .then(response => {
-        console.log(response);
-        const alertMessage = "Saved Video"
-        const alertFade = "fade"
+        // console.log(response);
+        // adding in alert in the save function
+        let alertFade = "fade";
         this.setState({ 
           savedVideos: response.data.savedVideo,
-          alertMessage: alertMessage, 
-          alertFade:alertFade 
-        });
-        
+          alertFade:alertFade
+        })
+        // reset state to have Alert work again
+        setTimeout(() => {
+          this.setState({alertFade: ""});
+        }, 2000)
+
       })
       .catch(err => console.log(err));
     // this.setState({ clicked: true })
@@ -151,7 +153,7 @@ class Main extends Component {
   };
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     // console.log(typeof this.state.savedVideos);
 
     return (
@@ -168,25 +170,27 @@ class Main extends Component {
                     YTstr={this.state.featuredVid.YTstr}
                   />
                   <br />
-                  <SaveBtn
-                    // disabled={this.state.clicked}
-                    key={this.state.featuredVid.name + "-save"}
-                    value={this.state.featuredVid.YTstr}
-                    id={this.state.featuredVid.name}
-                    name="saveVid"
-                    onClick={this.handleSaveFormSubmit}
-                  />
-                  <CommentBtn
-                    key={this.state.featuredVid.name + "-comment"}
-                    value={this.state.featuredVid.YTstr}
-                    name="CommentVid"
-                    onClick={this.handleCommentSubmit}
-                  />
-                <Alert
-                type={"success"}
-                fade={this.state.alertFade}
-                >
-                 Video Saved
+                  <BtnContainer>
+                    <SaveBtn
+                      // disabled={this.state.clicked}
+                      key={this.state.featuredVid.name + "-save"}
+                      value={this.state.featuredVid.YTstr}
+                      id={this.state.featuredVid.name}
+                      name="saveVid"
+                      onClick={this.handleSaveFormSubmit}
+                    />
+                    <CommentBtn
+                      key={this.state.featuredVid.name + "-comment"}
+                      value={this.state.featuredVid.YTstr}
+                      name="CommentVid"
+                      onClick={this.handleCommentSubmit}
+                    />
+                  </BtnContainer>
+                  <Alert
+                    type={"success"}
+                    fade={this.state.alertFade}
+                  >
+                    Video Saved
                 </Alert>
                 </div>
               </Jumbotron>
