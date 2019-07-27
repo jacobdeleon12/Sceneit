@@ -7,7 +7,7 @@ export function JumboIframe(props) {
       <iframe
         title={props.name}
         style={{ height: "100%" }}
-        src={"https://www.youtube.com/embed/" + props.YTstr}
+        src={props.url}
         frameBorder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
@@ -21,7 +21,7 @@ export function Iframe(props) {
     <div className="iFrame card pb-0 text-center">
       <iframe
         title={props.name}
-        src={"https://www.youtube.com/embed/" + props.YTstr}
+        src={props.url}
         frameBorder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen

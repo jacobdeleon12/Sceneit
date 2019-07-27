@@ -57,23 +57,23 @@ class Main extends Component {
   // =======================================
 
   loadVideos = () => {
-    var tmdbVids = JSON.parse(localStorage.getItem("tmdb"));
-    var youtubeVids = JSON.parse(localStorage.getItem("youtube"));
-    var redditVids = JSON.parse(localStorage.getItem("reddit"));
+    // var tmdbVids = JSON.parse(localStorage.getItem("tmdb"));
+    // var youtubeVids = JSON.parse(localStorage.getItem("youtube"));
+    // var redditVids = JSON.parse(localStorage.getItem("reddit"));
 
-    // console.log(tmdbVids);
-    // console.log(youtubeVids);
-    // console.log(redditVids);
+    // // console.log(tmdbVids);
+    // // console.log(youtubeVids);
+    // // console.log(redditVids);
 
-    this.setState({ featuredVid: redditVids[0] });
-    redditVids.shift();
-    this.setState({
-      videos: {
-        reddit: redditVids,
-        tmdb: tmdbVids,
-        youtube: youtubeVids
-      }
-    });
+    // this.setState({ featuredVid: redditVids[0] });
+    // redditVids.shift();
+    // this.setState({
+    //   videos: {
+    //     tmdb: tmdbVids,
+    //     youtube: youtubeVids,
+    //     reddit: redditVids
+    //   }
+    // });
   };
 
   //for movie vidoes, and anything else we want to come up with
@@ -193,10 +193,13 @@ class Main extends Component {
   // };
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     // console.log(this.state.savedVideos);
-    // console.log(this.state.featuredVid);
-    console.log(this.state.videos);
+    // console.log(this.state.videos.reddit);
+    // console.log(this.state.videos);
+    var tmdbVids = JSON.parse(localStorage.getItem("tmdb"));
+    var youtubeVids = JSON.parse(localStorage.getItem("youtube"));
+    var redditVids = JSON.parse(localStorage.getItem("reddit"));
 
     return (
       <div>
@@ -205,11 +208,11 @@ class Main extends Component {
           <Row>
             <Col size="md-12">
               <Jumbotron>
-                <h1>{this.state.featuredVid.name}</h1>
+                <h1>{redditVids[0].name}</h1>
                 <div>
                   <JumboIframe
-                    key={this.state.featuredVid.name}
-                    url={this.state.featuredVid.url}
+                    key={redditVids[0].name}
+                    url={redditVids[0].url}
                   />
                   <br />
                   <BtnContainer>
@@ -236,7 +239,7 @@ class Main extends Component {
           </Row>
           <h1 className="text-center">Reddit Hot</h1>
           <Wrapper ID="reddit">
-            {this.state.videos.reddit.map(video => (
+            {redditVids.map(video => (
               <div className="text-center" key={video.url}>
                 <Iframe key={video.name} url={video.url} />
                 <br />
@@ -262,7 +265,7 @@ class Main extends Component {
           </Wrapper>
           <h1 className="text-center">IMDB Popular</h1>
           <Wrapper ID="imdb">
-            {this.state.videos.tmdb.map(video => (
+            {tmdbVids.map(video => (
               <div className="text-center" key={video.url}>
                 <Iframe key={video.name} url={video.url} />
                 <br />
@@ -286,9 +289,9 @@ class Main extends Component {
               </div>
             ))}
           </Wrapper>
-          {/* <h1 className="text-center">Youtube Popular</h1>
+          <h1 className="text-center">Youtube Popular</h1>
           <Wrapper ID="youtube">
-            {this.state.videos.youtube.map(video => (
+            {youtubeVids.map(video => (
               <div className="text-center" key={video.url}>
                 <Iframe key={video.name} url={video.url} />
                 <br />
@@ -311,7 +314,7 @@ class Main extends Component {
                 </BtnContainer>
               </div>
             ))}
-          </Wrapper> */}
+          </Wrapper>
         </Container>
       </div>
     );
