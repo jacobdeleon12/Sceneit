@@ -40,7 +40,7 @@ class Main extends Component {
     API.getUser(document.cookie.split("=0; ")[1])
       .then(res => {
         // console.log(res.data)
-        this.setState({ user: res.data });
+        this.setState({ user: res.data, savedVideos: res.data.savedVideos });
       })
       .catch(err => console.log(err));
   };
@@ -114,6 +114,12 @@ class Main extends Component {
   };
 
   // =======================================
+
+
+
+  // =======================================
+
+
   handleSaveFormSubmit = event => {
     event.preventDefault();
     // this.refs.savebtn.setAttribute("disabled", "disabled");
@@ -145,9 +151,17 @@ class Main extends Component {
         }, 2000);
       })
       .catch(err => console.log(err));
-    // this.setState({ clicked: true })
-    // console.log(this.state.user);
+
+    event.target.disabled = true;
   };
+
+  // mouseUp = event => {
+  //   // event.preventDefault();
+  //   console.log(event.target.disabled);
+  //   event.target.disabled = true;
+
+
+  // }
 
   // left = () => {
   //   scrollLeft(document.getElementById("content"), -1500, 1000);
@@ -189,9 +203,10 @@ class Main extends Component {
 
   render() {
     // console.log(this.state);
-    // console.log(this.state.savedVideos);
+    console.log(this.state.savedVideos);
     // console.log(this.state.);
     // console.log(this.state.);
+
 
     return (
       <div>
@@ -209,7 +224,6 @@ class Main extends Component {
                   <br />
                   <BtnContainer>
                     <SaveBtn
-                      disabled={this.state.featuredVid.clicked}
                       key={this.state.featuredVid.name + "-save"}
                       value={this.state.featuredVid.YTstr}
                       id={this.state.featuredVid.name}
@@ -241,7 +255,6 @@ class Main extends Component {
                 <br />
                 <BtnContainer>
                   <SaveBtn
-                    disabled={video.clicked}
                     value={video.YTstr}
                     key={`${video.YTstr}-save`}
                     id={video.name}
@@ -266,7 +279,6 @@ class Main extends Component {
                 <br />
                 <BtnContainer>
                   <SaveBtn
-                    disabled={video.clicked}
                     value={video.YTstr}
                     key={`${video.YTstr}-save`}
                     id={video.name}
@@ -284,7 +296,7 @@ class Main extends Component {
             ))}
           </Wrapper>
         </Container>
-      </div>
+      </div >
     );
   }
 }
