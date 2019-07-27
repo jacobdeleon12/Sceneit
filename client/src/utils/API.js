@@ -67,32 +67,4 @@ export default {
       `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${query}&key=AIzaSyBJpSy55Bx8rlO3A4FyhWyav8uFtC8_r3I`
     );
   },
-
-  // ***** TMDB API ***** //
-
-  // TMDB search movie by Name
-  tmdbSearchName: function(query) {
-    return axios.get(
-      `https://api.themoviedb.org/3/search/movie?api_key=${tmdbApiKey}&language=en-US&query=${query}&page=1&include_adult=false`
-    );
-  },
-  // TMDB search movie by ID
-  tmdbSearchId: function(query) {
-    return axios.get(
-      `https://api.themoviedb.org/3/movie/${query}?api_key=${tmdbApiKey}&append_to_response=videos`
-    );
-  },
-  // TMDB top movies
-  tmdbTop: function() {
-    return axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${tmdbApiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&page=1`
-    );
-  },
-
-  // ***** Steam API ***** //
-
-  // Steam all games
-  steamAll: function(query) {
-    return axios.get(`https://api.steampowered.com/ISteamApps/GetAppList/v1/`);
-  }
 };

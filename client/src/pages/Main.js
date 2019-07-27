@@ -33,7 +33,7 @@ class Main extends Component {
     this.loadVideos();
     // console.log(document.cookie.split("=0; ")[1]);
 
-    this.loadMovieInfo("endgame");
+    // this.loadMovieInfo("endgame");
   }
   // =======================================
   loadUser = () => {
@@ -46,7 +46,7 @@ class Main extends Component {
   };
   // =======================================
   loadVideos = () => {
-    API.getRedditHot()
+    API.redditHot()
       .then(response => {
         const redditdata = response.data.data.children;
         let YTtitle = [];
@@ -82,36 +82,36 @@ class Main extends Component {
 
   //for movie vidoes, and anything else we want to come up with
   //must .split(" ").join("+") string for query to work correctly.
-  loadMovieInfo = query => {
-    API.getTmdbInfo(query)
-      .then(response => {
-        // console.log(response.data.results);
-        // console.log(response.data);
-        const searchResult = response.data.results[0].id;
-        //second call for api video results
-        API.getTmdbVideos(searchResult).then(response => {
-          // console.log(response.data);
-          const videoResults = response.data.results;
-          let YTMovieKey = [];
-          let YTMovieName = [];
-          let movieSearch = [];
+  // loadMovieInfo = query => {
+  //   API.getTmdbInfo(query)
+  //     .then(response => {
+  //       // console.log(response.data.results);
+  //       // console.log(response.data);
+  //       const searchResult = response.data.results[0].id;
+  //       //second call for api video results
+  //       API.getTmdbVideos(searchResult).then(response => {
+  //         // console.log(response.data);
+  //         const videoResults = response.data.results;
+  //         let YTMovieKey = [];
+  //         let YTMovieName = [];
+  //         let movieSearch = [];
 
-          //max of 10 for video search
-          for (let i = 0; i < 10 && i < videoResults.length; i++) {
-            YTMovieKey = videoResults[i].key;
-            YTMovieName = videoResults[i].name;
-            movieSearch.push({
-              name: YTMovieName,
-              YTstr: YTMovieKey,
-              vidType: "omdb"
-            });
-          }
-          this.setState({ movieVideos: movieSearch });
-          // console.log(this.state);
-        });
-      })
-      .catch(err => console.log(err));
-  };
+  //         //max of 10 for video search
+  //         for (let i = 0; i < 10 && i < videoResults.length; i++) {
+  //           YTMovieKey = videoResults[i].key;
+  //           YTMovieName = videoResults[i].name;
+  //           movieSearch.push({
+  //             name: YTMovieName,
+  //             YTstr: YTMovieKey,
+  //             vidType: "omdb"
+  //           });
+  //         }
+  //         this.setState({ movieVideos: movieSearch });
+  //         // console.log(this.state);
+  //       });
+  //     })
+  //     .catch(err => console.log(err));
+  // };
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -154,7 +154,7 @@ class Main extends Component {
   };
 
 
-  
+
   render() {
     return (
       <div>
