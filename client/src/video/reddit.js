@@ -7,70 +7,73 @@ export default {
     let urlArray = [];
     let YtCode = "";
     let YtTitle = "";
+    return new Promise(function(resolve, reject) {
+      axios
+        .get(`https://www.reddit.com/r/${query}/hot.json?limit=30`)
+        .then(response => {
+          for (let obj of response.data.data.children) {
+            if (obj.data.domain === "youtube.com") {
+              YtCode = obj.data.url.split("v=")[1].slice(0, 11);
+              YtTitle = `${obj.data.title.slice(0, 40)}...`;
+            } else if (obj.data.domain === "youtu.be") {
+              YtCode = obj.data.url.split("be/")[1].slice(0, 11);
+              YtTitle = `${obj.data.title.slice(0, 40)}...`;
+            }
 
-    axios
-      .get(`https://www.reddit.com/r/${query}/hot.json?limit=30`)
-      .then(response => {
+            YtCode &&
+              urlArray.push({
+                type: "reddit",
+                name: YtTitle,
+                url: `https://www.youtube.com/embed/${YtCode}`
+              });
 
-        for (let obj of response.data.data.children) {
-          if (obj.data.domain === "youtube.com") {
-            YtCode = obj.data.url.split("v=")[1].slice(0, 11);
-            YtTitle = obj.data.title;
-          } else if (obj.data.domain === "youtu.be") {
-            YtCode = obj.data.url.split("be/")[1].slice(0, 11);
-            YtTitle = obj.data.title;
+            if (urlArray.length === 10) {
+              // console.log(urlArray);
+              resolve(urlArray);
+            }
           }
-
-          YtCode &&
-            urlArray.push({
-              type: "reddit",
-              name: YtTitle,
-              url: `https://www.youtube.com/embed/${YtCode}`
-            });
-
-          if (urlArray.length === 10) {
-            console.log(urlArray);
-            return urlArray;
-          }
-        }
-      })
-      .catch(err => console.log(err));
+        })
+        .catch(err => reject(err));
+    });
   },
 
-    // try "videos"
+  // try "videos"
   // Queries Reddit name, returns 10 videos
   searchName: function(query) {
     let urlArray = [];
     let YtCode = "";
     let YtTitle = "";
+    return new Promise(function(resolve, reject) {
+      axios
+        .get(
+          `https://www.reddit.com/r/videos/search.json?q=${query}&restrict_sr=on&include_over_18=on&sort=relevance&t=all`
+        )
+        .then(response => {
+          const redditdata = response.data.data.children;
 
-    axios
-      .get(`https://www.reddit.com/r/videos/search.json?q=${query}&restrict_sr=on&include_over_18=on&sort=relevance&t=all`)
-      .then(response => {
-        const redditdata = response.data.data.children;
+          for (let obj of redditdata) {
+            if (obj.data.domain === "youtube.com") {
+              YtCode = obj.data.url.split("v=")[1].slice(0, 11);
+              YtTitle = `${obj.data.title.slice(0, 40)}...`;
+            } else if (obj.data.domain === "youtu.be") {
+              YtCode = obj.data.url.split("be/")[1].slice(0, 11);
+              YtTitle = `${obj.data.title.slice(0, 40)}...`;
+            }
 
-        for (let obj of redditdata) {
-          if (obj.data.domain === "youtube.com") {
-            YtCode = obj.data.url.split("v=")[1].slice(0, 11);
-            YtTitle = obj.data.title;
-          } else if (obj.data.domain === "youtu.be") {
-            YtCode = obj.data.url.split("be/")[1].slice(0, 11);
-            YtTitle = obj.data.title;
+            YtCode &&
+              urlArray.push({
+                type: "reddit",
+                name: YtTitle,
+                url: `https://www.youtube.com/embed/${YtCode}`
+              });
+
+            if (urlArray.length === 10) {
+              // console.log(urlArray);
+              resolve(urlArray);
+            }
           }
-
-          YtCode &&
-            urlArray.push({
-              type: "reddit",
-              name: YtTitle,
-              url: `https://www.youtube.com/embed/${YtCode}`
-            });
-
-          if (urlArray.length === 10) {
-            console.log(urlArray);
-            return urlArray;
-          }
-        }
-      })
-      .catch(err => console.log(err));
+        })
+        .catch(err => reject(err));
+    });
   }
 };
