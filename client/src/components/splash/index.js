@@ -13,8 +13,8 @@ function background({ children }) {
         <Row>
           <Col size="sm-12">
             <div className="m-3 p-3 ">
-              <h1 className = "splashHeadder1">Have you {Logo}?</h1>
-              <h2 className = "splashHeadder2">Its Time to catch up on Trending Videos</h2>
+              <h1 className="splashHeadder1">Have you {Logo}?</h1>
+              <h2 className="splashHeadder2">Its Time to catch up on Trending Videos</h2>
             </div>
           </Col>
         </Row>

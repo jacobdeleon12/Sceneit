@@ -40,43 +40,40 @@ class Main extends Component {
     API.getUser(document.cookie.split("=0; ")[1])
       .then(res => {
         // console.log(res.data)
-        this.setState({ user: res.data });
+        this.setState({ user: res.data, savedVideos: res.data.savedVideos });
       })
       .catch(err => console.log(err));
   };
   // =======================================
   loadVideos = () => {
-    API.getRedditHot()
-      .then(response => {
-        const redditdata = response.data.data.children;
-        let YTtitle = [];
-        let YTHotStr = [];
-        let reddit = [];
-        for (let i = 0; i < redditdata.length; i++) {
-          if (redditdata[i].data.domain === "youtube.com") {
-            //getting just the infromaion we need from huge string
-            const redditSplit = redditdata[i].data.media_embed.content.split(
-              "embed/"
-            )[1];
-            if (typeof redditSplit != "undefined") {
-              //title
-              YTtitle = redditdata[i].data.title;
-              //getting just the infromaion we need after ? in string
-              YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
-              //pushing to obj
-              reddit.push({
-                name: YTtitle,
-                YTstr: YTHotStr,
-                vidType: "youtube"
-              });
-            }
+    API.getRedditHot().then(response => {
+      console.log("getRedditHot", response.data.data);
+
+      const redditdata = response.data.data.children;
+      let YTtitle = [];
+      let YTHotStr = [];
+      let reddit = [];
+      for (let i = 0; i < redditdata.length; i++) {
+        if (redditdata[i].data.domain === "youtube.com") {
+          //getting just the infromaion we need from huge string
+          const redditSplit = redditdata[i].data.media_embed.content.split(
+            "embed/"
+          )[1];
+          if (typeof redditSplit != "undefined") {
+            //title
+            YTtitle = redditdata[i].data.title;
+            //getting just the infromaion we need after ? in string
+            YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
+            //pushing to obj
+            reddit.push({ name: YTtitle, YTstr: YTHotStr, vidType: "youtube", clicked: false });
           }
         }
-        this.setState({ featuredVid: reddit[0] });
-        reddit.shift();
-        this.setState({ videos: reddit });
-        //console.log(this.state.featuredVid);
-      })
+      }
+      this.setState({ featuredVid: reddit[0] });
+      reddit.shift();
+      this.setState({ videos: reddit });
+      //console.log(this.state.featuredVid);
+    })
       .catch(err => console.log(err));
   };
 
@@ -85,7 +82,7 @@ class Main extends Component {
   loadMovieInfo = query => {
     API.getTmdbInfo(query)
       .then(response => {
-        // console.log(response.data.results);
+        console.log("getTmdbInfo", response.data.results);
         // console.log(response.data);
         const searchResult = response.data.results[0].id;
         //second call for api video results
@@ -100,11 +97,7 @@ class Main extends Component {
           for (let i = 0; i < 10 && i < videoResults.length; i++) {
             YTMovieKey = videoResults[i].key;
             YTMovieName = videoResults[i].name;
-            movieSearch.push({
-              name: YTMovieName,
-              YTstr: YTMovieKey,
-              vidType: "omdb"
-            });
+            movieSearch.push({ name: YTMovieName, YTstr: YTMovieKey, vidType: "omdb", clicked: false });
           }
           this.setState({ movieVideos: movieSearch });
           // console.log(this.state);
@@ -121,16 +114,25 @@ class Main extends Component {
   };
 
   // =======================================
+
+
+
+  // =======================================
+
+
   handleSaveFormSubmit = event => {
     event.preventDefault();
     // this.refs.savebtn.setAttribute("disabled", "disabled");
+    console.log("event", event);
 
     const vStr = event.target.value;
     const vName = event.target.id;
+    console.log(event.target.value);
+    console.log(event.target.id);
 
     API.saveVideo(this.state.user._id, {
       $push: {
-        savedVideos: { vStr, vName }
+        savedVideos: { vStr, vName, clicked: true }
       }
     })
       .then(response => {
@@ -149,25 +151,33 @@ class Main extends Component {
         }, 2000);
       })
       .catch(err => console.log(err));
-    // this.setState({ clicked: true })
-    // console.log(this.state.user);
+
+    event.target.disabled = true;
   };
+
+  // mouseUp = event => {
+  //   // event.preventDefault();
+  //   console.log(event.target.disabled);
+  //   event.target.disabled = true;
+
+
+  // }
 
   // left = () => {
   //   scrollLeft(document.getElementById("content"), -1500, 1000);
   // };
-  
+
   // right = () => {
   //   scrollLeft(document.getElementById("content"), 1500, 1000);
   // };
-  
+
   // scrollLeft = (element, change, duration) => {
   //   var start = element.scrollLeft,
   //     currentTime = 0,
   //     increment = 20;
-  
+
   //   console.log(start);
-  
+
   //   var animateScroll = function() {
   //     currentTime += increment;
   //     var val = Math.easeInOutQuad(currentTime, start, change, duration);
@@ -178,7 +188,7 @@ class Main extends Component {
   //   };
   //   animateScroll();
   // }
-  
+
   // //t = current time
   // //b = start value
   // //c = change in value
@@ -189,11 +199,14 @@ class Main extends Component {
   //   t--;
   //   return (-c / 2) * (t * (t - 2) - 1) + b;
   // };
-  
+
 
   render() {
     // console.log(this.state);
-    // console.log(typeof this.state.savedVideos);
+    console.log(this.state.savedVideos);
+    // console.log(this.state.);
+    // console.log(this.state.);
+
 
     return (
       <div>
@@ -211,7 +224,6 @@ class Main extends Component {
                   <br />
                   <BtnContainer>
                     <SaveBtn
-                      // disabled={this.state.clicked}
                       key={this.state.featuredVid.name + "-save"}
                       value={this.state.featuredVid.YTstr}
                       id={this.state.featuredVid.name}
@@ -268,7 +280,7 @@ class Main extends Component {
                 <BtnContainer>
                   <SaveBtn
                     value={video.YTstr}
-                    key={`${video.YTstr}-save`}                    
+                    key={`${video.YTstr}-save`}
                     id={video.name}
                     name="saveVid"
                     onClick={this.handleSaveFormSubmit}
@@ -284,7 +296,7 @@ class Main extends Component {
             ))}
           </Wrapper>
         </Container>
-      </div>
+      </div >
     );
   }
 }
