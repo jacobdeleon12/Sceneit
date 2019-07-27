@@ -54,11 +54,12 @@ class Main extends Component {
       let YTHotStr = [];
       let reddit = [];
       for (let i = 0; i < redditdata.length; i++) {
-        if (redditdata[i].data.domain === "youtube.com") {
+        if (redditdata[i].data.domain !== "vimeo.com" || "twitter.com") {
           //getting just the infromaion we need from huge string
           const redditSplit = redditdata[i].data.media_embed.content.split(
             "embed/"
           )[1];
+          console.log(redditSplit);
           if (typeof redditSplit != "undefined") {
             //title
             YTtitle = redditdata[i].data.title;

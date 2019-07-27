@@ -38,7 +38,7 @@ export default {
     );
   },
   //TMDB popular for default landing 
-  getMoviePop:function(){
+  getMoviePop: function () {
     return axios.get("https://api.themoviedb.org/3/movie/popular?api_key=7b07c1ac2c9e9a9f62cfc49a4ec55f99&language=en-US&page=1")
   },
   // Saves a user to the database
@@ -47,7 +47,7 @@ export default {
   },
   // Saves a video to the user model
   saveVideo: function (id, videoData) {
-    return axios.put("api/users/" + id, videoData)
+    return axios.put("/api/users/" + id, videoData)
   },
   // Deletes the video with the given id
   deleteVideo: function (_id, videoData) {
