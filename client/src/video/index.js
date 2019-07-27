@@ -28,12 +28,14 @@ async function addToDb() {
     // const YOUTUBEarr = await YOUTUBE.searchName("speed");
 
     API.saveVideoObj({
-      vidType: "tmdb",
-      videos: TMDBarr
+      $set: {
+        vidType: "tmdb",
+        videos: TMDBarr
+      }
     })
     .then(res => {
-      // console.log("New user, info added to DB");
-      console.log(res);
+      console.log("New user, info added to DB");
+      // console.log(res);
     })
     .catch(err => console.log(err));
 
@@ -50,4 +52,4 @@ async function addToDb() {
     
 }
 
-addToDb();
+export default addToDb;
