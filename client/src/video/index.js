@@ -5,10 +5,10 @@ import YOUTUBE from "../video/youtube";
 
 // TMDB.searchList("popularity");
 // STEAM.searchList("popularwishlist");
-// REDDIT.searchList("top");
+// REDDIT.searchList("videos");
 // YOUTUBE.searchList("mostPopular");
 
-// TMDB.searchList("popularity");
-// STEAM.searchList("popularwishlist");
-// REDDIT.searchList("top");
-YOUTUBE.searchList("mostPopular");
+// TMDB.searchName("speed");
+// STEAM.searchName("speed");
+// REDDIT.searchName("speed");
+// YOUTUBE.searchName("speed");

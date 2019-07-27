@@ -9,7 +9,7 @@ export default {
     let YtTitle = "";
 
     axios
-      .get(`https://www.reddit.com/r/${query}/top.json?limit=30`)
+      .get(`https://www.reddit.com/r/${query}/hot.json?limit=30`)
       .then(response => {
 
         for (let obj of response.data.data.children) {
@@ -23,6 +23,7 @@ export default {
 
           YtCode &&
             urlArray.push({
+              type: "reddit",
               name: YtTitle,
               url: `https://www.youtube.com/embed/${YtCode}`
             });
@@ -59,6 +60,7 @@ export default {
 
           YtCode &&
             urlArray.push({
+              type: "reddit",
               name: YtTitle,
               url: `https://www.youtube.com/embed/${YtCode}`
             });

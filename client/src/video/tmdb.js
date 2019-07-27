@@ -16,7 +16,7 @@ export default {
 
     axios
       .get(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=${query}.desc&include_adult=false&page=1`
+        `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=${query}.desc&include_adult=false&page=1&append_to_response=videos`
       )
       .then(response => {
         for (const movie of response.data.results) {
@@ -24,6 +24,7 @@ export default {
             .then(response => {
               response.data.videos.results[0] &&
                 urlArray.push({
+                  type: "tmbd",
                   name: response.data.original_title,
                   url: `https://www.youtube.com/embed/${response.data.videos.results[0].key}`
                 });
@@ -48,11 +49,15 @@ export default {
         `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${query}&page=1&include_adult=false`
       )
       .then(response => {
-        for (const movie of response.data.results) {
-          searchId(movie.id)
+        for (let obj of response.data.results) {
+          axios
+            .get(
+              `https://api.themoviedb.org/3/movie/${obj.id}?api_key=${apiKey}&language=en-US&append_to_response=videos`
+            )
             .then(response => {
               response.data.videos.results[0] &&
                 urlArray.push({
+                  type: "tmdb",
                   name: response.data.original_title,
                   url: `https://www.youtube.com/embed/${response.data.videos.results[0].key}`
                 });

@@ -28,7 +28,12 @@ export default {
             let vidName = $("div.apphub_AppName").text();
             let vidUrl = $("div.highlight_movie").attr("data-webm-hd-source");
 
-            vidUrl && urlArray.push({ name: vidName, url: vidUrl });
+            vidUrl &&
+              urlArray.push({
+                type: "steam",
+                name: vidName,
+                url: vidUrl
+              });
             if (urlArray.length === 10) {
               console.log(urlArray);
               return urlArray;
@@ -61,7 +66,12 @@ export default {
             let vidName = $("div.apphub_AppName").text();
             let vidUrl = $("div.highlight_movie").attr("data-webm-hd-source");
 
-            vidUrl && urlArray.push({ name: vidName, url: vidUrl });
+            vidUrl &&
+              urlArray.push({
+                type: "steam",
+                name: vidName,
+                url: vidUrl
+              });
             // console.log({ name: vidName, url: vidUrl });
             if (urlArray.length === 10) {
               console.log(urlArray);

@@ -4,7 +4,7 @@ const apiKey = "AIzaSyBJpSy55Bx8rlO3A4FyhWyav8uFtC8_r3I";
 
 export default {
   // try "mostPopular"
-  // Queries Reddit sub, returns 10 videos
+  // Queries YouTube list, returns 10 videos
   searchList: function(query) {
     let urlArray = [];
 
@@ -14,15 +14,11 @@ export default {
       )
       .then(response => {
         for (let obj of response.data.items) {
-          let vidTitle = obj.snippet.title;
-          let vidCode = obj.id;
-          // console.log(vidTitle);
-          // console.log(vidCode);
-
-          vidCode &&
+          obj.id &&
             urlArray.push({
-              name: vidTitle,
-              url: `https://www.youtube.com/embed/${vidCode}`
+              type: "youtube",
+              name: obj.snippet.title,
+              url: `https://www.youtube.com/embed/${obj.id}`
             });
 
           if (urlArray.length === 10) {
@@ -45,15 +41,11 @@ export default {
       )
       .then(response => {
         for (let obj of response.data.items) {
-          let vidTitle = obj.snippet.title;
-          let vidCode = obj.id;
-          // console.log(vidTitle);
-          // console.log(vidCode);
-
-          vidCode &&
+          obj.id &&
             urlArray.push({
-              name: vidTitle,
-              url: `https://www.youtube.com/embed/${vidCode}`
+              type: "youtube",
+              name: obj.snippet.title,
+              url: `https://www.youtube.com/embed/${obj.id}`
             });
 
           if (urlArray.length === 10) {
