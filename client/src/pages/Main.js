@@ -253,7 +253,7 @@ class Main extends Component {
             </Col>
           </Row>
           <h1 className="text-center">Reddit Hot</h1>
-          <Wrapper>
+          <Wrapper ID="reddit">
             {this.state.videos.map(video => (
               <div className="text-center" key={video.YTstr}>
                 <Iframe key={video.name} YTstr={video.YTstr} />
@@ -279,7 +279,7 @@ class Main extends Component {
             ))}
           </Wrapper>
           <h1 className="text-center">IMDB Popular</h1>
-          <Wrapper>
+          <Wrapper ID="imdb">
             {this.state.movieVideos.map(video => (
               <div className="text-center" key={video.YTstr}>
                 <Iframe key={video.name} YTstr={video.YTstr} />
