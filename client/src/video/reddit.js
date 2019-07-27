@@ -1,68 +1,72 @@
 import axios from "axios";
 
-const tmdbApiKey = "7b07c1ac2c9e9a9f62cfc49a4ec55f99";
-
-const tmdbSearchId = query => {
-  return axios.get(
-    `https://api.themoviedb.org/3/movie/${query}?api_key=${tmdbApiKey}&append_to_response=videos`
-  );
-};
-
 export default {
-  // try "popularity"
-  // Queries TMDB list, returns 10 videos
+  // try "videos"
+  // Queries Reddit sub, returns 10 videos
   searchList: function(query) {
     let urlArray = [];
+    let YtCode = "";
+    let YtTitle = "";
 
     axios
-      .get(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${tmdbApiKey}&language=en-US&sort_by=${query}.desc&include_adult=false&page=1`
-      )
+      .get(`https://www.reddit.com/r/${query}/top.json?limit=30`)
       .then(response => {
-        for (const movie of response.data.results) {
-          tmdbSearchId(movie.id)
-            .then(response => {
-              response.data.videos.results[0] &&
-                urlArray.push({
-                  name: response.data.original_title,
-                  url: `https://www.youtube.com/embed/${response.data.videos.results[0].key}`
-                });
 
-              if (urlArray.length === 10) {
-                console.log(urlArray);
-                return urlArray;
-              }
-            })
-            .catch(err => console.log(err));
+        for (let obj of response.data.data.children) {
+          if (obj.data.domain === "youtube.com") {
+            YtCode = obj.data.url.split("v=")[1].slice(0, 11);
+            YtTitle = obj.data.title;
+          } else if (obj.data.domain === "youtu.be") {
+            YtCode = obj.data.url.split("be/")[1].slice(0, 11);
+            YtTitle = obj.data.title;
+          }
+
+          YtCode &&
+            urlArray.push({
+              name: YtTitle,
+              url: `https://www.youtube.com/embed/${YtCode}`
+            });
+
+          if (urlArray.length === 10) {
+            console.log(urlArray);
+            return urlArray;
+          }
         }
       })
       .catch(err => console.log(err));
   },
 
-  // Queries TMDB name, returns 10 videos
+    // try "videos"
+  // Queries Reddit name, returns 10 videos
   searchName: function(query) {
     let urlArray = [];
+    let YtCode = "";
+    let YtTitle = "";
 
     axios
-      .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=${tmdbApiKey}&language=en-US&query=${query}&page=1&include_adult=false`
-      )
+      .get(`https://www.reddit.com/r/videos/search.json?q=${query}&restrict_sr=on&include_over_18=on&sort=relevance&t=all`)
       .then(response => {
-        for (const movie of response.data.results) {
-          tmdbSearchId(movie.id)
-            .then(response => {
-              response.data.videos.results[0] &&
-                urlArray.push({
-                  name: response.data.original_title,
-                  url: `https://www.youtube.com/embed/${response.data.videos.results[0].key}`
-                });
+        const redditdata = response.data.data.children;
 
-              if (urlArray.length === 10) {
-                console.log(urlArray);
-                return urlArray;
-              }
-            })
-            .catch(err => console.log(err));
+        for (let obj of redditdata) {
+          if (obj.data.domain === "youtube.com") {
+            YtCode = obj.data.url.split("v=")[1].slice(0, 11);
+            YtTitle = obj.data.title;
+          } else if (obj.data.domain === "youtu.be") {
+            YtCode = obj.data.url.split("be/")[1].slice(0, 11);
+            YtTitle = obj.data.title;
+          }
+
+          YtCode &&
+            urlArray.push({
+              name: YtTitle,
+              url: `https://www.youtube.com/embed/${YtCode}`
+            });
+
+          if (urlArray.length === 10) {
+            console.log(urlArray);
+            return urlArray;
+          }
         }
       })
       .catch(err => console.log(err));

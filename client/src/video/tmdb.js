@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const tmdbApiKey = "7b07c1ac2c9e9a9f62cfc49a4ec55f99";
+const apiKey = "7b07c1ac2c9e9a9f62cfc49a4ec55f99";
 
-const tmdbSearchId = query => {
+const searchId = query => {
   return axios.get(
-    `https://api.themoviedb.org/3/movie/${query}?api_key=${tmdbApiKey}&append_to_response=videos`
+    `https://api.themoviedb.org/3/movie/${query}?api_key=${apiKey}&append_to_response=videos`
   );
 };
 
@@ -16,11 +16,11 @@ export default {
 
     axios
       .get(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${tmdbApiKey}&language=en-US&sort_by=${query}.desc&include_adult=false&page=1`
+        `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=${query}.desc&include_adult=false&page=1`
       )
       .then(response => {
         for (const movie of response.data.results) {
-          tmdbSearchId(movie.id)
+          searchId(movie.id)
             .then(response => {
               response.data.videos.results[0] &&
                 urlArray.push({
@@ -45,11 +45,11 @@ export default {
 
     axios
       .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=${tmdbApiKey}&language=en-US&query=${query}&page=1&include_adult=false`
+        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${query}&page=1&include_adult=false`
       )
       .then(response => {
         for (const movie of response.data.results) {
-          tmdbSearchId(movie.id)
+          searchId(movie.id)
             .then(response => {
               response.data.videos.results[0] &&
                 urlArray.push({

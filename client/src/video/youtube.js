@@ -1,74 +1,67 @@
 import axios from "axios";
-// require("dotenv").config();
+
+const apiKey = "AIzaSyBJpSy55Bx8rlO3A4FyhWyav8uFtC8_r3I";
 
 export default {
-  // Scrapes list page, returns 10 videos
+  // try "mostPopular"
+  // Queries Reddit sub, returns 10 videos
   searchList: function(query) {
-    let steamArray = [];
     let urlArray = [];
+
     axios
       .get(
-        `https://store.steampowered.com//search/?category1=998&os=win&filter=${query}`
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=${query}&maxResults=10&regionCode=US&key=${apiKey}`
       )
       .then(response => {
-        let $ = cheerio.load(response.data);
+        for (let obj of response.data.items) {
+          let vidTitle = obj.snippet.title;
+          let vidCode = obj.id;
+          // console.log(vidTitle);
+          // console.log(vidCode);
 
-        $("a.search_result_row").each((i, element) => {
-          let urlLink = $(element).attr("href");
-          steamArray.push(urlLink);
-        });
-        return steamArray;
-      })
-      .then(steamArray => {
-        for (let url of steamArray) {
-          axios.get(url).then(response => {
-            let $ = cheerio.load(response.data);
+          vidCode &&
+            urlArray.push({
+              name: vidTitle,
+              url: `https://www.youtube.com/embed/${vidCode}`
+            });
 
-            let vidName = $("div.apphub_AppName").text();
-            let vidUrl = $("div.highlight_movie").attr("data-webm-hd-source");
-
-            vidUrl && urlArray.push({ name: vidName, url: vidUrl });
-            // console.log({ name: vidName, url: vidUrl });
-            if (urlArray.length === 10) {
-              console.log(urlArray);
-              return urlArray;
-            }
-          });
+          if (urlArray.length === 10) {
+            console.log(urlArray);
+            return urlArray;
+          }
         }
-      });
+      })
+      .catch(err => console.log(err));
   },
 
-  // Scrapes game search page, returns 10 videos
+  // try "videos"
+  // Queries Reddit name, returns 10 videos
   searchName: function(query) {
-    let steamArray = [];
     let urlArray = [];
+
     axios
-      .get(`https://store.steampowered.com/search/?term=${query}&category1=998`)
+      .get(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${query}&key=${apiKey}`
+      )
       .then(response => {
-        let $ = cheerio.load(response.data);
+        for (let obj of response.data.items) {
+          let vidTitle = obj.snippet.title;
+          let vidCode = obj.id;
+          // console.log(vidTitle);
+          // console.log(vidCode);
 
-        $("a.search_result_row").each((i, element) => {
-          let urlLink = $(element).attr("href");
-          steamArray.push(urlLink);
-        });
-        return steamArray;
-      })
-      .then(steamArray => {
-        for (let url of steamArray) {
-          axios.get(url).then(response => {
-            let $ = cheerio.load(response.data);
+          vidCode &&
+            urlArray.push({
+              name: vidTitle,
+              url: `https://www.youtube.com/embed/${vidCode}`
+            });
 
-            let vidName = $("div.apphub_AppName").text();
-            let vidUrl = $("div.highlight_movie").attr("data-webm-hd-source");
-
-            vidUrl && urlArray.push({ name: vidName, url: vidUrl });
-            // console.log({ name: vidName, url: vidUrl });
-            if (urlArray.length === 10) {
-              console.log(urlArray);
-              return urlArray;
-            }
-          });
+          if (urlArray.length === 10) {
+            console.log(urlArray);
+            return urlArray;
+          }
         }
-      });
+      })
+      .catch(err => console.log(err));
   }
 };

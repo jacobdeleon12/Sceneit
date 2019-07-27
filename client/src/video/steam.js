@@ -29,7 +29,6 @@ export default {
             let vidUrl = $("div.highlight_movie").attr("data-webm-hd-source");
 
             vidUrl && urlArray.push({ name: vidName, url: vidUrl });
-            // console.log({ name: vidName, url: vidUrl });
             if (urlArray.length === 10) {
               console.log(urlArray);
               return urlArray;
