@@ -1,9 +1,4 @@
 import React, { Component } from "react";
-import {
-  // Col, 
-  Row,
-  Container
-} from "../components/Grid";
 import NavBar from "../components/Nav/index";
 import Background from "../components/splash";
 
