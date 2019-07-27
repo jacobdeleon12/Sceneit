@@ -13,17 +13,7 @@ class Login extends Component {
     return (
       <div>
         <NavBar />
-        <Background>
-        </Background>
-        <Container fluid>
-          <Row>
-            <div className="col-sm-12 splash">
-              <div className="m-3 p-3 text-center">
-                {/* <GLogin /> */}
-              </div>
-            </div>
-          </Row>
-        </Container>
+        <Background/>
       </div>
     );
   }
