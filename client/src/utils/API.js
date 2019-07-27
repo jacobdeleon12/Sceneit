@@ -24,9 +24,9 @@ export default {
   // Deletes the video with the given id
   deleteVideo: function(_id, videoData) {
     return axios.put("/api/users/" + _id, videoData);
-  },
-  // Saves a video to the user model
-  saveVideoObj: function(_id, videoData) {
-    return axios.put("/api/video/" + _id, videoData);
-  },
+  }
+  // // Saves a video to the user model
+  // saveVideoObj: function(_id, videoData) {
+  //   return axios.put("/api/video/" + _id, videoData);
+  // },
 };
