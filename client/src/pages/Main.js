@@ -40,7 +40,7 @@ class Main extends Component {
     API.getUser(document.cookie.split("=0; ")[1])
       .then(res => {
         // console.log(res.data)
-        this.setState({ user: res.data });
+        this.setState({ user: res.data, savedVideos: res.data.savedVideos });
       })
       .catch(err => console.log(err));
   };
@@ -123,16 +123,25 @@ class Main extends Component {
   };
 
   // =======================================
+
+
+
+  // =======================================
+
+
   handleSaveFormSubmit = event => {
     event.preventDefault();
     // this.refs.savebtn.setAttribute("disabled", "disabled");
+    console.log("event", event);
 
     const vStr = event.target.value;
     const vName = event.target.id;
+    console.log(event.target.value);
+    console.log(event.target.id);
 
     API.saveVideo(this.state.user._id, {
       $push: {
-        savedVideos: { vStr, vName }
+        savedVideos: { vStr, vName, clicked: true }
       }
     })
       .then(response => {
@@ -151,11 +160,63 @@ class Main extends Component {
         }, 2000);
       })
       .catch(err => console.log(err));
-    // this.setState({ clicked: true })
-    // console.log(this.state.user);
+
+    event.target.disabled = true;
   };
 
+  // mouseUp = event => {
+  //   // event.preventDefault();
+  //   console.log(event.target.disabled);
+  //   event.target.disabled = true;
+
+
+  // }
+
+  // left = () => {
+  //   scrollLeft(document.getElementById("content"), -1500, 1000);
+  // };
+
+  // right = () => {
+  //   scrollLeft(document.getElementById("content"), 1500, 1000);
+  // };
+
+  // scrollLeft = (element, change, duration) => {
+  //   var start = element.scrollLeft,
+  //     currentTime = 0,
+  //     increment = 20;
+
+  //   console.log(start);
+
+  //   var animateScroll = function() {
+  //     currentTime += increment;
+  //     var val = Math.easeInOutQuad(currentTime, start, change, duration);
+  //     element.scrollLeft = val;
+  //     if (currentTime < duration) {
+  //       setTimeout(animateScroll, increment);
+  //     }
+  //   };
+  //   animateScroll();
+  // }
+
+  // //t = current time
+  // //b = start value
+  // //c = change in value
+  // //d = duration
+  // Math.easeInOutQuad = function(t, b, c, d) {
+  //   t /= d / 2;
+  //   if (t < 1) return (c / 2) * t * t + b;
+  //   t--;
+  //   return (-c / 2) * (t * (t - 2) - 1) + b;
+  // };
+
+
   render() {
+    // console.log(this.state);
+    console.log(this.state.savedVideos);
+    // console.log(this.state.);
+    // console.log(this.state.);
+
+
     return (
       <div>
         <NavBar />
@@ -172,7 +233,6 @@ class Main extends Component {
                   <br />
                   <BtnContainer>
                     <SaveBtn
-                      // disabled={this.state.clicked}
                       key={this.state.featuredVid.name + "-save"}
                       value={this.state.featuredVid.YTstr}
                       id={this.state.featuredVid.name}
@@ -241,32 +301,8 @@ class Main extends Component {
               </div>
             ))}
           </Wrapper>
-          <h1 className="text-center">Top Steam Wishlists</h1>
-          <Wrapper>
-            {this.state.movieVideos.map(video => (
-              <div className="text-center" key={video.YTstr}>
-                <Iframe key={video.name} YTstr={video.YTstr} />
-                <br />
-                <BtnContainer>
-                  <SaveBtn
-                    value={video.YTstr}
-                    key={`${video.YTstr}-save`}
-                    id={video.name}
-                    name="saveVid"
-                    onClick={this.handleSaveFormSubmit}
-                  />
-                  <CommentBtn
-                    key={`${video.YTstr}-comment`}
-                    value={this.state.featuredVid.YTstr}
-                    name="CommentVid"
-                    onClick={this.handleCommentSubmit}
-                  />
-                </BtnContainer>
-              </div>
-            ))}
-          </Wrapper>
         </Container>
-      </div>
+      </div >
     );
   }
 }

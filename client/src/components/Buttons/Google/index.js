@@ -1,7 +1,10 @@
 import "./style.css";
 import API from "../../../utils/API";
 import React from "react";
-import { GoogleLogin } from "react-google-login";
+import {
+  // GoogleLogout,
+  GoogleLogin
+} from "react-google-login";
 
 const clientId =
   "560748393507-rrhsc621nmf915rp2d99bk38vrgjjpir.apps.googleusercontent.com";
