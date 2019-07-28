@@ -6,7 +6,7 @@ import API from "../utils/API";
 
 import Wrapper from "../components/Wrapper";
 import NavBar from "../components/Nav/MainNav";
-import { JumboIframe, Iframe } from "../components/Iframe";
+import { JumboIframe, Iframe, Thumb, Title } from "../components/Iframe";
 import {
   SaveBtn,
   CommentBtn,
@@ -30,6 +30,7 @@ class Main extends Component {
     tmdbVideos: [],
     redditVideos: [],
     youtubeVideos: [],
+    vevoVideos: [],
     featuredVid: [],
     savedVideos: [],
     clicked: false,
@@ -62,17 +63,20 @@ class Main extends Component {
     var tmdbVids = JSON.parse(localStorage.getItem("tmdb"));
     var youtubeVids = JSON.parse(localStorage.getItem("youtube"));
     var redditVids = JSON.parse(localStorage.getItem("reddit"));
+    var vevoVids = JSON.parse(localStorage.getItem("vevo"));
 
-    // // console.log(tmdbVids);
-    // // console.log(youtubeVids);
-    // // console.log(redditVids);
+    // console.log(tmdbVids);
+    // console.log(youtubeVids);
+    // console.log(redditVids);
+    // console.log(vevoVids);
 
     this.setState({ featuredVid: redditVids[0] });
     redditVids.shift();
     this.setState({
       tmdbVideos: tmdbVids,
       redditVideos: redditVids,
-      youtubeVideos: youtubeVids
+      youtubeVideos: youtubeVids,
+      vevoVideos: vevoVids
     });
   };
 
@@ -110,6 +114,13 @@ class Main extends Component {
       .catch(err => console.log(err));
 
     event.target.disabled = true;
+  };
+
+  imageSwap = event => {
+    event.preventDefault();
+    // this.refs.savebtn.setAttribute("disabled", "disabled");
+    console.log(event.target.movieUrl);
+    console.log(event.target.id);
   };
 
   // mouseUp = event => {
@@ -160,10 +171,7 @@ class Main extends Component {
     // console.log(this.state);
     // console.log(this.state.savedVideos);
     // console.log(this.state.videos.reddit);
-    console.log(this.state.videos);
-    // var tmdbVids = JSON.parse(localStorage.getItem("tmdb"));
-    // var youtubeVids = JSON.parse(localStorage.getItem("youtube"));
-    // var redditVids = JSON.parse(localStorage.getItem("reddit"));
+    // console.log(this.state.vevoVideos);
 
     return (
       <div>
@@ -202,14 +210,25 @@ class Main extends Component {
               </Jumbotron>
             </Col>
           </Row>
-          <h1 className="text-center">Reddit Hot</h1>
+          <h1 className="">Reddit Hot</h1>
           <Wrapper ID="reddit">
             {this.state.redditVideos.map(video => (
-              <div className="text-center" key={video.url}>
-                <Iframe
+              <div className="" key={video.url}>
+                {/* <Iframe
                   key={video.name}
+                  name={video.name}
                   movieUrl={video.url}
                   thumbUrl={video.bigImg}
+                /> */}
+                <Title title={video.name} />
+                <br />
+                <Thumb
+                  key={video.name}
+                  id={video.name}
+                  movieUrl={video.url}
+                  thumbUrl={video.bigImg}
+                  name="thumbnail"
+                  onmouseover={console.log("I am a thumbnail")}
                 />
                 <br />
                 <BtnContainer>
@@ -232,14 +251,23 @@ class Main extends Component {
               </div>
             ))}
           </Wrapper>
-          <h1 className="text-center">IMDB Popular</h1>
+          <h1 className="">IMDB Popular</h1>
           <Wrapper ID="imdb">
             {this.state.tmdbVideos.map(video => (
-              <div className="text-center" key={video.url}>
-                <Iframe
+              <div className="" key={video.url}>
+                {/* <Iframe
+                  key={video.name}
+                  name={video.name}
+                  movieUrl={video.url}
+                  thumbUrl={video.bigImg}
+                /> */}
+                <Title title={video.name} />
+                <br />
+                <Thumb
                   key={video.name}
                   movieUrl={video.url}
                   thumbUrl={video.bigImg}
+                  onClick={this.imageSwap}
                 />
                 <br />
                 <BtnContainer>
@@ -262,14 +290,62 @@ class Main extends Component {
               </div>
             ))}
           </Wrapper>
-          <h1 className="text-center">Youtube Popular</h1>
+          <h1 className="">Youtube Popular</h1>
           <Wrapper ID="youtube">
             {this.state.youtubeVideos.map(video => (
-              <div className="text-center" key={video.url}>
-                <Iframe
+              <div className="" key={video.url}>
+                {/* <Iframe
+                  key={video.name}
+                  name={video.name}
+                  movieUrl={video.url}
+                  thumbUrl={video.bigImg}
+                /> */}
+                <Title title={video.name} />
+                <br />
+                <Thumb
                   key={video.name}
                   movieUrl={video.url}
                   thumbUrl={video.bigImg}
+                  onClick={this.imageSwap}
+                />
+                <br />
+                <BtnContainer>
+                  <Provider template={AlertTemplate} {...options}>
+                    <SaveBtn
+                      value={video.url}
+                      key={`${video.url}-save`}
+                      id={video.name}
+                      name="saveVid"
+                      onClick={this.handleSaveFormSubmit}
+                    />
+                  </Provider>
+                  <CommentBtn
+                    key={`${video.url}-comment`}
+                    value={this.state.featuredVid.url}
+                    name="CommentVid"
+                    onClick={this.handleCommentSubmit}
+                  />
+                </BtnContainer>
+              </div>
+            ))}
+          </Wrapper>
+          <h1 className="">Hot on Vevo</h1>
+          <Wrapper ID="vevo">
+            {this.state.vevoVideos.map(video => (
+              <div className="" key={video.url}>
+                {/* <Iframe
+                  key={video.name}
+                  name={video.name}
+                  movieUrl={video.url}
+                  thumbUrl={video.bigImg}
+                /> */}
+                <Title title={video.name} />
+                <br />
+                <Thumb
+                  key={video.name}
+                  movieUrl={video.url}
+                  thumbUrl={video.bigImg}
+                  onClick={this.imageSwap}
                 />
                 <br />
                 <BtnContainer>

@@ -5,7 +5,7 @@ export function JumboIframe(props) {
   return (
     <iframe
       className="big_iframe"
-      title={props.name}
+      name-video={props.name}
       src={props.movieUrl}
       frameBorder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -18,7 +18,7 @@ export function Iframe(props) {
   return (
     <iframe
       className="sml_iframe"
-      title={props.name}
+      name-video={props.name}
       src={props.movieUrl}
       frameBorder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -27,10 +27,22 @@ export function Iframe(props) {
   );
 }
 
-export function thumb(props) {
+export function Thumb(props) {
   return (
     <div className="sml_iframe">
-      <img src={props.thumbUrl} />
+      <img
+        src={props.thumbUrl}
+        url-video={props.movieUrl}
+        name-video={props.name}
+      />
+    </div>
+  );
+}
+
+export function Title(props) {
+  return (
+    <div className="sml_title">
+    {props.title}
     </div>
   );
 }

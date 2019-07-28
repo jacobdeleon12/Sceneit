@@ -42,10 +42,13 @@
   z-index: 10;
   position: absolute;
   top: 0;
+  margin: auto;
+  display: flex;
 }
 
 .scrollArrow {
-  margin-top: 50%;
+  margin: auto;
+  text-align: center;
 }
 
 .scrollBtn:hover {

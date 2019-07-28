@@ -1,7 +1,8 @@
-import TMDB from "../video/tmdb";
-// import STEAM from "../video/steam";
-import REDDIT from "../video/reddit";
-import YOUTUBE from "../video/youtube";
+import TMDB from "./tmdb";
+// import STEAM from "./steam";
+import REDDIT from "./reddit";
+import YOUTUBE from "./youtube";
+import PLAYLIST from "./playList";
 // import API from "../utils/API";
 
 // const tmbdObjId = "5d3cb2a83bef5a333c9ff6c0";
@@ -9,15 +10,20 @@ import YOUTUBE from "../video/youtube";
 // const youtubeObjId = "5d3cb2a83bef5a333c9ff6c2";
 // const redditObjId = "5d3cb2a83bef5a333c9ff6c3";
 
+const vevoPlayList = "PL9tY0BWXOZFsPMZczEqnyvD-Z5ugOZrm8";
+const vevoChannel = "UC2pmfLm7iq6Ov1UwYrWYkZA";
+
 // TMDB.searchList("popularity");
 // STEAM.searchList("popularwishlist");
 // REDDIT.searchList("videos");
 // YOUTUBE.searchList("mostPopular");
+// PLAYLIST.searchList(vevoPlayList);
 
 // TMDB.searchName("speed");
 // STEAM.searchName("speed");
 // REDDIT.searchName("speed");
 // YOUTUBE.searchName("speed");
+// PLAYLIST.searchName(vevoChannel, "Justin");
 
 async function addToDb() {
   // const bigObj = [];
@@ -28,43 +34,20 @@ async function addToDb() {
 
     const TMDBarr = await TMDB.searchList("popularity");
     localStorage.setItem("tmdb", JSON.stringify(TMDBarr));
-    console.log(TMDBarr);
+    // console.log(TMDBarr);
 
     const REDDITarr = await REDDIT.searchList("videos");
     localStorage.setItem("reddit", JSON.stringify(REDDITarr));
-    console.log(REDDITarr);
+    // console.log(REDDITarr);
 
     const YOUTUBEarr = await YOUTUBE.searchList("mostPopular");
     localStorage.setItem("youtube", JSON.stringify(YOUTUBEarr));
-    console.log(YOUTUBEarr);
+    // console.log(YOUTUBEarr);
 
-    // await bigObj.push(TMDBarr, STEAMarr, REDDITarr, YOUTUBEarr);
-    // return TMDBarr;
+    const VEVOarr = await PLAYLIST.searchList(vevoPlayList);
+    localStorage.setItem("vevo", JSON.stringify(VEVOarr));
+    // console.log(PLAYLISTarr);
 
-    // Parse any JSON previously stored in allEntries
-    // var existingEntries = JSON.parse(localStorage.getItem("allEntries"));
-    // if(existingEntries == null) existingEntries = [];
-    // localStorage.setItem("entry", JSON.stringify(TMDBarr));
-
-    // Save allEntries back to local storage
-    // existingEntries.push(TMDBarr);
-
-    // const TMDBarr = await TMDB.searchName("speed");
-    // const STEAMarr = await STEAM.searchName("speed");
-    // const REDDITarr = await REDDIT.searchName("speed");
-    // const YOUTUBEarr = await YOUTUBE.searchName("speed");
-
-    // API.saveVideoObj(tmbdObjId, {
-    //   $set: {
-    //     vidType: "tmdb",
-    //     videos: TMDBarr
-    //   }
-    // })
-    //   .then(res => {
-    //     console.log("New video info added to DB");
-    //     // console.log(res);
-    //   })
-    //   .catch(err => console.log(err));
   } catch (error) {
     console.log(error.message);
   }
