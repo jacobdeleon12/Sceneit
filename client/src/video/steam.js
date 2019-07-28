@@ -1,12 +1,12 @@
 let cheerio = require("cheerio");
 let axios = require("axios");
 
+let urlArray = [];
+
 export default {
   // try "popularwishlist"
   // Scrapes list page, returns 10 videos
   searchList: function(query) {
-    let steamArray = [];
-    let urlArray = [];
     return new Promise(function(resolve, reject) {
       axios
         .get(
@@ -17,35 +17,28 @@ export default {
 
           $("a.search_result_row").each((i, element) => {
             let urlLink = $(element).attr("href");
-            steamArray.push(urlLink);
-          });
-        })
-        .catch(err => reject(err))
-        .then(response => {
-          for (let url of steamArray) {
+
             axios
-              .get(url)
+              .get(urlLink)
               .then(response => {
                 let $ = cheerio.load(response.data);
 
-                let vidName = $("div.apphub_AppName").text();
-                let vidUrl = $("div.highlight_movie").attr(
-                  "data-webm-hd-source"
-                );
-
-                vidUrl &&
+                $("div.highlight_movie").attr("data-webm-hd-source") &&
                   urlArray.push({
                     type: "steam",
-                    name: vidName,
-                    url: vidUrl
+                    name: $("div.apphub_AppName").text(),
+                    smlImg: $("img.movie_thumb").attr("src"),
+                    bigImg: $("img.game_header_image_full").attr("src"),
+                    url: $("div.highlight_movie").attr("data-webm-hd-source")
                   });
+
                 if (urlArray.length === 10) {
-                  // console.log(urlArray);
+                  console.log(urlArray);
                   resolve(urlArray);
                 }
               })
               .catch(err => reject(err));
-          }
+          });
         })
         .catch(err => reject(err));
     });
@@ -53,8 +46,6 @@ export default {
 
   // Scrapes game search page, returns 10 videos
   searchName: function(query) {
-    let steamArray = [];
-    let urlArray = [];
     return new Promise(function(resolve, reject) {
       axios
         .get(
@@ -65,37 +56,28 @@ export default {
 
           $("a.search_result_row").each((i, element) => {
             let urlLink = $(element).attr("href");
-            steamArray.push(urlLink);
-          });
-          return steamArray;
-        })
-        .catch(err => reject(err))
-        .then(steamArray => {
-          for (let url of steamArray) {
+
             axios
-              .get(url)
+              .get(urlLink)
               .then(response => {
                 let $ = cheerio.load(response.data);
 
-                let vidName = $("div.apphub_AppName").text();
-                let vidUrl = $("div.highlight_movie").attr(
-                  "data-webm-hd-source"
-                );
-
-                vidUrl &&
+                $("div.highlight_movie").attr("data-webm-hd-source") &&
                   urlArray.push({
                     type: "steam",
-                    name: vidName,
-                    url: vidUrl
+                    name: $("div.apphub_AppName").text(),
+                    smlImg: $("img.movie_thumb").attr("src"),
+                    bigImg: $("img.game_header_image_full").attr("src"),
+                    url: $("div.highlight_movie").attr("data-webm-hd-source")
                   });
-                // console.log({ name: vidName, url: vidUrl });
+
                 if (urlArray.length === 10) {
                   console.log(urlArray);
                   resolve(urlArray);
                 }
               })
               .catch(err => reject(err));
-          }
+          });
         })
         .catch(err => reject(err));
     });

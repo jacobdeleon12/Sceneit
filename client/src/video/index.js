@@ -15,7 +15,7 @@ import YOUTUBE from "../video/youtube";
 // YOUTUBE.searchList("mostPopular");
 
 // TMDB.searchName("speed");
-// STEAM.searchName("speed");
+STEAM.searchName("speed");
 // REDDIT.searchName("speed");
 // YOUTUBE.searchName("speed");
 
@@ -74,4 +74,4 @@ async function addToDb() {
   }
 }
 
-export default addToDb;
+// export default addToDb;
