@@ -8,39 +8,12 @@ const searchId = query => {
   );
 };
 
+let urlArray = [];
+
 export default {
-  // searchList2: async function(query) {
-
-  //   try {
-  //     const response = await axios.get(
-  //       `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=${query}.desc&include_adult=false&page=1&append_to_response=videos`
-  //       );
-  //       const urlArray = [];
-  //       await response.data.results.forEach(async element => {
-
-  //       const movie = await searchId(element.id);
-  //       // console.log(movie.data.videos.results[0].key);
-  //       movie.data.videos.results[0] &&
-  //       urlArray.push({
-  //         type: "tmbd",
-  //         name: movie.data.original_title,
-  //         url: `https://www.youtube.com/embed/${movie.data.videos.results[0].key}`
-  //       });
-  //     });
-  //     console.log(urlArray);
-  //     if (urlArray.length === 10) {
-  //       // console.log(urlArray);
-  //       return urlArray;
-  //     }
-  //   } catch (error) {
-  //     console.log("im here");
-  //   }
-  // },
-
   // try "popularity"
   // Queries TMDB list, returns 10 videos
   searchList: function(query) {
-    let urlArray = [];
     return new Promise(function(resolve, reject) {
       axios
         .get(
@@ -53,12 +26,14 @@ export default {
                 response.data.videos.results[0] &&
                   urlArray.push({
                     type: "tmbd",
-                    name: response.data.original_title,
+                    name: response.data.title,
+                    smlImg: `http://image.tmdb.org/t/p/w500${response.data.poster_path}`,
+                    bigImg: `http://image.tmdb.org/t/p/original${response.data.backdrop_path}`,
                     url: `https://www.youtube.com/embed/${response.data.videos.results[0].key}`
                   });
 
                 if (urlArray.length === 10) {
-                  // console.log(urlArray);
+                  console.log(urlArray);
                   resolve(urlArray);
                 }
               })
@@ -69,9 +44,9 @@ export default {
     });
   },
 
+  // try "speed"
   // Queries TMDB name, returns 10 videos
   searchName: function(query) {
-    let urlArray = [];
     return new Promise(function(resolve, reject) {
       axios
         .get(
@@ -86,13 +61,15 @@ export default {
               .then(response => {
                 response.data.videos.results[0] &&
                   urlArray.push({
-                    type: "tmdb",
-                    name: response.data.original_title,
+                    type: "tmbd",
+                    name: response.data.title,
+                    smlImg: `http://image.tmdb.org/t/p/w500${response.data.poster_path}`,
+                    bigImg: `http://image.tmdb.org/t/p/original${response.data.backdrop_path}`,
                     url: `https://www.youtube.com/embed/${response.data.videos.results[0].key}`
                   });
 
                 if (urlArray.length === 10) {
-                  // console.log(urlArray);
+                  console.log(urlArray);
                   resolve(urlArray);
                 }
               })
