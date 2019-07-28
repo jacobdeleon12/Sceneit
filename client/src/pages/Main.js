@@ -27,7 +27,9 @@ const options = {
 class Main extends Component {
   state = {
     user: [],
-    videos: [],
+    tmdbVideos: [],
+    redditVideos: [],
+    youtubeVideos: [],
     // movieVideos: [],
     featuredVid: [],
     savedVideos: [],
@@ -57,23 +59,21 @@ class Main extends Component {
   // =======================================
 
   loadVideos = () => {
-    // var tmdbVids = JSON.parse(localStorage.getItem("tmdb"));
-    // var youtubeVids = JSON.parse(localStorage.getItem("youtube"));
-    // var redditVids = JSON.parse(localStorage.getItem("reddit"));
+    var tmdbVids = JSON.parse(localStorage.getItem("tmdb"));
+    var youtubeVids = JSON.parse(localStorage.getItem("youtube"));
+    var redditVids = JSON.parse(localStorage.getItem("reddit"));
 
     // // console.log(tmdbVids);
     // // console.log(youtubeVids);
     // // console.log(redditVids);
 
-    // this.setState({ featuredVid: redditVids[0] });
-    // redditVids.shift();
-    // this.setState({
-    //   videos: {
-    //     tmdb: tmdbVids,
-    //     youtube: youtubeVids,
-    //     reddit: redditVids
-    //   }
-    // });
+    this.setState({ featuredVid: redditVids[0] });
+    redditVids.shift();
+    this.setState({
+      tmdbVideos: tmdbVids,
+      redditVideos: redditVids,
+      youtubeVideos: youtubeVids,
+      });
   };
 
   //for movie vidoes, and anything else we want to come up with
@@ -196,10 +196,10 @@ class Main extends Component {
     // console.log(this.state);
     // console.log(this.state.savedVideos);
     // console.log(this.state.videos.reddit);
-    // console.log(this.state.videos);
-    var tmdbVids = JSON.parse(localStorage.getItem("tmdb"));
-    var youtubeVids = JSON.parse(localStorage.getItem("youtube"));
-    var redditVids = JSON.parse(localStorage.getItem("reddit"));
+    console.log(this.state.videos);
+    // var tmdbVids = JSON.parse(localStorage.getItem("tmdb"));
+    // var youtubeVids = JSON.parse(localStorage.getItem("youtube"));
+    // var redditVids = JSON.parse(localStorage.getItem("reddit"));
 
     return (
       <div>
@@ -208,11 +208,11 @@ class Main extends Component {
           <Row>
             <Col size="md-12">
               <Jumbotron>
-                <h1>{redditVids[0].name}</h1>
+                <h1>{this.state.featuredVid.name}</h1>
                 <div>
                   <JumboIframe
-                    key={redditVids[0].name}
-                    url={redditVids[0].url}
+                    key={this.state.featuredVid.name}
+                    url={this.state.featuredVid.url}
                   />
                   <br />
                   <BtnContainer>
@@ -239,7 +239,7 @@ class Main extends Component {
           </Row>
           <h1 className="text-center">Reddit Hot</h1>
           <Wrapper ID="reddit">
-            {redditVids.map(video => (
+            {this.state.redditVideos.map(video => (
               <div className="text-center" key={video.url}>
                 <Iframe key={video.name} url={video.url} />
                 <br />
@@ -265,7 +265,7 @@ class Main extends Component {
           </Wrapper>
           <h1 className="text-center">IMDB Popular</h1>
           <Wrapper ID="imdb">
-            {tmdbVids.map(video => (
+            {this.state.tmdbVideos.map(video => (
               <div className="text-center" key={video.url}>
                 <Iframe key={video.name} url={video.url} />
                 <br />
@@ -291,7 +291,7 @@ class Main extends Component {
           </Wrapper>
           <h1 className="text-center">Youtube Popular</h1>
           <Wrapper ID="youtube">
-            {youtubeVids.map(video => (
+            {this.state.youtubeVideos.map(video => (
               <div className="text-center" key={video.url}>
                 <Iframe key={video.name} url={video.url} />
                 <br />

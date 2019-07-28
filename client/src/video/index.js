@@ -1,5 +1,5 @@
 import TMDB from "../video/tmdb";
-// import STEAM from "../video/steam";
+import STEAM from "../video/steam";
 import REDDIT from "../video/reddit";
 import YOUTUBE from "../video/youtube";
 // import API from "../utils/API";
@@ -23,13 +23,14 @@ async function addToDb() {
   // const bigObj = [];
   try {
     const TMDBarr = await TMDB.searchList("popularity");
-    // const STEAMarr = await STEAM.searchList("popularwishlist");
+    const STEAMarr = await STEAM.searchList("popularwishlist");
     const REDDITarr = await REDDIT.searchList("videos");
     const YOUTUBEarr = await YOUTUBE.searchList("mostPopular");
 
     localStorage.setItem("tmdb", JSON.stringify(TMDBarr));
     localStorage.setItem("reddit", JSON.stringify(REDDITarr));
     localStorage.setItem("youtube", JSON.stringify(YOUTUBEarr));
+    localStorage.setItem("steam", JSON.stringify(STEAMarr));
     //   {
     //   tmdb: TMDBarr,
     //   reddit: REDDITarr,
