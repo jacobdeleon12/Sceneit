@@ -1,5 +1,5 @@
 import TMDB from "../video/tmdb";
-import STEAM from "../video/steam";
+// import STEAM from "../video/steam";
 import REDDIT from "../video/reddit";
 import YOUTUBE from "../video/youtube";
 // import API from "../utils/API";
@@ -15,32 +15,28 @@ import YOUTUBE from "../video/youtube";
 // YOUTUBE.searchList("mostPopular");
 
 // TMDB.searchName("speed");
-STEAM.searchName("speed");
+// STEAM.searchName("speed");
 // REDDIT.searchName("speed");
 // YOUTUBE.searchName("speed");
 
 async function addToDb() {
   // const bigObj = [];
   try {
-    const TMDBarr = await TMDB.searchList("popularity");
-    const STEAMarr = await STEAM.searchList("popularwishlist");
-    const REDDITarr = await REDDIT.searchList("videos");
-    const YOUTUBEarr = await YOUTUBE.searchList("mostPopular");
-
-    localStorage.setItem("tmdb", JSON.stringify(TMDBarr));
-    localStorage.setItem("reddit", JSON.stringify(REDDITarr));
-    localStorage.setItem("youtube", JSON.stringify(YOUTUBEarr));
-    localStorage.setItem("steam", JSON.stringify(STEAMarr));
-    //   {
-    //   tmdb: TMDBarr,
-    //   reddit: REDDITarr,
-    //   youtube: YOUTUBEarr
-    //   // steam: STEAMarr
-    // }));
-    // console.log(TMDBarr);
+    // const STEAMarr = await STEAM.searchList("popularwishlist");
+    // localStorage.setItem("steam", JSON.stringify(STEAMarr));
     // console.log(STEAMarr);
-    // console.log(REDDITarr);
-    // console.log(YOUTUBEarr);
+
+    const TMDBarr = await TMDB.searchList("popularity");
+    localStorage.setItem("tmdb", JSON.stringify(TMDBarr));
+    console.log(TMDBarr);
+
+    const REDDITarr = await REDDIT.searchList("videos");
+    localStorage.setItem("reddit", JSON.stringify(REDDITarr));
+    console.log(REDDITarr);
+
+    const YOUTUBEarr = await YOUTUBE.searchList("mostPopular");
+    localStorage.setItem("youtube", JSON.stringify(YOUTUBEarr));
+    console.log(YOUTUBEarr);
 
     // await bigObj.push(TMDBarr, STEAMarr, REDDITarr, YOUTUBEarr);
     // return TMDBarr;
@@ -74,4 +70,4 @@ async function addToDb() {
   }
 }
 
-// export default addToDb;
+export default addToDb;

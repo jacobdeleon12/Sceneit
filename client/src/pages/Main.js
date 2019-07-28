@@ -30,7 +30,6 @@ class Main extends Component {
     tmdbVideos: [],
     redditVideos: [],
     youtubeVideos: [],
-    // movieVideos: [],
     featuredVid: [],
     savedVideos: [],
     clicked: false,
@@ -58,6 +57,7 @@ class Main extends Component {
 
   // =======================================
 
+  // load videos from local storage into state to pull from in render
   loadVideos = () => {
     var tmdbVids = JSON.parse(localStorage.getItem("tmdb"));
     var youtubeVids = JSON.parse(localStorage.getItem("youtube"));
@@ -72,43 +72,9 @@ class Main extends Component {
     this.setState({
       tmdbVideos: tmdbVids,
       redditVideos: redditVids,
-      youtubeVideos: youtubeVids,
-      });
+      youtubeVideos: youtubeVids
+    });
   };
-
-  //for movie vidoes, and anything else we want to come up with
-  //must .split(" ").join("+") string for query to work correctly.
-  // loadMovieInfo = query => {
-  //   API.getTmdbInfo(query)
-  //     .then(response => {
-  //       console.log("getTmdbInfo", response.data.results);
-  //       // console.log(response.data);
-  //       const searchResult = response.data.results[0].id;
-  //       //second call for api video results
-  //       API.getTmdbVideos(searchResult).then(response => {
-  //         // console.log(response.data);
-  //         const videoResults = response.data.results;
-  //         let YTMovieKey = [];
-  //         let YTMovieName = [];
-  //         let movieSearch = [];
-
-  //         //max of 10 for video search
-  //         for (let i = 0; i < 10 && i < videoResults.length; i++) {
-  //           YTMovieKey = videoResults[i].key;
-  //           YTMovieName = videoResults[i].name;
-  //           movieSearch.push({
-  //             name: YTMovieName,
-  //             url: YTMovieKey,
-  //             vidType: "omdb",
-  //             clicked: false
-  //           });
-  //         }
-  //         this.setState({ movieVideos: movieSearch });
-  //         // console.log(this.state);
-  //       });
-  //     })
-  //     .catch(err => console.log(err));
-  // };
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -116,8 +82,6 @@ class Main extends Component {
       [name]: value
     });
   };
-
-  // =======================================
 
   // =======================================
 
@@ -212,7 +176,8 @@ class Main extends Component {
                 <div>
                   <JumboIframe
                     key={this.state.featuredVid.name}
-                    url={this.state.featuredVid.url}
+                    movieUrl={this.state.featuredVid.url}
+                    thumbUrl={this.state.featuredVid.bigImg}
                   />
                   <br />
                   <BtnContainer>
@@ -241,7 +206,11 @@ class Main extends Component {
           <Wrapper ID="reddit">
             {this.state.redditVideos.map(video => (
               <div className="text-center" key={video.url}>
-                <Iframe key={video.name} url={video.url} />
+                <Iframe
+                  key={video.name}
+                  movieUrl={video.url}
+                  thumbUrl={video.bigImg}
+                />
                 <br />
                 <BtnContainer>
                   <Provider template={AlertTemplate} {...options}>
@@ -267,7 +236,11 @@ class Main extends Component {
           <Wrapper ID="imdb">
             {this.state.tmdbVideos.map(video => (
               <div className="text-center" key={video.url}>
-                <Iframe key={video.name} url={video.url} />
+                <Iframe
+                  key={video.name}
+                  movieUrl={video.url}
+                  thumbUrl={video.bigImg}
+                />
                 <br />
                 <BtnContainer>
                   <Provider template={AlertTemplate} {...options}>
@@ -293,7 +266,11 @@ class Main extends Component {
           <Wrapper ID="youtube">
             {this.state.youtubeVideos.map(video => (
               <div className="text-center" key={video.url}>
-                <Iframe key={video.name} url={video.url} />
+                <Iframe
+                  key={video.name}
+                  movieUrl={video.url}
+                  thumbUrl={video.bigImg}
+                />
                 <br />
                 <BtnContainer>
                   <Provider template={AlertTemplate} {...options}>
