@@ -213,7 +213,7 @@ class Main extends Component {
           <h1 className="">Reddit Hot</h1>
           <Wrapper ID="reddit">
             {this.state.redditVideos.map(video => (
-              <div className="" key={video.url}>
+              <div className="tile" key={video.url}>
                 {/* <Iframe
                   key={video.name}
                   name={video.name}
@@ -254,7 +254,8 @@ class Main extends Component {
           <h1 className="">IMDB Popular</h1>
           <Wrapper ID="imdb">
             {this.state.tmdbVideos.map(video => (
-              <div className="" key={video.url}>
+            
+              <div className="tile" key={video.url}>
                 {/* <Iframe
                   key={video.name}
                   name={video.name}
@@ -269,6 +270,7 @@ class Main extends Component {
                   thumbUrl={video.bigImg}
                   onClick={this.imageSwap}
                 />
+            
                 <br />
                 <BtnContainer>
                   <Provider template={AlertTemplate} {...options}>
@@ -278,28 +280,28 @@ class Main extends Component {
                       id={video.name}
                       name="saveVid"
                       onClick={this.handleSaveFormSubmit}
-                    />
+                      />
                   </Provider>
                   <CommentBtn
                     key={`${video.url}-comment`}
                     value={this.state.featuredVid.url}
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
-                  />
+                    />
                 </BtnContainer>
-              </div>
+            </div>
             ))}
           </Wrapper>
           <h1 className="">Youtube Popular</h1>
-          <Wrapper ID="youtube">
+          {/* <Wrapper ID="youtube">
             {this.state.youtubeVideos.map(video => (
               <div className="" key={video.url}>
-                {/* <Iframe
+                <Iframe
                   key={video.name}
                   name={video.name}
                   movieUrl={video.url}
                   thumbUrl={video.bigImg}
-                /> */}
+                />
                 <Title title={video.name} />
                 <br />
                 <Thumb
@@ -328,17 +330,17 @@ class Main extends Component {
                 </BtnContainer>
               </div>
             ))}
-          </Wrapper>
+          </Wrapper> */}
           <h1 className="">Hot on Vevo</h1>
-          <Wrapper ID="vevo">
+          {/* <Wrapper ID="vevo">
             {this.state.vevoVideos.map(video => (
               <div className="" key={video.url}>
-                {/* <Iframe
+                <Iframe
                   key={video.name}
                   name={video.name}
                   movieUrl={video.url}
                   thumbUrl={video.bigImg}
-                /> */}
+                />
                 <Title title={video.name} />
                 <br />
                 <Thumb
@@ -367,7 +369,7 @@ class Main extends Component {
                 </BtnContainer>
               </div>
             ))}
-          </Wrapper>
+          </Wrapper> */}
         </Container>
       </div>
     );

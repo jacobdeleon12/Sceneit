@@ -40,11 +40,11 @@ function Wrapper(props) {
   };
 
   return (
-    <div className="vidWrapper">
+    <div className="vidWrapper ">
       <div className="scrollBtn" id="left-button" onClick={left}>
         <span className="scrollArrow">&lt;</span>
       </div>
-      <div className="scroll_menu" id={props.ID}>
+      <div className="scroll_menu row__inner" id={props.ID}>
         {props.children}
       </div>
       <div className="scrollBtn" id="right-button" onClick={right}>

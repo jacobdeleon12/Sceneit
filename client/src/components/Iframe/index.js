@@ -17,7 +17,7 @@ export function JumboIframe(props) {
 export function Iframe(props) {
   return (
     <iframe
-      className="sml_iframe"
+      className="sml_iframe "
       name-video={props.name}
       src={props.movieUrl}
       frameBorder="0"
@@ -29,8 +29,9 @@ export function Iframe(props) {
 
 export function Thumb(props) {
   return (
-    <div className="sml_iframe">
+    <div className="sml_iframe  ">
       <img
+      className=" "
         src={props.thumbUrl}
         url-video={props.movieUrl}
         name-video={props.name}
@@ -41,7 +42,7 @@ export function Thumb(props) {
 
 export function Title(props) {
   return (
-    <div className="sml_title">
+    <div className="sml_title ">
     {props.title}
     </div>
   );
