@@ -7,11 +7,19 @@
 }
 
 .sml_iframe img {
+  z-index: 200;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
   position: absolute;
   top: 50%;
   left: 50%;
   width: 100%;
   transform: translate(-50%, -50%);
+}
+
+.sml_iframe img:hover {
+  opacity: 1.0;
+  transition: opacity .55s ease-in-out;
 }
 
 .sml_title {
