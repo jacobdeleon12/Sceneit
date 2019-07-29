@@ -65,11 +65,11 @@ export function GLogin() {
 
 export function GLogout() {
   return (
-    <logout
+    <div
       // client_Id={clientId}
       // buttonText="Logout"
       // onLogoutSuccess={logout}
       onClick={logout}
-    ><i className="fab fa-google"></i> logout</logout>
+    ><i className="fab fa-google"></i> logout</div>
   );
 }

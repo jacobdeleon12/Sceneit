@@ -13,7 +13,16 @@ import {
   // ViewBtn,
   CommentBtn
 } from "../components/Buttons/VideoBtns";
-//import Carousel from "../components/Carousel"
+//import Carousel from "../csomponents/Carousel"
+//NPM alert options
+import { positions, Provider, transitions } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
+
+const options = {
+  timeout: 3000,
+  position: positions.BOTTOM_CENTER,
+  transition: transitions.SCALEs
+};
 
 class User extends Component {
   state = {
@@ -114,13 +123,11 @@ class User extends Component {
     console.log(vStr);
     console.log(vName);
 
-    API.deleteVideo(
-      this.state.user._id,
-      {
-        $pull: {
-          savedVideos: { vStr }
-        }
-      })
+    API.deleteVideo(this.state.user._id, {
+      $pull: {
+        savedVideos: { vStr }
+      }
+    })
       .then(res => {
         window.location.reload();
         console.log("deleted video");
@@ -146,9 +153,13 @@ class User extends Component {
                   </Col>
                   <Col size="md-3">
                     <Container fluid>
-                      <Row fluid >
+                      <Row fluid>
                         <Col size="md-12">
-                          <h4>{this.state.user.givenName + " " + this.state.user.familyName}</h4>
+                          <h4>
+                            {this.state.user.givenName +
+                              " " +
+                              this.state.user.familyName}
+                          </h4>
                         </Col>
                       </Row>
                       <Row fluid>
@@ -159,27 +170,28 @@ class User extends Component {
                     </Container>
                   </Col>
                 </div>
-
               </Jumbotron>
             </Col>
           </Row>
           <Userwrap>
             {this.state.videos.map(video => (
               <div className="text-center">
-
                 <Iframe
                   key={this.state.user.savedVideos._id}
                   YTstr={video.vStr}
                 />
 
                 <br />
-                <DeleteBtn
-                  value={video.vStr}
-                  key={this.state.user.savedVideos._id + "-delete"}
-                  id={video.vName}
-                  name="delVid"
-                  onClick={this.handleDeleteFormSubmit}
-                />
+                {/* provider is for alert. must encompass  button */}
+                <Provider template={AlertTemplate} {...options}>
+                  <DeleteBtn
+                    value={video.vStr}
+                    key={this.state.user.savedVideos._id + "-delete"}
+                    id={video.vName}
+                    name="delVid"
+                    onClick={this.handleDeleteFormSubmit}
+                  />
+                </Provider>
                 <CommentBtn
                   value={video.vStr}
                   key={this.state.user.savedVideos._id + "-comment"}

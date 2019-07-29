@@ -4,7 +4,7 @@
 
 .background{
   background: #343a40;
-  height: 50vh;
+  height: 67vh;
   color: deepskyblue;
   width: 100%;
 }
@@ -47,15 +47,43 @@
   to   { -webkit-transform: translate3d(0, 30px, 0); transform: translate3d(0, 200px, 0); }
 }
 
+@media (min-width: 320px) {
+  .splashImg{
+    height: 8vh;
+    width: 8vh;
+  }
+
+  .background {
+    height: 77vh;
+  }
+}
+
+@media (min-width: 375px) {
+  .splashImg{
+    height: 8vh;
+    width: 8vh;
+  }
+
+  .background {
+    height: 67vh;
+  }
+}
+
 @media (min-width: 425px) {
   .splashImg{
-    height: 5vh;
+    height: 8vh;
+    width: 8vh;
+  }
+
+  .background {
+    height: 67vh;
   }
 }
 
 @media (min-width: 768px) {
   .splashImg{
-    height: 5vh;
+    height: 8vh;
+    width: 8vh;
     margin-top: 8vh;
   }
   .splashHeadder1{
@@ -65,11 +93,16 @@
   .splashHeadder2{
     font-size: 3vh
   }
+
+  .background {
+    height: 71vh;
+  }
 }
 
 @media (min-width: 1024px) {
   .splashImg{
-    height: 5vh;
+    height: 8vh;
+    width: 8vh;
     margin-top: 10vh;
   }
 
@@ -79,6 +112,10 @@
   }
   .splashHeadder2{
     font-size: 3vh
+  }
+
+  .background {
+    height: 62vh;
   }
 }
 
