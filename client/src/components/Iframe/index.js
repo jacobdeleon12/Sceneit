@@ -42,8 +42,10 @@ export function Thumb(props) {
 
 export function Title(props) {
   return (
-    <div className="sml_title ">
-    {props.title}
+    <div className = "tile__details" >
+      <div className="sml_title tile__title">
+      {props.title}
+      </div>
     </div>
   );
 }

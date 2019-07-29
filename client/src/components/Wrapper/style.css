@@ -18,6 +18,8 @@
   transition: 450ms all;
   -webkit-transform-origin: center left;
           transform-origin: center left;
+  height: 25vh;
+  padding-top: 2vh
 }
 
 .scroll_menu div {
@@ -26,9 +28,9 @@
   text-decoration: none;
 }
 
-.scroll_menu div:hover {
+/* .scroll_menu div:hover {
   background-color: #777;
-}
+} */
 
 #left-button {
   left: 0;
@@ -126,14 +128,15 @@ a:hover {
 }
 .tile__details {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: 0;
+  top: 120%;
+  left: 0%;
+  height: 0%;
+  width: 100%;
   font-size: 10px;
   opacity: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
-  transition: 450ms opacity;
+  /* background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%); */
+  transition: 250ms opacity;
+  z-index: 20;
 }
 .tile__details:after,
 .tile__details:before {
@@ -144,7 +147,7 @@ a:hover {
   display: #000;
 }
 .tile__details:after {
-  margin-top: -25px;
+  margin-top: -115px;
   margin-left: -25px;
   width: 50px;
   height: 50px;
@@ -152,26 +155,28 @@ a:hover {
   line-height: 50px;
   text-align: center;
   border-radius: 100%;
-  background: rgba(0,0,0,0.5);
-  z-index: 1;
+  /* background: rgba(0,0,0,0.5); */
+  z-index: 21;
 }
 .tile__details:before {
   content: '▶';
   left: 0;
   width: 100%;
   font-size: 30px;
-  margin-left: 7px;
-  margin-top: -18px;
+  margin-left: 0px;
+  margin-top: -115px;
   text-align: center;
-  z-index: 2;
+  z-index: 22;
 }
 .tile:hover .tile__details {
   opacity: 1;
 }
 .tile__title {
   position: absolute;
-  bottom: 0;
+
   padding: 10px;
+  margin-left: -70px;
+  margin-top: -165px;
 }
 /* .row__inner:hover {
   -webkit-transform: translate3d(-62.5px, 0, 0);
@@ -188,4 +193,5 @@ a:hover {
 .tile:hover ~ .tile {
   -webkit-transform: translate3d(125px, 0, 0);
           transform: translate3d(125px, 0, 0);
+          /* z-index: 99; */
 }
