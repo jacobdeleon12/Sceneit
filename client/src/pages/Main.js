@@ -17,6 +17,7 @@ import {
 //NPM alert options
 import { positions, Provider, transitions } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
+import Footer from "../components/footer"
 
 const options = {
   timeout: 3000,
@@ -371,6 +372,7 @@ class Main extends Component {
             ))}
           </Wrapper> */}
         </Container>
+        <Footer/>
       </div>
     );
   }

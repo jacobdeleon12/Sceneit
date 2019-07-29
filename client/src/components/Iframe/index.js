@@ -31,7 +31,6 @@ export function Thumb(props) {
   return (
     <div className="sml_iframe  ">
       <img
-      className=" "
         src={props.thumbUrl}
         url-video={props.movieUrl}
         name-video={props.name}
