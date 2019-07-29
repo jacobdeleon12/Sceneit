@@ -4,11 +4,13 @@
   position: relative;
   text-align: center;
   padding: 0 30px;
-  background: #677380;
+  background: rgb(52,58,64);
+background: linear-gradient(0deg, rgba(52,58,64,.85) 0%, rgba(103,115,128,1) 50%, rgba(52,58,64,1) 100%);
 }
 
 .scroll_menu {
-  background: #677380;
+  background: rgb(52,58,64);
+background: linear-gradient(0deg, rgba(52,58,64,.85) 0%, rgba(103,115,128,1) 50%, rgba(52,58,64,1) 100%);
   overflow: auto;
   white-space: nowrap;
   position: relative;
@@ -79,7 +81,7 @@
   background: #ff0000;
 }
 
-
+/* 
 a:link,
 a:hover,
 a:active,
@@ -91,10 +93,8 @@ a:visited {
 a:hover {
   color: #7f8c8d;
   text-decoration: underline;
-}
-.contain {
-  width: 100%;
-}
+} */
+
 .row {
   overflow: scroll;
   width: 100%;
@@ -156,7 +156,7 @@ a:hover {
   text-align: center;
   border-radius: 100%;
   /* background: rgba(0,0,0,0.5); */
-  z-index: 21;
+  /* z-index: 19; */
 }
 .tile__details:before {
   content: '▶';
