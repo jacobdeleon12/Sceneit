@@ -6,12 +6,12 @@ function footer() {
   const name = "<Scene/IT>™"
   return (
     <div className="footer">
-      <footer class="site-footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12 col-md-6">
+      <footer className="site-footer">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12 col-md-6">
               <h6>About</h6>
-              <p class="text-justify">
+              <p className="text-justify">
                 {name} <i>WANTS TO BE THE YOUR BEST VIDEO STREAMING SITE. </i>
                 We are here to provide the a network that will connect users to many video services as a one stop shop of video enjoyment.
                 <br/>
@@ -25,9 +25,9 @@ function footer() {
               </p>
             </div>
 
-            <div class="col-xs-6 col-md-3">
+            <div className="col-xs-6 col-md-3">
               <h6>Categories</h6>
-              <ul class="footer-links">
+              <ul className="footer-links">
                 <li>
                   <Link to="http://scanfcode.com/category/c-language/"></Link>
                 </li>
@@ -57,9 +57,9 @@ function footer() {
               </ul>
             </div>
 
-            <div class="col-xs-6 col-md-3">
+            <div className="col-xs-6 col-md-3">
               <h6>Quick Links</h6>
-              <ul class="footer-links">
+              <ul className="footer-links">
                 <li>
                   <Link to="http://scanfcode.com/about/">About Us</Link>
                 </li>
@@ -84,35 +84,35 @@ function footer() {
           </div>
           <hr />
         </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 col-sm-6 col-xs-12">
-              <p class="copyright-text">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8 col-sm-6 col-xs-12">
+              <p className="copyright-text">
                 Copyright &copy; 2017 All Rights Reserved by
                 <Link to="https://github.com/jacobdeleon12/Sceneit">{name}</Link>.
               </p>
             </div>
 
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <ul class="social-icons">
+            <div className="col-md-4 col-sm-6 col-xs-12">
+              <ul className="social-icons">
                 <li>
-                  <Link class="facebook" to="#">
-                    <i class="fa fa-facebook"></i>
+                  <Link className="facebook" to="#">
+                    <i className="fa fa-facebook"></i>
                  </Link>
                 </li>
                 <li>
-                  <Link class="twitter" to="#">
-                    <i class="fa fa-twitter"></i>
+                  <Link className="twitter" to="#">
+                    <i className="fa fa-twitter"></i>
                  </Link>
                 </li>
                 <li>
-                  <Link class="dribbble" to="#">
-                    <i class="fa fa-dribbble"></i>
+                  <Link className="dribbble" to="#">
+                    <i className="fa fa-dribbble"></i>
                  </Link>
                 </li>
                 <li>
-                  <Link class="linkedin" to="#">
-                    <i class="fa fa-linkedin"></i>
+                  <Link className="linkedin" to="#">
+                    <i className="fa fa-linkedin"></i>
                  </Link>
                 </li>
               </ul>
