@@ -3,29 +3,48 @@ import "./style.css";
 
 export function JumboIframe(props) {
   return (
-    <div className="pb-0 card text-center">
-      <iframe
-        title={props.name}
-        style={{ height: "100%" }}
-        src={"https://www.youtube.com/embed/" + props.YTstr}
-        frameBorder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      ></iframe>
-    </div>
+    <iframe
+      className="big_iframe"
+      name-video={props.name}
+      src={props.movieUrl}
+      frameBorder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    ></iframe>
   );
 }
 
 export function Iframe(props) {
   return (
-    <div className="iFrame card pb-0 text-center">
-      <iframe
-        title={props.name}
-        src={"https://www.youtube.com/embed/" + props.YTstr}
-        frameBorder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      ></iframe>
+    <iframe
+      className="sml_iframe "
+      name-video={props.name}
+      src={props.movieUrl}
+      frameBorder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    ></iframe>
+  );
+}
+
+export function Thumb(props) {
+  return (
+    <div className="sml_iframe  ">
+      <img
+        src={props.thumbUrl}
+        url-video={props.movieUrl}
+        name-video={props.name}
+      />
+    </div>
+  );
+}
+
+export function Title(props) {
+  return (
+    <div className = "tile__details" >
+      <div className="sml_title tile__title">
+      {props.title}
+      </div>
     </div>
   );
 }

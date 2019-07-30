@@ -1,19 +1,27 @@
-.wrapper {
+.vidWrapper {
+  height: auto;
   background-color: #333;
-  overflow: auto;
-  white-space: nowrap;
   position: relative;
   text-align: center;
+  padding: 0 30px;
+  background: rgb(52, 58, 64);
+  background: linear-gradient(0deg, rgba(52, 58, 64, .85) 0%, rgba(103, 115, 128, 1) 50%, rgba(52, 58, 64, 1) 100%);
 }
 
 .scroll_menu {
-  background-color: #333;
+  background: rgb(52, 58, 64);
+  background: linear-gradient(0deg, rgba(52, 58, 64, .85) 0%, rgba(103, 115, 128, 1) 50%, rgba(52, 58, 64, 1) 100%);
   overflow: auto;
   white-space: nowrap;
   position: relative;
-  margin: 0px auto;
-  margin-top: 10px;
   text-align: center;
+  overflow-wrap: normal;
+  position: relative;
+  transition: 150ms all;
+  -webkit-transform-origin: center left;
+  transform-origin: center left;
+  height: 25vh;
+  padding-top: 2vh
 }
 
 .scroll_menu div {
@@ -22,9 +30,9 @@
   text-decoration: none;
 }
 
-.scroll_menu div:hover {
+/* .scroll_menu div:hover {
   background-color: #777;
-}
+} */
 
 #left-button {
   left: 0;
@@ -35,18 +43,23 @@
 }
 
 .scrollBtn {
-  line-height: 240px;
-  white-space: nowrap;
   width: 30px;
   height: 100%;
   font-size: 20pt;
-  position: relative;
-  color: beige;
-  background-color: rgb(81, 115, 187);
+  color: deepskyblue;
+  background-color: rgb(78, 78, 78);
   opacity: 0.5;
   z-index: 10;
   position: absolute;
   top: 0;
+  margin: auto;
+  display: flex;
+  font-weight: 900;
+}
+
+.scrollArrow {
+  margin: auto;
+  text-align: center;
 }
 
 .scrollBtn:hover {
@@ -63,7 +76,105 @@
   width: 0px;
   background: transparent;
 }
+
 /* Optional: show position indicator in red */
+
 ::-webkit-scrollbar-thumb {
   background: #ff0000;
+}
+
+
+.row__inner {
+  transition: 150ms -webkit-transform;
+  transition: 150ms transform;
+  transition: 150ms transform, 150ms -webkit-transform;
+  font-size: 0;
+  white-space: nowrap;
+  margin: 70.3125px 0;
+  padding-bottom: 10px;
+}
+
+.tile {
+  position: relative;
+  display: inline-block;
+  width: 250px;
+  height: 140.625px;
+  margin-right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 200ms all;
+  -webkit-transform-origin: center left;
+  transform-origin: center left;
+}
+
+.tile__details {
+  position: absolute;
+  top: 120%;
+  left: 0%;
+  height: 0%;
+  width: 100%;
+  font-size: 10px;
+  opacity: 0;
+  transition: 150ms opacity;
+  z-index: 20;
+}
+
+.tile__details:after, .tile__details:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: #000;
+}
+
+.tile__details:after {
+  margin-top: -115px;
+  margin-left: -25px;
+  width: 50px;
+  height: 50px;
+  border: 3px solid #ecf0f1;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 100%;
+}
+
+.tile__details:before {
+  content: '▶';
+  left: 0;
+  width: 100%;
+  font-size: 30px;
+  margin-left: 0px;
+  margin-top: -115px;
+  text-align: center;
+}
+
+.tile:hover .tile__details {
+  opacity: 1;
+}
+
+.tile__title {
+  position: absolute;
+  padding: 10px;
+  margin-left: -70px;
+  margin-top: -165px;
+}
+
+.row__inner:hover .tile {
+  opacity: 0.3;
+}
+
+.row__inner:hover .tile:hover {
+  -webkit-transform: scale(1.5);
+  transform: scale(1.5);
+  opacity: 1;
+}
+
+.tile:hover~.tile {
+  -webkit-transform: translate3d(125px, 0, 0);
+  transform: translate3d(125px, 0, 0);
+}
+
+.row__inner:hover {
+  -webkit-transform: translate3d(-62.5px, 0, 0);
+          transform: translate3d(-62.5px, 0, 0);
 }

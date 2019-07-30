@@ -1,23 +1,22 @@
 import React from "react";
 import "./style.css";
 
-
 function Wrapper(props) {
   const left = () => {
     scrollLeft(document.getElementById(props.ID), -1500, 1000);
   };
-  
+
   const right = () => {
     scrollLeft(document.getElementById(props.ID), 1500, 1000);
   };
-  
+
   function scrollLeft(element, change, duration) {
     var start = element.scrollLeft,
       currentTime = 0,
       increment = 20;
-  
+
     console.log(start);
-  
+
     var animateScroll = function() {
       currentTime += increment;
       var val = Math.easeInOutQuad(currentTime, start, change, duration);
@@ -28,7 +27,7 @@ function Wrapper(props) {
     };
     animateScroll();
   }
-  
+
   //t = current time
   //b = start value
   //c = change in value
@@ -41,15 +40,15 @@ function Wrapper(props) {
   };
 
   return (
-    <div className="wrapper">
+    <div className="vidWrapper ">
       <div className="scrollBtn" id="left-button" onClick={left}>
-        &lt;
+        <span className="scrollArrow">&lt;</span>
       </div>
-      <div className="scroll_menu" id={props.ID}>
+      <div className="scroll_menu row__inner" id={props.ID}>
         {props.children}
       </div>
       <div className="scrollBtn" id="right-button" onClick={right}>
-        &gt;
+        <span className="scrollArrow"> &gt;</span>
       </div>
     </div>
   );
