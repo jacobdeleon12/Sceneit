@@ -83,10 +83,6 @@
   background: #ff0000;
 }
 
-.row {
-  overflow: scroll;
-  width: 100%;
-}
 
 .row__inner {
   transition: 150ms -webkit-transform;
@@ -106,7 +102,7 @@
   margin-right: 10px;
   font-size: 20px;
   cursor: pointer;
-  transition: 150ms all;
+  transition: 200ms all;
   -webkit-transform-origin: center left;
   transform-origin: center left;
 }
@@ -150,7 +146,6 @@
   margin-left: 0px;
   margin-top: -115px;
   text-align: center;
-  z-index: 22;
 }
 
 .tile:hover .tile__details {
@@ -177,4 +172,9 @@
 .tile:hover~.tile {
   -webkit-transform: translate3d(125px, 0, 0);
   transform: translate3d(125px, 0, 0);
+}
+
+.row__inner:hover {
+  -webkit-transform: translate3d(-62.5px, 0, 0);
+          transform: translate3d(-62.5px, 0, 0);
 }

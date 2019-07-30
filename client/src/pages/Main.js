@@ -17,7 +17,7 @@ import {
 //NPM alert options
 import { positions, Provider, transitions } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
-import Footer from "../components/footer"
+import Footer from "../components/footer";
 
 const options = {
   timeout: 3000,
@@ -255,7 +255,6 @@ class Main extends Component {
           <h1 className="">IMDB Popular</h1>
           <Wrapper ID="imdb">
             {this.state.tmdbVideos.map(video => (
-            
               <div className="tile" key={video.url}>
                 {/* <Iframe
                   key={video.name}
@@ -271,7 +270,7 @@ class Main extends Component {
                   thumbUrl={video.bigImg}
                   onClick={this.imageSwap}
                 />
-            
+
                 <br />
                 <BtnContainer>
                   <Provider template={AlertTemplate} {...options}>
@@ -281,16 +280,16 @@ class Main extends Component {
                       id={video.name}
                       name="saveVid"
                       onClick={this.handleSaveFormSubmit}
-                      />
+                    />
                   </Provider>
                   <CommentBtn
                     key={`${video.url}-comment`}
                     value={this.state.featuredVid.url}
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
-                    />
+                  />
                 </BtnContainer>
-            </div>
+              </div>
             ))}
           </Wrapper>
           <h1 className="">Youtube Popular</h1>
@@ -372,7 +371,7 @@ class Main extends Component {
             ))}
           </Wrapper> */}
         </Container>
-        <Footer/>
+        <Footer />
       </div>
     );
   }
