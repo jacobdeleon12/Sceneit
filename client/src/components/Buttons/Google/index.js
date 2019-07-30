@@ -2,7 +2,7 @@ import "./style.css";
 import API from "../../../utils/API";
 import React from "react";
 import {
-  // GoogleLogout, 
+  // GoogleLogout,
   GoogleLogin
 } from "react-google-login";
 
