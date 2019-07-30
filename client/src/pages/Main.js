@@ -293,15 +293,15 @@ class Main extends Component {
             ))}
           </Wrapper>
           <h1 className="">Youtube Popular</h1>
-          {/* <Wrapper ID="youtube">
+          <Wrapper ID="youtube">
             {this.state.youtubeVideos.map(video => (
-              <div className="" key={video.url}>
-                <Iframe
+              <div className="tile" key={video.url}>
+                {/* <Iframe
                   key={video.name}
                   name={video.name}
                   movieUrl={video.url}
                   thumbUrl={video.bigImg}
-                />
+                /> */}
                 <Title title={video.name} />
                 <br />
                 <Thumb
@@ -330,17 +330,17 @@ class Main extends Component {
                 </BtnContainer>
               </div>
             ))}
-          </Wrapper> */}
+          </Wrapper>
           <h1 className="">Hot on Vevo</h1>
-          {/* <Wrapper ID="vevo">
+          <Wrapper ID="vevo">
             {this.state.vevoVideos.map(video => (
-              <div className="" key={video.url}>
-                <Iframe
+              <div className="tile" key={video.url}>
+                {/* <Iframe
                   key={video.name}
                   name={video.name}
                   movieUrl={video.url}
                   thumbUrl={video.bigImg}
-                />
+                /> */}
                 <Title title={video.name} />
                 <br />
                 <Thumb
@@ -369,7 +369,7 @@ class Main extends Component {
                 </BtnContainer>
               </div>
             ))}
-          </Wrapper> */}
+          </Wrapper>
         </Container>
         <Footer />
       </div>
