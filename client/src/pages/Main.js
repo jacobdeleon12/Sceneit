@@ -230,7 +230,7 @@ class Main extends Component {
                   thumbUrl={video.bigImg}
                 /> */}
                 <Title title={video.name} />
-                <br />
+                
                 <Thumb
                   key={video.name}
                   id={video.name}
@@ -272,14 +272,12 @@ class Main extends Component {
                   thumbUrl={video.bigImg}
                 /> */}
                 <Title title={video.name} />
-                <br />
                 <Thumb
                   key={video.name}
                   movieUrl={video.url}
                   thumbUrl={video.bigImg}
                   onClick={this.imageSwap}
                 />
-
                 <br />
                 <BtnContainer>
                   <Provider template={AlertTemplate} {...options}>
@@ -312,7 +310,6 @@ class Main extends Component {
                   thumbUrl={video.bigImg}
                 />
                 <Title title={video.name} />
-                <br />
                 <Thumb
                   key={video.name}
                   movieUrl={video.url}
@@ -351,7 +348,6 @@ class Main extends Component {
                   thumbUrl={video.bigImg}
                 />
                 <Title title={video.name} />
-                <br />
                 <Thumb
                   key={video.name}
                   movieUrl={video.url}
