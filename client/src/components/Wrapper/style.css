@@ -84,9 +84,7 @@
 }
 
 @media (min-width: 320px) {
-  /* .tile {
-    width: 48%;
-  } */
+
   .scrollBtn {
     width: 18px;
   }
