@@ -18,6 +18,7 @@ import {
 import { positions, Provider, transitions } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import Footer from "../components/footer";
+import VidWrapper from "../components/vidWraper"
 
 const options = {
   timeout: 3000,
@@ -35,7 +36,8 @@ class Main extends Component {
     featuredVid: [],
     savedVideos: [],
     clicked: false,
-    alertFade: ""
+    alertFade: "",
+    vidStateID: ""
   };
 
   // =======================================
@@ -88,41 +90,45 @@ class Main extends Component {
     });
   };
 
+
+
   // =======================================
 
-  handleSaveFormSubmit = event => {
-    event.preventDefault();
-    // this.refs.savebtn.setAttribute("disabled", "disabled");
-    console.log("event", event);
+  // handleSaveFormSubmit = event => {
+  //   event.preventDefault();
+  //   // this.refs.savebtn.setAttribute("disabled", "disabled");
+  //   console.log("event", event);
 
-    const vStr = event.target.value;
-    const vName = event.target.id;
-    console.log(event.target.value);
-    console.log(event.target.id);
+  //   const vStr = event.target.value;
+  //   const vName = event.target.id;
+  //   console.log(event.target.value);
+  //   console.log(event.target.id);
 
-    API.saveVideo(this.state.user._id, {
-      $push: {
-        savedVideos: { vStr, vName, clicked: true }
-      }
-    })
-      .then(response => {
-        // console.log(response);
+  //   API.saveVideo(this.state.user._id, {
+  //     $push: {
+  //       savedVideos: { vStr, vName, clicked: true }
+  //     }
+  //   })
+  //     .then(response => {
+  //       console.log(response);
 
-        this.setState({
-          savedVideos: response.data.savedVideo
-        });
-      })
-      .catch(err => console.log(err));
+  //       // this.setState({
+  //       //   savedVideos: response.data.savedVideo
+  //       // });
+  //     })
+  //     .catch(err => console.log(err));
 
-    event.target.disabled = true;
+  //   event.target.disabled = true;
+  // };
+
+  imageSwap = (event, vidURl) => {
+    console.log("we made it here ");
+    
+    this.setState({vidStateID:vidURl})
+    console.log(this.state);
+    
   };
 
-  imageSwap = event => {
-    event.preventDefault();
-    // this.refs.savebtn.setAttribute("disabled", "disabled");
-    console.log(event.target.movieUrl);
-    console.log(event.target.id);
-  };
 
   // mouseUp = event => {
   //   // event.preventDefault();
@@ -215,6 +221,8 @@ class Main extends Component {
           <Wrapper ID="reddit">
             {this.state.redditVideos.map(video => (
               <div className="tile" key={video.url}>
+                <VidWrapper
+                onClick = {(event) => this.imageSwap( event, video.url)}>
                 {/* <Iframe
                   key={video.name}
                   name={video.name}
@@ -231,6 +239,7 @@ class Main extends Component {
                   name="thumbnail"
                   onmouseover={console.log("I am a thumbnail")}
                 />
+                </VidWrapper>
                 <br />
                 <BtnContainer>
                   <Provider template={AlertTemplate} {...options}>
@@ -292,16 +301,16 @@ class Main extends Component {
               </div>
             ))}
           </Wrapper>
-          <h1 className="">Youtube Popular</h1>
+          {/* <h1 className="">Youtube Popular</h1>
           <Wrapper ID="youtube">
             {this.state.youtubeVideos.map(video => (
               <div className="tile" key={video.url}>
-                {/* <Iframe
+                <Iframe
                   key={video.name}
                   name={video.name}
                   movieUrl={video.url}
                   thumbUrl={video.bigImg}
-                /> */}
+                />
                 <Title title={video.name} />
                 <br />
                 <Thumb
@@ -335,12 +344,12 @@ class Main extends Component {
           <Wrapper ID="vevo">
             {this.state.vevoVideos.map(video => (
               <div className="tile" key={video.url}>
-                {/* <Iframe
+                <Iframe
                   key={video.name}
                   name={video.name}
                   movieUrl={video.url}
                   thumbUrl={video.bigImg}
-                /> */}
+                />
                 <Title title={video.name} />
                 <br />
                 <Thumb
@@ -369,7 +378,7 @@ class Main extends Component {
                 </BtnContainer>
               </div>
             ))}
-          </Wrapper>
+          </Wrapper> */}
         </Container>
         <Footer />
       </div>
