@@ -33,8 +33,6 @@ class Main extends Component {
     youtubeVideos: [],
     vevoVideos: [],
     featuredVid: [],
-    savedVideos: [],
-    clicked: false,
     alertFade: ""
   };
 
@@ -90,27 +88,23 @@ class Main extends Component {
 
   // =======================================
 
-  handleSaveFormSubmit = event => {
+  handleSaveFormSubmit = (event, video) => {
     event.preventDefault();
     // this.refs.savebtn.setAttribute("disabled", "disabled");
     console.log("event", event);
 
-    const vStr = event.target.value;
-    const vName = event.target.id;
-    console.log(event.target.value);
-    console.log(event.target.id);
+    const vStr = video.url;
+    const vName = video.name;
+    const vImg = video.bigImg;
+    console.log(video);
 
     API.saveVideo(this.state.user._id, {
       $push: {
-        savedVideos: { vStr, vName, clicked: true }
+        savedVideos: { vStr, vName, vImg }
       }
     })
       .then(response => {
-        // console.log(response);
-
-        this.setState({
-          savedVideos: response.data.savedVideo
-        });
+        console.log(response);
       })
       .catch(err => console.log(err));
 
@@ -197,7 +191,7 @@ class Main extends Component {
                         value={this.state.featuredVid.url}
                         id={this.state.featuredVid.name}
                         name="saveVid"
-                        onClick={this.handleSaveFormSubmit}
+                        onClick={(event) => { this.handleSaveFormSubmit(event, this.state.featuredVid) }}
                       />
                     </Provider>
                     <CommentBtn
@@ -239,7 +233,7 @@ class Main extends Component {
                       key={`${video.url}-save`}
                       id={video.name}
                       name="saveVid"
-                      onClick={this.handleSaveFormSubmit}
+                      onClick={(event) => { this.handleSaveFormSubmit(event, video) }}
                     />
                   </Provider>
                   <CommentBtn
@@ -279,7 +273,7 @@ class Main extends Component {
                       key={`${video.url}-save`}
                       id={video.name}
                       name="saveVid"
-                      onClick={this.handleSaveFormSubmit}
+                      onClick={(event) => { this.handleSaveFormSubmit(event, video) }}
                     />
                   </Provider>
                   <CommentBtn
@@ -292,16 +286,16 @@ class Main extends Component {
               </div>
             ))}
           </Wrapper>
-          <h1 className="">Youtube Popular</h1>
+          {/* <h1 className="">Youtube Popular</h1>
           <Wrapper ID="youtube">
             {this.state.youtubeVideos.map(video => (
               <div className="tile" key={video.url}>
-                {/* <Iframe
+                <Iframe
                   key={video.name}
                   name={video.name}
                   movieUrl={video.url}
                   thumbUrl={video.bigImg}
-                /> */}
+                />
                 <Title title={video.name} />
                 <br />
                 <Thumb
@@ -318,7 +312,7 @@ class Main extends Component {
                       key={`${video.url}-save`}
                       id={video.name}
                       name="saveVid"
-                      onClick={this.handleSaveFormSubmit}
+                      onClick={(event) => { this.handleSaveFormSubmit(event, video) }}
                     />
                   </Provider>
                   <CommentBtn
@@ -335,12 +329,12 @@ class Main extends Component {
           <Wrapper ID="vevo">
             {this.state.vevoVideos.map(video => (
               <div className="tile" key={video.url}>
-                {/* <Iframe
+                <Iframe
                   key={video.name}
                   name={video.name}
                   movieUrl={video.url}
                   thumbUrl={video.bigImg}
-                /> */}
+                />
                 <Title title={video.name} />
                 <br />
                 <Thumb
@@ -357,7 +351,7 @@ class Main extends Component {
                       key={`${video.url}-save`}
                       id={video.name}
                       name="saveVid"
-                      onClick={this.handleSaveFormSubmit}
+                      onClick={(event) => { this.handleSaveFormSubmit(event, video) }}
                     />
                   </Provider>
                   <CommentBtn
@@ -369,7 +363,7 @@ class Main extends Component {
                 </BtnContainer>
               </div>
             ))}
-          </Wrapper>
+          </Wrapper> */}
         </Container>
         <Footer />
       </div>

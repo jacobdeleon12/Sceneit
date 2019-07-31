@@ -5,7 +5,10 @@ import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import Userwrap from "../components/Userwrap";
 import NavBar from "../components/Nav/MainNav";
-import { Iframe } from "../components/Iframe";
+import {
+  Iframe,
+  Thumb
+} from "../components/Iframe";
 // import JumboIframe from "../components/JumboIframe";
 import {
   // SaveBtn,
@@ -116,10 +119,10 @@ class User extends Component {
     });
   };
   // =======================================
-  handleDeleteFormSubmit = event => {
+  handleDeleteFormSubmit = (event, video) => {
     event.preventDefault();
-    const vStr = event.target.value;
-    const vName = event.target.id;
+    const vStr = video.vStr;
+    const vName = video.vName;
     console.log(vStr);
     console.log(vName);
 
@@ -133,6 +136,13 @@ class User extends Component {
         console.log("deleted video");
       })
       .catch(err => console.log(err));
+  };
+
+  changeSrcImage = (event, video) => {
+    event.preventDefault();
+    console.log("clicked");
+
+    video.attr("src", video.url)
   };
 
   render() {
@@ -174,34 +184,47 @@ class User extends Component {
             </Col>
           </Row>
           <Userwrap>
-            {this.state.videos.map(video => (
-              <div className="text-center">
-                <Iframe
+            {this.state.videos.length ?
+              this.state.videos.map(video => (
+                <div className="text-center">
+                  {/* <Iframe
                   key={this.state.user.savedVideos._id}
                   YTstr={video.vStr}
-                />
-
-                <br />
-                {/* provider is for alert. must encompass  button */}
-                <Provider template={AlertTemplate} {...options}>
-                  <DeleteBtn
-                    value={video.vStr}
-                    key={this.state.user.savedVideos._id + "-delete"}
-                    id={video.vName}
-                    name="delVid"
-                    onClick={this.handleDeleteFormSubmit}
+                  movieUrl={video.vImg}
+                  onClick={(event) => { this.changeSrcImage(event, video) }}
+                /> */}
+                  <Thumb
+                    key={this.state.user.savedVideos._id}
+                    thumbUrl={video.vImg}
+                    movieUrl={video.vStr}
+                    name={video.vName}
+                    onClick={(event) => { this.changeSrcImage(event, video) }}
                   />
-                </Provider>
-                <CommentBtn
-                  value={video.vStr}
-                  key={this.state.user.savedVideos._id + "-comment"}
-                  id={video.vName}
-                  name="CommentVid"
-                  onClick={this.handleCommentSubmit}
-                />
-              </div>
-            ))}
+
+
+                  <br />
+                  {/* provider is for alert. must encompass  button */}
+                  <Provider template={AlertTemplate} {...options}>
+                    <DeleteBtn
+                      value={video.vStr}
+                      key={this.state.user.savedVideos._id + "-delete"}
+                      id={video.vName}
+                      name="delVid"
+                      onClick={(event) => { this.handleDeleteFormSubmit(event, video) }}
+                    />
+                  </Provider>
+                  <CommentBtn
+                    value={video.vStr}
+                    key={this.state.user.savedVideos._id + "-comment"}
+                    id={video.vName}
+                    name="CommentVid"
+                    onClick={this.handleCommentSubmit}
+                  />
+                </div>
+              ))
+              : <p>You have no saved videos.</p>}
           </Userwrap>
+
           {/* <h1 className="text-center">IMDB Popular</h1>
           <Wrapper>
             {this.state.movieVideos.map(video => (
@@ -226,6 +249,7 @@ class User extends Component {
                 <DeleteBtn onClick={() => this.deleteBook(video._id)} />
               </div>
             ))} */}
+
         </Container>
       </div>
     );
