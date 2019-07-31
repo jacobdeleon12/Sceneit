@@ -30,3 +30,12 @@
   box-shadow: none;
   outline: 0;
 }
+
+@media (min-width: 320px) {
+.vidBtn{
+  font-size: 8px;
+  width:46%;
+}
+  
+}
+

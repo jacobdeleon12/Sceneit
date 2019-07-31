@@ -22,12 +22,12 @@ const success = response => {
         API.saveUser(response.profileObj)
           .then(res => {
             console.log("New user, info added to DB");
-            // window.location.replace("/main");
+            window.location.replace("/main");
           })
           .catch(err => console.log(err));
       } else {
         console.log("User already exists, info not added to DB");
-        // window.location.replace("/main");
+        window.location.replace("/main");
       }
     })
     .catch(err => console.log(err));
@@ -70,6 +70,8 @@ export function GLogout() {
       // buttonText="Logout"
       // onLogoutSuccess={logout}
       onClick={logout}
-    ><i className="fab fa-google"></i> logout</div>
+    >
+      <i className="fab fa-google"></i> logout
+    </div>
   );
 }
