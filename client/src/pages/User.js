@@ -13,8 +13,8 @@ import {
 import {
   // SaveBtn,
   DeleteBtn,
-  // ViewBtn,
-  CommentBtn
+  BtnContainer
+  // CommentBtn
 } from "../components/Buttons/VideoBtns";
 //import Carousel from "../csomponents/Carousel"
 //NPM alert options
@@ -40,7 +40,7 @@ class User extends Component {
   }
 
   loadUser = () => {
-    API.getUser(document.cookie.split("=0; ")[1])
+    API.getUser(document.cookie.split("profId=")[1])
       .then(res => {
         // console.log(res.data)
         this.setState({ user: res.data, videos: res.data.savedVideos });
@@ -200,26 +200,27 @@ class User extends Component {
                     name={video.vName}
                     onClick={(event) => { this.changeSrcImage(event, video) }}
                   />
-
-
-                  <br />
-                  {/* provider is for alert. must encompass  button */}
-                  <Provider template={AlertTemplate} {...options}>
-                    <DeleteBtn
-                      value={video.vStr}
-                      key={this.state.user.savedVideos._id + "-delete"}
-                      id={video.vName}
-                      name="delVid"
-                      onClick={(event) => { this.handleDeleteFormSubmit(event, video) }}
-                    />
-                  </Provider>
-                  <CommentBtn
+                  {/* <br /> */}
+                  <BtnContainer>
+                    {/* provider is for alert. must encompass  button */}
+                    <Provider template={AlertTemplate} {...options}>
+                      <DeleteBtn
+                        value={video.vStr}
+                        key={`${video.vStr}-delete`}
+                        id={video.vName}
+                        name="delVid"
+                        onClick={(event) => { this.handleDeleteFormSubmit(event, video) }}
+                      />
+                    </Provider>
+                    {/* <CommentBtn
                     value={video.vStr}
                     key={this.state.user.savedVideos._id + "-comment"}
                     id={video.vName}
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
-                  />
+                  /> */}
+                  </BtnContainer>
+                  <br />
                 </div>
               ))
               : <h5>You have no saved videos. Womp Womp!</h5>}

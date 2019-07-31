@@ -40,7 +40,7 @@ class Main extends Component {
   componentDidMount() {
     this.loadUser();
     this.loadVideos();
-    console.log(document.cookie.split("; G_AUTHUSER_H=0;")[1]);
+    console.log(document.cookie.split("profId=")[1]);
     console.log(this.user);
 
     // this.loadMovieInfo("endgame");
@@ -48,7 +48,7 @@ class Main extends Component {
 
   // =======================================
   loadUser = () => {
-    API.getUser(document.cookie.split("; G_AUTHUSER_H=0;")[1])
+    API.getUser(document.cookie.split("profId=")[1])
       .then(res => {
         console.log(res.data)
         this.setState({ user: res.data, savedVideos: res.data.savedVideos });
