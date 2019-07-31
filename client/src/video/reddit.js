@@ -8,7 +8,7 @@ export default {
   searchList: function(query) {
     return new Promise(function(resolve, reject) {
       axios
-        .get(`https://www.reddit.com/r/${query}/hot.json?limit=30`)
+        .get(`https://www.reddit.com/r/${query}/hot.json?limit=10`)
         .then(response => {
           // console.log(response.data.data.children);
           for (let obj of response.data.data.children) {
@@ -38,7 +38,7 @@ export default {
             }
 
             if (urlArray.length === 10) {
-              console.log(urlArray);
+              // console.log(urlArray);
               resolve(urlArray);
             }
           }
@@ -82,7 +82,7 @@ export default {
             }
 
             if (urlArray.length === 10) {
-              console.log(urlArray);
+              // console.log(urlArray);
               resolve(urlArray);
             }
           }
