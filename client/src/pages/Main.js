@@ -10,7 +10,6 @@ class Main extends Component {
   state = {
     user: [],
     savedVideos: [],
-    clicked: false,
     vidStateID: ""
   };
 
@@ -35,33 +34,6 @@ class Main extends Component {
   };
 
   // =======================================
-
-  handleSaveFormSubmit = (event, video) => {
-    event.preventDefault();
-    // this.refs.savebtn.setAttribute("disabled", "disabled");
-    console.log("event", event);
-
-    const vStr = video.url;
-    const vName = video.name;
-    const vImg = video.bigImg;
-    console.log(video);
-
-    API.saveVideo(this.state.user._id, {
-      $push: {
-        savedVideos: { vStr, vName, vImg }
-      }
-    })
-      .then(response => {
-        console.log(response);
-
-        this.setState({
-          savedVideos: response.data.savedVideo
-        });
-      })
-      .catch(err => console.log(err));
-
-    event.target.disabled = true;
-  };
 
   // imageSwap = (event, vidURl) => {
   //   console.log("we made it here ");

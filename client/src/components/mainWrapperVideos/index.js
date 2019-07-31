@@ -22,7 +22,6 @@ class mainWraper extends Component {
     vevoVideos: [],
     featuredVid: [],
     savedVideos: [],
-    clicked: false,
     vidStateID: ""
   };
 
@@ -65,6 +64,42 @@ class mainWraper extends Component {
       vevoVideos: vevoVids
     });
   };
+  //=========================================
+  handleSaveFormSubmit = (event, video) => {
+    event.preventDefault();
+    // this.refs.savebtn.setAttribute("disabled", "disabled");
+    console.log("event", event);
+
+    const vStr = video.url;
+    const vName = video.name;
+    const vImg = video.bigImg;
+    console.log(video);
+
+    API.saveVideo(this.state.user._id, {
+      $push: {
+        savedVideos: { vStr, vName, vImg }
+      }
+    })
+      .then(response => {
+        console.log(response);
+
+        this.setState({
+          savedVideos: response.data.savedVideo
+        });
+      })
+      .catch(err => console.log(err));
+
+    event.target.disabled = true;
+  };
+
+  loadUser = () => {
+    API.getUser(document.cookie.split("profId=")[1])
+      .then(res => {
+        console.log(res.data);
+        this.setState({ user: res.data, savedVideos: res.data.savedVideos });
+      })
+      .catch(err => console.log(err));
+  };
 
   render() {
     return (
@@ -99,15 +134,17 @@ class mainWraper extends Component {
                     key={`${video.url}-save`}
                     id={video.name}
                     name="saveVid"
-                    onClick={this.handleSaveFormSubmit}
+                    onClick={event => {
+                      this.handleSaveFormSubmit(event, video);
+                    }}
                   />
                 </Provider>
-                <CommentBtn
+                {/* <CommentBtn
                   key={`${video.url}-comment`}
                   value={this.state.featuredVid.url}
                   name="CommentVid"
                   onClick={this.handleCommentSubmit}
-                />
+                /> */}
               </BtnContainer>
             </div>
           ))}
@@ -138,20 +175,22 @@ class mainWraper extends Component {
                     key={`${video.url}-save`}
                     id={video.name}
                     name="saveVid"
-                    onClick={this.handleSaveFormSubmit}
+                    onClick={event => {
+                      this.handleSaveFormSubmit(event, video);
+                    }}
                   />
                 </Provider>
-                <CommentBtn
+                {/* <CommentBtn
                   key={`${video.url}-comment`}
                   value={this.state.featuredVid.url}
                   name="CommentVid"
                   onClick={this.handleCommentSubmit}
-                />
+                /> */}
               </BtnContainer>
             </div>
           ))}
         </Wrapper>
-          {/* <h1 className="">Youtube Popular</h1>
+        {/* <h1 className="">Youtube Popular</h1>
           <Wrapper ID="youtube">
             {this.state.youtubeVideos.map(video => (
               <div className="tile" key={video.url}>
@@ -176,7 +215,7 @@ class mainWraper extends Component {
                       key={`${video.url}-save`}
                       id={video.name}
                       name="saveVid"
-                      onClick={this.handleSaveFormSubmit}
+                      onClick={(event) => { this.handleSaveFormSubmit(event, video) }}
                     />
                   </Provider>
                   <CommentBtn
@@ -214,7 +253,7 @@ class mainWraper extends Component {
                       key={`${video.url}-save`}
                       id={video.name}
                       name="saveVid"
-                      onClick={this.handleSaveFormSubmit}
+                      onClick={(event) => { this.handleSaveFormSubmit(event, video) }}
                     />
                   </Provider>
                   <CommentBtn

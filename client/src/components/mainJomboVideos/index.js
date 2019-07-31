@@ -16,8 +16,12 @@ const options = {
 class mainJombo extends Component {
   state = {
     user: [],
+    tmdbVideos: [],
     redditVideos: [],
-    featuredVid: []
+    youtubeVideos: [],
+    vevoVideos: [],
+    featuredVid: [],
+    savedVideos: []
   };
 
   // =======================================
@@ -44,6 +48,34 @@ class mainJombo extends Component {
     this.setState({ featuredVid: redditVids[0] });
   };
 
+  //=========================================
+  handleSaveFormSubmit = (event, video) => {
+    event.preventDefault();
+    // this.refs.savebtn.setAttribute("disabled", "disabled");
+    console.log("event", event);
+
+    const vStr = video.url;
+    const vName = video.name;
+    const vImg = video.bigImg;
+    console.log(video);
+
+    API.saveVideo(this.state.user._id, {
+      $push: {
+        savedVideos: { vStr, vName, vImg }
+      }
+    })
+      .then(response => {
+        console.log(response);
+
+        this.setState({
+          savedVideos: response.data.savedVideo
+        });
+      })
+      .catch(err => console.log(err));
+
+    event.target.disabled = true;
+  };
+
   render() {
     return (
       <div className="mainJombo">
@@ -66,15 +98,20 @@ class mainJombo extends Component {
                       value={this.state.featuredVid.url}
                       id={this.state.featuredVid.name}
                       name="saveVid"
-                      onClick={this.handleSaveFormSubmit}
+                      onClick={event => {
+                        this.handleSaveFormSubmit(
+                          event,
+                          this.state.featuredVid
+                        );
+                      }}
                     />
                   </Provider>
-                  <CommentBtn
+                  {/* <CommentBtn
                     key={this.state.featuredVid.name + "-comment"}
                     value={this.state.featuredVid.url}
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
-                  />
+                  /> */}
                 </BtnContainer>
               </div>
             </Jumbotron>
