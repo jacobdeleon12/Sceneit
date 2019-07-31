@@ -20,7 +20,7 @@
   transition: 150ms all;
   -webkit-transform-origin: center left;
   transform-origin: center left;
-  height: 26vh;
+  height: 14rem;
   padding-top: 2vh
 }
 
@@ -82,6 +82,7 @@
 ::-webkit-scrollbar-thumb {
   background: #ff0000;
 }
+
 
 @media (min-width: 320px) {
 
