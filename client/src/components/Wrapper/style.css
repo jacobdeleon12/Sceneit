@@ -20,7 +20,7 @@
   transition: 150ms all;
   -webkit-transform-origin: center left;
   transform-origin: center left;
-  height: 16rem;
+  height: 14rem;
   padding-top: 2vh
 }
 
@@ -99,6 +99,7 @@
   display: inline-block;
   width: 250px;
   height: 140.625px;
+  margin-top: 18px;
   margin-right: 10px;
   font-size: 20px;
   cursor: pointer;
