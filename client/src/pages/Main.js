@@ -33,8 +33,6 @@ class Main extends Component {
     youtubeVideos: [],
     vevoVideos: [],
     featuredVid: [],
-    savedVideos: [],
-    clicked: false,
     alertFade: ""
   };
 
@@ -42,16 +40,17 @@ class Main extends Component {
   componentDidMount() {
     this.loadUser();
     this.loadVideos();
-    // console.log(document.cookie.split("=0; ")[1]);
+    console.log(document.cookie.split("profId=")[1]);
+    console.log(this.user);
 
     // this.loadMovieInfo("endgame");
   }
 
   // =======================================
   loadUser = () => {
-    API.getUser(document.cookie.split("=0; ")[1])
+    API.getUser(document.cookie.split("profId=")[1])
       .then(res => {
-        // console.log(res.data)
+        console.log(res.data)
         this.setState({ user: res.data, savedVideos: res.data.savedVideos });
       })
       .catch(err => console.log(err));
@@ -90,27 +89,23 @@ class Main extends Component {
 
   // =======================================
 
-  handleSaveFormSubmit = event => {
+  handleSaveFormSubmit = (event, video) => {
     event.preventDefault();
     // this.refs.savebtn.setAttribute("disabled", "disabled");
     console.log("event", event);
 
-    const vStr = event.target.value;
-    const vName = event.target.id;
-    console.log(event.target.value);
-    console.log(event.target.id);
+    const vStr = video.url;
+    const vName = video.name;
+    const vImg = video.bigImg;
+    console.log(video);
 
     API.saveVideo(this.state.user._id, {
       $push: {
-        savedVideos: { vStr, vName, clicked: true }
+        savedVideos: { vStr, vName, vImg }
       }
     })
       .then(response => {
-        // console.log(response);
-
-        this.setState({
-          savedVideos: response.data.savedVideo
-        });
+        console.log(response);
       })
       .catch(err => console.log(err));
 
@@ -197,15 +192,15 @@ class Main extends Component {
                         value={this.state.featuredVid.url}
                         id={this.state.featuredVid.name}
                         name="saveVid"
-                        onClick={this.handleSaveFormSubmit}
+                        onClick={(event) => { this.handleSaveFormSubmit(event, this.state.featuredVid) }}
                       />
                     </Provider>
-                    <CommentBtn
+                    {/* <CommentBtn
                       key={this.state.featuredVid.name + "-comment"}
                       value={this.state.featuredVid.url}
                       name="CommentVid"
                       onClick={this.handleCommentSubmit}
-                    />
+                    /> */}
                   </BtnContainer>
                 </div>
               </Jumbotron>
@@ -222,7 +217,7 @@ class Main extends Component {
                   thumbUrl={video.bigImg}
                 /> */}
                 <Title title={video.name} />
-                
+
                 <Thumb
                   key={video.name}
                   id={video.name}
@@ -239,15 +234,15 @@ class Main extends Component {
                       key={`${video.url}-save`}
                       id={video.name}
                       name="saveVid"
-                      onClick={this.handleSaveFormSubmit}
+                      onClick={(event) => { this.handleSaveFormSubmit(event, video) }}
                     />
                   </Provider>
-                  <CommentBtn
+                  {/* <CommentBtn
                     key={`${video.url}-comment`}
                     value={this.state.featuredVid.url}
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
-                  />
+                  /> */}
                 </BtnContainer>
               </div>
             ))}
@@ -277,15 +272,15 @@ class Main extends Component {
                       key={`${video.url}-save`}
                       id={video.name}
                       name="saveVid"
-                      onClick={this.handleSaveFormSubmit}
+                      onClick={(event) => { this.handleSaveFormSubmit(event, video) }}
                     />
                   </Provider>
-                  <CommentBtn
+                  {/* <CommentBtn
                     key={`${video.url}-comment`}
                     value={this.state.featuredVid.url}
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
-                  />
+                  /> */}
                 </BtnContainer>
               </div>
             ))}
@@ -315,15 +310,15 @@ class Main extends Component {
                       key={`${video.url}-save`}
                       id={video.name}
                       name="saveVid"
-                      onClick={this.handleSaveFormSubmit}
+                      onClick={(event) => { this.handleSaveFormSubmit(event, video) }}
                     />
                   </Provider>
-                  <CommentBtn
+                  {/* <CommentBtn
                     key={`${video.url}-comment`}
                     value={this.state.featuredVid.url}
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
-                  />
+                  /> */}
                 </BtnContainer>
               </div>
             ))}
@@ -353,15 +348,15 @@ class Main extends Component {
                       key={`${video.url}-save`}
                       id={video.name}
                       name="saveVid"
-                      onClick={this.handleSaveFormSubmit}
+                      onClick={(event) => { this.handleSaveFormSubmit(event, video) }}
                     />
                   </Provider>
-                  <CommentBtn
+                  {/* <CommentBtn
                     key={`${video.url}-comment`}
                     value={this.state.featuredVid.url}
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
-                  />
+                  /> */}
                 </BtnContainer>
               </div>
             ))}

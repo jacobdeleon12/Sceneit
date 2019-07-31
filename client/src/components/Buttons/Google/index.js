@@ -12,7 +12,7 @@ const clientId =
 const success = response => {
   const profId = response.profileObj.googleId;
 
-  document.cookie = profId;
+  document.cookie = "profId=" + profId;
   console.log(document.cookie);
 
   API.getUser(profId)
@@ -22,12 +22,12 @@ const success = response => {
         API.saveUser(response.profileObj)
           .then(res => {
             console.log("New user, info added to DB");
-            window.location.replace("/main");
+            // window.location.replace("/main");
           })
           .catch(err => console.log(err));
       } else {
         console.log("User already exists, info not added to DB");
-        window.location.replace("/main");
+        // window.location.replace("/main");
       }
     })
     .catch(err => console.log(err));
