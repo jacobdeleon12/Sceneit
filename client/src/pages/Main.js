@@ -40,16 +40,17 @@ class Main extends Component {
   componentDidMount() {
     this.loadUser();
     this.loadVideos();
-    // console.log(document.cookie.split("=0; ")[1]);
+    console.log(document.cookie.split("; G_AUTHUSER_H=0;")[1]);
+    console.log(this.user);
 
     // this.loadMovieInfo("endgame");
   }
 
   // =======================================
   loadUser = () => {
-    API.getUser(document.cookie.split("=0; ")[1])
+    API.getUser(document.cookie.split("; G_AUTHUSER_H=0;")[1])
       .then(res => {
-        // console.log(res.data)
+        console.log(res.data)
         this.setState({ user: res.data, savedVideos: res.data.savedVideos });
       })
       .catch(err => console.log(err));
@@ -194,12 +195,12 @@ class Main extends Component {
                         onClick={(event) => { this.handleSaveFormSubmit(event, this.state.featuredVid) }}
                       />
                     </Provider>
-                    <CommentBtn
+                    {/* <CommentBtn
                       key={this.state.featuredVid.name + "-comment"}
                       value={this.state.featuredVid.url}
                       name="CommentVid"
                       onClick={this.handleCommentSubmit}
-                    />
+                    /> */}
                   </BtnContainer>
                 </div>
               </Jumbotron>
@@ -216,7 +217,7 @@ class Main extends Component {
                   thumbUrl={video.bigImg}
                 /> */}
                 <Title title={video.name} />
-                
+
                 <Thumb
                   key={video.name}
                   id={video.name}
@@ -236,12 +237,12 @@ class Main extends Component {
                       onClick={(event) => { this.handleSaveFormSubmit(event, video) }}
                     />
                   </Provider>
-                  <CommentBtn
+                  {/* <CommentBtn
                     key={`${video.url}-comment`}
                     value={this.state.featuredVid.url}
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
-                  />
+                  /> */}
                 </BtnContainer>
               </div>
             ))}
@@ -274,26 +275,26 @@ class Main extends Component {
                       onClick={(event) => { this.handleSaveFormSubmit(event, video) }}
                     />
                   </Provider>
-                  <CommentBtn
+                  {/* <CommentBtn
                     key={`${video.url}-comment`}
                     value={this.state.featuredVid.url}
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
-                  />
+                  /> */}
                 </BtnContainer>
               </div>
             ))}
           </Wrapper>
-          {/* <h1 className="">Youtube Popular</h1>
+          <h1 className="">Youtube Popular</h1>
           <Wrapper ID="youtube">
             {this.state.youtubeVideos.map(video => (
               <div className="tile" key={video.url}>
-                <Iframe
+                {/* <Iframe
                   key={video.name}
                   name={video.name}
                   movieUrl={video.url}
                   thumbUrl={video.bigImg}
-                />
+                /> */}
                 <Title title={video.name} />
                 <Thumb
                   key={video.name}
@@ -312,12 +313,12 @@ class Main extends Component {
                       onClick={(event) => { this.handleSaveFormSubmit(event, video) }}
                     />
                   </Provider>
-                  <CommentBtn
+                  {/* <CommentBtn
                     key={`${video.url}-comment`}
                     value={this.state.featuredVid.url}
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
-                  />
+                  /> */}
                 </BtnContainer>
               </div>
             ))}
@@ -326,12 +327,12 @@ class Main extends Component {
           <Wrapper ID="vevo">
             {this.state.vevoVideos.map(video => (
               <div className="tile" key={video.url}>
-                <Iframe
+                {/* <Iframe
                   key={video.name}
                   name={video.name}
                   movieUrl={video.url}
                   thumbUrl={video.bigImg}
-                />
+                /> */}
                 <Title title={video.name} />
                 <Thumb
                   key={video.name}
@@ -350,16 +351,16 @@ class Main extends Component {
                       onClick={(event) => { this.handleSaveFormSubmit(event, video) }}
                     />
                   </Provider>
-                  <CommentBtn
+                  {/* <CommentBtn
                     key={`${video.url}-comment`}
                     value={this.state.featuredVid.url}
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
-                  />
+                  /> */}
                 </BtnContainer>
               </div>
             ))}
-          </Wrapper> */}
+          </Wrapper>
         </Container>
         <Footer />
       </div>

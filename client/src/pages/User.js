@@ -222,7 +222,7 @@ class User extends Component {
                   />
                 </div>
               ))
-              : <p>You have no saved videos.</p>}
+              : <h5>You have no saved videos. Womp Womp!</h5>}
           </Userwrap>
 
           {/* <h1 className="text-center">IMDB Popular</h1>
