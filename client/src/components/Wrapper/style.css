@@ -1,6 +1,5 @@
 .vidWrapper {
   height: auto;
-
   position: relative;
   text-align: center;
   padding: 0 30px;
@@ -83,9 +82,7 @@
   background: #ff0000;
 }
 
-
 @media (min-width: 320px) {
-
   .scrollBtn {
     width: 18px;
   }
@@ -96,6 +93,7 @@
     height: 30vh;
   }
 }
+
 @media (min-width: 768px) {
   .tile {
     width: 48%;
@@ -107,23 +105,21 @@
     padding: 0px 18px;
   }
   .scroll_menu {
-    height: 36vh;
+    height: 28vh;
   }
 }
-@media (min-width: 992px) {
 
+@media (min-width: 992px) {
   .scroll_menu {
     height: 27vh;
   }
 }
-@media (min-width: 2560px) {
 
+@media (min-width: 2560px) {
   .scroll_menu {
     height: 25vh;
   }
 }
-
-
 
 @media (min-width: 768px) {
   .row__inner {
@@ -134,11 +130,13 @@
     white-space: nowrap;
     margin-bottom: 50px;
     padding-bottom: 10px;
+    /* overflow-y: visible;
+    overflow-x: visible; */
   }
   .tile {
     position: relative;
     display: inline-block;
-    width: 250px;
+    width: 230px;
     height: 140.625px;
     margin-right: 10px;
     font-size: 20px;
