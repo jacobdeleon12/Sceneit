@@ -1,17 +1,17 @@
-import axios from "axios";
+const axios = require("axios");
 
-const apiKey = "AIzaSyBJpSy55Bx8rlO3A4FyhWyav8uFtC8_r3I";
+const apiKey = "AIzaSyBQaJOdXS5rojwu9fVmBi-JenkMGVMUIec";
 
 let urlArray = [];
 
-export default {
+module.exports = {
   // try "mostPopular"
   // Queries YouTube playlist, returns 10 videos
-  searchList: function(query) {
+  searchPlayList: function(query) {
     return new Promise(function(resolve, reject) {
       axios
         .get(
-          `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=${query}&key=${apiKey}`
+          `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${query}&key=${apiKey}`
         )
         .then(response => {
           for (let obj of response.data.items) {
@@ -23,12 +23,9 @@ export default {
                 bigImg: obj.snippet.thumbnails.maxres.url,
                 url: `https://www.youtube.com/embed/${obj.snippet.resourceId.videoId}`
               });
-
-            if (urlArray.length === 10) {
-              console.log(urlArray);
-              resolve(urlArray);
-            }
           }
+          // console.log(urlArray);
+          resolve(urlArray);
         })
         .catch(err => reject(err));
     });
@@ -36,11 +33,11 @@ export default {
 
   // try "speed"
   // Queries Youtube channel by name, returns 10 videos
-  searchName: function(chan, query) {
+  searchChannel: function(channelId, query) {
     return new Promise(function(resolve, reject) {
       axios
         .get(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${chan}&maxResults=20&q=${query}&key=${apiKey}`
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=10&q=${query}&key=${apiKey}`
         )
         .then(response => {
           for (let obj of response.data.items) {
@@ -52,12 +49,9 @@ export default {
                 bigImg: obj.snippet.thumbnails.high.url,
                 url: `https://www.youtube.com/embed/${obj.id.videoId}`
               });
-
-            if (urlArray.length === 10) {
-              console.log(urlArray);
-              resolve(urlArray);
-            }
           }
+          // console.log(urlArray);
+          resolve(urlArray);
         })
         .catch(err => reject(err));
     });
