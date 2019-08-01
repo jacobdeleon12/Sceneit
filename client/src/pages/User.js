@@ -5,8 +5,9 @@ import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import Userwrap from "../components/Userwrap";
 import NavBar from "../components/Nav/MainNav";
+import Footer from "../components/footer";
 import {
-  Iframe,
+  // Iframe,
   Thumb
 } from "../components/Iframe";
 // import JumboIframe from "../components/JumboIframe";
@@ -31,9 +32,10 @@ class User extends Component {
   state = {
     user: [],
     videos: [],
-    movieVideos: []
+    movieVideos: [],
     // featuredVid: [],
     // selectedVideo: [{}]
+    keyCard: ""
   };
   componentDidMount() {
     this.loadUser();
@@ -43,7 +45,7 @@ class User extends Component {
     API.getUser(document.cookie.split("profId=")[1])
       .then(res => {
         // console.log(res.data)
-        this.setState({ user: res.data, videos: res.data.savedVideos });
+        this.setState({ user: res.data, videos: res.data.savedVideos, keyCard: document.cookie.split("profId=")[1] });
       })
       .catch(err => console.log(err));
   };
@@ -148,85 +150,87 @@ class User extends Component {
   render() {
     console.log(this.state);
 
-    return (
-      <div>
-        <NavBar />
-        <Container fluid>
-          <Row>
-            <Col size="md-12">
-              <Jumbotron>
-                <div className="row justify-content-center">
-                  <Col size="md-2">
-                    <Container fluid>
-                      <img src={this.state.user.imageUrl} alt="googleImage" />
-                    </Container>
-                  </Col>
-                  <Col size="md-3">
-                    <Container fluid>
-                      <Row fluid>
-                        <Col size="md-12">
-                          <h4>
-                            {this.state.user.givenName +
-                              " " +
-                              this.state.user.familyName}
-                          </h4>
-                        </Col>
-                      </Row>
-                      <Row fluid>
-                        <Col size="md-12">
-                          <h5>{this.state.user.email}</h5>
-                        </Col>
-                      </Row>
-                    </Container>
-                  </Col>
-                </div>
-              </Jumbotron>
-            </Col>
-          </Row>
-          <Userwrap>
-            {this.state.videos.length ?
-              this.state.videos.map(video => (
-                <div className="text-center">
-                  {/* <Iframe
+    switch (this.state.keyCard) {
+      case this.state.user.googleId:
+        return (
+          <div>
+            <NavBar />
+            <Container fluid>
+              <Row>
+                <Col size="md-12">
+                  <Jumbotron>
+                    <div className="row justify-content-center">
+                      <Col size="md-2">
+                        <Container fluid>
+                          <img src={this.state.user.imageUrl} alt="googleImage" />
+                        </Container>
+                      </Col>
+                      <Col size="md-3">
+                        <Container fluid>
+                          <Row fluid>
+                            <Col size="md-12">
+                              <h4>
+                                {this.state.user.givenName +
+                                  " " +
+                                  this.state.user.familyName}
+                              </h4>
+                            </Col>
+                          </Row>
+                          <Row fluid>
+                            <Col size="md-12">
+                              <h5>{this.state.user.email}</h5>
+                            </Col>
+                          </Row>
+                        </Container>
+                      </Col>
+                    </div>
+                  </Jumbotron>
+                </Col>
+              </Row>
+              <Userwrap>
+                {this.state.videos ?
+                  this.state.videos.map(video => (
+                    <div className="text-center">
+                      {/* <Iframe
                   key={this.state.user.savedVideos._id}
                   YTstr={video.vStr}
                   movieUrl={video.vImg}
                   onClick={(event) => { this.changeSrcImage(event, video) }}
                 /> */}
-                  <Thumb
-                    key={this.state.user.savedVideos._id}
-                    thumbUrl={video.vImg}
-                    movieUrl={video.vStr}
-                    name={video.vName}
-                    onClick={(event) => { this.changeSrcImage(event, video) }}
-                  />
-                  {/* <br /> */}
-                  <BtnContainer>
-                    {/* provider is for alert. must encompass  button */}
-                    <Provider template={AlertTemplate} {...options}>
-                      <DeleteBtn
-                        value={video.vStr}
-                        key={`${video.vStr}-delete`}
-                        id={video.vName}
-                        name="delVid"
-                        onClick={(event) => { this.handleDeleteFormSubmit(event, video) }}
+                      <Thumb
+                        key={this.state.user.savedVideos._id}
+                        thumbUrl={video.vImg}
+                        movieUrl={video.vStr}
+                        name={video.vName}
+                        onClick={(event) => { this.changeSrcImage(event, video) }}
                       />
-                    </Provider>
-                    {/* <CommentBtn
+                      {/* <br /> */}
+                      <BtnContainer>
+                        {/* provider is for alert. must encompass  button */}
+                        <Provider template={AlertTemplate} {...options}>
+                          <DeleteBtn
+                            value={video.vStr}
+                            key={`${video.vStr}-delete`}
+                            id={video.vName}
+                            name="delVid"
+                            onClick={(event) => { this.handleDeleteFormSubmit(event, video) }}
+                          />
+                        </Provider>
+                        {/* <CommentBtn
                     value={video.vStr}
                     key={this.state.user.savedVideos._id + "-comment"}
                     id={video.vName}
                     name="CommentVid"
                     onClick={this.handleCommentSubmit}
                   /> */}
-                  </BtnContainer>
-                  <br />
-                </div>
-              ))
-              : <h5>You have no saved videos. Womp Womp!</h5>}
-          </Userwrap>
+                      </BtnContainer>
+                      <br />
+                    </div>
+                  ))
+                  : <h5>You have no saved videos. Womp Womp!</h5>}
+              </Userwrap>
 
-          {/* <h1 className="text-center">IMDB Popular</h1>
+              {/* <h1 className="text-center">IMDB Popular</h1>
           <Wrapper>
             {this.state.movieVideos.map(video => (
               <div className="text-center">
@@ -241,7 +245,7 @@ class User extends Component {
               </div>
             ))}
           </Wrapper> */}
-          {/* {this.state.movieVideos.map(video => (
+              {/* {this.state.movieVideos.map(video => (
               <div className="text-center">
                 <Iframe
                   key={video.name}
@@ -250,10 +254,23 @@ class User extends Component {
                 <DeleteBtn onClick={() => this.deleteBook(video._id)} />
               </div>
             ))} */}
+            </Container>
+          </div>
+        );
+      // break;
 
-        </Container>
-      </div>
-    );
+      default:
+        return (
+          <div>
+            <NavBar />
+            <Container fluid>
+              <h5>You must be logged in to visit the Profile page. Womp Womp! Click <a href="https://sceneitapp.herokuapp.com/">here</a> to visit the login page.</h5>
+            </Container>
+            <Footer />
+          </div>
+        )
+      // break;
+    }
   }
 }
 
