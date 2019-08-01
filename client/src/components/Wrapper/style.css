@@ -1,4 +1,4 @@
-.vidWrapper {
+.scrollWrapper {
   height: auto;
 
   position: relative;
@@ -89,7 +89,7 @@
   .scrollBtn {
     width: 18px;
   }
-  .vidWrapper {
+  .scrollWrapper {
     padding: 0px 18px;
   }
   .scroll_menu {
@@ -103,7 +103,7 @@
   .scrollBtn {
     width: 18px;
   }
-  .vidWrapper {
+  .scrollWrapper {
     padding: 0px 18px;
   }
   .scroll_menu {

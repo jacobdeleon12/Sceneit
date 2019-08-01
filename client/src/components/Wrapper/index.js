@@ -40,7 +40,7 @@ function Wrapper(props) {
   };
 
   return (
-    <div className="vidWrapper ">
+    <div className="scrollWrapper ">
       <div className="scrollBtn" id="left-button" onClick={left}>
         <span className="scrollArrow">&lt;</span>
       </div>
