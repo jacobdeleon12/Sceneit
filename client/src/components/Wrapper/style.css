@@ -20,7 +20,6 @@
   -webkit-transform-origin: center left;
   transform-origin: center left;
   height: 14rem;
-  padding-top: 2vh
 }
 
 .scroll_menu div {
@@ -79,7 +78,7 @@
 /* Optional: show position indicator in red */
 
 ::-webkit-scrollbar-thumb {
-  background: #ff0000;
+  background: rgb(1, 96, 128);
 }
 
 @media (min-width: 320px) {
@@ -90,7 +89,20 @@
     padding: 0px 18px;
   }
   .scroll_menu {
-    height: 30vh;
+    height: 15rem;
+  }
+}
+
+@media (min-width: 425px) {
+
+  .scrollBtn {
+    width: 18px;
+  }
+  .vidWrapper {
+    padding: 0px 18px;
+  }
+  .scroll_menu {
+    height: 17rem;
   }
 }
 
@@ -105,21 +117,23 @@
     padding: 0px 18px;
   }
   .scroll_menu {
-    height: 28vh;
+    height: 16rem;
   }
 }
+@media (min-width: 1024px) {
 
 @media (min-width: 992px) {
   .scroll_menu {
-    height: 27vh;
+    height: 16rem;
   }
 }
+/* @media (min-width: 1200px) {
 
 @media (min-width: 2560px) {
   .scroll_menu {
     height: 25vh;
   }
-}
+} */
 
 @media (min-width: 768px) {
   .row__inner {
@@ -128,7 +142,7 @@
     transition: 150ms transform, 150ms -webkit-transform;
     font-size: 0;
     white-space: nowrap;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     padding-bottom: 10px;
     /* overflow-y: visible;
     overflow-x: visible; */
