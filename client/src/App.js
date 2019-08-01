@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
-import Search from "./pages/Search";
+import Search from "./pages/SearchResults";
 import NoMatch from "./pages/NoMatch";
 import SearchResults from "./pages/SearchResults";
 import User from "./pages/User";
