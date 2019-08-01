@@ -1,18 +1,17 @@
-import axios from "axios";
+const axios = require("axios");
 
 let urlArray = [];
 
-export default {
+module.exports = {
   // try "videos"
   // Queries Reddit sub, returns 10 videos
   searchList: function(query) {
     return new Promise(function(resolve, reject) {
       axios
-        .get(`https://www.reddit.com/r/${query}/hot.json?limit=10`)
+        .get(`https://www.reddit.com/r/${query}/hot.json?limit=20`)
         .then(response => {
           // console.log(response.data.data.children);
           for (let obj of response.data.data.children) {
-            
             if (obj.data.domain === "youtube.com") {
               obj.data.url &&
                 urlArray.push({
@@ -36,12 +35,9 @@ export default {
                     .slice(0, 11)}`
                 });
             }
-
-            if (urlArray.length === 10) {
-              // console.log(urlArray);
-              resolve(urlArray);
-            }
           }
+          // console.log(urlArray);
+          resolve(urlArray);
         })
         .catch(err => reject(err));
     });
@@ -53,7 +49,7 @@ export default {
     return new Promise(function(resolve, reject) {
       axios
         .get(
-          `https://www.reddit.com/r/videos/search.json?q=${query}&restrict_sr=on&include_over_18=on&sort=relevance&t=all`
+          `https://www.reddit.com/r/videos/search.json?q=${query}&restrict_sr=on&limit=20&include_over_18=on&sort=relevance&t=all`
         )
         .then(response => {
           for (let obj of response.data.data.children) {
@@ -80,12 +76,9 @@ export default {
                     .slice(0, 11)}`
                 });
             }
-
-            if (urlArray.length === 10) {
-              // console.log(urlArray);
-              resolve(urlArray);
-            }
           }
+          // console.log(urlArray);
+          resolve(urlArray);
         })
         .catch(err => reject(err));
     });
