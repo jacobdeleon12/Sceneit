@@ -153,20 +153,22 @@ class mainWraper extends Component {
         <Wrapper ID="imdb">
           {this.state.tmdbVideos.map(video => (
             <div className="tile" key={video.url}>
-              {/* <Iframe
+              <VidWrapper onClick={event => this.imageSwap(event, video.url)}>
+                {/* <Iframe
                   key={video.name}
                   name={video.name}
                   movieUrl={video.url}
                   thumbUrl={video.bigImg}
                 /> */}
-              <Title title={video.name} />
-              <br />
-              <Thumb
-                key={video.name}
-                movieUrl={video.url}
-                thumbUrl={video.bigImg}
-                onClick={this.imageSwap}
-              />
+                <Title title={video.name} />
+                <br />
+                <Thumb
+                  key={video.name}
+                  movieUrl={video.url}
+                  thumbUrl={video.bigImg}
+                  onClick={this.imageSwap}
+                />
+              </VidWrapper>
               <br />
               <BtnContainer>
                 <Provider template={AlertTemplate} {...options}>

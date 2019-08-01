@@ -28,6 +28,7 @@ z-index: -99;
   max-width: 150px;
   display: inline;
   white-space: nowrap;
+  text-overflow: ellipsis;
   /* border-style: dotted; */
   border-color: red;
   overflow: hidden;
