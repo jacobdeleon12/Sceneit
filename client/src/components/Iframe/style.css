@@ -45,8 +45,32 @@ z-index: -99;
 
 @media (min-width: 320px) {
   .sml_iframe {
-    height: 70px;
-    width: 100px;
+    /* height: 70px; */
+    height: 120px;
+    /* width: 100px; */
+    width: 240px;
+    text-align: center;
+  }
+  .sml_title {
+    max-width: 150px;
+  }
+  
+}
+@media (min-width: 375px) {
+  .sml_iframe {
+    height: 120px;
+    width: 300px;
+    text-align: center;
+  }
+  .sml_title {
+    max-width: 150px;
+  }
+  
+}
+@media (min-width: 425px) {
+  .sml_iframe {
+    height: 155px;
+    width: 350px;
     text-align: center;
   }
   .sml_title {

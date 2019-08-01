@@ -1,16 +1,16 @@
 .vidWrapper {
   height: auto;
-  background-color: #333;
+
   position: relative;
   text-align: center;
   padding: 0 30px;
-  background: rgb(52, 58, 64);
-  background: linear-gradient(0deg, rgba(52, 58, 64, .85) 0%, rgba(103, 115, 128, 1) 50%, rgba(52, 58, 64, 1) 100%);
+  /* background: rgb(52, 58, 64);
+  background: linear-gradient(0deg, rgba(52, 58, 64, 1) 0%, rgba(103, 115, 128, 1) 50%, rgba(52, 58, 64, 1) 100%); */
 }
 
 .scroll_menu {
   background: rgb(52, 58, 64);
-  background: linear-gradient(0deg, rgba(52, 58, 64, .85) 0%, rgba(103, 115, 128, 1) 50%, rgba(52, 58, 64, 1) 100%);
+  background: linear-gradient(0deg, rgba(52, 58, 64, 1) 0%, rgba(103, 115, 128, .5) 50%, rgba(52, 58, 64, 1) 100%);
   overflow: auto;
   white-space: nowrap;
   position: relative;
@@ -84,42 +84,81 @@
 }
 
 
-.row__inner {
-  transition: 150ms -webkit-transform;
-  transition: 150ms transform;
-  transition: 150ms transform, 150ms -webkit-transform;
-  font-size: 0;
-  white-space: nowrap;
-  margin-bottom: 50px;
-  padding-bottom: 10px;
+@media (min-width: 320px) {
+
+  .scrollBtn {
+    width: 18px;
+  }
+  .vidWrapper {
+    padding: 0px 18px;
+  }
+  .scroll_menu {
+    height: 30vh;
+  }
+}
+@media (min-width: 768px) {
+  .tile {
+    width: 48%;
+  }
+  .scrollBtn {
+    width: 18px;
+  }
+  .vidWrapper {
+    padding: 0px 18px;
+  }
+  .scroll_menu {
+    height: 36vh;
+  }
+}
+@media (min-width: 992px) {
+
+  .scroll_menu {
+    height: 27vh;
+  }
+}
+@media (min-width: 2560px) {
+
+  .scroll_menu {
+    height: 25vh;
+  }
 }
 
-.tile {
-  position: relative;
-  display: inline-block;
-  width: 250px;
-  height: 140.625px;
-  margin-top: 18px;
-  margin-right: 10px;
-  font-size: 20px;
-  cursor: pointer;
-  transition: 200ms all;
-  -webkit-transform-origin: center left;
-  transform-origin: center left;
-}
 
-.tile__details {
-  position: absolute;
-  top: 120%;
-  left: 0%;
-  height: 0%;
-  width: 100%;
-  font-size: 10px;
-  opacity: 0;
-  transition: 150ms opacity;
-  z-index: 20;
-}
-/* 
+
+@media (min-width: 768px) {
+  .row__inner {
+    transition: 150ms -webkit-transform;
+    transition: 150ms transform;
+    transition: 150ms transform, 150ms -webkit-transform;
+    font-size: 0;
+    white-space: nowrap;
+    margin-bottom: 50px;
+    padding-bottom: 10px;
+  }
+  .tile {
+    position: relative;
+    display: inline-block;
+    width: 250px;
+    height: 140.625px;
+    margin-right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 200ms all;
+    -webkit-transform-origin: center left;
+    transform-origin: center left;
+  }
+  .tile__details {
+    position: absolute;
+    top: 120%;
+    left: 0%;
+    height: 0%;
+    width: 100%;
+    font-size: 10px;
+    opacity: 0;
+    transition: 150ms opacity;
+    z-index: 20;
+  }
+  /* 
 .tile__details:after, .tile__details:before {
   content: '';
   position: absolute;
@@ -148,50 +187,29 @@
   margin-top: -115px;
   text-align: center;
 } */
-
-.tile:hover .tile__details {
-  opacity: 1;
-}
-
-.tile__title {
-  position: absolute;
-  padding: 10px;
-  margin-left: -70px;
-  margin-top: -165px;
-}
-
-.row__inner:hover .tile {
-  opacity: 0.3;
-}
-
-.row__inner:hover .tile:hover {
-  -webkit-transform: scale(1.5);
-  transform: scale(1.5);
-  opacity: 1;
-}
-
-.tile:hover~.tile {
-  -webkit-transform: translate3d(125px, 0, 0);
-  transform: translate3d(125px, 0, 0);
-}
-
-.row__inner:hover {
-  -webkit-transform: translate3d(-62.5px, 0, 0);
-          transform: translate3d(-62.5px, 0, 0);
-}
-
-@media (max-width: 320px) {
-.tile{
-  width: 48%;
-}
-.scrollBtn{
-  width: 20px;
-}
-.vidWrapper{
-  padding: 0px 18px;
-}
-.scroll_menu{
-  height: 46vh;
-}
-  
+  .tile:hover .tile__details {
+    opacity: 1;
+  }
+  .tile__title {
+    position: absolute;
+    padding: 10px;
+    margin-left: -70px;
+    margin-top: -170px;
+  }
+  .row__inner:hover .tile {
+    opacity: 0.3;
+  }
+  .row__inner:hover .tile:hover {
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  .tile:hover~.tile {
+    -webkit-transform: translate3d(125px, 0, 0);
+    transform: translate3d(125px, 0, 0);
+  }
+  .row__inner:hover {
+    -webkit-transform: translate3d(-62.5px, 0, 0);
+    transform: translate3d(-62.5px, 0, 0);
+  }
 }
