@@ -3,11 +3,11 @@ import "./style.css";
 
 function Wrapper(props) {
   const left = () => {
-    scrollLeft(document.getElementById(props.ID), -1500, 1000);
+    scrollLeft(document.getElementById(props.ID), -300, 500);
   };
 
   const right = () => {
-    scrollLeft(document.getElementById(props.ID), 1500, 1000);
+    scrollLeft(document.getElementById(props.ID), 300, 500);
   };
 
   function scrollLeft(element, change, duration) {
