@@ -10,3 +10,13 @@ logout:hover {
   color: rgb(102, 102, 102);
 
 }
+
+.logout {
+  color: rgb(156, 156, 156);
+  /* background-color: beige; */
+}
+
+.logout:hover {
+  cursor: pointer;
+  color:rgb(201, 201, 201);
+}

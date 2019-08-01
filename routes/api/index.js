@@ -4,6 +4,6 @@ const videoRoutes = require("./videos");
 
 // User routes
 router.use("/users", userRoutes);
-// router.use("/videos", videoRoutes);
+router.use("/videos", videoRoutes);
 
 module.exports = router;

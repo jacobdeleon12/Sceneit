@@ -1,9 +1,9 @@
-let cheerio = require("cheerio");
-let axios = require("axios");
+const cheerio = require("cheerio");
+const axios = require("axios");
 
 let urlArray = [];
 
-export default {
+module.exports = {
   // try "popularwishlist"
   // Scrapes list page, returns 10 videos
   searchList: function(query) {
