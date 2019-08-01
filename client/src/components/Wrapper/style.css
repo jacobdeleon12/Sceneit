@@ -79,7 +79,7 @@
 /* Optional: show position indicator in red */
 
 ::-webkit-scrollbar-thumb {
-  background: #ff0000;
+  background: rgb(1, 96, 128);
 }
 
 
@@ -145,7 +145,7 @@
     transition: 150ms transform, 150ms -webkit-transform;
     font-size: 0;
     white-space: nowrap;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     padding-bottom: 10px;
   }
   .tile {
