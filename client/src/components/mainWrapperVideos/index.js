@@ -1,81 +1,54 @@
-import React, { Component } from "react";
-import Wrapper from "../Wrapper";
-import { Thumb, Title, Iframe } from "../Iframe";
-import { SaveBtn, CommentBtn, BtnContainer } from "../Buttons/VideoBtns";
+import React, { Component, Fragment } from "react";
 import API from "../../utils/API";
-import { positions, Provider, transitions } from "react-alert";
-import AlertTemplate from "react-alert-template-basic";
+
+import Wrapper from "../Wrapper";
+import { Title, Iframe } from "../Iframe";
+import { SaveBtn, BtnContainer } from "../Buttons/VideoBtns";
 import VidWrapper from "../vidWraper";
 import Tile from "../tile";
 
+//NPM alert options
+import { positions, Provider, transitions } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
 const options = {
   timeout: 3000,
   position: positions.BOTTOM_CENTER,
   transition: transitions.SCALE
 };
 
-class mainWrapper extends Component {
+export default class mainWrapper extends React.Component {
   state = {
+    videos: {},
+    videoUrl: [],
     user: [],
-    tmdbVideos: [],
-    redditVideos: [],
-    youtubeVideos: [],
-    vevoVideos: [],
-    featuredVid: [],
     savedVideos: [],
     vidStateID: "",
     hover: false
   };
-
-  // =======================================
   componentDidMount() {
-    this.loadUser();
     this.loadVideos();
+    this.loadUser();
   }
 
-  // =======================================
   loadUser = () => {
     API.getUser(document.cookie.split("=0; ")[1])
       .then(res => {
-        // console.log(res.data)
-        this.setState({ user: res.data, savedVideos: res.data.savedVideos });
+        res.data.savedVideos != null &&
+          this.setState({ user: res.data, savedVideos: res.data.savedVideos });
       })
       .catch(err => console.log(err));
   };
 
-  // =======================================
-
-  // load videos from local storage into state to pull from in render
-  loadVideos = () => {
-    var tmdbVids = JSON.parse(localStorage.getItem("tmdb"));
-    var youtubeVids = JSON.parse(localStorage.getItem("youtube"));
-    var redditVids = JSON.parse(localStorage.getItem("reddit"));
-    var vevoVids = JSON.parse(localStorage.getItem("vevo"));
-
-    // console.log(tmdbVids);
-    // console.log(youtubeVids);
-    // console.log(redditVids);
-    // console.log(vevoVids);
-
-    this.setState({ featuredVid: redditVids[0] });
-    redditVids.shift();
-    this.setState({
-      tmdbVideos: tmdbVids,
-      redditVideos: redditVids,
-      youtubeVideos: youtubeVids,
-      vevoVideos: vevoVids
-    });
+  loadVideos = async () => {
+    let res = await API.getVideos();
+    this.setState({ videos: res.data[0].videos });
   };
-  //=========================================
+
   handleSaveFormSubmit = (event, video) => {
     event.preventDefault();
-    // this.refs.savebtn.setAttribute("disabled", "disabled");
-    console.log("event", event);
-
     const vStr = video.url;
     const vName = video.name;
     const vImg = video.bigImg;
-    console.log(video);
 
     API.saveVideo(this.state.user._id, {
       $push: {
@@ -83,8 +56,6 @@ class mainWrapper extends Component {
       }
     })
       .then(response => {
-        console.log(response);
-
         this.setState({
           savedVideos: response.data.savedVideo
         });
@@ -94,212 +65,82 @@ class mainWrapper extends Component {
     event.target.disabled = true;
   };
 
-  loadUser = () => {
-    API.getUser(document.cookie.split("profId=")[1])
-      .then(res => {
-        console.log(res.data);
-        this.setState({ user: res.data, savedVideos: res.data.savedVideos });
-      })
-      .catch(err => console.log(err));
+  hoverOn = (event, url) => {
+    console.log("im hovering");
+    console.log(`event target: ${event.target}`);
+    console.log(`target url: ${url}`);
   };
 
-  hoverOn = () => {
-    console.log("we are hovering");
-
-    this.setState({ hover: true });
+  hoverOff = (event, url) => {
+    console.log("im not hovering");
+    console.log(`event target: ${event.target}`);
+    console.log(`target url: ${url}`);
   };
 
-  hoverOff = () => {
-    this.setState({ hover: false });
-  };
-
-  renderRedditVids = () =>
-    this.state.redditVideos.map(video => {
-
-      return (
-        <Tile hoverOn={this.hoverOn} hoverOff={this.hoverOff}>
-          <VidWrapper>
-            {this.state.hover ? (
+  renderVideos = data => {
+    return data === undefined ? (
+      <div>Loading...</div>
+    ) : (
+      <ul>
+        {data.map((video, i) => (
+          <Tile key={i}>
+            <VidWrapper>
+              <Title title={video.name} />
+              <br />
               <Iframe
-                key={video.name}
+                key={i}
+                hoverOn={this.hoverOn(video.url)}
+                hoverOff={this.hoverOff(video.bigImg)}
                 name={video.name}
-                movieUrl={video.url}
-                thumbUrl={video.bigImg}
+                url={video.bigImg}
+                // thumbUrl={video.bigImg}
+                // videoUrl={video.url}
               />
-            ) : (
-              <Thumb
-                key={video.name}
-                id={video.name}
-                movieUrl={video.url}
-                thumbUrl={video.bigImg}
-                name="thumbnail"
-              />
-            )}
-
-            <Title title={video.name} />
-            <br />
-          </VidWrapper>
-          <br />
-          <BtnContainer>
-            <Provider template={AlertTemplate} {...options}>
-              <SaveBtn
-                value={video.url}
-                key={`${video.url}-save`}
-                id={video.name}
-                name="saveVid"
-                onClick={event => {
-                  this.handleSaveFormSubmit(event, video);
-                }}
-              />
-            </Provider>
-            {/* <CommentBtn
-              key={`${video.url}-comment`}
-              value={this.state.featuredVid.url}
-              name="CommentVid"
-              onClick={this.handleCommentSubmit}
-            /> */}
-          </BtnContainer>
-        </Tile>
-      );
-    });
-
-  renderIMDBVids = () =>
-    this.state.tmdbVideos.map(video => {
-
-      return (
-        <Tile hoverOn={this.hoverOn} hoverOff={this.hoverOff}>
-          <VidWrapper>
-            {this.state.hover ? (
-              <Iframe
-                key={video.name}
-                name={video.name}
-                movieUrl={video.url}
-                thumbUrl={video.bigImg}
-              />
-            ) : (
-              <Thumb
-                key={video.name}
-                id={video.name}
-                movieUrl={video.url}
-                thumbUrl={video.bigImg}
-                name="thumbnail"
-              />
-            )}
-
-            <Title title={video.name} />
-            <br />
-          </VidWrapper>
-          <br />
-          <BtnContainer>
-            <Provider template={AlertTemplate} {...options}>
-              <SaveBtn
-                value={video.url}
-                key={`${video.url}-save`}
-                id={video.name}
-                name="saveVid"
-                onClick={event => {
-                  this.handleSaveFormSubmit(event, video);
-                }}
-              />
-            </Provider>
-            {/* <CommentBtn
-              key={`${video.url}-comment`}
-              value={this.state.featuredVid.url}
-              name="CommentVid"
-              onClick={this.handleCommentSubmit}
-            /> */}
-          </BtnContainer>
-        </Tile>
-      );
-    });
+              <br />
+              <BtnContainer>
+                <Provider template={AlertTemplate} {...options}>
+                  <SaveBtn
+                    value={video.url}
+                    key={`${video.url}-save`}
+                    id={video.name}
+                    name="saveVid"
+                    onClick={event => {
+                      this.handleSaveFormSubmit(event, video);
+                    }}
+                  />
+                </Provider>
+              </BtnContainer>
+            </VidWrapper>
+          </Tile>
+        ))}
+      </ul>
+    );
+  };
 
   render() {
-    console.log(this.state.hover);
-
     return (
       <div className="mainWraper">
-        <h1 className="">Reddit Hot</h1>
-        <Wrapper ID="reddit">{this.renderRedditVids()}</Wrapper>
-        <h1 className="">IMDB Popular</h1>
-        <Wrapper ID="imdb">{this.renderIMDBVids()}</Wrapper>
-        {/* <h1 className="">Youtube Popular</h1>
-          <Wrapper ID="youtube">
-            {this.state.youtubeVideos.map(video => (
-              <div className="tile" key={video.url}>
-                <Iframe
-                  key={video.name}
-                  name={video.name}
-                  movieUrl={video.url}
-                  thumbUrl={video.bigImg}
-                />
-                <Title title={video.name} />
-                <Thumb
-                  key={video.name}
-                  movieUrl={video.url}
-                  thumbUrl={video.bigImg}
-                  onClick={this.imageSwap}
-                />
-                <br />
-                <BtnContainer>
-                  <Provider template={AlertTemplate} {...options}>
-                    <SaveBtn
-                      value={video.url}
-                      key={`${video.url}-save`}
-                      id={video.name}
-                      name="saveVid"
-                      onClick={(event) => { this.handleSaveFormSubmit(event, video) }}
-                    />
-                  </Provider>
-                  <CommentBtn
-                    key={`${video.url}-comment`}
-                    value={this.state.featuredVid.url}
-                    name="CommentVid"
-                    onClick={this.handleCommentSubmit}
-                  />
-                </BtnContainer>
-              </div>
-            ))}
-          </Wrapper>
-          <h1 className="">Hot on Vevo</h1>
-          <Wrapper ID="vevo">
-            {this.state.vevoVideos.map(video => (
-              <div className="tile" key={video.url}>
-                <Iframe
-                  key={video.name}
-                  name={video.name}
-                  movieUrl={video.url}
-                  thumbUrl={video.bigImg}
-                />
-                <Title title={video.name} />
-                <Thumb
-                  key={video.name}
-                  movieUrl={video.url}
-                  thumbUrl={video.bigImg}
-                  onClick={this.imageSwap}
-                />
-                <br />
-                <BtnContainer>
-                  <Provider template={AlertTemplate} {...options}>
-                    <SaveBtn
-                      value={video.url}
-                      key={`${video.url}-save`}
-                      id={video.name}
-                      name="saveVid"
-                      onClick={(event) => { this.handleSaveFormSubmit(event, video) }}
-                    />
-                  </Provider>
-                  <CommentBtn
-                    key={`${video.url}-comment`}
-                    value={this.state.featuredVid.url}
-                    name="CommentVid"
-                    onClick={this.handleCommentSubmit}
-                  />
-                </BtnContainer>
-              </div>
-            ))}
-          </Wrapper> */}
+        <h3 className="">Reddit</h3>
+        <Wrapper ID="reddit">
+          {this.renderVideos(this.state.videos.reddit)}
+        </Wrapper>
+        <h3 className="">TMDB</h3>
+        <Wrapper ID="tmdb">{this.renderVideos(this.state.videos.tmdb)}</Wrapper>
+        <h3 className="">STEAM</h3>
+        <Wrapper ID="steam">
+          {this.renderVideos(this.state.videos.steam)}
+        </Wrapper>
+        <h3 className="">YOUTUBE</h3>
+        <Wrapper ID="youtube">
+          {this.renderVideos(this.state.videos.youtube)}
+        </Wrapper>
+        <h3 className="">VEVO</h3>
+        <Wrapper ID="vevo">{this.renderVideos(this.state.videos.vevo)}</Wrapper>
+        <h3 className="">VIMEO</h3>
+        <Wrapper ID="vimeo">
+          {this.renderVideos(this.state.videos.vimeo)}
+        </Wrapper>
       </div>
     );
   }
 }
-export default mainWrapper;

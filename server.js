@@ -2,14 +2,6 @@ const express = require("express");
 require("dotenv").config();
 const mongoose = require("mongoose");
 const routes = require("./routes");
-const videos = require("./video");
-
-const steamQ = "popularwishlist";
-const tmdbQ = "popularity";
-const redditQ = "videos";
-const youtubeQ = "mostPopular";
-const playListQ = "PL9tY0BWXOZFsPMZczEqnyvD-Z5ugOZrm8";
-const vimeoQ = "staffpicks";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -29,28 +21,26 @@ app.use(routes);
 mongoose
   .connect(
     process.env.MONGODB_URI ||
-      `mongodb://user:password1@ds351107.mlab.com:51107/heroku_qmrhm6sk`,
+      `mongodb://${process.env.MDB_USERNAME}:${process.env.MDB_PASSWORD}@ds351107.mlab.com:51107/heroku_qmrhm6sk`,
     { useNewUrlParser: true, useFindAndModify: false }
   )
   .then(() => {
-    const steamQ = "popularity";
-    const tmdbQ = "popularwishlist";
+    const tmdbQ = "popularity";
+    const steamQ = "popularwishlist";
     const redditQ = "videos";
     const youtubeQ = "mostPopular";
     const vevoQ = "PL9tY0BWXOZFsPMZczEqnyvD-Z5ugOZrm8";
     const vimeoQ = "staffpicks";
 
-    console.log("mongoose connected");
-    // videos.addToDb(steamQ, tmdbQ, redditQ, youtubeQ, vevoQ, vimeoQ);
+    console.log(`mongoose connected on ${new Date()}`);
+    // videos.addToDb(tmdbQ, steamQ,  redditQ, youtubeQ, vevoQ, vimeoQ);
     setInterval(() => {
-      console.log("im am a new function");
-      // videos.addToDb(steamQ, tmdbQ, redditQ, youtubeQ, vevoQ, vimeoQ);
+      console.log(`new videos added on ${new Date()}`);
+      // videos.addToDb(tmdbQ, steamQ,  redditQ, youtubeQ, vevoQ, vimeoQ);
     }, 60 * 60 * 1000);
   })
   .catch(err => console.log(err));
 
-  videos.addToDb(steamQ, tmdbQ, redditQ, youtubeQ, playListQ, vimeoQ);
-  
 // Start the API server
 app.listen(PORT, function() {
   console.log(`API Server now listening on PORT ${PORT}!`);

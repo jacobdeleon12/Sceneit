@@ -1,6 +1,7 @@
+require('dotenv').config()
 const axios = require("axios");
 
-const apiKey = "AIzaSyBQaJOdXS5rojwu9fVmBi-JenkMGVMUIec";
+// const apiKey = "AIzaSyBQaJOdXS5rojwu9fVmBi-JenkMGVMUIec";
 
 let urlArray = [];
 
@@ -11,7 +12,7 @@ module.exports = {
     return new Promise(function(resolve, reject) {
       axios
         .get(
-          `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${query}&key=${apiKey}`
+          `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${query}&key=${process.env.YOUTUBE_API}`
         )
         .then(response => {
           for (let obj of response.data.items) {
@@ -37,7 +38,7 @@ module.exports = {
     return new Promise(function(resolve, reject) {
       axios
         .get(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=10&q=${query}&key=${apiKey}`
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=10&q=${query}&key=${process.env.YOUTUBE_API}`
         )
         .then(response => {
           for (let obj of response.data.items) {

@@ -2,7 +2,6 @@ const cheerio = require("cheerio");
 const axios = require("axios");
 
 let urlArray = [];
-let count = 0;
 
 module.exports = {
   // try "popularwishlist"
@@ -21,7 +20,6 @@ module.exports = {
             axios
               .get(urlLink)
               .then(response => {
-                count++;
                 let $ = cheerio.load(response.data);
 
                 $("div.highlight_movie").attr("data-webm-hd-source") &&
@@ -32,10 +30,12 @@ module.exports = {
                     bigImg: $("img.game_header_image_full").attr("src"),
                     url: $("div.highlight_movie").attr("data-webm-hd-source")
                   });
+                if (urlArray.length === 20) {
+                  // console.log(urlArray);
+                  resolve(urlArray);
+                }
               })
               .catch(err => reject(err));
-            // console.log(urlArray);
-            resolve(urlArray);
           });
         })
         .catch(err => reject(err));
@@ -68,10 +68,12 @@ module.exports = {
                     bigImg: $("img.game_header_image_full").attr("src"),
                     url: $("div.highlight_movie").attr("data-webm-hd-source")
                   });
+                if (urlArray.length === 20) {
+                  // console.log(urlArray);
+                  resolve(urlArray);
+                }
               })
               .catch(err => reject(err));
-            // console.log(urlArray);
-            resolve(urlArray);
           });
         })
         .catch(err => reject(err));

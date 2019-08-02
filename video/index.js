@@ -7,9 +7,6 @@ const YOUTUBE = require("./youtube");
 const PLAYLIST = require("./playList");
 const VIMEO = require("./vimeo");
 
-// const vevoPlayList = "PL9tY0BWXOZFsPMZczEqnyvD-Z5ugOZrm8";
-const vevoChannel = "UC2pmfLm7iq6Ov1UwYrWYkZA";
-
 // TMDB.searchList("popularity");
 // STEAM.searchList("popularwishlist");
 // REDDIT.searchList("videos");
@@ -21,32 +18,47 @@ const vevoChannel = "UC2pmfLm7iq6Ov1UwYrWYkZA";
 // STEAM.searchName("speed");
 // REDDIT.searchName("speed");
 // YOUTUBE.searchName("speed");
-// PLAYLIST.searchChannel(vevoChannel, "Justin");
+// PLAYLIST.searchChannel(vevoChannel, "speed");
 // VIMEO.searchName("speed");
 
-const videoArray = [];
-
 module.exports = {
-  addToDb: async function(steamQ, tmdbQ, redditQ, youtubeQ, vevoQ, vimeoQ) {
+  addToDb: async function(tmdbQ, steamQ, redditQ, youtubeQ, vevoQ, vimeoQ) {
     try {
-      const STEAMarr = await STEAM.searchList(steamQ);
       const TMDBarr = await TMDB.searchList(tmdbQ);
-      const REDDITarr = await REDDIT.searchList(redditQ);
-      const YOUTUBEarr = await YOUTUBE.searchList(youtubeQ);
-      const VEVOarr = await PLAYLIST.searchPlayList(vevoQ);
-      const VIMEOarr = await VIMEO.searchList(vimeoQ);
+      console.log("made it past TMDB");
+      // console.log(TMDBarr);
 
-      videoArray.push({
-        steam: STEAMarr,
-        tmdb: TMDBarr,
-        reddit: REDDITarr,
-        youtube: YOUTUBEarr,
-        vevo: VEVOarr,
-        vimeo: VIMEOarr
-      });
+      const STEAMarr = await STEAM.searchList(steamQ);
+      console.log("made it past STEAM");
+      // console.log(STEAMarr);
+
+      const REDDITarr = await REDDIT.searchList(redditQ);
+      console.log("made it past REDDIT");
+      // console.log(REDDITarr);
+
+      const YOUTUBEarr = await YOUTUBE.searchList(youtubeQ);
+      console.log("made it past YOUTUBE");
+      // console.log(YOUTUBEarr);
+
+      const VEVOarr = await PLAYLIST.searchPlayList(vevoQ);
+      console.log("made it past PLAYLIST");
+      // console.log(VEVOarr);
+
+      const VIMEOarr = await VIMEO.searchList(vimeoQ);
+      console.log("made it past VIMEO");
+      // console.log(VIMEOarr);
 
       const query = { vidType: "mainPage" };
-      const update = { videos: videoArray };
+      const update = {
+        videos: {
+          tmdb: TMDBarr,
+          steam: STEAMarr,
+          reddit: REDDITarr,
+          youtube: YOUTUBEarr,
+          vevo: VEVOarr,
+          vimeo: VIMEOarr
+        }
+      };
       const options = { upsert: true, new: true, setDefaultsOnInsert: true };
 
       // Find the document
@@ -64,37 +76,33 @@ module.exports = {
     }
   },
   searchByWord: async function(searchWord) {
-    console.log(searchWord);
-    
+    const vevoChannel = "UC2pmfLm7iq6Ov1UwYrWYkZA";
+
     try {
       const STEAMarr = await STEAM.searchName(searchWord);
-      console.log("made it past steam");
-
-      // const TMDBarr = await TMDB.searchName(searchWord);
       // console.log("made it past steam");
-
+      const TMDBarr = await TMDB.searchName(searchWord);
+      // console.log("made it past steam");
       const REDDITarr = await REDDIT.searchName(searchWord);
-      console.log("made it past reddit");
-
+      // console.log("made it past reddit");
       const YOUTUBEarr = await YOUTUBE.searchName(searchWord);
-      console.log("made it past youtube");
-
+      // console.log("made it past youtube");
       const VEVOarr = await PLAYLIST.searchChannel(vevoChannel, searchWord);
-      console.log("made it past vevo");
-
+      // console.log("made it past vevo");
       const VIMEOarr = await VIMEO.searchName(searchWord);
-      console.log("made it past vimeo");
+      // console.log("made it past vimeo");
 
       videoArray.push({
+        searched_word: searchWord,
         steam: STEAMarr,
-        // tmdb: TMDBarr,
+        tmdb: TMDBarr,
         reddit: REDDITarr,
         youtube: YOUTUBEarr,
         vevo: VEVOarr,
         vimeo: VIMEOarr
       });
 
-      console.log(videoArray);
+      // console.log(videoArray);
       return videoArray;
     } catch (error) {
       console.log(error);
@@ -102,4 +110,3 @@ module.exports = {
     }
   }
 };
-// addToDb();
