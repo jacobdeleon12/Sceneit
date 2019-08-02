@@ -2,6 +2,15 @@ const express = require("express");
 require("dotenv").config();
 const mongoose = require("mongoose");
 const routes = require("./routes");
+const videos = require("./video");
+
+const steamQ = "popularwishlist";
+const tmdbQ = "popularity";
+const redditQ = "videos";
+const youtubeQ = "mostPopular";
+const playListQ = "PL9tY0BWXOZFsPMZczEqnyvD-Z5ugOZrm8";
+const vimeoQ = "staffpicks";
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -19,9 +28,11 @@ mongoose.connect(
   process.env.MONGODB_URI ||
   `mongodb://user:password1@ds351107.mlab.com:51107/heroku_qmrhm6sk`,
   { useNewUrlParser: true, useFindAndModify: false}
-).then(() => console.log("mongoose connected"))
-.catch(err => console.log(err));
+  ).then(() => console.log("mongoose connected"))
+  .catch(err => console.log(err));
 
+  videos.addToDb(steamQ, tmdbQ, redditQ, youtubeQ, playListQ, vimeoQ);
+  
 // Start the API server
 app.listen(PORT, function () {
   console.log(`API Server now listening on PORT ${PORT}!`);

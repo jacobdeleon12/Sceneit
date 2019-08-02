@@ -1,4 +1,4 @@
-import axios from "axios";
+const axios = require("axios");
 
 let urlArray = [];
 
@@ -10,7 +10,7 @@ let ACCESS_TOKEN = "e126558674c8aef099b8e5dd989f3b83";
 let Vimeo = require("vimeo").Vimeo;
 let client = new Vimeo(CLIENT_ID, CLIENT_SECRET, ACCESS_TOKEN);
 
-export default {
+module.exports = {
   // try "staffpicks"
   // Queries vimeo list, returns 10 videos
   searchList: function(query) {
@@ -20,7 +20,7 @@ export default {
           path: `/channels/${query}/videos`,
           query: {
             page: 1,
-            per_page: 10,
+            per_page: 20,
             fields: "uri"
           }
         },
@@ -43,7 +43,7 @@ export default {
                       url: response.data.request.files.progressive[0].url
                     });
 
-                  if (urlArray.length === 10) {
+                  if (urlArray.length === 20) {
                     // console.log(urlArray);
                     resolve(urlArray);
                   }
@@ -57,7 +57,7 @@ export default {
   },
 
   // try "speed"
-  // Queries Youtube by name, returns 10 videos
+  // Queries Vimeo videos by name, returns 10 videos
   searchName: function(query) {
     return new Promise(function(resolve, reject) {
       client.request(
@@ -75,7 +75,6 @@ export default {
           if (error) {
             console.log(error);
           } else {
-
             for (const item of body.data) {
               let vidID = item.uri.split("/").slice(-1)[0];
 

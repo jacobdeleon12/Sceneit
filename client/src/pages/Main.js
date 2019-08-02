@@ -265,12 +265,12 @@ class Main extends Component {
           <Wrapper ID="imdb">
             {this.state.tmdbVideos.map(video => (
               <div className="tile" key={video.url}>
-                {/* <Iframe
+                <Iframe
                   key={video.name}
                   name={video.name}
                   movieUrl={video.url}
                   thumbUrl={video.bigImg}
-                /> */}
+                />
                 <Title title={video.name} />
                 <Thumb
                   key={video.name}
@@ -299,7 +299,7 @@ class Main extends Component {
               </div>
             ))}
           </Wrapper>
-          {/* <h1 className="">Youtube Popular</h1>
+          <h1 className="">Youtube Popular</h1>
           <Wrapper ID="youtube">
             {this.state.youtubeVideos.map(video => (
               <div className="tile" key={video.url}>
@@ -374,7 +374,7 @@ class Main extends Component {
                 </BtnContainer>
               </div>
             ))}
-          </Wrapper> */}
+          </Wrapper>
         </Container>
         <Footer />
       </div>

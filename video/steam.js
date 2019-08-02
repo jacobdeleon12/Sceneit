@@ -1,9 +1,10 @@
-let cheerio = require("cheerio");
-let axios = require("axios");
+const cheerio = require("cheerio");
+const axios = require("axios");
 
 let urlArray = [];
+let count = 0;
 
-export default {
+module.exports = {
   // try "popularwishlist"
   // Scrapes list page, returns 10 videos
   searchList: function(query) {
@@ -17,10 +18,10 @@ export default {
 
           $("a.search_result_row").each((i, element) => {
             let urlLink = $(element).attr("href");
-
             axios
               .get(urlLink)
               .then(response => {
+                count++;
                 let $ = cheerio.load(response.data);
 
                 $("div.highlight_movie").attr("data-webm-hd-source") &&
@@ -31,13 +32,10 @@ export default {
                     bigImg: $("img.game_header_image_full").attr("src"),
                     url: $("div.highlight_movie").attr("data-webm-hd-source")
                   });
-
-                if (urlArray.length === 10) {
-                  // console.log(urlArray);
-                  resolve(urlArray);
-                }
               })
               .catch(err => reject(err));
+            // console.log(urlArray);
+            resolve(urlArray);
           });
         })
         .catch(err => reject(err));
@@ -70,13 +68,10 @@ export default {
                     bigImg: $("img.game_header_image_full").attr("src"),
                     url: $("div.highlight_movie").attr("data-webm-hd-source")
                   });
-
-                if (urlArray.length === 10) {
-                  // console.log(urlArray);
-                  resolve(urlArray);
-                }
               })
               .catch(err => reject(err));
+            // console.log(urlArray);
+            resolve(urlArray);
           });
         })
         .catch(err => reject(err));
