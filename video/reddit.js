@@ -49,7 +49,7 @@ module.exports = {
     return new Promise(function(resolve, reject) {
       axios
         .get(
-          `https://www.reddit.com/r/videos/search.json?q=${query}&limit=20&restrict_sr=on&include_over_18=on&sort=relevance&t=all`
+          `https://www.reddit.com/r/videos/search.json?q=${query}&restrict_sr=on&limit=20&include_over_18=on&sort=relevance&t=all`
         )
         .then(response => {
           for (let obj of response.data.data.children) {

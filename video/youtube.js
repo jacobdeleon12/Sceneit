@@ -5,7 +5,7 @@ const apiKey = "AIzaSyBQaJOdXS5rojwu9fVmBi-JenkMGVMUIec";
 let urlArray = [];
 
 module.exports = {
-  // try "mostPopular"
+    // try "mostPopular"
   // Queries YouTube list, returns 10 videos
   searchList: function(query) {
     return new Promise(function(resolve, reject) {

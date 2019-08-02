@@ -5,13 +5,17 @@ import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import Userwrap from "../components/Userwrap";
 import NavBar from "../components/Nav/MainNav";
-import { Iframe } from "../components/Iframe";
+import Footer from "../components/footer";
+import {
+  // Iframe,
+  Thumb
+} from "../components/Iframe";
 // import JumboIframe from "../components/JumboIframe";
 import {
   // SaveBtn,
   DeleteBtn,
-  // ViewBtn,
-  CommentBtn
+  BtnContainer
+  // CommentBtn
 } from "../components/Buttons/VideoBtns";
 //import Carousel from "../csomponents/Carousel"
 //NPM alert options
@@ -28,19 +32,20 @@ class User extends Component {
   state = {
     user: [],
     videos: [],
-    movieVideos: []
+    movieVideos: [],
     // featuredVid: [],
     // selectedVideo: [{}]
+    keyCard: ""
   };
   componentDidMount() {
     this.loadUser();
   }
 
   loadUser = () => {
-    API.getUser(document.cookie.split("=0; ")[1])
+    API.getUser(document.cookie.split("profId=")[1])
       .then(res => {
         // console.log(res.data)
-        this.setState({ user: res.data, videos: res.data.savedVideos });
+        this.setState({ user: res.data, videos: res.data.savedVideos, keyCard: document.cookie.split("profId=")[1] });
       })
       .catch(err => console.log(err));
   };
@@ -116,10 +121,10 @@ class User extends Component {
     });
   };
   // =======================================
-  handleDeleteFormSubmit = event => {
+  handleDeleteFormSubmit = (event, video) => {
     event.preventDefault();
-    const vStr = event.target.value;
-    const vName = event.target.id;
+    const vStr = video.vStr;
+    const vName = video.vName;
     console.log(vStr);
     console.log(vName);
 
@@ -135,74 +140,97 @@ class User extends Component {
       .catch(err => console.log(err));
   };
 
+  changeSrcImage = (event, video) => {
+    event.preventDefault();
+    console.log("clicked");
+
+    video.attr("src", video.url)
+  };
+
   render() {
     console.log(this.state);
 
-    return (
-      <div>
-        <NavBar />
-        <Container fluid>
-          <Row>
-            <Col size="md-12">
-              <Jumbotron>
-                <div className="row justify-content-center">
-                  <Col size="md-2">
-                    <Container fluid>
-                      <img src={this.state.user.imageUrl} alt="googleImage" />
-                    </Container>
-                  </Col>
-                  <Col size="md-3">
-                    <Container fluid>
-                      <Row fluid>
-                        <Col size="md-12">
-                          <h4>
-                            {this.state.user.givenName +
-                              " " +
-                              this.state.user.familyName}
-                          </h4>
-                        </Col>
-                      </Row>
-                      <Row fluid>
-                        <Col size="md-12">
-                          <h5>{this.state.user.email}</h5>
-                        </Col>
-                      </Row>
-                    </Container>
-                  </Col>
-                </div>
-              </Jumbotron>
-            </Col>
-          </Row>
-          <Userwrap>
-            {this.state.videos.map(video => (
-              <div className="text-center">
-                <Iframe
+    switch (this.state.keyCard) {
+      case this.state.user.googleId:
+        return (
+          <div>
+            <NavBar />
+            <Container fluid>
+              <Row>
+                <Col size="md-12">
+                  <Jumbotron>
+                    <div className="row justify-content-center">
+                      <Col size="md-2">
+                        <Container fluid>
+                          <img src={this.state.user.imageUrl} alt="googleImage" />
+                        </Container>
+                      </Col>
+                      <Col size="md-3">
+                        <Container fluid>
+                          <Row fluid>
+                            <Col size="md-12">
+                              <h4>
+                                {this.state.user.givenName +
+                                  " " +
+                                  this.state.user.familyName}
+                              </h4>
+                            </Col>
+                          </Row>
+                          <Row fluid>
+                            <Col size="md-12">
+                              <h5>{this.state.user.email}</h5>
+                            </Col>
+                          </Row>
+                        </Container>
+                      </Col>
+                    </div>
+                  </Jumbotron>
+                </Col>
+              </Row>
+              <Userwrap>
+                {this.state.videos ?
+                  this.state.videos.map(video => (
+                    <div className="text-center">
+                      {/* <Iframe
                   key={this.state.user.savedVideos._id}
                   YTstr={video.vStr}
-                />
-
-                <br />
-                {/* provider is for alert. must encompass  button */}
-                <Provider template={AlertTemplate} {...options}>
-                  <DeleteBtn
+                  movieUrl={video.vImg}
+                  onClick={(event) => { this.changeSrcImage(event, video) }}
+                /> */}
+                      <Thumb
+                        key={this.state.user.savedVideos._id}
+                        thumbUrl={video.vImg}
+                        movieUrl={video.vStr}
+                        name={video.vName}
+                        onClick={(event) => { this.changeSrcImage(event, video) }}
+                      />
+                      {/* <br /> */}
+                      <BtnContainer>
+                        {/* provider is for alert. must encompass  button */}
+                        <Provider template={AlertTemplate} {...options}>
+                          <DeleteBtn
+                            value={video.vStr}
+                            key={`${video.vStr}-delete`}
+                            id={video.vName}
+                            name="delVid"
+                            onClick={(event) => { this.handleDeleteFormSubmit(event, video) }}
+                          />
+                        </Provider>
+                        {/* <CommentBtn
                     value={video.vStr}
-                    key={this.state.user.savedVideos._id + "-delete"}
+                    key={this.state.user.savedVideos._id + "-comment"}
                     id={video.vName}
-                    name="delVid"
-                    onClick={this.handleDeleteFormSubmit}
-                  />
-                </Provider>
-                <CommentBtn
-                  value={video.vStr}
-                  key={this.state.user.savedVideos._id + "-comment"}
-                  id={video.vName}
-                  name="CommentVid"
-                  onClick={this.handleCommentSubmit}
-                />
-              </div>
-            ))}
-          </Userwrap>
-          {/* <h1 className="text-center">IMDB Popular</h1>
+                    name="CommentVid"
+                    onClick={this.handleCommentSubmit}
+                  /> */}
+                      </BtnContainer>
+                      <br />
+                    </div>
+                  ))
+                  : <h5>You have no saved videos. Womp Womp!</h5>}
+              </Userwrap>
+
+              {/* <h1 className="text-center">IMDB Popular</h1>
           <Wrapper>
             {this.state.movieVideos.map(video => (
               <div className="text-center">
@@ -217,7 +245,7 @@ class User extends Component {
               </div>
             ))}
           </Wrapper> */}
-          {/* {this.state.movieVideos.map(video => (
+              {/* {this.state.movieVideos.map(video => (
               <div className="text-center">
                 <Iframe
                   key={video.name}
@@ -226,9 +254,23 @@ class User extends Component {
                 <DeleteBtn onClick={() => this.deleteBook(video._id)} />
               </div>
             ))} */}
-        </Container>
-      </div>
-    );
+            </Container>
+          </div>
+        );
+      // break;
+
+      default:
+        return (
+          <div>
+            <NavBar />
+            <Container fluid>
+              <h5>You must be logged in to visit the Profile page. Womp Womp! Click <a href="https://sceneitapp.herokuapp.com/">here</a> to visit the login page.</h5>
+            </Container>
+            <Footer />
+          </div>
+        )
+      // break;
+    }
   }
 }
 

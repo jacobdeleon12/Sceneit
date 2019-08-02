@@ -65,7 +65,7 @@ module.exports = {
           path: `/videos`,
           query: {
             page: 1,
-            per_page: 10,
+            per_page: 20,
             query: query,
             sort: "plays",
             fields: "uri"
@@ -91,7 +91,7 @@ module.exports = {
                       url: response.data.request.files.progressive[0].url
                     });
 
-                  if (urlArray.length === 10) {
+                  if (urlArray.length === 20) {
                     console.log(urlArray);
                     resolve(urlArray);
                   }

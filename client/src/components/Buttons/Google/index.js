@@ -12,7 +12,7 @@ const clientId =
 const success = response => {
   const profId = response.profileObj.googleId;
 
-  document.cookie = profId;
+  document.cookie = "profId=" + profId;
   console.log(document.cookie);
 
   API.getUser(profId)
@@ -65,11 +65,13 @@ export function GLogin() {
 
 export function GLogout() {
   return (
-    <div
+    <div className="logout"
       // client_Id={clientId}
       // buttonText="Logout"
       // onLogoutSuccess={logout}
       onClick={logout}
-    ><i className="fab fa-google"></i> logout</div>
+    >
+      <i className="fab fa-google"></i> Logout
+    </div>
   );
 }

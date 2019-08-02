@@ -3,11 +3,11 @@ import "./style.css";
 
 function Wrapper(props) {
   const left = () => {
-    scrollLeft(document.getElementById(props.ID), -1500, 1000);
+    scrollLeft(document.getElementById(props.ID), -300, 500);
   };
 
   const right = () => {
-    scrollLeft(document.getElementById(props.ID), 1500, 1000);
+    scrollLeft(document.getElementById(props.ID), 300, 500);
   };
 
   function scrollLeft(element, change, duration) {
@@ -15,9 +15,9 @@ function Wrapper(props) {
       currentTime = 0,
       increment = 20;
 
-    console.log(start);
+    // console.log(start);
 
-    var animateScroll = function() {
+    var animateScroll = function () {
       currentTime += increment;
       var val = Math.easeInOutQuad(currentTime, start, change, duration);
       element.scrollLeft = val;
@@ -32,7 +32,7 @@ function Wrapper(props) {
   //b = start value
   //c = change in value
   //d = duration
-  Math.easeInOutQuad = function(t, b, c, d) {
+  Math.easeInOutQuad = function (t, b, c, d) {
     t /= d / 2;
     if (t < 1) return (c / 2) * t * t + b;
     t--;
@@ -40,7 +40,7 @@ function Wrapper(props) {
   };
 
   return (
-    <div className="vidWrapper ">
+    <div className="scrollWrapper ">
       <div className="scrollBtn" id="left-button" onClick={left}>
         <span className="scrollArrow">&lt;</span>
       </div>

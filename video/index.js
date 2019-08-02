@@ -1,3 +1,5 @@
+const db = require("../models");
+
 const TMDB = require("./tmdb");
 const STEAM = require("./steam");
 const REDDIT = require("./reddit");
@@ -5,14 +7,8 @@ const YOUTUBE = require("./youtube");
 const PLAYLIST = require("./playList");
 const VIMEO = require("./vimeo");
 
-// const steamQ = "popularwishlist";
-// const tmdbQ = "popularity";
-// const redditQ = "videos";
-// const youtubeQ = "mostPopular";
-// const playListQ = "PL9tY0BWXOZFsPMZczEqnyvD-Z5ugOZrm8";
-// const vimeoQ = "staffpicks";
-
-// const vevoChannel = "UC2pmfLm7iq6Ov1UwYrWYkZA";
+// const vevoPlayList = "PL9tY0BWXOZFsPMZczEqnyvD-Z5ugOZrm8";
+const vevoChannel = "UC2pmfLm7iq6Ov1UwYrWYkZA";
 
 // TMDB.searchList("popularity");
 // STEAM.searchList("popularwishlist");
@@ -26,63 +22,84 @@ const VIMEO = require("./vimeo");
 // REDDIT.searchName("speed");
 // YOUTUBE.searchName("speed");
 // PLAYLIST.searchChannel(vevoChannel, "Justin");
-// VIMEO.searchName("the matrix");
+// VIMEO.searchName("speed");
 
-let videoArr = [];
+const videoArray = [];
 
 module.exports = {
-  // try "videos"
-  // Queries Reddit sub, returns 10 videos
-  addToDb: async function(steamQ, tmdbQ, redditQ, youtubeQ, playListQ, vimeoQ) {
-      try {
-        const STEAMarr = await STEAM.searchList(steamQ);
-        const TMDBarr = await TMDB.searchList(tmdbQ);
-        const REDDITarr = await REDDIT.searchList(redditQ);
-        const YOUTUBEarr = await YOUTUBE.searchList(youtubeQ);
-        const VEVOarr = await PLAYLIST.searchPlayList(playListQ);
-        const VIMEOarr = await VIMEO.searchList(vimeoQ);
+  addToDb: async function(steamQ, tmdbQ, redditQ, youtubeQ, vevoQ, vimeoQ) {
+    try {
+      const STEAMarr = await STEAM.searchList(steamQ);
+      const TMDBarr = await TMDB.searchList(tmdbQ);
+      const REDDITarr = await REDDIT.searchList(redditQ);
+      const YOUTUBEarr = await YOUTUBE.searchList(youtubeQ);
+      const VEVOarr = await PLAYLIST.searchPlayList(vevoQ);
+      const VIMEOarr = await VIMEO.searchList(vimeoQ);
+
+      videoArray.push({
+        steam: STEAMarr,
+        tmdb: TMDBarr,
+        reddit: REDDITarr,
+        youtube: YOUTUBEarr,
+        vevo: VEVOarr,
+        vimeo: VIMEOarr
+      });
+
+      const query = { vidType: "mainPage" };
+      const update = { videos: videoArray };
+      const options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
+      // Find the document
+      db.Video.findOneAndUpdate(query, update, options, function(
+        error,
+        result
+      ) {
+        if (error) return;
+        console.log(result);
+      });
+
+      // console.log(videoArray);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  searchByWord: async function(searchWord) {
+    console.log(searchWord);
     
-        videoArr.push({
-          steam: STEAMarr,
-          tmdb: TMDBarr,
-          reddit: REDDITarr,
-          youtube: YOUTUBEarr,
-          vevo: VEVOarr,
-          vimeo: VIMEOarr
-        });
-    
-        console.log(videoArr);
-      } catch (err) {
-        console.log(err);
-      }
-    
+    try {
+      const STEAMarr = await STEAM.searchName(searchWord);
+      console.log("made it past steam");
+
+      // const TMDBarr = await TMDB.searchName(searchWord);
+      // console.log("made it past steam");
+
+      const REDDITarr = await REDDIT.searchName(searchWord);
+      console.log("made it past reddit");
+
+      const YOUTUBEarr = await YOUTUBE.searchName(searchWord);
+      console.log("made it past youtube");
+
+      const VEVOarr = await PLAYLIST.searchChannel(vevoChannel, searchWord);
+      console.log("made it past vevo");
+
+      const VIMEOarr = await VIMEO.searchName(searchWord);
+      console.log("made it past vimeo");
+
+      videoArray.push({
+        steam: STEAMarr,
+        // tmdb: TMDBarr,
+        reddit: REDDITarr,
+        youtube: YOUTUBEarr,
+        vevo: VEVOarr,
+        vimeo: VIMEOarr
+      });
+
+      console.log(videoArray);
+      return videoArray;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   }
 };
-
-
-// async function addToDb() {
-//   try {
-//     const STEAMarr = await STEAM.searchList("popularwishlist");
-//     const TMDBarr = await TMDB.searchList("popularity");
-//     const REDDITarr = await REDDIT.searchList("videos");
-//     const YOUTUBEarr = await YOUTUBE.searchList("mostPopular");
-//     const VEVOarr = await PLAYLIST.searchPlayList(vevoPlayList);
-//     const VIMEOarr = await VIMEO.searchList("staffpicks");
-
-//     videoArr.push({
-//       steam: STEAMarr,
-//       tmdb: TMDBarr,
-//       reddit: REDDITarr,
-//       youtube: YOUTUBEarr,
-//       vevo: VEVOarr,
-//       vimeo: VIMEOarr
-//     });
-
-//     console.log(videoArr);
-//     // resolve(urlArray);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
 // addToDb();
-// export default addToDb;

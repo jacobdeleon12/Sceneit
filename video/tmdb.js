@@ -52,7 +52,7 @@ module.exports = {
         .get(
           `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${query}&page=1&include_adult=false`
         )
-        .then(response => {
+        .then(response => {          
           for (let obj of response.data.results) {
             axios
               .get(
@@ -69,7 +69,7 @@ module.exports = {
                   });
 
                 if (urlArray.length === 10) {
-                  // console.log(urlArray);
+                  console.log(urlArray);
                   resolve(urlArray);
                 }
               })
