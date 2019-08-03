@@ -1,6 +1,5 @@
 .scrollWrapper {
   height: auto;
-
   position: relative;
   text-align: center;
   padding: 0 30px;
@@ -82,9 +81,7 @@
   background: rgb(1, 96, 128);
 }
 
-
 @media (min-width: 320px) {
-
   .scrollBtn {
     width: 18px;
   }
@@ -97,7 +94,18 @@
 }
 
 @media (min-width: 425px) {
+  .scrollBtn {
+    width: 18px;
+  }
+  .scrollWrapper {
+    padding: 0px 18px;
+  }
+  .scroll_menu {
+    height: 15rem;
+  }
+}
 
+@media (min-width: 425px) {
   .scrollBtn {
     width: 18px;
   }
@@ -123,20 +131,19 @@
     height: 16rem;
   }
 }
-@media (min-width: 1024px) {
 
+@media (min-width: 1024px) {
   .scroll_menu {
-    height: 16rem;
+    height: 17rem;
   }
 }
+
 /* @media (min-width: 1200px) {
 
   .scroll_menu {
     height: 25vh;
   }
 } */
-
-
 
 @media (min-width: 768px) {
   .row__inner {
@@ -154,6 +161,7 @@
     width: 250px;
     height: 140.625px;
     margin-right: 10px;
+    margin-top: 20px;
     font-size: 20px;
     cursor: pointer;
     transition: 200ms all;
@@ -179,7 +187,6 @@
   left: 50%;
   display: #000;
 }
-
 .tile__details:after {
   margin-top: -115px;
   margin-left: -25px;
@@ -190,7 +197,6 @@
   text-align: center;
   border-radius: 100%;
 }
-
 .tile__details:before {
   content: '▶';
   left: 0;

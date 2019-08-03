@@ -1,15 +1,14 @@
 import React from "react";
 import Wrapper from "../Wrapper";
 import {
-  SaveBtn,
-  // CommentBtn, 
+  SaveBtn
+  // CommentBtn,
   // BtnContainer
 } from "../Buttons/VideoBtns";
 import API from "../../utils/API";
 import { Title, Iframe, Thumbnail } from "../Iframe";
 import { Tile, JumboTile } from "../Tile";
 import { JumboIframe } from "../Iframe";
-
 //NPM alert options
 import { positions, Provider, transitions } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
@@ -18,7 +17,6 @@ const options = {
   position: positions.BOTTOM_CENTER,
   transition: transitions.SCALE
 };
-
 export default class mainWrapper extends React.Component {
   state = {
     videos: {},
@@ -32,7 +30,6 @@ export default class mainWrapper extends React.Component {
     this.loadVideos();
     this.loadUser();
   }
-
   loadUser = () => {
     // let loggedInUser = window.sessionStorage.getItem("loggedInUser");
     // console.log(loggedInUser);
@@ -44,18 +41,15 @@ export default class mainWrapper extends React.Component {
       })
       .catch(err => console.log(err));
   };
-
   loadVideos = async () => {
     let res = await API.getVideos();
     this.setState({ videos: res.data[0].videos });
   };
-
   handleSaveFormSubmit = (event, video) => {
     event.preventDefault();
     const vStr = video.url;
     const vName = video.name;
     const vImg = video.bigImg;
-
 
     API.saveVideo(window.sessionStorage.getItem("loggedInUser"), {
       $push: {
@@ -68,27 +62,23 @@ export default class mainWrapper extends React.Component {
         });
       })
       .catch(err => console.log(err));
-
     event.target.disabled = true;
   };
-
   constructor() {
     super();
     this.state = {};
   }
-
   determineItemStyle(video, i) {
     const isItemSelected = this.state.selectedItem === video.url;
     return isItemSelected ? (
       <Iframe name={video.name} url={video.url} id={i} />
     ) : (
-        <Thumbnail img={video.bigImg} id={i} />
-      );
+      <Thumbnail alt={video.name} img={video.bigImg} id={i} />
+    );
   }
-
   renderVideos = data => {
     return (
-      <ul>
+      <div>
         {data.map((video, i) => (
           <Tile key={i}>
             <Title title={video.name} />
@@ -118,10 +108,9 @@ export default class mainWrapper extends React.Component {
             </Provider>
           </Tile>
         ))}
-      </ul>
+      </div>
     );
   };
-
   renderJumbo = video => {
     return (
       <ul>
@@ -145,34 +134,33 @@ export default class mainWrapper extends React.Component {
       </ul>
     );
   };
-
   render() {
     return this.state.videos === undefined ? (
       <div>Loading...</div>
     ) : (
-        <div className="mainWraper">
-          <JumboTile>{this.renderJumbo(this.state.videos.reddit[0])}</JumboTile>
-          <h3 className="">Reddit</h3>
-          <Wrapper ID="reddit">
-            {this.renderVideos(this.state.videos.reddit)}
-          </Wrapper>
-          <h3 className="">TMDB</h3>
-          <Wrapper ID="tmdb">{this.renderVideos(this.state.videos.tmdb)}</Wrapper>
-          <h3 className="">STEAM</h3>
-          <Wrapper ID="steam">
-            {this.renderVideos(this.state.videos.steam)}
-          </Wrapper>
-          <h3 className="">YOUTUBE</h3>
-          <Wrapper ID="youtube">
-            {this.renderVideos(this.state.videos.youtube)}
-          </Wrapper>
-          <h3 className="">VEVO</h3>
-          <Wrapper ID="vevo">{this.renderVideos(this.state.videos.vevo)}</Wrapper>
-          <h3 className="">VIMEO</h3>
-          <Wrapper ID="vimeo">
-            {this.renderVideos(this.state.videos.vimeo)}
-          </Wrapper>
-        </div>
-      );
+      <div className="mainWraper">
+        <JumboTile>{this.renderJumbo(this.state.videos.reddit[0])}</JumboTile>
+        <h3 className="">Reddit</h3>
+        <Wrapper ID="reddit">
+          {this.renderVideos(this.state.videos.reddit)}
+        </Wrapper>
+        <h3 className="">TMDB</h3>
+        <Wrapper ID="tmdb">{this.renderVideos(this.state.videos.tmdb)}</Wrapper>
+        <h3 className="">STEAM</h3>
+        <Wrapper ID="steam">
+          {this.renderVideos(this.state.videos.steam)}
+        </Wrapper>
+        <h3 className="">YOUTUBE</h3>
+        <Wrapper ID="youtube">
+          {this.renderVideos(this.state.videos.youtube)}
+        </Wrapper>
+        <h3 className="">VEVO</h3>
+        <Wrapper ID="vevo">{this.renderVideos(this.state.videos.vevo)}</Wrapper>
+        <h3 className="">VIMEO</h3>
+        <Wrapper ID="vimeo">
+          {this.renderVideos(this.state.videos.vimeo)}
+        </Wrapper>
+      </div>
+    );
   }
 }
