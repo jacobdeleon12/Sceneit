@@ -5,7 +5,6 @@ import { Title, Iframe, Thumbnail } from "../Iframe";
 import { SaveBtn } from "../Buttons/VideoBtns";
 import { Tile, JumboTile } from "../Tile";
 import { JumboIframe } from "../Iframe";
-
 //NPM alert options
 import { positions, Provider, transitions } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
@@ -15,7 +14,6 @@ const options = {
   position: positions.BOTTOM_CENTER,
   transition: transitions.SCALE
 };
-
 export default class mainWrapper extends React.Component {
   state = {
     videos: {},
@@ -28,7 +26,6 @@ export default class mainWrapper extends React.Component {
     this.loadVideos();
     this.loadUser();
   }
-
   loadUser = () => {
     API.getUser(document.cookie.split("=0; ")[1])
       .then(res => {
@@ -37,18 +34,15 @@ export default class mainWrapper extends React.Component {
       })
       .catch(err => console.log(err));
   };
-
   loadVideos = async () => {
     let res = await API.getVideos();
     this.setState({ videos: res.data[0].videos });
   };
-
   handleSaveFormSubmit = (event, video) => {
     event.preventDefault();
     const vStr = video.url;
     const vName = video.name;
     const vImg = video.bigImg;
-
     API.saveVideo(this.state.user._id, {
       $push: {
         savedVideos: { vStr, vName, vImg }
@@ -60,15 +54,12 @@ export default class mainWrapper extends React.Component {
         });
       })
       .catch(err => console.log(err));
-
     event.target.disabled = true;
   };
-
   constructor() {
     super();
     this.state = {};
   }
-
   determineItemStyle(video, i) {
     const isItemSelected = this.state.selectedItem === video.url;
     return isItemSelected ? (
@@ -77,16 +68,15 @@ export default class mainWrapper extends React.Component {
       <Thumbnail img={video.bigImg} id={i} />
     );
   }
-
   renderVideos = data => {
     return (
-      <ul>
+      <div>
         {data.map((video, i) => (
           <Tile key={i}>
             <Title title={video.name} />
             <br />
             <div
-              className="sml_iframe_container"
+              className="sml_iframe_container sml_iframe"
               onMouseEnter={() => {
                 this.setState({ selectedItem: video.url });
               }}
@@ -110,10 +100,9 @@ export default class mainWrapper extends React.Component {
             </Provider>
           </Tile>
         ))}
-      </ul>
+      </div>
     );
   };
-
   renderJumbo = video => {
     return (
       <ul>
@@ -137,7 +126,6 @@ export default class mainWrapper extends React.Component {
       </ul>
     );
   };
-
   render() {
     return this.state.videos === undefined ? (
       <div>Loading...</div>

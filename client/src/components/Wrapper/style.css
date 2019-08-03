@@ -134,7 +134,7 @@
 
 @media (min-width: 1024px) {
   .scroll_menu {
-    height: 16rem;
+    height: 17rem;
   }
 }
 
@@ -161,6 +161,7 @@
     width: 250px;
     height: 140.625px;
     margin-right: 10px;
+    margin-top: 20px;
     font-size: 20px;
     cursor: pointer;
     transition: 200ms all;
