@@ -1,4 +1,4 @@
-.vidWrapper {
+.scrollWrapper {
   height: auto;
   position: relative;
   text-align: center;
@@ -20,7 +20,6 @@
   -webkit-transform-origin: center left;
   transform-origin: center left;
   height: 14rem;
-  padding-top: 2vh
 }
 
 .scroll_menu div {
@@ -79,10 +78,22 @@
 /* Optional: show position indicator in red */
 
 ::-webkit-scrollbar-thumb {
-  background: #ff0000;
+  background: rgb(1, 96, 128);
 }
 
 @media (min-width: 320px) {
+  .scrollBtn {
+    width: 18px;
+  }
+  .scrollWrapper {
+    padding: 0px 18px;
+  }
+  .scroll_menu {
+    height: 15rem;
+  }
+}
+
+@media (min-width: 425px) {
   .scrollBtn {
     width: 18px;
   }
@@ -90,7 +101,7 @@
     padding: 0px 18px;
   }
   .scroll_menu {
-    height: 30vh;
+    height: 17rem;
   }
 }
 
@@ -101,25 +112,25 @@
   .scrollBtn {
     width: 18px;
   }
-  .vidWrapper {
+  .scrollWrapper {
     padding: 0px 18px;
   }
   .scroll_menu {
-    height: 28vh;
+    height: 16rem;
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1024px) {
   .scroll_menu {
-    height: 27vh;
+    height: 16rem;
   }
 }
 
-@media (min-width: 2560px) {
+/* @media (min-width: 1200px) {
   .scroll_menu {
     height: 25vh;
   }
-}
+} */
 
 @media (min-width: 768px) {
   .row__inner {
@@ -128,15 +139,13 @@
     transition: 150ms transform, 150ms -webkit-transform;
     font-size: 0;
     white-space: nowrap;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     padding-bottom: 10px;
-    /* overflow-y: visible;
-    overflow-x: visible; */
   }
   .tile {
     position: relative;
     display: inline-block;
-    width: 230px;
+    width: 250px;
     height: 140.625px;
     margin-right: 10px;
     font-size: 20px;
@@ -164,7 +173,6 @@
   left: 50%;
   display: #000;
 }
-
 .tile__details:after {
   margin-top: -115px;
   margin-left: -25px;
@@ -175,7 +183,6 @@
   text-align: center;
   border-radius: 100%;
 }
-
 .tile__details:before {
   content: '▶';
   left: 0;
