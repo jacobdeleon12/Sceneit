@@ -7,7 +7,7 @@ import { MainNav } from "../components/Nav";
 import Footer from "../components/Footer";
 import { Iframe, Title, Thumbnail } from "../components/Iframe";
 import { DeleteBtn } from "../components/Buttons/VideoBtns";
-import { Tile, JumboTile } from "../components/Tile";
+import { Tile } from "../components/Tile";
 import Wrapper from "../components/Wrapper";
 
 //NPM alert options
@@ -92,11 +92,11 @@ class User extends Component {
   }
 
   determineItemStyle(video, i) {
-    const isItemSelected = this.state.selectedItem === video.url;
+    const isItemSelected = this.state.selectedItem === video.vStr;
     return isItemSelected ? (
-      <Iframe name={video.name} url={video.url} id={i} />
+      <Iframe name={video.vName} url={video.vStr} id={i} />
     ) : (
-      <Thumbnail img={video.bigImg} id={i} />
+      <Thumbnail img={video.vImg} id={i} />
     );
   }
 
@@ -105,12 +105,12 @@ class User extends Component {
       <ul>
         {data.map((video, i) => (
           <Tile key={i}>
-            <Title title={video.name} />
+            <Title title={video.vName} />
             <br />
             <div
               className="sml_iframe_container sml_iframe"
               onMouseEnter={() => {
-                this.setState({ selectedItem: video.url });
+                this.setState({ selectedItem: video.vStr });
               }}
               onMouseLeave={() => {
                 this.setState({ selectedItem: "" });
@@ -121,9 +121,9 @@ class User extends Component {
             <br />
             <Provider template={AlertTemplate} {...options}>
               <DeleteBtn
-                value={video.url}
-                key={`${video.url}-delete`}
-                id={video.name}
+                value={video.vStr}
+                key={`${video.vStr}-delete`}
+                id={video.vName}
                 name="deleteVid"
                 onClick={event => {
                   this.handleSaveFormSubmit(event, video);
@@ -180,11 +180,13 @@ class User extends Component {
             <div>
               {this.state.savedVideos !== undefined ? (
                 <div className="mainWraper">
-                  <h3 className="">Reddit</h3>
-                  <Wrapper ID="reddit">
+                  <h3 className="">Saved Videos</h3>
+                  <Wrapper ID="saved">
                     {this.renderVideos(this.state.savedVideos)}
                   </Wrapper>
                 </div>
+              ) : this.state.savedVideos === undefined ? (
+                <h5>Loading...</h5>
               ) : (
                 <h5>You have no saved videos. Womp Womp!</h5>
               )}
@@ -211,66 +213,3 @@ class User extends Component {
 }
 
 export default User;
-
-// import React, { Component } from "react";
-// import { Container } from "../components/Grid";
-// import API from "../utils/API";
-// import { MainNav } from "../components/Nav";
-// import Footer from "../components/Footer"
-// import MainWrapper from "../components/MainWrapperVideos";
-
-// class Main extends Component {
-//   state = {
-//     user: [],
-//     savedVideos: [],
-//     vidStateID: "",
-//     keyCard: ""
-//   };
-
-//   componentDidMount() {
-//     this.loadUser();
-//   }
-
-//   // =======================================
-//   loadUser = () => {
-//     let loggedInUser = sessionStorage.getItem("loggedInUser");
-//     console.log(loggedInUser);
-
-//     API.getUser(loggedInUser)
-//       .then(res => {
-//         console.log(res.data);
-//         this.setState({ user: res.data, savedVideos: res.data.savedVideos, keyCard: loggedInUser });
-//       })
-//       .catch(err => console.log(err));
-//     // console.log(document.cookie);
-//   };
-
-//   handleInputChange = event => {
-//     const { name, value } = event.target;
-//     this.setState({
-//       [name]: value
-//     });
-//   };
-
-//   render() {
-//     return (
-//       <div>
-//         <MainNav />
-//         <Container fluid>
-//           {this.state.keyCard ? (
-//             <MainWrapper />
-//           ) : (
-//               <h5>
-//                 You must be logged in to visit this page. Womp Womp! Click
-//               <a href="https://sceneitapp.herokuapp.com/">here</a> to visit the
-//                     login page.
-//             </h5>
-//             )}
-//         </Container>
-//         <Footer />
-//       </div>
-//     );
-//   }
-// }
-
-// export default Main;
