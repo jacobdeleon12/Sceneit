@@ -67,7 +67,7 @@ function Footer() {
               <h6>Quick Links</h6>
               <ul className="footer-links">
                 <li>
-                  <Link to="http://scanfcode.com/about/">About Us</Link>
+                  <Link to="/AboutUs">About Us</Link>
                 </li>
                 <li>
                   <Link to="http://scanfcode.com/contact/">Contact Us</Link>
