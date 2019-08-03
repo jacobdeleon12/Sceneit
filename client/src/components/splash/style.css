@@ -4,7 +4,7 @@
 
 .background {
   background: #343a40;
-  height: 67vh;
+  height: 88vh;
   color: deepskyblue;
   width: 100%;
   margin-bottom: 30px;
@@ -62,9 +62,9 @@
     height: 8vh;
     width: 8vh;
   }
-  .background {
-    height: 77vh;
-  }
+  /* .background {
+    height: 88vh;
+  } */
 }
 
 @media (min-width: 375px) {
@@ -72,9 +72,9 @@
     height: 8vh;
     width: 8vh;
   }
-  .background {
-    height: 67vh;
-  }
+  /* .background {
+    height: 88vh;
+  } */
 }
 
 @media (min-width: 425px) {
@@ -82,9 +82,19 @@
     height: 8vh;
     width: 8vh;
   }
-  .background {
-    height: 67vh;
+  /* .background {
+    height: 88vh;
+  } */
+}
+
+@media (min-width: 576px) {
+  .splashImg {
+    height: 8vh;
+    width: 8vh;
   }
+  /* .background {
+    height: 88vh;
+  } */
 }
 
 @media (min-width: 768px) {
@@ -100,9 +110,9 @@
   .splashHeadder2 {
     font-size: 3vh
   }
-  .background {
-    height: 71vh;
-  }
+  /* .background {
+    height: 88vh;
+  } */
 }
 
 @media (min-width: 1024px) {
@@ -119,7 +129,7 @@
     font-size: 3vh
   }
   .background {
-    height: 60vh;
+    height: 85vh;
     margin-bottom: 8vh;
   }
 }
