@@ -4,10 +4,10 @@ import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import Userwrap from "../components/Userwrap";
 import { MainNav } from "../components/Nav";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 import { Iframe, Title, Thumbnail } from "../components/Iframe";
 import { DeleteBtn } from "../components/Buttons/VideoBtns";
-import { Tile, JumboTile } from "../components/tile";
+import { Tile, JumboTile } from "../components/Tile";
 
 //NPM alert options
 import { positions, Provider, transitions } from "react-alert";
@@ -130,8 +130,6 @@ class User extends Component {
   };
 
   render() {
-    console.log(window.sessionStorage.getItem("loggedInUser"));
-    console.log(this.state);
 
     switch (this.state.keyCard) {
       case window.sessionStorage.getItem("loggedInUser"):

@@ -1,5 +1,4 @@
 import React from "react";
-import API from "../../utils/API";
 import Wrapper from "../Wrapper";
 import {
   SaveBtn,
@@ -8,7 +7,7 @@ import {
 } from "../Buttons/VideoBtns";
 import API from "../../utils/API";
 import { Title, Iframe, Thumbnail } from "../Iframe";
-import { Tile, JumboTile } from "../tile";
+import { Tile, JumboTile } from "../Tile";
 import { JumboIframe } from "../Iframe";
 
 //NPM alert options
