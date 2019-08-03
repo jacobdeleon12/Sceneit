@@ -15,7 +15,7 @@ const options = {
   transition: transitions.SCALE
 };
 
-export default class MainWrapper extends React.Component {
+export default class SearchWrapper extends React.Component {
   state = {
     videos: {},
     user: [],
@@ -42,8 +42,12 @@ export default class MainWrapper extends React.Component {
   };
 
   loadVideos = async () => {
-    let res = await API.getVideos();
-    this.setState({ videos: res.data[0].videos });
+    let res = await API.searchVideos("speed");
+    let path = window.location.pathname
+    // console.log(res.data[0]);
+    console.log(`path: ${path}`);
+    
+    this.setState({ videos: res.data[0] });
   };
 
   handleSaveFormSubmit = (event, video) => {
@@ -117,36 +121,11 @@ export default class MainWrapper extends React.Component {
     );
   };
 
-  renderJumbo = video => {
-    return (
-      <ul className="jumboList">
-        {/* <Tile key={1}> */}
-          {/* <Title title={video.name} />
-          <br /> */}
-          <JumboIframe name={video.name} url={video.url} id={1} />
-          <br />
-          <Provider template={AlertTemplate} {...options}>
-            <SaveBtn
-              value={video.url}
-              key={`${video.url}-save`}
-              id={video.name}
-              name="saveVid"
-              onClick={event => {
-                this.handleSaveFormSubmit(event, video);
-              }}
-            />
-          </Provider>
-        {/* </Tile> */}
-      </ul>
-    );
-  };
-
   render() {
     return this.state.videos === undefined ? (
       <div>Loading...</div>
     ) : (
       <div className="mainWraper">
-        <JumboTile>{this.renderJumbo(this.state.videos.reddit[0])}</JumboTile>
         <h3 className="">Reddit</h3>
         <Wrapper ID="reddit">
           {this.renderVideos(this.state.videos.reddit)}

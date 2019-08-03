@@ -21,6 +21,8 @@ const VIMEO = require("./vimeo");
 // PLAYLIST.searchChannel(vevoChannel, "speed");
 // VIMEO.searchName("speed");
 
+const videoArray = [];
+
 module.exports = {
   addToDb: async function(tmdbQ, steamQ, redditQ, youtubeQ, vevoQ, vimeoQ) {
     try {
@@ -80,17 +82,17 @@ module.exports = {
 
     try {
       const STEAMarr = await STEAM.searchName(searchWord);
-      // console.log("made it past steam");
+      console.log("made it past steam");
       const TMDBarr = await TMDB.searchName(searchWord);
-      // console.log("made it past steam");
+      console.log("made it past steam");
       const REDDITarr = await REDDIT.searchName(searchWord);
-      // console.log("made it past reddit");
+      console.log("made it past reddit");
       const YOUTUBEarr = await YOUTUBE.searchName(searchWord);
-      // console.log("made it past youtube");
+      console.log("made it past youtube");
       const VEVOarr = await PLAYLIST.searchChannel(vevoChannel, searchWord);
-      // console.log("made it past vevo");
+      console.log("made it past vevo");
       const VIMEOarr = await VIMEO.searchName(searchWord);
-      // console.log("made it past vimeo");
+      console.log("made it past vimeo");
 
       videoArray.push({
         searched_word: searchWord,

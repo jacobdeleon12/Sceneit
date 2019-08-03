@@ -4,6 +4,8 @@ import API from "../utils/API";
 import { MainNav } from "../components/Nav";
 import Footer from "../components/Footer";
 import MainWrapper from "../components/MainWrapperVideos";
+import SearchWrapper from "../components/SearchWrapperVideos";
+
 
 class Main extends Component {
   state = {
@@ -49,7 +51,7 @@ class Main extends Component {
         <MainNav />
         <Container fluid>
           {this.state.keyCard ? (
-            <MainWrapper />
+            <SearchWrapper />
           ) : (
               <h5>
                 You must be logged in to visit this page. Womp Womp! Click
