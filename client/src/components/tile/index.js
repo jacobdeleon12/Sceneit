@@ -1,4 +1,4 @@
-import React from "react";
+import React from "./node_modules/react";
 
 export function Tile(props) {
   return <div className="tile">{props.children}</div>;
