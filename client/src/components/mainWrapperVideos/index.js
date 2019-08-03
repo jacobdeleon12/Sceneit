@@ -1,7 +1,7 @@
 import React from "react";
+import API from "../../utils/API";
 import Wrapper from "../Wrapper";
 import { SaveBtn } from "../Buttons/VideoBtns";
-import API from "../../utils/API";
 import { Title, Iframe, Thumbnail } from "../Iframe";
 import { Tile, JumboTile } from "../Tile";
 import { JumboIframe } from "../Iframe";
@@ -14,6 +14,7 @@ const options = {
   position: positions.BOTTOM_CENTER,
   transition: transitions.SCALE
 };
+
 export default class mainWrapper extends React.Component {
   state = {
     videos: {},
@@ -27,6 +28,7 @@ export default class mainWrapper extends React.Component {
     this.loadVideos();
     this.loadUser();
   }
+
   loadUser = () => {
     // let loggedInUser = window.sessionStorage.getItem("loggedInUser");
     // console.log(loggedInUser);
@@ -38,10 +40,12 @@ export default class mainWrapper extends React.Component {
       })
       .catch(err => console.log(err));
   };
+
   loadVideos = async () => {
     let res = await API.getVideos();
     this.setState({ videos: res.data[0].videos });
   };
+
   handleSaveFormSubmit = (event, video) => {
     event.preventDefault();
     const vStr = video.url;
@@ -59,23 +63,27 @@ export default class mainWrapper extends React.Component {
         });
       })
       .catch(err => console.log(err));
+
     event.target.disabled = true;
   };
+
   constructor() {
     super();
     this.state = {};
   }
+
   determineItemStyle(video, i) {
     const isItemSelected = this.state.selectedItem === video.url;
     return isItemSelected ? (
       <Iframe name={video.name} url={video.url} id={i} />
     ) : (
-      <Thumbnail alt={video.name} img={video.bigImg} id={i} />
+      <Thumbnail img={video.bigImg} id={i} />
     );
   }
+
   renderVideos = data => {
     return (
-      <div>
+      <ul>
         {data.map((video, i) => (
           <Tile key={i}>
             <Title title={video.name} />
@@ -105,9 +113,10 @@ export default class mainWrapper extends React.Component {
             </Provider>
           </Tile>
         ))}
-      </div>
+      </ul>
     );
   };
+
   renderJumbo = video => {
     return (
       <ul>
@@ -131,6 +140,7 @@ export default class mainWrapper extends React.Component {
       </ul>
     );
   };
+
   render() {
     return this.state.videos === undefined ? (
       <div>Loading...</div>
