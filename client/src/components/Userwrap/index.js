@@ -1,5 +1,4 @@
 // import React from "react";
-// import "./style.css";
 
 // function Userwrap(props) {
 //   return (
@@ -10,6 +9,7 @@
 // }
 
 import React from "react";
+import "./style.css";
 import API from "../../utils/API";
 import Wrapper from "../Wrapper";
 import { SaveBtn } from "../Buttons/VideoBtns";
