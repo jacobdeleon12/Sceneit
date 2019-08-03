@@ -17,19 +17,27 @@ export function JumboIframe(props) {
 
 export function Iframe(props) {
   return (
-    <iframe
-      onMouseEnter={props.hoverOn}
-      onMouseLeave={props.hoverOff}
-      title={props.name}
-      className="sml_iframe"
-      src={props.url}
-      // thumb-url={props.thumbUrl}
-      // video-url={props.videoUrl}
-      frameBorder="0"
-      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-    ></iframe>
+    <div className="sml_iframe_container" onMouseOver={props.hoverOn} onMouseOut={null}>
+      <iframe
+        title={props.name}
+        className="sml_iframe"
+        src={props.url}
+        // thumb-url={props.thumbUrl}
+        // video-url={props.videoUrl}
+        frameBorder="0"
+        name={`iframe_video${props.id}`}
+        allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+      <a href={props.img} target={`iframe_video${props.id}`}>
+        <img src={props.img} />
+      </a>
+    </div>
   );
+}
+
+export function Source(props) {
+  return <source src={props.src} type="video/mp4" />;
 }
 
 export function Title(props) {

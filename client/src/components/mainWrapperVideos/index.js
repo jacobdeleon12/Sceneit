@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import API from "../../utils/API";
 
 import Wrapper from "../Wrapper";
-import { Title, Iframe } from "../Iframe";
+import { Title, Iframe, Source } from "../Iframe";
 import { SaveBtn, BtnContainer } from "../Buttons/VideoBtns";
 import VidWrapper from "../vidWraper";
 import Tile from "../tile";
@@ -65,17 +65,17 @@ export default class mainWrapper extends React.Component {
     event.target.disabled = true;
   };
 
-  hoverOn = (event, url) => {
-    console.log("im hovering");
-    console.log(`event target: ${event.target}`);
-    console.log(`target url: ${url}`);
-  };
+  // hoverOn = (event, url) => {
+  //   console.log("im hovering");
+  //   console.log(`event target: ${event.target}`);
+  //   console.log(`target url: ${url}`);
+  // };
 
-  hoverOff = (event, url) => {
-    console.log("im not hovering");
-    console.log(`event target: ${event.target}`);
-    console.log(`target url: ${url}`);
-  };
+  // hoverOff = (event, url) => {
+  //   console.log("im not hovering");
+  //   console.log(`event target: ${event.target}`);
+  //   console.log(`target url: ${url}`);
+  // };
 
   renderVideos = data => {
     return data === undefined ? (
@@ -89,10 +89,12 @@ export default class mainWrapper extends React.Component {
               <br />
               <Iframe
                 key={i}
-                hoverOn={this.hoverOn(video.url)}
-                hoverOff={this.hoverOff(video.bigImg)}
+                id={i}
+                hoverOn={e => (console.log(e.currentTarget))}
+                // hoverOff={this.hoverOff(video.bigImg)}
                 name={video.name}
-                url={video.bigImg}
+                img={video.bigImg}
+                // url={video.url}
                 // thumbUrl={video.bigImg}
                 // videoUrl={video.url}
               />
