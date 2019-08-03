@@ -5,6 +5,7 @@ import Main from "./pages/Main";
 import Search from "./pages/Search";
 import NoMatch from "./pages/NoMatch";
 import User from "./pages/User";
+import AboutUs from "./pages/AboutUs";
 // import EditUser from "./pages/EditUser";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route exact path="/main/search" component={Search} />
           {/* <Route exact path="/main/search/results" component={SearchResults} /> */}
           <Route exact path="/main/user" component={User} />
+          <Route exact path="/AboutUs" component={AboutUs} />
           {/* <Route exact path="/main/user/:id" component={EditUser} /> */}
           <Route component={NoMatch} />
         </Switch>
