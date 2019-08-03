@@ -2,15 +2,13 @@ import React, { Component } from "react";
 import API from "../utils/API";
 
 import { Col, Row, Container } from "../components/Grid";
-import Userwrap from "../components/Userwrap";
+// import Userwrap from "../components/Userwrap";
 import { MainNav } from "../components/Nav";
 import Footer from "../components/Footer";
 import { Iframe, Title, Thumbnail } from "../components/Iframe";
 import { DeleteBtn } from "../components/Buttons/VideoBtns";
-import {
-  Tile
-  //  JumboTile
-} from "../components/Tile";
+import { Tile } from "../components/Tile";
+import Wrapper from "../components/Wrapper";
 
 //NPM alert options
 import { positions, Provider, transitions } from "react-alert";
@@ -48,7 +46,7 @@ class User extends Component {
     API.getUser(loggedInUser)
       .then(res => {
         // console.log(res.data.savedVideos);
-        this.setState({ savedVideos: res.data.savedVideos })
+        this.setState({ savedVideos: res.data.savedVideos });
       })
       .catch(err => console.log(err));
   };
@@ -128,7 +126,7 @@ class User extends Component {
                 id={video.name}
                 name="deleteVid"
                 onClick={event => {
-                  this.handleDeleteFormSubmit(event, video);
+                  this.handleSaveFormSubmit(event, video);
                 }}
               />
             </Provider>
@@ -139,12 +137,11 @@ class User extends Component {
   };
 
   render() {
-    console.log(this.state.user);
-    console.log(this.state.savedVideos);
+    // console.log(this.state.user);
+    // console.log(this.state.savedVideos);
 
-    console.log(loggedInUser);
-    console.log(user);
-
+    // console.log(loggedInUser);
+    // console.log(user);
 
     if (this.state.user) {
       return (
@@ -160,6 +157,7 @@ class User extends Component {
                         src={this.state.user.imageUrl}
                         alt="googleImage"
                       />
+                      <img src={this.state.user.imageUrl} alt="googleImage" />
                     </Container>
                   </Col>
                   <Col size="md-3">
@@ -183,30 +181,30 @@ class User extends Component {
                 </div>
               </Col>
             </Row>
-            <Userwrap>
+            <div>
               {this.state.savedVideos !== undefined ? (
-                this.renderVideos(this.state.savedVideos)
-                // console.log(this.state.savedVideos)
-
-              )
-                : (
+                <div className="mainWraper">
+                  <h3 className="">Reddit</h3>
+                  <Wrapper ID="reddit">
+                    {this.renderVideos(this.state.savedVideos)}
+                  </Wrapper>
+                </div>
+              ) : (
                   <h5>You have no saved videos. Womp Womp!</h5>
-
                 )}
-            </Userwrap>
+            </div>
           </Container>
         </div>
       );
-
     } else {
       return (
         <div>
           <MainNav />
           <Container fluid>
             <h5>
-              You must be logged in to visit the Profile page. Womp Womp!
-              Click <a href="https://sceneitapp.herokuapp.com/">here</a> to
-              visit the login page.
+              You must be logged in to visit the Profile page. Womp Womp! Click{" "}
+              <a href="https://sceneitapp.herokuapp.com/">here</a> to visit the
+              login page.
             </h5>
           </Container>
           <Footer />
@@ -280,4 +278,3 @@ export default User;
 // }
 
 // export default Main;
-
