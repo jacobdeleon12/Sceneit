@@ -7,7 +7,7 @@ import { MainNav } from "../components/Nav";
 import Footer from "../components/Footer";
 import { Iframe, Title, Thumbnail } from "../components/Iframe";
 import { DeleteBtn } from "../components/Buttons/VideoBtns";
-import { Tile, JumboTile } from "../components/Tile";
+import { Tile } from "../components/Tile";
 
 //NPM alert options
 import { positions, Provider, transitions } from "react-alert";

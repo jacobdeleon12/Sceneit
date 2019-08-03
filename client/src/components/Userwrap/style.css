@@ -11,14 +11,10 @@
   overflow: auto;
 }
 
-p {
+p, h1, h2, h3, h4, h5 {
   color: deepskyblue;
 }
 
-h4 {
-  color: deepskyblue;
-}
-
-h5 {
+#logo {
   color: deepskyblue;
 }

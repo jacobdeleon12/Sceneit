@@ -106,10 +106,10 @@ export default class mainWrapper extends React.Component {
   };
   renderJumbo = video => {
     return (
-      <ul>
-        <Tile key={1}>
-          <Title title={video.name} />
-          <br />
+      <ul className="jumboList">
+        {/* <Tile key={1}> */}
+          {/* <Title title={video.name} />
+          <br /> */}
           <JumboIframe name={video.name} url={video.url} id={1} />
           <br />
           <Provider template={AlertTemplate} {...options}>
@@ -123,13 +123,13 @@ export default class mainWrapper extends React.Component {
               }}
             />
           </Provider>
-        </Tile>
+        {/* </Tile> */}
       </ul>
     );
   };
   render() {
     return this.state.videos === undefined ? (
-      <div>Loading...</div>
+      <h5>Loading...</h5>
     ) : (
         <div className="mainWraper">
           <JumboTile>{this.renderJumbo(this.state.videos.reddit[0])}</JumboTile>
