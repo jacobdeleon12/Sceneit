@@ -14,8 +14,11 @@ import API from "../../utils/API";
 import Wrapper from "../Wrapper";
 import { SaveBtn } from "../Buttons/VideoBtns";
 import { Title, Iframe, Thumbnail } from "../Iframe";
-import { Tile, JumboTile } from "../Tile";
-import { JumboIframe } from "../Iframe";
+import {
+  Tile
+  // JumboTile
+} from "../Tile";
+// import { JumboIframe } from "../Iframe";
 
 //NPM alert options
 import { positions, Provider, transitions } from "react-alert";
@@ -27,7 +30,7 @@ const options = {
 };
 
 const loggedInUser = window.sessionStorage.getItem("loggedInUser");
-const user = JSON.parse(window.sessionStorage.getItem("UserInfo"));
+// const user = JSON.parse(window.sessionStorage.getItem("UserInfo"));
 
 export default class UserWrapper extends React.Component {
   state = {
@@ -92,8 +95,8 @@ export default class UserWrapper extends React.Component {
     return isItemSelected ? (
       <Iframe name={video.name} url={video.url} id={i} />
     ) : (
-      <Thumbnail img={video.bigImg} id={i} />
-    );
+        <Thumbnail img={video.bigImg} id={i} />
+      );
   }
 
   renderVideos = data => {
@@ -137,13 +140,13 @@ export default class UserWrapper extends React.Component {
     return this.state.videos === undefined ? (
       <div>Loading...</div>
     ) : (
-      <div className="mainWraper">
-        <h3 className="">Saved</h3>
-        <Wrapper ID="saved">
-          {this.renderVideos(this.state.videos.reddit)}
-        </Wrapper>
-      </div>
-    );
+        <div className="mainWraper">
+          <h3 className="">Saved</h3>
+          <Wrapper ID="saved">
+            {this.renderVideos(this.state.videos.reddit)}
+          </Wrapper>
+        </div>
+      );
   }
 }
 

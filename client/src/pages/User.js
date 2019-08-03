@@ -7,7 +7,10 @@ import { MainNav } from "../components/Nav";
 import Footer from "../components/Footer";
 import { Iframe, Title, Thumbnail } from "../components/Iframe";
 import { DeleteBtn } from "../components/Buttons/VideoBtns";
-import { Tile, JumboTile } from "../components/Tile";
+import {
+  Tile
+  //  JumboTile
+} from "../components/Tile";
 
 //NPM alert options
 import { positions, Provider, transitions } from "react-alert";
@@ -150,34 +153,34 @@ class User extends Component {
           <Container fluid>
             <Row>
               <Col size="md-12">
-                  <div className="row justify-content-center">
-                    <Col size="md-2">
-                      <Container fluid>
-                        <img
-                          src={this.state.user.imageUrl}
-                          alt="googleImage"
-                        />
-                      </Container>
-                    </Col>
-                    <Col size="md-3">
-                      <Container fluid>
-                        <Row fluid>
-                          <Col size="md-12">
-                            <h4>
-                              {this.state.user.givenName +
-                                " " +
-                                this.state.user.familyName}
-                            </h4>
-                          </Col>
-                        </Row>
-                        <Row fluid>
-                          <Col size="md-12">
-                            <h5>{this.state.user.email}</h5>
-                          </Col>
-                        </Row>
-                      </Container>
-                    </Col>
-                  </div>
+                <div className="row justify-content-center">
+                  <Col size="md-2">
+                    <Container fluid>
+                      <img
+                        src={this.state.user.imageUrl}
+                        alt="googleImage"
+                      />
+                    </Container>
+                  </Col>
+                  <Col size="md-3">
+                    <Container fluid>
+                      <Row fluid>
+                        <Col size="md-12">
+                          <h4>
+                            {this.state.user.givenName +
+                              " " +
+                              this.state.user.familyName}
+                          </h4>
+                        </Col>
+                      </Row>
+                      <Row fluid>
+                        <Col size="md-12">
+                          <h5>{this.state.user.email}</h5>
+                        </Col>
+                      </Row>
+                    </Container>
+                  </Col>
+                </div>
               </Col>
             </Row>
             <Userwrap>
