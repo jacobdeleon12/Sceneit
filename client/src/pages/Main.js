@@ -62,7 +62,7 @@ class Main extends Component {
             <Footer />
           </div>
         )
-        break;
+      // break;
 
       default:
         return (
@@ -74,7 +74,7 @@ class Main extends Component {
             <Footer />
           </div>
         )
-        break;
+      // break;
     }
 
     // if (this.state.keyCard === this.state.user.googleId) {

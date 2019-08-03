@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import Wrapper from "../Wrapper";
 import { Thumb, Title, Iframe } from "../Iframe";
-import { SaveBtn, CommentBtn, BtnContainer } from "../Buttons/VideoBtns";
+import {
+  SaveBtn,
+  // CommentBtn, 
+  BtnContainer
+} from "../Buttons/VideoBtns";
 import API from "../../utils/API";
 import { positions, Provider, transitions } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
@@ -24,21 +28,22 @@ class mainWrapper extends Component {
     featuredVid: [],
     savedVideos: [],
     vidStateID: "",
-    hover: false
+    hover: false,
+    keyCard: ""
   };
 
   // =======================================
   componentDidMount() {
     this.loadUser();
-    this.loadVideos();
+    // this.loadVideos();
   }
 
   // =======================================
   loadUser = () => {
-    API.getUser(document.cookie.split("=0; ")[1])
+    API.getUser(document.cookie.split("profId=")[1])
       .then(res => {
-        // console.log(res.data)
-        this.setState({ user: res.data, savedVideos: res.data.savedVideos });
+        console.log(res.data)
+        this.setState({ user: res.data, savedVideos: res.data.savedVideos, keyCard: document.cookie.split("profId=")[1] });
       })
       .catch(err => console.log(err));
   };
@@ -94,14 +99,14 @@ class mainWrapper extends Component {
     event.target.disabled = true;
   };
 
-  loadUser = () => {
-    API.getUser(document.cookie.split("profId=")[1])
-      .then(res => {
-        console.log(res.data);
-        this.setState({ user: res.data, savedVideos: res.data.savedVideos });
-      })
-      .catch(err => console.log(err));
-  };
+  // loadUser = () => {
+  //   API.getUser(document.cookie.split("profId=")[1])
+  //     .then(res => {
+  //       console.log(res.data);
+  //       this.setState({ user: res.data, savedVideos: res.data.savedVideos, keyCard: document.cookie.split("profId=")[1] });
+  //     })
+  //     .catch(err => console.log(err));
+  // };
 
   hoverOn = () => {
     console.log("we are hovering");
@@ -127,14 +132,14 @@ class mainWrapper extends Component {
                 thumbUrl={video.bigImg}
               />
             ) : (
-              <Thumb
-                key={video.name}
-                id={video.name}
-                movieUrl={video.url}
-                thumbUrl={video.bigImg}
-                name="thumbnail"
-              />
-            )}
+                <Thumb
+                  key={video.name}
+                  id={video.name}
+                  movieUrl={video.url}
+                  thumbUrl={video.bigImg}
+                  name="thumbnail"
+                />
+              )}
 
             <Title title={video.name} />
             <br />
@@ -177,14 +182,14 @@ class mainWrapper extends Component {
                 thumbUrl={video.bigImg}
               />
             ) : (
-              <Thumb
-                key={video.name}
-                id={video.name}
-                movieUrl={video.url}
-                thumbUrl={video.bigImg}
-                name="thumbnail"
-              />
-            )}
+                <Thumb
+                  key={video.name}
+                  id={video.name}
+                  movieUrl={video.url}
+                  thumbUrl={video.bigImg}
+                  name="thumbnail"
+                />
+              )}
 
             <Title title={video.name} />
             <br />

@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { Col, Row } from "../Grid";
 import Jumbotron from "../Jumbotron";
 import { JumboIframe } from "../Iframe";
-import { SaveBtn, CommentBtn, BtnContainer } from "../Buttons/VideoBtns";
+import {
+  SaveBtn,
+  // CommentBtn,
+  BtnContainer
+} from "../Buttons/VideoBtns";
 import API from "../../utils/API";
 import { positions, Provider, transitions } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
@@ -21,21 +25,26 @@ class mainJombo extends Component {
     youtubeVideos: [],
     vevoVideos: [],
     featuredVid: [],
-    savedVideos: []
+    savedVideos: [],
+    keyCard: ""
   };
 
   // =======================================
   componentDidMount() {
     this.loadUser();
-    this.loadVideos();
+    // this.loadVideos();
   }
 
   // =======================================
   loadUser = () => {
-    API.getUser(document.cookie.split("=0; ")[1])
+    API.getUser(document.cookie.split("profId=")[1])
       .then(res => {
         // console.log(res.data)
-        this.setState({ user: res.data, savedVideos: res.data.savedVideos });
+        this.setState({
+          user: res.data,
+          savedVideos: res.data.savedVideos,
+          keyCard: document.cookie.split("profId=")[1]
+        });
       })
       .catch(err => console.log(err));
   };
@@ -45,6 +54,8 @@ class mainJombo extends Component {
   // load videos from local storage into state to pull from in render
   loadVideos = () => {
     var redditVids = JSON.parse(localStorage.getItem("reddit"));
+    console.log(redditVids);
+
     this.setState({ featuredVid: redditVids[0] });
   };
 
