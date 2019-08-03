@@ -12,7 +12,7 @@ function footer() {
             <div className="col-sm-12 col-md-6">
               <h6>About</h6>
               <p className="text-justify">
-                {name} <i>WANTS TO BE THE YOUR BEST VIDEO STREAMING SITE. </i>
+                {name} <i>WANTS TO BE YOUR BEST VIDEO STREAMING SITE. </i>
                 We are here to provide the a network that will connect users to
                 many video services as a one stop shop of video enjoyment.
                 <br />
