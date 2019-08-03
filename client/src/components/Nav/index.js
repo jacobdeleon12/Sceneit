@@ -18,7 +18,7 @@ export function LoginNav() {
 export function MainNav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-      <Link className="navbar-brand" to="/">
+      <Link className="navbar-brand" id="logo" to="/">
         {Logo}
       </Link>
       <button className="navbar-toggler" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
