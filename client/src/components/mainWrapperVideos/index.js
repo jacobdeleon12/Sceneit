@@ -65,7 +65,7 @@ export default class mainWrapper extends React.Component {
     return isItemSelected ? (
       <Iframe name={video.name} url={video.url} id={i} />
     ) : (
-      <Thumbnail img={video.bigImg} id={i} />
+      <Thumbnail alt={video.name} img={video.bigImg} id={i} />
     );
   }
   renderVideos = data => {
