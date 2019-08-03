@@ -1,9 +1,9 @@
-let cheerio = require("cheerio");
-let axios = require("axios");
+const cheerio = require("cheerio");
+const axios = require("axios");
 
 let urlArray = [];
 
-export default {
+module.exports = {
   // try "popularwishlist"
   // Scrapes list page, returns 10 videos
   searchList: function(query) {
@@ -17,7 +17,6 @@ export default {
 
           $("a.search_result_row").each((i, element) => {
             let urlLink = $(element).attr("href");
-
             axios
               .get(urlLink)
               .then(response => {
@@ -31,9 +30,8 @@ export default {
                     bigImg: $("img.game_header_image_full").attr("src"),
                     url: $("div.highlight_movie").attr("data-webm-hd-source")
                   });
-
-                if (urlArray.length === 10) {
-                  console.log(urlArray);
+                if (urlArray.length === 20) {
+                  // console.log(urlArray);
                   resolve(urlArray);
                 }
               })
@@ -70,9 +68,8 @@ export default {
                     bigImg: $("img.game_header_image_full").attr("src"),
                     url: $("div.highlight_movie").attr("data-webm-hd-source")
                   });
-
-                if (urlArray.length === 10) {
-                  console.log(urlArray);
+                if (urlArray.length === 20) {
+                  // console.log(urlArray);
                   resolve(urlArray);
                 }
               })

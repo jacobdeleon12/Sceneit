@@ -1,36 +1,17 @@
 const db = require("../models");
+const videos = require("../video");
 
 // Defining methods for the UsersController
 module.exports = {
-  findAll: function (req, res) {
+  searchAll: async function(req, res) {
+    // console.log(req);
+    const results = await videos.searchByWord(req.params.searchWord);
+    res.json(results).catch(err => res.status(422).json(err));
+  },
+  returnAll: function(req, res) {
     // console.log(req);
     db.Video.find(req.query)
-      .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  findById: function (req, res) {
-    // console.log(req);
-    db.Video.findOne({ googleId: req.params.id })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  create: function (req, res) {
-    // console.log(req);
-    db.Video.create(req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  update: function (req, res) {
-    // console.log(req);
-    db.Video.replaceOne(_id, req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  remove: function (req, res) {
-    // console.log(req);
-    db.Video.findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbModel => console.log(dbModel))
       .catch(err => res.status(422).json(err));
   }
 };

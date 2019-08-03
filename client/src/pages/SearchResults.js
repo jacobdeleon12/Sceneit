@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 // import { Link } from "react-router-dom";
-// import { Col, Row, Container } from "../components/Grid";
 import { Container } from "../components/Grid";
-// import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import NavBar from "../components/Nav/SearchResultNav";
+import { MainNav } from "../components/Nav";
 import Wrapper from "../components/Wrapper";
 
 class SearchResults extends Component {
@@ -46,19 +44,9 @@ class SearchResults extends Component {
   render() {
     return (
       <div>
-        <NavBar />
+        <MainNav />
         <Container fluid>
-          <Wrapper>
-            {/* {this.state.friends.map(friend => ( */}
-            {/* <MovieCard
-              remixFriends={this.remixFriends}
-              id={friend.id}
-              key={friend.id}
-              name={friend.name}
-              image={friend.image}
-            /> */}
-            {/* ))} */}
-          </Wrapper>
+          <Wrapper></Wrapper>
         </Container>
       </div>
     );
