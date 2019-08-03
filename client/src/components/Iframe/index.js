@@ -15,29 +15,35 @@ export function JumboIframe(props) {
   );
 }
 
+// export function FrameWrap(props) {
+//   const frame = '';
+//   return (
+//     <div
+//       className="sml_iframe_container"
+//       onMouseEnter={frame = <Iframe name={video.name} url={video.url} id={i}/>}
+//       onMouseLeave={frame = <Thumbnail img={video.bigImg} id={i} />}
+//     >{frame}</div>
+//   );
+// }
 export function Iframe(props) {
   return (
-    <div className="sml_iframe_container" onMouseOver={props.hoverOn} onMouseOut={null}>
-      <iframe
-        title={props.name}
-        className="sml_iframe"
-        src={props.url}
-        // thumb-url={props.thumbUrl}
-        // video-url={props.videoUrl}
-        frameBorder="0"
-        name={`iframe_video${props.id}`}
-        allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      />
-      <a href={props.img} target={`iframe_video${props.id}`}>
-        <img src={props.img} />
-      </a>
-    </div>
+    <iframe
+      title={props.name}
+      className="sml_iframe"
+      src={props.url}
+      frameBorder="0"
+      name={`iframe_video${props.id}`}
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    />
   );
 }
-
-export function Source(props) {
-  return <source src={props.src} type="video/mp4" />;
+export function Thumbnail(props) {
+  return (
+    <a href={props.img} target={`iframe_video${props.id}`}>
+      <img src={props.img} />
+    </a>
+  );
 }
 
 export function Title(props) {
