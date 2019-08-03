@@ -1,13 +1,14 @@
-import React from "react";
+import React from "../../../node_modules/react";
 import API from "../../utils/API";
 import Wrapper from "../Wrapper";
 import { Title, Iframe, Thumbnail } from "../Iframe";
 import { SaveBtn } from "../Buttons/VideoBtns";
-import Tile from "../tile";
+import { Tile, JumboTile } from "../Tile";
+import { JumboIframe } from "../Iframe";
 
 //NPM alert options
-import { positions, Provider, transitions } from "react-alert";
-import AlertTemplate from "react-alert-template-basic";
+import { positions, Provider, transitions } from "../../../node_modules/react-alert";
+import AlertTemplate from "../../../node_modules/react-alert-template-basic";
 const options = {
   timeout: 3000,
   position: positions.BOTTOM_CENTER,
@@ -19,6 +20,7 @@ export default class mainWrapper extends React.Component {
     videos: {},
     user: [],
     savedVideos: [],
+    vidStateID: "",
     selectedItem: -1
   };
   componentDidMount() {
@@ -111,11 +113,36 @@ export default class mainWrapper extends React.Component {
     );
   };
 
+  renderJumbo = video => {
+    return (
+      <ul>
+        <Tile key={1}>
+          <Title title={video.name} />
+          <br />
+          <JumboIframe name={video.name} url={video.url} id={1} />
+          <br />
+          <Provider template={AlertTemplate} {...options}>
+            <SaveBtn
+              value={video.url}
+              key={`${video.url}-save`}
+              id={video.name}
+              name="saveVid"
+              onClick={event => {
+                this.handleSaveFormSubmit(event, video);
+              }}
+            />
+          </Provider>
+        </Tile>
+      </ul>
+    );
+  };
+
   render() {
     return this.state.videos === undefined ? (
       <div>Loading...</div>
     ) : (
       <div className="mainWraper">
+        <JumboTile>{this.renderJumbo(this.state.videos.reddit[0])}</JumboTile>
         <h3 className="">Reddit</h3>
         <Wrapper ID="reddit">
           {this.renderVideos(this.state.videos.reddit)}

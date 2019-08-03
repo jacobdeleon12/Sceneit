@@ -6,8 +6,8 @@ export function JumboIframe(props) {
     <iframe
       title={props.name}
       className="big_iframe"
-      name-video={props.name}
-      src={props.movieUrl}
+      src={props.url}
+      name={`iframe_video${props.id}`}
       frameBorder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       allowFullScreen
@@ -21,8 +21,8 @@ export function Iframe(props) {
       title={props.name}
       className="sml_iframe"
       src={props.url}
-      frameBorder="0"
       name={`iframe_video${props.id}`}
+      frameBorder="0"
       allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
       allowFullScreen
     />
