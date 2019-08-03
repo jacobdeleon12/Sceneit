@@ -4,7 +4,6 @@ import Login from "./pages/Login";
 import Main from "./pages/Main";
 import Search from "./pages/Search";
 import NoMatch from "./pages/NoMatch";
-import Search from "./pages/Search";
 import User from "./pages/User";
 // import EditUser from "./pages/EditUser";
 

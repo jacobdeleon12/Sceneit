@@ -38,7 +38,7 @@ export function MainNav() {
         </ul>
         <form className="form-inline my-2 my-lg-0" style={{display: "block"}}>
           <input className="form-control mr-sm-2" type="search" placeholder="Search Videos" aria-label="Search" />
-          <button className="btn btn-outline-success my-2 my-sm-0 vidSearch" type="submit">Search</button>
+          <button className="btn btn-outline-success my-2 my-sm-0 vidSearch" type="submit"><i class="fa fa-search"></i></button>
         </form>
       </div>
     </nav>
