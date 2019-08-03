@@ -3,7 +3,6 @@
   width: 100%;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 3px 6px #999, 0 3px 6px #999;
  
 }
 
@@ -17,10 +16,6 @@
   width: 100%;
   transform: translate(-50%, -50%);
 }
-
-/* .sml_iframe img:hover {
-z-index: -99;
-} */
 
 .sml_title {
   color: beige;
