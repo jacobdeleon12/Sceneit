@@ -4,6 +4,8 @@ import { Container } from "../components/Grid";
 import { MainNav } from "../components/Nav";
 import Footer from "../components/Footer";
 import MainWrapper from "../components/MainWrapperVideos";
+import SearchWrapper from "../components/SearchWrapperVideos";
+
 
 const loggedInUser = window.sessionStorage.getItem("loggedInUser");
 const user = JSON.parse(sessionStorage.getItem("UserInfo"));
@@ -13,7 +15,6 @@ class Main extends Component {
     user: [],
     savedVideos: [],
     vidStateID: "",
-    // keyCard: ""
   };
 
   componentDidMount() {

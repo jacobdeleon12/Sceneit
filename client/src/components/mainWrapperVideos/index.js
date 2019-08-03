@@ -1,14 +1,11 @@
 import React from "react";
-import Wrapper from "../Wrapper";
-import {
-  SaveBtn
-  // CommentBtn,
-  // BtnContainer
-} from "../Buttons/VideoBtns";
 import API from "../../utils/API";
+import Wrapper from "../Wrapper";
+import { SaveBtn } from "../Buttons/VideoBtns";
 import { Title, Iframe, Thumbnail } from "../Iframe";
 import { Tile, JumboTile } from "../Tile";
 import { JumboIframe } from "../Iframe";
+
 //NPM alert options
 import { positions, Provider, transitions } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
@@ -31,13 +28,16 @@ export default class mainWrapper extends React.Component {
     this.loadVideos();
     this.loadUser();
   }
+
   loadUser = () => {
     this.setState({ user: user });
   };
+
   loadVideos = async () => {
     let res = await API.getVideos();
     this.setState({ videos: res.data[0].videos });
   };
+
   handleSaveFormSubmit = (event, video) => {
     event.preventDefault();
     const vStr = video.url;
@@ -55,12 +55,15 @@ export default class mainWrapper extends React.Component {
         });
       })
       .catch(err => console.log(err));
+
     event.target.disabled = true;
   };
+
   constructor() {
     super();
     this.state = {};
   }
+
   determineItemStyle(video, i) {
     const isItemSelected = this.state.selectedItem === video.url;
     return isItemSelected ? (
@@ -69,9 +72,10 @@ export default class mainWrapper extends React.Component {
         <Thumbnail alt={video.name} img={video.bigImg} id={i} />
       );
   }
+
   renderVideos = data => {
     return (
-      <div>
+      <ul>
         {data.map((video, i) => (
           <Tile key={i}>
             <Title title={video.name} />
@@ -101,9 +105,10 @@ export default class mainWrapper extends React.Component {
             </Provider>
           </Tile>
         ))}
-      </div>
+      </ul>
     );
   };
+
   renderJumbo = video => {
     return (
       <ul className="jumboList">
@@ -127,6 +132,7 @@ export default class mainWrapper extends React.Component {
       </ul>
     );
   };
+
   render() {
     return this.state.videos === undefined ? (
       <h5>Loading...</h5>

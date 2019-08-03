@@ -11,11 +11,8 @@ const clientId =
 
 const success = response => {
   const profId = response.profileObj.googleId;
-  // console.log(response);
 
   window.sessionStorage.setItem("loggedInUser", profId);
-  // document.cookie = "profId=" + profId;
-  // console.log(document.cookie);
 
   API.getUser(profId)
     .then(res => {
@@ -34,20 +31,11 @@ const success = response => {
       }
     })
     .catch(err => console.log(err));
-
-  // API.getUsers()
-  //   .then(res => console.log(res.data))
-  //   .catch(err => console.log(err));
 };
 
 const error = () => {
   console.error("error"); // eslint-disable-line
 };
-
-// const loading = () => {
-//   console.log("loading"); // eslint-disable-line
-//   window.location.replace("https://sceneitapp.herokuapp.com/");
-// };
 
 const logout = () => {
   console.log("logout"); // eslint-disable-line
@@ -68,7 +56,8 @@ export function GLogin() {
 
 export function GLogout() {
   return (
-    <div className="logout"
+    <div
+      className="logout"
       // client_Id={clientId}
       // buttonText="Logout"
       // onLogoutSuccess={logout}

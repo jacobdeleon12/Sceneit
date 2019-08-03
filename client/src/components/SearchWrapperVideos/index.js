@@ -1,14 +1,3 @@
-// import React from "react";
-// import "./style.css";
-
-// function Userwrap(props) {
-//   return (
-//     <div className="wrapper container">
-//       {props.children}
-//     </div>
-//   );
-// }
-
 import React from "react";
 import API from "../../utils/API";
 import Wrapper from "../Wrapper";
@@ -26,10 +15,7 @@ const options = {
   transition: transitions.SCALE
 };
 
-const loggedInUser = window.sessionStorage.getItem("loggedInUser");
-const user = JSON.parse(window.sessionStorage.getItem("UserInfo"));
-
-export default class UserWrapper extends React.Component {
+export default class SearchWrapper extends React.Component {
   state = {
     videos: {},
     user: [],
@@ -44,6 +30,9 @@ export default class UserWrapper extends React.Component {
   }
 
   loadUser = () => {
+    // let loggedInUser = window.sessionStorage.getItem("loggedInUser");
+    // console.log(loggedInUser);
+
     API.getUser(window.sessionStorage.getItem("loggedInUser"))
       .then(res => {
         res.data.savedVideos != null &&
@@ -52,13 +41,13 @@ export default class UserWrapper extends React.Component {
       .catch(err => console.log(err));
   };
 
-  loadVideos = () => {
-    API.getUser(loggedInUser)
-      .then(res => {
-        // console.log(res.data.savedVideos);
-        this.setState({ savedVideos: res.data.savedVideos })
-      })
-      .catch(err => console.log(err));
+  loadVideos = async () => {
+    let res = await API.searchVideos("speed");
+    let path = window.location.pathname
+    // console.log(res.data[0]);
+    console.log(`path: ${path}`);
+    
+    this.setState({ videos: res.data[0] });
   };
 
   handleSaveFormSubmit = (event, video) => {
@@ -132,18 +121,32 @@ export default class UserWrapper extends React.Component {
     );
   };
 
-
   render() {
     return this.state.videos === undefined ? (
       <div>Loading...</div>
     ) : (
       <div className="mainWraper">
-        <h3 className="">Saved</h3>
-        <Wrapper ID="saved">
+        <h3 className="">Reddit</h3>
+        <Wrapper ID="reddit">
           {this.renderVideos(this.state.videos.reddit)}
+        </Wrapper>
+        <h3 className="">TMDB</h3>
+        <Wrapper ID="tmdb">{this.renderVideos(this.state.videos.tmdb)}</Wrapper>
+        <h3 className="">STEAM</h3>
+        <Wrapper ID="steam">
+          {this.renderVideos(this.state.videos.steam)}
+        </Wrapper>
+        <h3 className="">YOUTUBE</h3>
+        <Wrapper ID="youtube">
+          {this.renderVideos(this.state.videos.youtube)}
+        </Wrapper>
+        <h3 className="">VEVO</h3>
+        <Wrapper ID="vevo">{this.renderVideos(this.state.videos.vevo)}</Wrapper>
+        <h3 className="">VIMEO</h3>
+        <Wrapper ID="vimeo">
+          {this.renderVideos(this.state.videos.vimeo)}
         </Wrapper>
       </div>
     );
   }
 }
-

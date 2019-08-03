@@ -3,11 +3,6 @@ const axios = require("axios");
 
 let urlArray = [];
 
-// let CLIENT_ID = "385538f9b231338961848e6c1b87ae3cc55b0b69";
-// let CLIENT_SECRET =
-//   "n6jmUOcKnamF8Z0W3NyCqgkJKdvgTn1nLewYV8MaAKaa8PwwbX3brb/JVh1kkbebHOxnJSb5si/bH3lecfznHcWBlsF9M7COXnxTRQpZJWRG4vtRjRPiP/aVc8hCX6ck";
-// let ACCESS_TOKEN = "e126558674c8aef099b8e5dd989f3b83";
-
 let Vimeo = require("vimeo").Vimeo;
 let client = new Vimeo(process.env.VIMEO_CLIENT_ID, process.env.VIMEO_CLIENT_SECRET, process.env.VIMEO_ACCESS_TOKEN);
 
