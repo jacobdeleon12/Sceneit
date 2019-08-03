@@ -10,10 +10,9 @@ module.exports = {
       axios
         .get(`https://www.reddit.com/r/${query}/hot.json?limit=20`)
         .then(response => {
-          // console.log(response.data.data.children);
           for (let obj of response.data.data.children) {
             if (obj.data.domain === "youtube.com") {
-              obj.data.url &&
+              obj.data.url.search("v=") != -1 &&
                 urlArray.push({
                   type: "reddit",
                   name: `${obj.data.title.slice(0, 40)}...`,
@@ -24,7 +23,7 @@ module.exports = {
                     .slice(0, 11)}`
                 });
             } else if (obj.data.domain === "youtu.be") {
-              obj.data.url &&
+              obj.data.url.search("be/") != -1 &&
                 urlArray.push({
                   type: "reddit",
                   name: `${obj.data.title.slice(0, 40)}...`,

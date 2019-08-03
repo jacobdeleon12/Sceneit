@@ -17,7 +17,6 @@ module.exports = {
 
           $("a.search_result_row").each((i, element) => {
             let urlLink = $(element).attr("href");
-
             axios
               .get(urlLink)
               .then(response => {
@@ -31,8 +30,7 @@ module.exports = {
                     bigImg: $("img.game_header_image_full").attr("src"),
                     url: $("div.highlight_movie").attr("data-webm-hd-source")
                   });
-
-                if (urlArray.length === 10) {
+                if (urlArray.length === 20) {
                   // console.log(urlArray);
                   resolve(urlArray);
                 }
@@ -70,8 +68,7 @@ module.exports = {
                     bigImg: $("img.game_header_image_full").attr("src"),
                     url: $("div.highlight_movie").attr("data-webm-hd-source")
                   });
-
-                if (urlArray.length === 10) {
+                if (urlArray.length === 20) {
                   // console.log(urlArray);
                   resolve(urlArray);
                 }
