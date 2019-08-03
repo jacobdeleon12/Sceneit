@@ -1,9 +1,14 @@
 import React from "react";
 import API from "../../utils/API";
 import Wrapper from "../Wrapper";
+import {
+  SaveBtn,
+  // CommentBtn, 
+  // BtnContainer
+} from "../Buttons/VideoBtns";
+import API from "../../utils/API";
 import { Title, Iframe, Thumbnail } from "../Iframe";
-import { SaveBtn } from "../Buttons/VideoBtns";
-import { Tile, JumboTile } from "../Tile";
+import { Tile, JumboTile } from "../tile";
 import { JumboIframe } from "../Iframe";
 
 //NPM alert options
@@ -22,6 +27,7 @@ export default class mainWrapper extends React.Component {
     savedVideos: [],
     vidStateID: "",
     selectedItem: -1
+    // keyCard: ""
   };
   componentDidMount() {
     this.loadVideos();
@@ -29,7 +35,10 @@ export default class mainWrapper extends React.Component {
   }
 
   loadUser = () => {
-    API.getUser(document.cookie.split("=0; ")[1])
+    // let loggedInUser = window.sessionStorage.getItem("loggedInUser");
+    // console.log(loggedInUser);
+
+    API.getUser(window.sessionStorage.getItem("loggedInUser"))
       .then(res => {
         res.data.savedVideos != null &&
           this.setState({ user: res.data, savedVideos: res.data.savedVideos });
@@ -48,7 +57,8 @@ export default class mainWrapper extends React.Component {
     const vName = video.name;
     const vImg = video.bigImg;
 
-    API.saveVideo(this.state.user._id, {
+
+    API.saveVideo(window.sessionStorage.getItem("loggedInUser"), {
       $push: {
         savedVideos: { vStr, vName, vImg }
       }
@@ -73,8 +83,8 @@ export default class mainWrapper extends React.Component {
     return isItemSelected ? (
       <Iframe name={video.name} url={video.url} id={i} />
     ) : (
-      <Thumbnail img={video.bigImg} id={i} />
-    );
+        <Thumbnail img={video.bigImg} id={i} />
+      );
   }
 
   renderVideos = data => {
@@ -141,29 +151,29 @@ export default class mainWrapper extends React.Component {
     return this.state.videos === undefined ? (
       <div>Loading...</div>
     ) : (
-      <div className="mainWraper">
-        <JumboTile>{this.renderJumbo(this.state.videos.reddit[0])}</JumboTile>
-        <h3 className="">Reddit</h3>
-        <Wrapper ID="reddit">
-          {this.renderVideos(this.state.videos.reddit)}
-        </Wrapper>
-        <h3 className="">TMDB</h3>
-        <Wrapper ID="tmdb">{this.renderVideos(this.state.videos.tmdb)}</Wrapper>
-        <h3 className="">STEAM</h3>
-        <Wrapper ID="steam">
-          {this.renderVideos(this.state.videos.steam)}
-        </Wrapper>
-        <h3 className="">YOUTUBE</h3>
-        <Wrapper ID="youtube">
-          {this.renderVideos(this.state.videos.youtube)}
-        </Wrapper>
-        <h3 className="">VEVO</h3>
-        <Wrapper ID="vevo">{this.renderVideos(this.state.videos.vevo)}</Wrapper>
-        <h3 className="">VIMEO</h3>
-        <Wrapper ID="vimeo">
-          {this.renderVideos(this.state.videos.vimeo)}
-        </Wrapper>
-      </div>
-    );
+        <div className="mainWraper">
+          <JumboTile>{this.renderJumbo(this.state.videos.reddit[0])}</JumboTile>
+          <h3 className="">Reddit</h3>
+          <Wrapper ID="reddit">
+            {this.renderVideos(this.state.videos.reddit)}
+          </Wrapper>
+          <h3 className="">TMDB</h3>
+          <Wrapper ID="tmdb">{this.renderVideos(this.state.videos.tmdb)}</Wrapper>
+          <h3 className="">STEAM</h3>
+          <Wrapper ID="steam">
+            {this.renderVideos(this.state.videos.steam)}
+          </Wrapper>
+          <h3 className="">YOUTUBE</h3>
+          <Wrapper ID="youtube">
+            {this.renderVideos(this.state.videos.youtube)}
+          </Wrapper>
+          <h3 className="">VEVO</h3>
+          <Wrapper ID="vevo">{this.renderVideos(this.state.videos.vevo)}</Wrapper>
+          <h3 className="">VIMEO</h3>
+          <Wrapper ID="vimeo">
+            {this.renderVideos(this.state.videos.vimeo)}
+          </Wrapper>
+        </div>
+      );
   }
 }

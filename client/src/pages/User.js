@@ -4,10 +4,10 @@ import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import Userwrap from "../components/Userwrap";
 import { MainNav } from "../components/Nav";
-import Footer from "../components/Footer";
+import Footer from "../components/footer";
 import { Iframe, Title, Thumbnail } from "../components/Iframe";
 import { DeleteBtn } from "../components/Buttons/VideoBtns";
-import { Tile, JumboTile } from "../components/Tile";
+import { Tile, JumboTile } from "../components/tile";
 
 //NPM alert options
 import { positions, Provider, transitions } from "react-alert";
@@ -25,18 +25,20 @@ class User extends Component {
     movieVideos: [],
     keyCard: ""
   };
+
   componentDidMount() {
     this.loadUser();
   }
 
   loadUser = () => {
-    API.getUser(document.cookie.split("profId=")[1])
+
+    API.getUser(window.sessionStorage.getItem("loggedInUser"))
       .then(res => {
-        // console.log(res.data)
+        console.log(res.data)
         this.setState({
           user: res.data,
           videos: res.data.savedVideos,
-          keyCard: document.cookie.split("profId=")[1]
+          keyCard: window.sessionStorage.getItem("loggedInUser")
         });
       })
       .catch(err => console.log(err));
@@ -49,7 +51,7 @@ class User extends Component {
       .then(res => this.loadUser())
       .catch(err => console.log(err));
   };
-  loadVideos = () => {};
+  loadVideos = () => { };
   // =======================================
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -87,8 +89,8 @@ class User extends Component {
     return isItemSelected ? (
       <Iframe name={video.name} url={video.url} id={i} />
     ) : (
-      <Thumbnail img={video.bigImg} id={i} />
-    );
+        <Thumbnail img={video.bigImg} id={i} />
+      );
   }
 
   renderVideos = data => {
@@ -128,8 +130,11 @@ class User extends Component {
   };
 
   render() {
+    console.log(window.sessionStorage.getItem("loggedInUser"));
+    console.log(this.state);
+
     switch (this.state.keyCard) {
-      case this.state.user.googleId:
+      case window.sessionStorage.getItem("loggedInUser"):
         return (
           <div>
             <MainNav />
@@ -169,11 +174,11 @@ class User extends Component {
                 </Col>
               </Row>
               <Userwrap>
-                {this.state.user.videos !== undefined ? (
-                  this.renderVideos(this.state.user.videos)
+                {this.state.user.savedVideos !== undefined ? (
+                  this.renderVideos(this.state.user.savedVideos)
                 ) : (
-                  <h5>You have no saved videos. Womp Womp!</h5>
-                )}
+                    <h5>You have no saved videos. Womp Womp!</h5>
+                  )}
               </Userwrap>
             </Container>
           </div>
