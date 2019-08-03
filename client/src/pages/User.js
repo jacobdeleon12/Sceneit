@@ -18,9 +18,13 @@ const options = {
   transition: transitions.SCALEs
 };
 
+const loggedInUser = window.sessionStorage.getItem("loggedInUser");
+const user = JSON.parse(window.sessionStorage.getItem("UserInfo"));
+
 class User extends Component {
   state = {
-    user: [],
+    user: user,
+    savedVideos: [],
     videos: [],
     movieVideos: [],
     keyCard: ""
@@ -28,18 +32,20 @@ class User extends Component {
 
   componentDidMount() {
     this.loadUser();
+    this.loadVideos();
+    // console.log(user);
   }
 
   loadUser = () => {
+    console.log(loggedInUser);
+    this.setState({ user: user });
+  };
 
-    API.getUser(window.sessionStorage.getItem("loggedInUser"))
+  loadVideos = () => {
+    API.getUser(loggedInUser)
       .then(res => {
-        console.log(res.data)
-        this.setState({
-          user: res.data,
-          videos: res.data.savedVideos,
-          keyCard: window.sessionStorage.getItem("loggedInUser")
-        });
+        // console.log(res.data.savedVideos);
+        this.setState({ savedVideos: res.data.savedVideos })
       })
       .catch(err => console.log(err));
   };
@@ -51,7 +57,6 @@ class User extends Component {
       .then(res => this.loadUser())
       .catch(err => console.log(err));
   };
-  loadVideos = () => { };
   // =======================================
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -67,7 +72,7 @@ class User extends Component {
     console.log(vStr);
     console.log(vName);
 
-    API.deleteVideo(this.state.user._id, {
+    API.deleteVideo(user.googleId, {
       $pull: {
         savedVideos: { vStr }
       }
@@ -130,72 +135,81 @@ class User extends Component {
   };
 
   render() {
+    console.log(this.state.user);
+    console.log(this.state.savedVideos);
 
-    switch (this.state.keyCard) {
-      case window.sessionStorage.getItem("loggedInUser"):
-        return (
-          <div>
-            <MainNav />
-            <Container fluid>
-              <Row>
-                <Col size="md-12">
-                  <JumboTile>
-                    <div className="row justify-content-center">
-                      <Col size="md-2">
-                        <Container fluid>
-                          <img
-                            src={this.state.user.imageUrl}
-                            alt="googleImage"
-                          />
-                        </Container>
-                      </Col>
-                      <Col size="md-3">
-                        <Container fluid>
-                          <Row fluid>
-                            <Col size="md-12">
-                              <h4>
-                                {this.state.user.givenName +
-                                  " " +
-                                  this.state.user.familyName}
-                              </h4>
-                            </Col>
-                          </Row>
-                          <Row fluid>
-                            <Col size="md-12">
-                              <h5>{this.state.user.email}</h5>
-                            </Col>
-                          </Row>
-                        </Container>
-                      </Col>
-                    </div>
-                  </JumboTile>
-                </Col>
-              </Row>
-              <Userwrap>
-                {this.state.user.savedVideos !== undefined ? (
-                  this.renderVideos(this.state.user.savedVideos)
-                ) : (
-                    <h5>You have no saved videos. Womp Womp!</h5>
-                  )}
-              </Userwrap>
-            </Container>
-          </div>
-        );
+    console.log(loggedInUser);
+    console.log(user);
 
-      default:
-        return (
-          <div>
-            <MainNav />
-            <Container fluid>
-              <h5>
-                You must be logged in to visit the Profile page. Womp Womp!
-                Click <a href="https://sceneitapp.herokuapp.com/">here</a> to
-                visit the login page.
-              </h5>
-            </Container>
-            <Footer />
-          </div>
-        );
+
+    if (this.state.user) {
+      return (
+        <div>
+          <MainNav />
+          <Container fluid>
+            <Row>
+              <Col size="md-12">
+                <JumboTile>
+                  <div className="row justify-content-center">
+                    <Col size="md-2">
+                      <Container fluid>
+                        <img
+                          src={this.state.user.imageUrl}
+                          alt="googleImage"
+                        />
+                      </Container>
+                    </Col>
+                    <Col size="md-3">
+                      <Container fluid>
+                        <Row fluid>
+                          <Col size="md-12">
+                            <h4>
+                              {this.state.user.givenName +
+                                " " +
+                                this.state.user.familyName}
+                            </h4>
+                          </Col>
+                        </Row>
+                        <Row fluid>
+                          <Col size="md-12">
+                            <h5>{this.state.user.email}</h5>
+                          </Col>
+                        </Row>
+                      </Container>
+                    </Col>
+                  </div>
+                </JumboTile>
+              </Col>
+            </Row>
+            <Userwrap>
+              {this.state.savedVideos !== undefined ? (
+                this.renderVideos(this.state.savedVideos)
+                // console.log(this.state.savedVideos)
+
+              )
+                : (
+                  <h5>You have no saved videos. Womp Womp!</h5>
+
+                )}
+            </Userwrap>
+          </Container>
+        </div>
+      );
+
+    } else {
+      return (
+        <div>
+          <MainNav />
+          <Container fluid>
+            <h5>
+              You must be logged in to visit the Profile page. Womp Womp!
+              Click <a href="https://sceneitapp.herokuapp.com/">here</a> to
+              visit the login page.
+            </h5>
+          </Container>
+          <Footer />
+        </div>
+      );
     }
   }
 }

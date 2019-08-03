@@ -14,10 +14,7 @@ module.exports = {
     // console.log(req);
     db.User
       .findOne({ googleId: req.params.id })
-      .then(dbModel => {
-        console.log(dbModel);
-        res.json(dbModel)
-      })
+      .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
@@ -37,7 +34,7 @@ module.exports = {
   remove: function (req, res) {
     // console.log(req);
     db.User
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .findOneAndUpdate({ vStr: req.params.id }, req.body)
       .then(dbModel => console.log(dbModel))
       .catch(err => res.status(422).json(err));
   }
