@@ -75,7 +75,7 @@ export default class mainWrapper extends React.Component {
 
   renderVideos = data => {
     return (
-      <ul>
+      <div>
         {data.map((video, i) => (
           <Tile key={i}>
             <Title title={video.name} />
@@ -105,31 +105,31 @@ export default class mainWrapper extends React.Component {
             </Provider>
           </Tile>
         ))}
-      </ul>
+      </div>
     );
   };
 
   renderJumbo = video => {
     return (
-      <ul className="jumboList">
+      <div className="jumboList">
         {/* <Tile key={1}> */}
-          {/* <Title title={video.name} />
+        {/* <Title title={video.name} />
           <br /> */}
-          <JumboIframe name={video.name} url={video.url} id={1} />
-          <br />
-          <Provider template={AlertTemplate} {...options}>
-            <SaveBtn
-              value={video.url}
-              key={`${video.url}-save`}
-              id={video.name}
-              name="saveVid"
-              onClick={event => {
-                this.handleSaveFormSubmit(event, video);
-              }}
-            />
-          </Provider>
+        <JumboIframe name={video.name} url={video.url} id={1} />
+        <br />
+        <Provider template={AlertTemplate} {...options}>
+          <SaveBtn
+            value={video.url}
+            key={`${video.url}-save`}
+            id={video.name}
+            name="saveVid"
+            onClick={event => {
+              this.handleSaveFormSubmit(event, video);
+            }}
+          />
+        </Provider>
         {/* </Tile> */}
-      </ul>
+      </div>
     );
   };
 

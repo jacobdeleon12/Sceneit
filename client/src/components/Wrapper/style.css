@@ -144,7 +144,6 @@
 }
 
 /* @media (min-width: 1200px) {
-
   .scroll_menu {
     height: 25vh;
   }
@@ -237,3 +236,24 @@
     transform: translate3d(-62.5px, 0, 0);
   } */
 }
+.wrapper {
+  padding-top: 50px;
+  background: rgb(52, 58, 64);
+  background: linear-gradient(0deg, rgba(52, 58, 64, .85) 0%, rgba(103, 115, 128, .5) 50%, rgba(52, 58, 64, 1) 100%);
+  height: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 20px;
+  justify-content: space-around;
+  align-content: flex-start;
+  overflow: auto;
+}
+
+p, h1, h2, h3, h4, h5 {
+  color: deepskyblue;
+}
+
+#logo {
+  color: deepskyblue;
+}
+
