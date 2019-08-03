@@ -136,7 +136,7 @@ export default class mainWrapper extends React.Component {
   };
   render() {
     return this.state.videos === undefined ? (
-      <div>Loading...</div>
+      <h5>Loading...</h5>
     ) : (
       <div className="mainWraper">
         <JumboTile>{this.renderJumbo(this.state.videos.reddit[0])}</JumboTile>
