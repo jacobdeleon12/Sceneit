@@ -1,14 +1,17 @@
 import React from "react";
-import API from "../../utils/API";
 import Wrapper from "../Wrapper";
+import {
+  SaveBtn
+  // CommentBtn,
+  // BtnContainer
+} from "../Buttons/VideoBtns";
+import API from "../../utils/API";
 import { Title, Iframe, Thumbnail } from "../Iframe";
-import { SaveBtn } from "../Buttons/VideoBtns";
 import { Tile, JumboTile } from "../Tile";
 import { JumboIframe } from "../Iframe";
 //NPM alert options
 import { positions, Provider, transitions } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
-
 const options = {
   timeout: 3000,
   position: positions.BOTTOM_CENTER,
@@ -21,13 +24,17 @@ export default class mainWrapper extends React.Component {
     savedVideos: [],
     vidStateID: "",
     selectedItem: -1
+    // keyCard: ""
   };
   componentDidMount() {
     this.loadVideos();
     this.loadUser();
   }
   loadUser = () => {
-    API.getUser(document.cookie.split("=0; ")[1])
+    // let loggedInUser = window.sessionStorage.getItem("loggedInUser");
+    // console.log(loggedInUser);
+
+    API.getUser(window.sessionStorage.getItem("loggedInUser"))
       .then(res => {
         res.data.savedVideos != null &&
           this.setState({ user: res.data, savedVideos: res.data.savedVideos });
@@ -43,7 +50,8 @@ export default class mainWrapper extends React.Component {
     const vStr = video.url;
     const vName = video.name;
     const vImg = video.bigImg;
-    API.saveVideo(this.state.user._id, {
+
+    API.saveVideo(window.sessionStorage.getItem("loggedInUser"), {
       $push: {
         savedVideos: { vStr, vName, vImg }
       }

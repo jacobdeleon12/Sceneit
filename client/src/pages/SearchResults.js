@@ -14,9 +14,9 @@ class SearchResults extends Component {
   }
 
   loadUsers = () => {
-    API.getUsers()
+    API.getUser(window.sessionStorage.getItem("loggedInUser"))
       .then(res =>
-        this.setState({ users: res.data, title: "", author: "", synopsis: "" })
+        this.setState({ users: res.data })
       )
       .catch(err => console.log(err));
   };

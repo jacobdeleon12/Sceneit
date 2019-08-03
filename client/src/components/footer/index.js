@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 
-function footer() {
+function Footer() {
   const name = "<Scene/IT>™";
   return (
     <div className="footer">
@@ -133,4 +133,4 @@ function footer() {
   );
 }
 
-export default footer;
+export default Footer;

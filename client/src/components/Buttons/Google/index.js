@@ -12,8 +12,9 @@ const clientId =
 const success = response => {
   const profId = response.profileObj.googleId;
 
-  document.cookie = "profId=" + profId;
-  console.log(document.cookie);
+  window.sessionStorage.setItem("loggedInUser", profId);
+  // document.cookie = "profId=" + profId;
+  // console.log(document.cookie);
 
   API.getUser(profId)
     .then(res => {
