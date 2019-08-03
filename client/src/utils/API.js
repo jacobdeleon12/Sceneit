@@ -30,7 +30,7 @@ export default {
     return axios.get("/api/videos/" + searchWord);
   },
   // Saves a video to the user model
-  getVideos: function(_id) {
+  getVideos: function() {
     return axios.get("/api/videos");
   }
 };

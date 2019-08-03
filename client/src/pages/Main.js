@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { Container } from "../components/Grid";
 import API from "../utils/API";
-import NavBar from "../components/Nav/MainNav";
-import Footer from "../components/footer";
-import MainWrapper from "../components/mainWrapperVideos";
-import MainJombo from "../components/mainJomboVideos";
+import { MainNav } from "../components/Nav";
+import Footer from "../components/Footer";
+import MainWrapper from "../components/MainWrapperVideos";
 
 class Main extends Component {
   state = {
@@ -15,7 +14,6 @@ class Main extends Component {
   };
 
   componentDidMount() {
-    // this.setState({ keyCard: document.cookie.split("loggedInUser=")[1] })
     this.loadUser();
   }
 
@@ -40,68 +38,24 @@ class Main extends Component {
     });
   };
 
-  // =======================================
-
-  // imageSwap = (event, vidURl) => {
-  //   console.log("we made it here ");
-
-  //   this.setState({ vidStateID: vidURl });
-  //   console.log(this.state);
-  // };
-
   render() {
-    console.log(this.state.keyCard);
-    console.log(this.state);
-
-    switch (this.state.keyCard) {
-      case this.state.user.googleId:
-        return (
-          <div>
-            <NavBar />
-            <Container fluid>
-              <MainJombo />
-              <MainWrapper />
-            </Container>
-            <Footer />
-          </div>
-        )
-      // break;
-
-      default:
-        return (
-          <div>
-            <NavBar />
-            <Container fluid>
-              <h5>You must be logged in to visit this page. Womp Womp! Click <a href="https://sceneitapp.herokuapp.com/">here</a> to visit the login page.</h5>
-            </Container>
-            <Footer />
-          </div>
-        )
-      // break;
-    }
-
-    // if (this.state.keyCard === this.state.user.googleId) {
-    //   return (
-    //     <div>
-    //       <NavBar />
-    //       <Container fluid>
-    //         <MainJombo />
-    //         <MainWrapper />
-    //       </Container>
-    //       <Footer />
-    //     </div>
-    //   );
-    // } else if (this.state.keyCard !== this.state.user.googleId) {
-    //   return (
-    //     <div>
-    //       <NavBar />
-    //       <Container fluid>
-    //         <h5>You must be logged in to visit the Main page. Womp Womp! Click <a href="https://sceneitapp.herokuapp.com/">here</a> to visit the login page.</h5>
-    //       </Container>
-    //       <Footer />
-    //     </div>
-    //   )
-    // }
+    return (
+      <div>
+        <MainNav />
+        <Container fluid>
+          {this.state.keyCard ? (
+            <MainWrapper />
+          ) : (
+              <h5>
+                You must be logged in to visit this page. Womp Womp! Click
+              <a href="https://sceneitapp.herokuapp.com/">here</a> to visit the
+                login page.
+            </h5>
+            )}
+        </Container>
+        <Footer />
+      </div>
+    );
   }
 }
 

@@ -1,27 +1,17 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
+
+import { Col, Row, Container } from "../components/Grid";
 import Userwrap from "../components/Userwrap";
-import NavBar from "../components/Nav/MainNav";
-import Footer from "../components/footer";
-import {
-  // Iframe,
-  Thumb
-} from "../components/Iframe";
-// import JumboIframe from "../components/JumboIframe";
-import {
-  // SaveBtn,
-  DeleteBtn,
-  BtnContainer
-  // CommentBtn
-} from "../components/Buttons/VideoBtns";
-//import Carousel from "../csomponents/Carousel"
+import { MainNav } from "../components/Nav";
+import Footer from "../components/Footer";
+import { Iframe, Title, Thumbnail } from "../components/Iframe";
+import { DeleteBtn } from "../components/Buttons/VideoBtns";
+import { Tile, JumboTile } from "../components/Tile";
+
 //NPM alert options
 import { positions, Provider, transitions } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
-
 const options = {
   timeout: 3000,
   position: positions.BOTTOM_CENTER,
@@ -33,8 +23,6 @@ class User extends Component {
     user: [],
     videos: [],
     movieVideos: [],
-    // featuredVid: [],
-    // selectedVideo: [{}]
     keyCard: ""
   };
   componentDidMount() {
@@ -64,62 +52,7 @@ class User extends Component {
       .then(res => this.loadUser())
       .catch(err => console.log(err));
   };
-  loadVideos = () => {
-    // API.getVideos().then(res => {
-    //   console.log(res.data);
-    //   const redditdata = res.data.data.children;
-    //   let YTtitle = [];
-    //   let YTHotStr = [];
-    //   let reddit = [];
-    //   for (let i = 0; i < redditdata.length; i++) {
-    //     if (redditdata[i].data.domain === "youtube.com") {
-    //       //getting just the infromaion we need from huge string
-    //       const redditSplit = redditdata[i].data.media_embed.content.split(
-    //         "embed/"
-    //       )[1];
-    //       if (typeof redditSplit != "undefined") {
-    //         //title
-    //         YTtitle = redditdata[i].data.title;
-    //         //getting just the infromaion we need after ? in string
-    //         YTHotStr = redditSplit.substring(0, redditSplit.indexOf("?"));
-    //         //pushing to obj
-    //         reddit.push({ name: YTtitle, YTstr: YTHotStr });
-    //       }
-    //     }
-    //   }
-    //   this.setState({ featuredVid: reddit[0] });
-    //   reddit.shift();
-    //   this.setState({ videos: reddit });
-    //   //console.log(this.state.featuredVid);
-    // });
-  };
-  // =======================================
-  //for movie vidoes, and anything else we want to come up with
-  //must .split(" ").join("+") string for query to work correctly.
-  // loadMovieInfo = (query) => {
-  // API.getMovieInfo(query).then(res => {
-  //   // console.log(res.data.results);
-  //   const searchResult = res.data.results[0].id;
-  //   //second call for api video results
-  //   API.getMovieVideo(searchResult).then(res => {
-  //     // console.log(res.data);
-  //     const videoResults = res.data.results;
-  //     let YTMovieKey = [];
-  //     let YTMovieName = [];
-  //     let movieSearch = [];
-
-  //     //max of 10 for video search
-  //     for (let i = 0; i < 10 && i < videoResults.length; i++) {
-  //       YTMovieKey = videoResults[i].key;
-  //       YTMovieName = videoResults[i].name
-  //       movieSearch.push({ name: YTMovieName, YTstr: YTMovieKey })
-  //     }
-  //     this.setState({ movieVideos: movieSearch });
-  //     // console.log(this.state);
-
-  //   })
-  // })
-  // };
+  loadVideos = () => { };
   // =======================================
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -147,29 +80,73 @@ class User extends Component {
       .catch(err => console.log(err));
   };
 
-  changeSrcImage = (event, video) => {
-    event.preventDefault();
-    console.log("clicked");
+  constructor() {
+    super();
+    this.state = {};
+  }
 
-    video.attr("src", video.url)
+  determineItemStyle(video, i) {
+    const isItemSelected = this.state.selectedItem === video.url;
+    return isItemSelected ? (
+      <Iframe name={video.name} url={video.url} id={i} />
+    ) : (
+        <Thumbnail img={video.bigImg} id={i} />
+      );
+  }
+
+  renderVideos = data => {
+    return (
+      <ul>
+        {data.map((video, i) => (
+          <Tile key={i}>
+            <Title title={video.name} />
+            <br />
+            <div
+              className="sml_iframe_container"
+              onMouseEnter={() => {
+                this.setState({ selectedItem: video.url });
+              }}
+              onMouseLeave={() => {
+                this.setState({ selectedItem: "" });
+              }}
+            >
+              {this.determineItemStyle(video, i)}
+            </div>
+            <br />
+            <Provider template={AlertTemplate} {...options}>
+              <DeleteBtn
+                value={video.url}
+                key={`${video.url}-delete`}
+                id={video.name}
+                name="deleteVid"
+                onClick={event => {
+                  this.handleDeleteFormSubmit(event, video);
+                }}
+              />
+            </Provider>
+          </Tile>
+        ))}
+      </ul>
+    );
   };
 
   render() {
-    console.log(this.state);
-
     switch (this.state.keyCard) {
       case this.state.user.googleId:
         return (
           <div>
-            <NavBar />
+            <MainNav />
             <Container fluid>
               <Row>
                 <Col size="md-12">
-                  <Jumbotron>
+                  <JumboTile>
                     <div className="row justify-content-center">
                       <Col size="md-2">
                         <Container fluid>
-                          <img src={this.state.user.imageUrl} alt="googleImage" />
+                          <img
+                            src={this.state.user.imageUrl}
+                            alt="googleImage"
+                          />
                         </Container>
                       </Col>
                       <Col size="md-3">
@@ -191,92 +168,34 @@ class User extends Component {
                         </Container>
                       </Col>
                     </div>
-                  </Jumbotron>
+                  </JumboTile>
                 </Col>
               </Row>
               <Userwrap>
-                {this.state.videos ?
-                  this.state.videos.map(video => (
-                    <div className="text-center">
-                      {/* <Iframe
-                  key={this.state.user.savedVideos._id}
-                  YTstr={video.vStr}
-                  movieUrl={video.vImg}
-                  onClick={(event) => { this.changeSrcImage(event, video) }}
-                /> */}
-                      <Thumb
-                        key={this.state.user.savedVideos._id}
-                        thumbUrl={video.vImg}
-                        movieUrl={video.vStr}
-                        name={video.vName}
-                        onClick={(event) => { this.changeSrcImage(event, video) }}
-                      />
-                      {/* <br /> */}
-                      <BtnContainer>
-                        {/* provider is for alert. must encompass  button */}
-                        <Provider template={AlertTemplate} {...options}>
-                          <DeleteBtn
-                            value={video.vStr}
-                            key={`${video.vStr}-delete`}
-                            id={video.vName}
-                            name="delVid"
-                            onClick={(event) => { this.handleDeleteFormSubmit(event, video) }}
-                          />
-                        </Provider>
-                        {/* <CommentBtn
-                    value={video.vStr}
-                    key={this.state.user.savedVideos._id + "-comment"}
-                    id={video.vName}
-                    name="CommentVid"
-                    onClick={this.handleCommentSubmit}
-                  /> */}
-                      </BtnContainer>
-                      <br />
-                    </div>
-                  ))
-                  : <h5>You have no saved videos. Womp Womp!</h5>}
+                {this.state.user.videos !== undefined ? (
+                  this.renderVideos(this.state.user.videos)
+                ) : (
+                    <h5>You have no saved videos. Womp Womp!</h5>
+                  )}
               </Userwrap>
-
-              {/* <h1 className="text-center">IMDB Popular</h1>
-          <Wrapper>
-            {this.state.movieVideos.map(video => (
-              <div className="text-center">
-                <Iframe key={video.name} YTstr={video.YTstr} />
-                <br />
-                <DeleteBtn onClick={() => this.deleteVideo(video._id)} />
-                <CommentBtn
-                  // value={this.state.featuredVid.YTstr}
-                  name="CommentVid"
-                  onClick={this.handleCommentSubmit}
-                />
-              </div>
-            ))}
-          </Wrapper> */}
-              {/* {this.state.movieVideos.map(video => (
-              <div className="text-center">
-                <Iframe
-                  key={video.name}
-                  YTstr={video.YTstr}
-                />
-                <DeleteBtn onClick={() => this.deleteBook(video._id)} />
-              </div>
-            ))} */}
             </Container>
           </div>
         );
-      // break;
 
       default:
         return (
           <div>
-            <NavBar />
+            <MainNav />
             <Container fluid>
-              <h5>You must be logged in to visit the Profile page. Womp Womp! Click <a href="https://sceneitapp.herokuapp.com/">here</a> to visit the login page.</h5>
+              <h5>
+                You must be logged in to visit the Profile page. Womp Womp!
+                Click <a href="https://sceneitapp.herokuapp.com/">here</a> to
+                visit the login page.
+              </h5>
             </Container>
             <Footer />
           </div>
-        )
-      // break;
+        );
     }
   }
 }
