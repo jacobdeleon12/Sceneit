@@ -1,13 +1,13 @@
-import React from "react";
-import "./style.css";
+// import React from "react";
+// import "./style.css";
 
-function Userwrap(props) {
-  return (
-    <div className="wrapper container">
-      {props.children}
-    </div>
-  );
-}
+// function Userwrap(props) {
+//   return (
+//     <div className="wrapper container">
+//       {props.children}
+//     </div>
+//   );
+// }
 
 import React from "react";
 import API from "../../utils/API";
