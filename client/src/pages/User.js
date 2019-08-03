@@ -149,7 +149,6 @@ class User extends Component {
           <Container fluid>
             <Row>
               <Col size="md-12">
-                <JumboTile>
                   <div className="row justify-content-center">
                     <Col size="md-2">
                       <Container fluid>
@@ -178,7 +177,6 @@ class User extends Component {
                       </Container>
                     </Col>
                   </div>
-                </JumboTile>
               </Col>
             </Row>
             <Userwrap>
