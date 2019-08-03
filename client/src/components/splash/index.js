@@ -5,7 +5,7 @@ import Img from "./img/down-arrow2.png";
 import { GLogin } from "../Buttons/Google";
 
 
-function background({ children }) {
+function Background({ children }) {
   const Logo = "<Scene/ IT>"
 
   return (
@@ -35,4 +35,4 @@ function background({ children }) {
   );
 }
 
-export default background;
+export default Background;
