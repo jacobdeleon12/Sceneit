@@ -70,7 +70,7 @@ function Footer() {
                   <Link to="/AboutUs">About Us</Link>
                 </li>
                 <li>
-                  <Link to="http://scanfcode.com/contact/">Contact Us</Link>
+                  <Link to="/ContactUS">Contact Us</Link>
                 </li>
                 <li>
                   <Link to="http://scanfcode.com/contribute-at-scanfcode/">

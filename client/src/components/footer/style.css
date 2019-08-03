@@ -134,20 +134,20 @@
   font-size: 14px
 }
 
-.social-icons a.facebook:hover {
-  background-color: #3b5998
+.social-icons a.user-circle:hover {
+  background-color: #3b983b
 }
 
-.social-icons a.twitter:hover {
-  background-color: #00aced
+.social-icons a.envelope-square:hover {
+  background-color: #ff8944
 }
 
 .social-icons a.linkedin:hover {
   background-color: #007bb6
 }
 
-.social-icons a.dribbble:hover {
-  background-color: #ea4c89
+.social-icons a.github:hover {
+  background-color: #222
 }
 
 @media (max-width:767px) {

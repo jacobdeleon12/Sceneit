@@ -2,11 +2,11 @@ import React from "react";
 import "./style.css";
 import { Container, Col, Row } from "../Grid";
 
-function AboutUS() {
+function ContactUs() {
   return (
     <div className="About">
       <Container className="fluid">
-        <h1 className="text-center aboutHeader">The Dev Team</h1>
+        <h1 className="text-center aboutHeader">We Need Jobs!</h1>
         <Row>
           <Col size="12">
             <div className="text-left row AboutEach">
@@ -16,63 +16,47 @@ function AboutUS() {
                 alt="placeholder"
                 style={{ height: "250px" }}
               ></img>
-              <br />
-              <ul className="social-icons">
-                <li>
-                  <a
-                    href="https://github.com/jacobdeleon12"
-                    target="blank"
-                    className="github"
-                  >
-                    <i className="fa fa-github"></i>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.linkedin.com/in/jacob-deleon-65105892/"
-                    target="blank"
-                    className="linkedin"
-                  >
-                    <i className="fa fa-linkedin"></i>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="user-circle"
-                    href="https://jacobdeleonportfolio.herokuapp.com/"
-                    target="blank"
-                  >
-                    <i className="fa fa-user-circle"></i>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="envelope-square"
-                    target="blank"
-                    href="mailto:jacobdeleon122@gmail.com"
-                  >
-                    <i className="fa fa-envelope-square"></i>
-                  </a>
-                </li>
-              </ul>
-              <Row>
-                <p className="col Description">
-                  <h3 className="headerName">Jacob DeLeon</h3>
-                  Full Stack Web Developer with a Background in design and
-                  animation. Attended Both Washington State University and
-                  University of Washington and to obtain a bachelor’s in Digital
-                  Technology and Full Stack Web Development certificate.
-                  Passionate about technology and creativity which led to a path
-                  of schooling, work experience, and teamwork which strengthened
-                  communication skills, and the ability to connect with all
-                  individuals. This combination enabled proficiencies in: Html,
-                  CSS, JavaScript, jQuery, Node, React. As a result, I built
-                  many successful projects. Currently, pursuing a position as a
-                  Full Stack Web Developer molded and sculpted from education
-                  and experience to be one of the very best developers a
-                  technological company would desire.
-                </p>
-              </Row>
+
+              <div className="">
+                <ul className="social-icons">
+                  <li>
+                    <a
+                      href="https://github.com/jacobdeleon12"
+                      target="blank"
+                      className="github"
+                    >
+                      <i className="fa fa-github"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.linkedin.com/in/jacob-deleon-65105892/"
+                      target="blank"
+                      className="linkedin"
+                    >
+                      <i className="fa fa-linkedin"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className="user-circle"
+                      href="https://jacobdeleonportfolio.herokuapp.com/"
+                      target="blank"
+                    >
+                      <i className="fa fa-user-circle"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className="envelope-square"
+                      target="blank"
+                      href="mailto:jacobdeleon122@gmail.com"
+                    >
+                      <i className="fa fa-envelope-square"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </Col>
         </Row>
@@ -172,4 +156,4 @@ function AboutUS() {
   );
 }
 
-export default AboutUS;
+export default ContactUs;
