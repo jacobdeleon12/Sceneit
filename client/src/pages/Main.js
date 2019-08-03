@@ -15,7 +15,6 @@ class Main extends Component {
     user: [],
     savedVideos: [],
     vidStateID: "",
-    // keyCard: ""
   };
 
   componentDidMount() {
@@ -43,8 +42,8 @@ class Main extends Component {
       <div>
         <MainNav />
         <Container fluid>
-          {this.state.keyCard ? (
-            <SearchWrapper />
+          {this.state.user ? (
+            <MainWrapper />
           ) : (
               <h5>
                 You must be logged in to visit this page. Womp Womp! Click

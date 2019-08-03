@@ -26,6 +26,9 @@ const options = {
   transition: transitions.SCALE
 };
 
+const loggedInUser = window.sessionStorage.getItem("loggedInUser");
+const user = JSON.parse(window.sessionStorage.getItem("UserInfo"));
+
 export default class UserWrapper extends React.Component {
   state = {
     videos: {},
@@ -41,9 +44,6 @@ export default class UserWrapper extends React.Component {
   }
 
   loadUser = () => {
-    // let loggedInUser = window.sessionStorage.getItem("loggedInUser");
-    // console.log(loggedInUser);
-
     API.getUser(window.sessionStorage.getItem("loggedInUser"))
       .then(res => {
         res.data.savedVideos != null &&
@@ -52,9 +52,13 @@ export default class UserWrapper extends React.Component {
       .catch(err => console.log(err));
   };
 
-  loadVideos = async () => {
-    let res = await API.getVideos();
-    this.setState({ videos: res.data[0].videos });
+  loadVideos = () => {
+    API.getUser(loggedInUser)
+      .then(res => {
+        // console.log(res.data.savedVideos);
+        this.setState({ savedVideos: res.data.savedVideos })
+      })
+      .catch(err => console.log(err));
   };
 
   handleSaveFormSubmit = (event, video) => {
@@ -128,55 +132,15 @@ export default class UserWrapper extends React.Component {
     );
   };
 
-  renderJumbo = video => {
-    return (
-      <ul>
-        <Tile key={1}>
-          <Title title={video.name} />
-          <br />
-          <JumboIframe name={video.name} url={video.url} id={1} />
-          <br />
-          <Provider template={AlertTemplate} {...options}>
-            <SaveBtn
-              value={video.url}
-              key={`${video.url}-save`}
-              id={video.name}
-              name="saveVid"
-              onClick={event => {
-                this.handleSaveFormSubmit(event, video);
-              }}
-            />
-          </Provider>
-        </Tile>
-      </ul>
-    );
-  };
 
   render() {
     return this.state.videos === undefined ? (
       <div>Loading...</div>
     ) : (
       <div className="mainWraper">
-        <JumboTile>{this.renderJumbo(this.state.videos.reddit[0])}</JumboTile>
-        <h3 className="">Reddit</h3>
-        <Wrapper ID="reddit">
+        <h3 className="">Saved</h3>
+        <Wrapper ID="saved">
           {this.renderVideos(this.state.videos.reddit)}
-        </Wrapper>
-        <h3 className="">TMDB</h3>
-        <Wrapper ID="tmdb">{this.renderVideos(this.state.videos.tmdb)}</Wrapper>
-        <h3 className="">STEAM</h3>
-        <Wrapper ID="steam">
-          {this.renderVideos(this.state.videos.steam)}
-        </Wrapper>
-        <h3 className="">YOUTUBE</h3>
-        <Wrapper ID="youtube">
-          {this.renderVideos(this.state.videos.youtube)}
-        </Wrapper>
-        <h3 className="">VEVO</h3>
-        <Wrapper ID="vevo">{this.renderVideos(this.state.videos.vevo)}</Wrapper>
-        <h3 className="">VIMEO</h3>
-        <Wrapper ID="vimeo">
-          {this.renderVideos(this.state.videos.vimeo)}
         </Wrapper>
       </div>
     );
