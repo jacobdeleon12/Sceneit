@@ -97,6 +97,18 @@
   .scrollBtn {
     width: 18px;
   }
+  .scrollWrapper {
+    padding: 0px 18px;
+  }
+  .scroll_menu {
+    height: 15rem;
+  }
+}
+
+@media (min-width: 425px) {
+  .scrollBtn {
+    width: 18px;
+  }
   .vidWrapper {
     padding: 0px 18px;
   }
@@ -127,6 +139,7 @@
 }
 
 /* @media (min-width: 1200px) {
+
   .scroll_menu {
     height: 25vh;
   }

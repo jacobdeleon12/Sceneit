@@ -7,7 +7,7 @@
 }
 
 .vidBtn {
-  background-color: rgb(223, 39, 39);
+  background-color: rgb(0, 157, 209);
   color: beige;
   text-align: center;
   border: none;
@@ -22,11 +22,11 @@
 
 .vidBtn:hover {
   cursor: pointer;
-  background-color: rgb(141, 38, 38);
+  background-color: rgb(1, 96, 128);
 }
 
-.vidBtn:active {
-  background-color: rgb(94, 24, 24);
+.vidBtn:disabled {
+  background-color: #5f5f5f;
   box-shadow: none;
   outline: 0;
 }
