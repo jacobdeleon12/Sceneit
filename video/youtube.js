@@ -1,8 +1,6 @@
 require('dotenv').config()
 const axios = require("axios");
 
-// const apiKey = "AIzaSyBQaJOdXS5rojwu9fVmBi-JenkMGVMUIec";
-
 let urlArray = [];
 
 module.exports = {

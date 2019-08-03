@@ -6,7 +6,8 @@ module.exports = {
   searchAll: async function(req, res) {
     // console.log(req);
     const results = await videos.searchByWord(req.params.searchWord);
-    res.json(results).catch(err => res.status(422).json(err));
+    res.json(results)
+    // .catch(err => res.status(422).json(err));
   },
   returnAll: function(req, res) {
     // console.log(req);
