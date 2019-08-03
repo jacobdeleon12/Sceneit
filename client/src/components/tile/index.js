@@ -7,7 +7,7 @@ export function Tile(props) {
 export function JumboTile({ children }) {
   return (
     <div
-      style={{ clear: "both", paddingTop: "2rem", paddingBottom: "2rem", textAlign: "center",  marginTop: "1rem", }}
+      style={{ clear: "both", paddingTop: "2rem", paddingBottom: "2rem", textAlign: "center", marginTop: "1rem", }}
       className="jumbotron justify-content-center text-center"
     >
       {children}
