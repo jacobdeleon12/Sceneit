@@ -3,13 +3,15 @@ const videos = require("../video");
 
 // Defining methods for the UsersController
 module.exports = {
-  searchApi: async function (req, res) {
+  searchAll: async function(req, res) {
     // console.log(req);
-    console.log(req.params.searchWord);
-    
-    const results = await videos.searchByWord(req.params.searchWord)
-    res.json(results)
-      // .then(results => res.json(results))
-      // .catch(err => res.status(422).json(err));
+    const results = await videos.searchByWord(req.params.searchWord);
+    res.json(results).catch(err => res.status(422).json(err));
+  },
+  returnAll: function(req, res) {
+    // console.log(req);
+    db.Video.find(req.query)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   }
 };

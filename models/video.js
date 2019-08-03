@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const videoSchema = new Schema({
   vidType: String,
-  videos: Array,
+  videos: Object,
   date: { type: Date, default: Date.now }
 });
 

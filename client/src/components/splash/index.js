@@ -26,7 +26,7 @@ function background({ children }) {
               <img className="splashImg ball" alt="arrow" src={Img} />
               <br />
               <br />
-              <GLogin/>
+              <GLogin />
             </div>
           </Col>
         </Row>
