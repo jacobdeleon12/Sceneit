@@ -117,7 +117,7 @@ class mainWrapper extends Component {
     this.state.redditVideos.map(video => {
 
       return (
-        <Tile hoverOn={this.hoverOn} hoverOff={this.hoverOff}>
+        <Tile key={video.name} hoverOn={this.hoverOn} hoverOff={this.hoverOff}>
           <VidWrapper>
             {this.state.hover ? (
               <Iframe
@@ -137,7 +137,7 @@ class mainWrapper extends Component {
             )}
 
             <Title title={video.name} />
-            <br />
+            {/* <br /> */}
           </VidWrapper>
           <br />
           <BtnContainer>
@@ -167,7 +167,7 @@ class mainWrapper extends Component {
     this.state.tmdbVideos.map(video => {
 
       return (
-        <Tile hoverOn={this.hoverOn} hoverOff={this.hoverOff}>
+        <Tile key={video.name} hoverOn={this.hoverOn} hoverOff={this.hoverOff}>
           <VidWrapper>
             {this.state.hover ? (
               <Iframe
