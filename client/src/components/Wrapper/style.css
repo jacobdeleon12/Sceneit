@@ -28,6 +28,11 @@
   text-decoration: none;
 }
 
+.load {
+  padding: 80px;
+  margin: 20px auto;
+}
+
 /* .scroll_menu div:hover {
   background-color: #777;
 } */
