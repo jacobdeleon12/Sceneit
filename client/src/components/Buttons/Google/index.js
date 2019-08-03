@@ -11,6 +11,7 @@ const clientId =
 
 const success = response => {
   const profId = response.profileObj.googleId;
+  // console.log(response);
 
   window.sessionStorage.setItem("loggedInUser", profId);
   // document.cookie = "profId=" + profId;
@@ -18,7 +19,8 @@ const success = response => {
 
   API.getUser(profId)
     .then(res => {
-      console.log(res.data);
+      console.log(JSON.stringify(res.data));
+      window.sessionStorage.setItem("UserInfo", JSON.stringify(res.data));
       if (res.data === null || res.data.googleId !== profId) {
         API.saveUser(response.profileObj)
           .then(res => {
@@ -33,9 +35,9 @@ const success = response => {
     })
     .catch(err => console.log(err));
 
-  API.getUsers()
-    .then(res => console.log(res.data))
-    .catch(err => console.log(err));
+  // API.getUsers()
+  //   .then(res => console.log(res.data))
+  //   .catch(err => console.log(err));
 };
 
 const error = () => {
@@ -72,7 +74,8 @@ export function GLogout() {
       // onLogoutSuccess={logout}
       onClick={logout}
     >
-      <i className="fab fa-google"></i> Logout
+      {/* <i className="fab fa-google"></i> */}
+       Logout
     </div>
   );
 }
