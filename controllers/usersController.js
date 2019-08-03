@@ -34,7 +34,7 @@ module.exports = {
   remove: function (req, res) {
     // console.log(req);
     db.User
-      .findOneAndUpdate({ vStr: req.params.id }, req.body)
+      .findOneAndUpdate({ googleId: req.params.id }, req.body)
       .then(dbModel => console.log(dbModel))
       .catch(err => res.status(422).json(err));
   }
