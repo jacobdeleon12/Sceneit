@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Container } from "../components/Grid";
 import API from "../utils/API";
 import { MainNav } from "../components/Nav";
-import Footer from "../components/footer"
-import MainWrapper from "../components/mainWrapperVideos";
+import Footer from "../components/Footer"
+import MainWrapper from "../components/MainWrapperVideos";
 
 class Main extends Component {
   state = {

@@ -66,7 +66,8 @@ export function GLogin() {
 
 export function GLogout() {
   return (
-    <div className="logout"
+    <div
+      className="logout"
       // client_Id={clientId}
       // buttonText="Logout"
       // onLogoutSuccess={logout}

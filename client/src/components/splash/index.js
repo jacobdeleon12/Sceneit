@@ -1,8 +1,8 @@
 import "./style.css";
 import React from "react";
-import { Col, Row, Container } from "../Grid/index";
+import { Col, Row, Container } from "../Grid";
 import Img from "./img/down-arrow2.png";
-import { GLogin } from "../Buttons/Google/index";
+import { GLogin } from "../Buttons/Google";
 
 
 function background({ children }) {
