@@ -40,10 +40,17 @@ class mainWrapper extends Component {
 
   // =======================================
   loadUser = () => {
-    API.getUser(document.cookie.split("profId=")[1])
+    let loggedInUser = sessionStorage.getItem("loggedInUser");
+    console.log(loggedInUser);
+
+    API.getUser(loggedInUser)
       .then(res => {
         console.log(res.data)
-        this.setState({ user: res.data, savedVideos: res.data.savedVideos, keyCard: document.cookie.split("profId=")[1] });
+        this.setState({
+          user: res.data,
+          savedVideos: res.data.savedVideos,
+          keyCard: loggedInUser
+        });
       })
       .catch(err => console.log(err));
   };
@@ -100,10 +107,10 @@ class mainWrapper extends Component {
   };
 
   // loadUser = () => {
-  //   API.getUser(document.cookie.split("profId=")[1])
+  //   API.getUser(document.cookie.split("loggedInUser=")[1])
   //     .then(res => {
   //       console.log(res.data);
-  //       this.setState({ user: res.data, savedVideos: res.data.savedVideos, keyCard: document.cookie.split("profId=")[1] });
+  //       this.setState({ user: res.data, savedVideos: res.data.savedVideos, keyCard: document.cookie.split("loggedInUser=")[1] });
   //     })
   //     .catch(err => console.log(err));
   // };

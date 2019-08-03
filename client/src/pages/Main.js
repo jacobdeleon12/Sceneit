@@ -15,19 +15,22 @@ class Main extends Component {
   };
 
   componentDidMount() {
-    // this.setState({ keyCard: document.cookie.split("profId=")[1] })
+    // this.setState({ keyCard: document.cookie.split("loggedInUser=")[1] })
     this.loadUser();
-
   }
+
   // =======================================
   loadUser = () => {
-    API.getUser(document.cookie.split("profId=")[1])
+    let loggedInUser = sessionStorage.getItem("loggedInUser");
+    console.log(loggedInUser);
+
+    API.getUser(loggedInUser)
       .then(res => {
         console.log(res.data);
-        this.setState({ user: res.data, savedVideos: res.data.savedVideos, keyCard: document.cookie.split("profId=")[1] });
+        this.setState({ user: res.data, savedVideos: res.data.savedVideos, keyCard: loggedInUser });
       })
       .catch(err => console.log(err));
-    console.log(document.cookie);
+    // console.log(document.cookie);
   };
 
   handleInputChange = event => {
