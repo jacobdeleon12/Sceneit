@@ -15,16 +15,6 @@ export function JumboIframe(props) {
   );
 }
 
-// export function FrameWrap(props) {
-//   const frame = '';
-//   return (
-//     <div
-//       className="sml_iframe_container"
-//       onMouseEnter={frame = <Iframe name={video.name} url={video.url} id={i}/>}
-//       onMouseLeave={frame = <Thumbnail img={video.bigImg} id={i} />}
-//     >{frame}</div>
-//   );
-// }
 export function Iframe(props) {
   return (
     <iframe

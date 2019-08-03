@@ -1,10 +1,8 @@
-import React, { Component, Fragment } from "react";
+import React from "react";
 import API from "../../utils/API";
-
 import Wrapper from "../Wrapper";
 import { Title, Iframe, Thumbnail } from "../Iframe";
-import { SaveBtn, BtnContainer } from "../Buttons/VideoBtns";
-import VidWrapper from "../vidWraper";
+import { SaveBtn } from "../Buttons/VideoBtns";
 import Tile from "../tile";
 
 //NPM alert options
@@ -19,11 +17,9 @@ const options = {
 export default class mainWrapper extends React.Component {
   state = {
     videos: {},
-    videoUrl: [],
     user: [],
     savedVideos: [],
-    vidStateID: "",
-    hover: false
+    selectedItem: -1
   };
   componentDidMount() {
     this.loadVideos();
@@ -65,27 +61,17 @@ export default class mainWrapper extends React.Component {
     event.target.disabled = true;
   };
 
-  // hoverOn = (event, url) => {
-  // };
-
-  // hoverOff = (event, url) => {
-  // };
-
   constructor() {
     super();
-    this.state = { isHovered: false, selectedItem: -1 };
-    // this.toggleHover = this.toggleHover.bind(this);
+    this.state = {};
   }
 
-  // toggleHover() {
-  //   this.setState(prevState => ({ isHovered: !prevState.isHovered }));
-  // }
   determineItemStyle(video, i) {
     const isItemSelected = this.state.selectedItem === video.url;
     return isItemSelected ? (
       <Iframe name={video.name} url={video.url} id={i} />
-      ) : (
-        <Thumbnail img={video.bigImg} id={i} />
+    ) : (
+      <Thumbnail img={video.bigImg} id={i} />
     );
   }
 
@@ -97,24 +83,15 @@ export default class mainWrapper extends React.Component {
             <Title title={video.name} />
             <br />
             <div
-              // data={data[i]}
               className="sml_iframe_container"
               onMouseEnter={() => {
                 this.setState({ selectedItem: video.url });
-                console.log(this.state.selectedItem);
               }}
               onMouseLeave={() => {
-                this.setState({ selectedItem: '' });
-                console.log(this.state.selectedItem);
+                this.setState({ selectedItem: "" });
               }}
-              // selected={this.determineItemStyle(video)}
             >
               {this.determineItemStyle(video, i)}
-              {/* {this.state.selectedItem === i ? (
-                <Iframe name={video.name} url={video.url} id={i} />
-              ) : (
-                <Thumbnail img={video.bigImg} id={i} />
-              )} */}
             </div>
             <br />
             <Provider template={AlertTemplate} {...options}>
