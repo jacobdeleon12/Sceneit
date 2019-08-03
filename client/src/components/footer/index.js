@@ -12,7 +12,7 @@ function Footer() {
             <div className="col-sm-12 col-md-6">
               <h6>About</h6>
               <p className="text-justify">
-                {name} <i>WANTS TO BE THE YOUR BEST VIDEO STREAMING SITE. </i>
+                {name} <i>WANTS TO BE YOUR FAVORITE VIDEO STREAMING SITE. </i>
                 We are here to provide the a network that will connect users to
                 many video services as a one stop shop of video enjoyment.
                 <br />
@@ -30,35 +30,35 @@ function Footer() {
             </div>
 
             <div className="col-xs-6 col-md-3">
-              <h6>Categories</h6>
+              <h6>Technologies Used</h6>
               <ul className="footer-links">
                 <li>
-                  <Link to="http://scanfcode.com/category/c-language/"></Link>
+                  <Link
+                    target="_blank"
+                    to="http://scanfcode.com/category/c-language/"
+                  ></Link>
                 </li>
                 <li>
-                  <Link to="http://scanfcode.com/category/front-end-development/">
-                    UI Design
-                  </Link>
+                  <a href="https://reactjs.org/">React</a>
                 </li>
                 <li>
-                  <Link to="http://scanfcode.com/category/back-end-development/">
-                    PHP
-                  </Link>
+                  <a href="https://nodejs.org/en/about/">Node</a>
                 </li>
                 <li>
-                  <Link to="http://scanfcode.com/category/java-programming-language/">
-                    Java
-                  </Link>
+                  <a href="https://en.wikipedia.org/wiki/JavaScript">
+                    JavaScript
+                  </a>
                 </li>
                 <li>
-                  <Link to="http://scanfcode.com/category/android/">
-                    Android
-                  </Link>
+                  <a href="https://www.npmjs.com/">npmjs</a>
                 </li>
                 <li>
-                  <Link to="http://scanfcode.com/category/templates/">
-                    Templates
-                  </Link>
+                  <a href="https://developers.google.com/identity/sign-in/web/sign-in">
+                    Google Authentication
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.mongodb.com/">Mongo DB</a>
                 </li>
               </ul>
             </div>
