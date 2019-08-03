@@ -1,4 +1,4 @@
-import React from "../../../node_modules/react";
+import React from "react";
 import API from "../../utils/API";
 import Wrapper from "../Wrapper";
 import { Title, Iframe, Thumbnail } from "../Iframe";
