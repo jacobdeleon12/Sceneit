@@ -1,5 +1,4 @@
 // import React from "react";
-// import "./style.css";
 
 // function Userwrap(props) {
 //   return (
@@ -10,6 +9,7 @@
 // }
 
 import React from "react";
+import "./style.css";
 import API from "../../utils/API";
 import Wrapper from "../Wrapper";
 import { SaveBtn } from "../Buttons/VideoBtns";
@@ -92,8 +92,8 @@ export default class UserWrapper extends React.Component {
     return isItemSelected ? (
       <Iframe name={video.name} url={video.url} id={i} />
     ) : (
-      <Thumbnail img={video.bigImg} id={i} />
-    );
+        <Thumbnail img={video.bigImg} id={i} />
+      );
   }
 
   renderVideos = data => {
@@ -137,13 +137,13 @@ export default class UserWrapper extends React.Component {
     return this.state.videos === undefined ? (
       <div>Loading...</div>
     ) : (
-      <div className="mainWraper">
-        <h3 className="">Saved</h3>
-        <Wrapper ID="saved">
-          {this.renderVideos(this.state.videos.reddit)}
-        </Wrapper>
-      </div>
-    );
+        <div className="mainWraper">
+          <h3 className="">Saved</h3>
+          <Wrapper ID="saved">
+            {this.renderVideos(this.state.videos.reddit)}
+          </Wrapper>
+        </div>
+      );
   }
 }
 
