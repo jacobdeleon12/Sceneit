@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { LoginNav } from "../components/Nav";
-import Background from "../components/splash";
+import Background from "../components/Splash";
 import Footer from "../components/Footer";
 
 class Login extends Component {
