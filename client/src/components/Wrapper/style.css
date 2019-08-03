@@ -227,8 +227,8 @@
     -webkit-transform: translate3d(125px, 0, 0);
     transform: translate3d(125px, 0, 0);
   }
-  .row__inner:hover {
+  /* .row__inner:hover {
     -webkit-transform: translate3d(-62.5px, 0, 0);
     transform: translate3d(-62.5px, 0, 0);
-  }
+  } */
 }

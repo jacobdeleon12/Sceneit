@@ -41,6 +41,11 @@
   box-shadow: 0 3px 6px #999, 0 3px 6px #999;
 }
 
+.jumboList {
+  padding: 0px;
+  margin: auto;
+}
+
 @media (min-width: 320px) {
   .sml_iframe {
     /* height: 70px; */
