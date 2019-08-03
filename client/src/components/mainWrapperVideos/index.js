@@ -1,16 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import Wrapper from "../Wrapper";
-import { Thumb, Title, Iframe } from "../Iframe";
 import {
   SaveBtn,
   // CommentBtn, 
   // BtnContainer
 } from "../Buttons/VideoBtns";
 import API from "../../utils/API";
-import Wrapper from "../Wrapper";
 import { Title, Iframe, Thumbnail } from "../Iframe";
-import { SaveBtn } from "../Buttons/VideoBtns";
-import { Tile, JumboTile } from "../Tile";
+import { Tile, JumboTile } from "../tile";
 import { JumboIframe } from "../Iframe";
 
 //NPM alert options
@@ -37,10 +34,10 @@ export default class mainWrapper extends React.Component {
   }
 
   loadUser = () => {
-    let loggedInUser = sessionStorage.getItem("loggedInUser");
-    console.log(loggedInUser);
+    // let loggedInUser = window.sessionStorage.getItem("loggedInUser");
+    // console.log(loggedInUser);
 
-    API.getUser(loggedInUser)
+    API.getUser(window.sessionStorage.getItem("loggedInUser"))
       .then(res => {
         res.data.savedVideos != null &&
           this.setState({ user: res.data, savedVideos: res.data.savedVideos });
@@ -59,7 +56,8 @@ export default class mainWrapper extends React.Component {
     const vName = video.name;
     const vImg = video.bigImg;
 
-    API.saveVideo(this.state.user._id, {
+
+    API.saveVideo(window.sessionStorage.getItem("loggedInUser"), {
       $push: {
         savedVideos: { vStr, vName, vImg }
       }

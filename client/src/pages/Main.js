@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Container } from "../components/Grid";
 import API from "../utils/API";
 import { MainNav } from "../components/Nav";
-import Footer from "../components/Footer";
-import MainWrapper from "../components/MainWrapperVideos";
+import Footer from "../components/footer"
+import MainWrapper from "../components/mainWrapperVideos";
 
 class Main extends Component {
   state = {
@@ -49,7 +49,7 @@ class Main extends Component {
               <h5>
                 You must be logged in to visit this page. Womp Womp! Click
               <a href="https://sceneitapp.herokuapp.com/">here</a> to visit the
-                login page.
+                    login page.
             </h5>
             )}
         </Container>

@@ -12,7 +12,7 @@ const clientId =
 const success = response => {
   const profId = response.profileObj.googleId;
 
-  sessionStorage.setItem("loggedInUser", profId)
+  window.sessionStorage.setItem("loggedInUser", profId);
   // document.cookie = "profId=" + profId;
   // console.log(document.cookie);
 
