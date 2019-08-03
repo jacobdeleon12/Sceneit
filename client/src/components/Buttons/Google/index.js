@@ -16,7 +16,7 @@ const success = response => {
 
   API.getUser(profId)
     .then(res => {
-      console.log(JSON.stringify(res.data));
+      // console.log(JSON.stringify(res.data));
       window.sessionStorage.setItem("UserInfo", JSON.stringify(res.data));
       if (res.data === null || res.data.googleId !== profId) {
         API.saveUser(response.profileObj)
