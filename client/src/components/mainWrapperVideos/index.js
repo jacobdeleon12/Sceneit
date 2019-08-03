@@ -1,4 +1,4 @@
-import React from "../../../node_modules/react";
+import React from "react";
 import API from "../../utils/API";
 import Wrapper from "../Wrapper";
 import { Title, Iframe, Thumbnail } from "../Iframe";
@@ -7,12 +7,9 @@ import { Tile, JumboTile } from "../Tile";
 import { JumboIframe } from "../Iframe";
 
 //NPM alert options
-import {
-  positions,
-  Provider,
-  transitions
-} from "../../../node_modules/react-alert";
-import AlertTemplate from "../../../node_modules/react-alert-template-basic";
+import { positions, Provider, transitions } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
+
 const options = {
   timeout: 3000,
   position: positions.BOTTOM_CENTER,

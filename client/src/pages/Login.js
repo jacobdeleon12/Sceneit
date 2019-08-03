@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { LoginNav } from "../components/Nav";
 import Background from "../components/splash";
+import Footer from "../components/Footer";
 
 class Login extends Component {
   render() {
