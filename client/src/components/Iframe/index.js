@@ -31,7 +31,7 @@ export function Iframe(props) {
 export function Thumbnail(props) {
   return (
     <a href={props.img} target={`iframe_video${props.id}`}>
-      <img src={props.img} />
+      <img src={props.img} alt=""/>
     </a>
   );
 }
