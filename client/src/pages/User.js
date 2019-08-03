@@ -130,8 +130,6 @@ class User extends Component {
   };
 
   render() {
-    console.log(window.sessionStorage.getItem("loggedInUser"));
-    console.log(this.state);
 
     switch (this.state.keyCard) {
       case window.sessionStorage.getItem("loggedInUser"):
