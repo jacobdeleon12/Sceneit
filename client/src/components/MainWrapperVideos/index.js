@@ -69,8 +69,8 @@ export default class mainWrapper extends React.Component {
     return isItemSelected ? (
       <Iframe name={video.name} url={video.url} id={i} />
     ) : (
-        <Thumbnail alt={video.name} img={video.bigImg} id={i} />
-      );
+      <Thumbnail alt={video.name} img={video.bigImg} id={i} />
+    );
   }
 
   renderVideos = data => {
@@ -137,29 +137,29 @@ export default class mainWrapper extends React.Component {
     return this.state.videos === undefined ? (
       <h5 className="load text-center">Loading...</h5>
     ) : (
-        <div className="mainWraper">
-          <JumboTile>{this.renderJumbo(this.state.videos.reddit[0])}</JumboTile>
-          <h3 className="">Reddit</h3>
-          <Wrapper ID="reddit">
-            {this.renderVideos(this.state.videos.reddit)}
-          </Wrapper>
-          <h3 className="">TMDB</h3>
-          <Wrapper ID="tmdb">{this.renderVideos(this.state.videos.tmdb)}</Wrapper>
-          <h3 className="">STEAM</h3>
-          <Wrapper ID="steam">
-            {this.renderVideos(this.state.videos.steam)}
-          </Wrapper>
-          <h3 className="">YOUTUBE</h3>
-          <Wrapper ID="youtube">
-            {this.renderVideos(this.state.videos.youtube)}
-          </Wrapper>
-          <h3 className="">VEVO</h3>
-          <Wrapper ID="vevo">{this.renderVideos(this.state.videos.vevo)}</Wrapper>
-          <h3 className="">VIMEO</h3>
-          <Wrapper ID="vimeo">
-            {this.renderVideos(this.state.videos.vimeo)}
-          </Wrapper>
-        </div>
-      );
+      <div className="mainWraper">
+        <JumboTile>{this.renderJumbo(this.state.videos.reddit[0])}</JumboTile>
+        <h3 className="">Reddit</h3>
+        <Wrapper ID="reddit">
+          {this.renderVideos(this.state.videos.reddit)}
+        </Wrapper>
+        <h3 className="">TMDB</h3>
+        <Wrapper ID="tmdb">{this.renderVideos(this.state.videos.tmdb)}</Wrapper>
+        <h3 className="">STEAM</h3>
+        <Wrapper ID="steam">
+          {this.renderVideos(this.state.videos.steam)}
+        </Wrapper>
+        <h3 className="">YOUTUBE</h3>
+        <Wrapper ID="youtube">
+          {this.renderVideos(this.state.videos.youtube)}
+        </Wrapper>
+        <h3 className="">VEVO</h3>
+        <Wrapper ID="vevo">{this.renderVideos(this.state.videos.vevo)}</Wrapper>
+        <h3 className="">VIMEO</h3>
+        <Wrapper ID="vimeo">
+          {this.renderVideos(this.state.videos.vimeo)}
+        </Wrapper>
+      </div>
+    );
   }
 }

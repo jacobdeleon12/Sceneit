@@ -9,7 +9,12 @@
 
 .scroll_menu {
   background: rgb(52, 58, 64);
-  background: linear-gradient(0deg, rgba(52, 58, 64, 1) 0%, rgba(103, 115, 128, .5) 50%, rgba(52, 58, 64, 1) 100%);
+  background: linear-gradient(
+    0deg,
+    rgba(52, 58, 64, 1) 0%,
+    rgba(103, 115, 128, 0.5) 50%,
+    rgba(52, 58, 64, 1) 100%
+  );
   overflow: auto;
   white-space: nowrap;
   position: relative;
@@ -227,7 +232,7 @@
     transform: scale(1.5);
     opacity: 1;
   }
-  .tile:hover~.tile {
+  .tile:hover ~ .tile {
     -webkit-transform: translate3d(125px, 0, 0);
     transform: translate3d(125px, 0, 0);
   }
@@ -236,10 +241,23 @@
     transform: translate3d(-62.5px, 0, 0);
   } */
 }
+<<<<<<< HEAD
 .wrapper {
   padding-top: 50px;
   background: rgb(52, 58, 64);
   background: linear-gradient(0deg, rgba(52, 58, 64, .85) 0%, rgba(103, 115, 128, .5) 50%, rgba(52, 58, 64, 1) 100%);
+=======
+
+.wrapper {
+  padding-top: 50px;
+  background: rgb(52, 58, 64);
+  background: linear-gradient(
+    0deg,
+    rgba(52, 58, 64, 0.85) 0%,
+    rgba(103, 115, 128, 0.5) 50%,
+    rgba(52, 58, 64, 1) 100%
+  );
+>>>>>>> master
   height: 100%;
   display: flex;
   flex-flow: row wrap;
@@ -249,11 +267,23 @@
   overflow: auto;
 }
 
+<<<<<<< HEAD
 p, h1, h2, h3, h4, h5 {
+=======
+p,
+h1,
+h2,
+h3,
+h4,
+h5 {
+>>>>>>> master
   color: deepskyblue;
 }
 
 #logo {
   color: deepskyblue;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master

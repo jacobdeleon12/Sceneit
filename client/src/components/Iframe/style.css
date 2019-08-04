@@ -43,7 +43,7 @@
 
 .jumboList {
   padding: 0px;
-  margin: auto;
+  margin: 0;
 }
 
 @media (min-width: 320px) {
