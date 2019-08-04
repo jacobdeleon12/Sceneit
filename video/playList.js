@@ -14,14 +14,18 @@ module.exports = {
           `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${query}&key=${YOUTUBE_API}`
         )
         .then(response => {
+          
           for (let obj of response.data.items) {
+            // console.log(obj.snippet.resourceId.videoId);
+            // console.log(obj.id.videoId);
+            
             obj.snippet.resourceId.videoId &&
               urlArray.push({
                 type: obj.snippet.channelTitle,
                 name: `${obj.snippet.title.slice(0, 40)}...`,
                 smlImg: obj.snippet.thumbnails.medium.url,
                 bigImg: obj.snippet.thumbnails.maxres.url,
-                url: `https://www.youtube.com/embed/${obj.id.videoId}?rel=0;&autoplay=1&mute=0&loop=1&playlist=${obj.id.videoId}`
+                url: `https://www.youtube.com/embed/${obj.snippet.resourceId.videoId}?rel=0;&autoplay=1&mute=0&loop=1`
               });
           }
           // console.log(urlArray);
@@ -47,7 +51,7 @@ module.exports = {
                 name: `${obj.snippet.title.slice(0, 40)}...`,
                 smlImg: obj.snippet.thumbnails.medium.url,
                 bigImg: obj.snippet.thumbnails.high.url,
-                url: `https://www.youtube.com/embed/${obj.id.videoId}?rel=0;&autoplay=1&mute=0&loop=1&playlist=${obj.id.videoId}`
+                url: `https://www.youtube.com/embed/${obj.snippet.resourceId.videoId}?rel=0;&autoplay=1&mute=0&loop=1`
               });
           }
           // console.log(urlArray);

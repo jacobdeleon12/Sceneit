@@ -25,7 +25,7 @@ export function Iframe(props) {
       src={props.url}
       name={`iframe_video${props.id}`}
       frameBorder="0"
-      allow="accelerometer; gyroscope; picture-in-picture; autoplay; fullscreen"
+      allow="accelerometer; gyroscope; autoplay; picture-in-picture; fullscreen"
       allowFullScreen
     />
   );

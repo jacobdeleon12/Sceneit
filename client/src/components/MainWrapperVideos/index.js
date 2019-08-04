@@ -28,7 +28,7 @@ export default class mainWrapper extends React.Component {
   componentDidMount() {
     this.loadVideos();
     this.loadUser();
-  };
+  }
   // componentDidUpdate(prevProps, prevState) {
   //   this.loadVideos();
   // };
@@ -73,8 +73,8 @@ export default class mainWrapper extends React.Component {
     return isItemSelected ? (
       <Iframe name={video.name} url={video.url} id={i} />
     ) : (
-        <Thumbnail alt={video.name} img={video.bigImg} id={i} />
-      );
+      <Thumbnail alt={video.name} img={video.bigImg} id={i} />
+    );
   }
 
   renderVideos = data => {
@@ -114,12 +114,11 @@ export default class mainWrapper extends React.Component {
   };
 
   renderJumbo = video => {
+    const jumBoi = video.url.replace("&autoplay=1", "");
+
     return (
       <div className="jumboList">
-        {/* <Tile key={1}> */}
-        {/* <Title title={video.name} />
-          <br /> */}
-        <JumboIframe name={video.name} url={video.url} id={1} />
+        <JumboIframe name={video.name} url={jumBoi} id={1} />
         <br />
         <Provider template={AlertTemplate} {...options}>
           <SaveBtn
@@ -132,7 +131,6 @@ export default class mainWrapper extends React.Component {
             }}
           />
         </Provider>
-        {/* </Tile> */}
       </div>
     );
   };
@@ -149,12 +147,12 @@ export default class mainWrapper extends React.Component {
             {this.renderVideos(this.state.videos.reddit)}
           </Wrapper>
         </div>
-        <div className="row-wrapper">
+        {/* <div className="row-wrapper">
           <h3 className="">TMDB</h3>
           <Wrapper ID="tmdb">
             {this.renderVideos(this.state.videos.tmdb)}
           </Wrapper>
-        </div>
+        </div> */}
         <div className="row-wrapper">
           <h3 className="">STEAM</h3>
           <Wrapper ID="steam">

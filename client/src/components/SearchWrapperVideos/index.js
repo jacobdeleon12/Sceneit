@@ -42,8 +42,8 @@ export default class mainWrapper extends React.Component {
     let pathSnip = window.location.search.substring(1).split("q=")[1];
     // let pathSnip = fullPath.split("q=")[1];
     console.log(`searched word: ${pathSnip}`);
-
-    let res = await API.searchVideos(pathSnip);
+    
+    let res = await API.searchVideos("mtga");
     console.log(res.data[0]);
 
     this.setState({ videos: res.data[0], searchWord: pathSnip });

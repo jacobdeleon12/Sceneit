@@ -23,8 +23,10 @@ module.exports = {
         .then(response => {
           for (let i = 0; i < 10; i++) {
            let movie = response.data.results[i]
-            searchId(movie.id)
-              .then(response => {
+           
+           searchId(movie.id)
+           .then(response => {
+            // console.log(response.data);
                 response.data.videos.results[0] &&
                   urlArray.push({
                     type: "tmbd",
@@ -34,7 +36,7 @@ module.exports = {
                     url: `https://www.youtube.com/embed/${response.data.videos.results[0].key}?rel=0;&autoplay=1&mute=0&loop=1&playlist=${response.data.videos.results[0].key}`
                   });
 
-                if (urlArray.length === 10) {
+                if (urlArray.length === 5) {
                   // console.log(urlArray);
                   resolve(urlArray);
                 }
@@ -71,7 +73,7 @@ module.exports = {
                     url: `https://www.youtube.com/embed/${response.data.videos.results[0].key}?rel=0;&autoplay=1&mute=0&loop=1&playlist=${response.data.videos.results[0].key}`
                   });
 
-                if (urlArray.length === 10) {
+                if (urlArray.length === 5) {
                   // console.log(urlArray);
                   resolve(urlArray);
                 }
