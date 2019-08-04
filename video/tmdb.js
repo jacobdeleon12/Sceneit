@@ -1,8 +1,6 @@
 require('dotenv').config()
 const axios = require("axios");
 
-// const apiKey = "7b07c1ac2c9e9a9f62cfc49a4ec55f99";
-
 const searchId = query => {
   return axios.get(
     `https://api.themoviedb.org/3/movie/${query}?api_key=${process.env.TMDB_API}&append_to_response=videos`

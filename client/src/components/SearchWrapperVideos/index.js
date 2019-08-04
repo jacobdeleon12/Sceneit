@@ -1,14 +1,14 @@
 import React from "react";
-import Wrapper from "../Wrapper";
-import {
-  SaveBtn
-  // CommentBtn,
-  // BtnContainer
-} from "../Buttons/VideoBtns";
 import API from "../../utils/API";
+import Wrapper from "../Wrapper";
+import { SaveBtn } from "../Buttons/VideoBtns";
 import { Title, Iframe, Thumbnail } from "../Iframe";
-import { Tile, JumboTile } from "../Tile";
-import { JumboIframe } from "../Iframe";
+import {
+  Tile
+  // JumboTile
+} from "../Tile";
+// import { JumboIframe } from "../Iframe";
+
 //NPM alert options
 import { positions, Provider, transitions } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
@@ -17,34 +17,49 @@ const options = {
   position: positions.BOTTOM_CENTER,
   transition: transitions.SCALE
 };
-const loggedInUser = window.sessionStorage.getItem("loggedInUser");
-const user = JSON.parse(sessionStorage.getItem("UserInfo"));
-export default class mainWrapper extends React.Component {
+
+export default class SearchWrapper extends React.Component {
   state = {
     videos: {},
     user: [],
     savedVideos: [],
     vidStateID: "",
     selectedItem: -1
+    // keyCard: ""
   };
   componentDidMount() {
     this.loadVideos();
     this.loadUser();
-  }
+  };
+
   loadUser = () => {
-    this.setState({ user: user });
+    // let loggedInUser = window.sessionStorage.getItem("loggedInUser");
+    // console.log(loggedInUser);
+
+    API.getUser(window.sessionStorage.getItem("loggedInUser"))
+      .then(res => {
+        res.data.savedVideos != null &&
+          this.setState({ user: res.data, savedVideos: res.data.savedVideos });
+      })
+      .catch(err => console.log(err));
   };
+
   loadVideos = async () => {
-    let res = await API.getVideos();
-    this.setState({ videos: res.data[0].videos });
+    let res = await API.searchVideos("speed");
+    let path = window.location.pathname
+    // console.log(res.data[0]);
+    console.log(`path: ${path}`);
+
+    this.setState({ videos: res.data[0] });
   };
+
   handleSaveFormSubmit = (event, video) => {
     event.preventDefault();
     const vStr = video.url;
     const vName = video.name;
     const vImg = video.bigImg;
 
-    API.saveVideo(loggedInUser, {
+    API.saveVideo(window.sessionStorage.getItem("loggedInUser"), {
       $push: {
         savedVideos: { vStr, vName, vImg }
       }
@@ -55,23 +70,27 @@ export default class mainWrapper extends React.Component {
         });
       })
       .catch(err => console.log(err));
+
     event.target.disabled = true;
   };
+
   constructor() {
     super();
     this.state = {};
   }
+
   determineItemStyle(video, i) {
     const isItemSelected = this.state.selectedItem === video.url;
     return isItemSelected ? (
       <Iframe name={video.name} url={video.url} id={i} />
     ) : (
-        <Thumbnail alt={video.name} img={video.bigImg} id={i} />
+        <Thumbnail img={video.bigImg} id={i} />
       );
   }
+
   renderVideos = data => {
     return (
-      <div>
+      <ul>
         {data.map((video, i) => (
           <Tile key={i}>
             <Title title={video.name} />
@@ -101,38 +120,15 @@ export default class mainWrapper extends React.Component {
             </Provider>
           </Tile>
         ))}
-      </div>
-    );
-  };
-  renderJumbo = video => {
-    return (
-      <ul className="jumboList">
-        {/* <Tile key={1}> */}
-          {/* <Title title={video.name} />
-          <br /> */}
-          <JumboIframe name={video.name} url={video.url} id={1} />
-          <br />
-          <Provider template={AlertTemplate} {...options}>
-            <SaveBtn
-              value={video.url}
-              key={`${video.url}-save`}
-              id={video.name}
-              name="saveVid"
-              onClick={event => {
-                this.handleSaveFormSubmit(event, video);
-              }}
-            />
-          </Provider>
-        {/* </Tile> */}
       </ul>
     );
   };
+
   render() {
     return this.state.videos === undefined ? (
-      <h5>Loading...</h5>
+      <div>Loading...</div>
     ) : (
         <div className="mainWraper">
-          <JumboTile>{this.renderJumbo(this.state.videos.reddit[0])}</JumboTile>
           <h3 className="">Reddit</h3>
           <Wrapper ID="reddit">
             {this.renderVideos(this.state.videos.reddit)}

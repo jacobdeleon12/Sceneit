@@ -70,7 +70,7 @@ function Footer() {
                   <Link to="/AboutUs">About Us</Link>
                 </li>
                 <li>
-                  <Link to="/ContactUS">Contact Us</Link>
+                  <Link to="http://scanfcode.com/contact/">Contact Us</Link>
                 </li>
                 <li>
                   <Link to="http://scanfcode.com/contribute-at-scanfcode/">
@@ -103,7 +103,7 @@ function Footer() {
             </div>
 
             <div className="col-md-4 col-sm-6 col-xs-12">
-              <ul className="icons">
+              <ul className="social-icons">
                 <li>
                   <Link className="facebook" to="#">
                     <i className="fa fa-facebook"></i>
