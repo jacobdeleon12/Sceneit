@@ -33,7 +33,7 @@ mongoose
     const vimeoQ = "staffpicks";
 
     console.log(`mongoose connected on ${new Date()}`);
-    videos.addToDb(tmdbQ, steamQ, redditQ, youtubeQ, vevoQ, vimeoQ);
+    // videos.addToDb(tmdbQ, steamQ, redditQ, youtubeQ, vevoQ, vimeoQ);
     setInterval(() => {
       console.log(`new videos added on ${new Date()}`);
       // videos.addToDb(tmdbQ, steamQ, redditQ, youtubeQ, vevoQ, vimeoQ);
