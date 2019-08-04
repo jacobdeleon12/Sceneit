@@ -97,12 +97,12 @@ module.exports = {
       console.log("made it past vevo");
       const VIMEOarr = await VIMEO.searchName(searchWord);
       console.log("made it past vimeo");
-      const TMDBarr = await TMDB.searchName(searchWord);
-      console.log("made it past tmdn");
+      // const TMDBarr = await TMDB.searchName(searchWord);
+      // console.log("made it past tmdn");
 
       videoArray.push({
         searched_word: searchWord,
-        tmdb: TMDBarr,
+        // tmdb: TMDBarr,
         steam: STEAMarr,
         reddit: REDDITarr,
         youtube: YOUTUBEarr,

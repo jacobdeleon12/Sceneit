@@ -51,7 +51,7 @@ module.exports = {
                 name: `${obj.snippet.title.slice(0, 40)}...`,
                 smlImg: obj.snippet.thumbnails.medium.url,
                 bigImg: obj.snippet.thumbnails.high.url,
-                url: `https://www.youtube.com/embed/${obj.snippet.resourceId.videoId}?rel=0;&autoplay=1&mute=0&loop=1`
+                url: `https://www.youtube.com/embed/${obj.id.videoId}?rel=0;&autoplay=1&mute=0&loop=1`
               });
           }
           // console.log(urlArray);
