@@ -81,8 +81,6 @@ module.exports = {
     const vevoChannel = "UC2pmfLm7iq6Ov1UwYrWYkZA";
 
     try {
-      const TMDBarr = await TMDB.searchName(searchWord);
-      console.log("made it past tmdn");
       const STEAMarr = await STEAM.searchName(searchWord);
       console.log("made it past steam");
       const REDDITarr = await REDDIT.searchName(searchWord);
@@ -93,6 +91,8 @@ module.exports = {
       console.log("made it past vevo");
       const VIMEOarr = await VIMEO.searchName(searchWord);
       console.log("made it past vimeo");
+      const TMDBarr = await TMDB.searchName(searchWord);
+      console.log("made it past tmdn");
 
       videoArray.push({
         searched_word: searchWord,

@@ -21,7 +21,8 @@ module.exports = {
           `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API}&language=en-US&sort_by=${query}.desc&include_adult=false&page=1&append_to_response=videos`
         )
         .then(response => {
-          for (const movie of response.data.results) {
+          for (let i = 0; i < 10; i++) {
+           let movie = response.data.results[i]
             searchId(movie.id)
               .then(response => {
                 response.data.videos.results[0] &&
@@ -54,8 +55,9 @@ module.exports = {
           `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API}&language=en-US&query=${query}&page=1&include_adult=false`
         )
         .then(response => {
-          for (let obj of response.data.results) {
-            axios
+          for (let i = 0; i < 10; i++) {
+            let obj = response.data.results[i]
+             axios
               .get(
                 `https://api.themoviedb.org/3/movie/${obj.id}?api_key=${TMDB_API}&language=en-US&append_to_response=videos`
               )

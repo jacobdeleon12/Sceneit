@@ -27,8 +27,6 @@ export function Iframe(props) {
       frameBorder="0"
       allow="accelerometer; gyroscope; picture-in-picture; autoplay; fullscreen"
       allowFullScreen
-      webkitallowfullscreen 
-      mozallowfullscreen 
     />
   );
 }

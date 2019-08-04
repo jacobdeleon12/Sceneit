@@ -15,8 +15,6 @@ module.exports = {
         )
         .then(response => {
           for (let obj of response.data.items) {
-            // console.log(obj.snippet.thumbnails);
-
             obj.id &&
               urlArray.push({
                 type: "youtube",
