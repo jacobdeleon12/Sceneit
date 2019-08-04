@@ -1,18 +1,18 @@
 import React from "react";
-import About from "../components/AboutUs";
+import Contact from "../components/ContactUs";
 import { MainNav } from "../components/Nav";
 import Footer from "../components/Footer";
 
-function AboutUs() {
+function ContactUs() {
   window.scrollTo(0, 0);
 
   return (
     <div>
       <MainNav />
-      <About />
+      <Contact />
       <Footer />
     </div>
   );
 }
 
-export default AboutUs;
+export default ContactUs;
