@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import "./style.css";
 import { Container, Col, Row } from "../Grid";
 
 function AboutUS() {
-  const name = "<Scene/IT>™";
+  // const name = "<Scene/IT>™";
   return (
     <div className="About">
       <Container className="fluid">
