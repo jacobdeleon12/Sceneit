@@ -1,24 +1,27 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
 import { Container } from "../components/Grid";
-import API from "../utils/API";
 import { MainNav } from "../components/Nav";
-import Wrapper from "../components/Wrapper";
+import Footer from "../components/Footer";
+import SearchWrapper from "../components/SearchWrapperVideos";
 
-class SearchResults extends Component {
+const loggedInUser = window.sessionStorage.getItem("loggedInUser");
+const user = JSON.parse(sessionStorage.getItem("UserInfo"));
+
+class MainSearch extends Component {
   state = {
-    user: {}
+    user: [],
+    savedVideos: [],
+    vidStateID: ""
   };
+
   componentDidMount() {
-    this.loadUsers();
+    this.loadUser();
   }
 
-  loadUsers = () => {
-    API.getUser(window.sessionStorage.getItem("loggedInUser"))
-      .then(res =>
-        this.setState({ users: res.data })
-      )
-      .catch(err => console.log(err));
+  // =======================================
+  loadUser = () => {
+    console.log(loggedInUser);
+    this.setState({ user: user });
   };
 
   handleInputChange = event => {
@@ -28,29 +31,27 @@ class SearchResults extends Component {
     });
   };
 
-  handleFormSubmit = event => {
-    event.preventDefault();
-    if (this.state.title && this.state.author) {
-      API.saveUser({
-        title: this.state.title,
-        author: this.state.author,
-        synopsis: this.state.synopsis
-      })
-        .then(res => this.loadUsers())
-        .catch(err => console.log(err));
-    }
-  };
-
   render() {
+    console.log(this.state.user);
+
     return (
       <div>
         <MainNav />
         <Container fluid>
-          <Wrapper></Wrapper>
+          {this.state.user ? (
+            <SearchWrapper />
+          ) : (
+            <h5>
+              You must be logged in to visit this page. Womp Womp! Click
+              <a href="https://sceneitapp.herokuapp.com/">here</a> to visit the
+              login page.
+            </h5>
+          )}
         </Container>
+        <Footer />
       </div>
     );
   }
 }
 
-export default SearchResults;
+export default MainSearch;
