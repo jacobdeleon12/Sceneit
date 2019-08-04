@@ -30,7 +30,7 @@ export default class SearchWrapper extends React.Component {
   componentDidMount() {
     this.loadVideos();
     this.loadUser();
-  }
+  };
 
   loadUser = () => {
     // let loggedInUser = window.sessionStorage.getItem("loggedInUser");

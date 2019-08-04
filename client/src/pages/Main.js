@@ -19,7 +19,7 @@ class Main extends Component {
 
   componentDidMount() {
     this.loadUser();
-  }
+  };
 
   // =======================================
   loadUser = () => {
@@ -47,8 +47,7 @@ class Main extends Component {
           ) : (
               <h5>
                 You must be logged in to visit this page. Womp Womp! Click
-              <a href="https://sceneitapp.herokuapp.com/">here</a> to visit the
-                                                                      login page.
+              <a href="https://sceneitapp.herokuapp.com/">here</a> to visit the login page.
             </h5>
             )}
         </Container>
