@@ -40,7 +40,8 @@ module.exports = {
             console.log(error);
           } else {
             for (const item of body.data) {
-              let thumbNail = item.pictures.sizes[3].link;
+              let smlThumb = item.pictures.sizes[3].link;
+              let bigThumb = item.pictures.sizes[6].link;
               let vidID = item.uri.split("/").slice(-1)[0];
               let name = item.name;
 
@@ -48,7 +49,8 @@ module.exports = {
                 urlArray.push({
                   type: "vimeo",
                   name: name,
-                  thumb: thumbNail,
+                  smlImg: smlThumb,
+                  bigImg: bigThumb,
                   url: `https://player.vimeo.com/video/${vidID}?autoplay=1&color=e4ff00&title=0&byline=0&portrait=0`
                 });
             }
@@ -80,7 +82,8 @@ module.exports = {
             console.log(error);
           } else {
             for (const item of body.data) {
-              let thumbNail = item.pictures.sizes[3].link;
+              let smlThumb = item.pictures.sizes[3].link;
+              let bigThumb = item.pictures.sizes[6].link;
               let vidID = item.uri.split("/").slice(-1)[0];
               let name = item.name;
 
@@ -88,7 +91,8 @@ module.exports = {
                 urlArray.push({
                   type: "vimeo",
                   name: name,
-                  thumb: thumbNail,
+                  smlImg: smlThumb,
+                  bigImg: bigThumb,
                   url: `https://player.vimeo.com/video/${vidID}?autoplay=1&color=e4ff00&title=0&byline=0&portrait=0`
                 });
             }

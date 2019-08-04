@@ -14,12 +14,12 @@ const VIMEO = require("./vimeo");
 // PLAYLIST.searchPlayList(vevoPlayList);
 // VIMEO.searchList("staffpicks");
 
-// TMDB.searchName("speed");
+TMDB.searchName("speed");
 // STEAM.searchName("speed");
 // REDDIT.searchName("speed");
 // YOUTUBE.searchName("speed");
 // PLAYLIST.searchChannel(vevoChannel, "speed");
-VIMEO.searchName("speed");
+// VIMEO.searchName("speed");
 
 const videoArray = [];
 
@@ -72,7 +72,7 @@ module.exports = {
         console.log(result);
       });
 
-      // console.log(videoArray);
+      console.log(videoArray);
     } catch (error) {
       console.log(error);
     }
@@ -81,10 +81,10 @@ module.exports = {
     const vevoChannel = "UC2pmfLm7iq6Ov1UwYrWYkZA";
 
     try {
-      const STEAMarr = await STEAM.searchName(searchWord);
-      console.log("made it past steam");
       const TMDBarr = await TMDB.searchName(searchWord);
       console.log("made it past tmdn");
+      const STEAMarr = await STEAM.searchName(searchWord);
+      console.log("made it past steam");
       const REDDITarr = await REDDIT.searchName(searchWord);
       console.log("made it past reddit");
       const YOUTUBEarr = await YOUTUBE.searchName(searchWord);
@@ -96,8 +96,8 @@ module.exports = {
 
       videoArray.push({
         searched_word: searchWord,
-        steam: STEAMarr,
         tmdb: TMDBarr,
+        steam: STEAMarr,
         reddit: REDDITarr,
         youtube: YOUTUBEarr,
         vevo: VEVOarr,

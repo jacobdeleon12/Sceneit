@@ -70,7 +70,7 @@ module.exports = {
                   });
 
                 if (urlArray.length === 10) {
-                  console.log(urlArray);
+                  // console.log(urlArray);
                   resolve(urlArray);
                 }
               })
