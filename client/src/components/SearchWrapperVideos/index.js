@@ -3,8 +3,11 @@ import API from "../../utils/API";
 import Wrapper from "../Wrapper";
 import { SaveBtn } from "../Buttons/VideoBtns";
 import { Title, Iframe, Thumbnail } from "../Iframe";
-import { Tile, JumboTile } from "../Tile";
-import { JumboIframe } from "../Iframe";
+import {
+  Tile
+  // JumboTile
+} from "../Tile";
+// import { JumboIframe } from "../Iframe";
 
 //NPM alert options
 import { positions, Provider, transitions } from "react-alert";
@@ -29,7 +32,7 @@ export default class mainWrapper extends React.Component {
   componentDidMount() {
     this.loadVideos();
     this.loadUser();
-  }
+  };
 
   loadUser = () => {
     this.setState({ user: user });

@@ -1,10 +1,11 @@
 import React from "react";
 import API from "../../utils/API";
 import Wrapper from "../Wrapper";
-import { SaveBtn } from "../Buttons/VideoBtns";
+import { DeleteBtn } from "../Buttons/VideoBtns";
 import { Title, Iframe, Thumbnail } from "../Iframe";
-import { Tile, JumboTile } from "../Tile";
-import { JumboIframe } from "../Iframe";
+import { Tile } from "../Tile";
+import { Col, Row, Container } from "../Grid";
+// import { JumboIframe } from "../Iframe";
 import "./style.css";
 
 //NPM alert options
@@ -15,7 +16,8 @@ const options = {
   position: positions.BOTTOM_CENTER,
   transition: transitions.SCALE
 };
-
+const loggedInUser = window.sessionStorage.getItem("loggedInUser");
+const user = JSON.parse(sessionStorage.getItem("UserInfo"));
 export default class UserWrapper extends React.Component {
   state = {
     videos: {},
@@ -23,49 +25,53 @@ export default class UserWrapper extends React.Component {
     savedVideos: [],
     vidStateID: "",
     selectedItem: -1
-    // keyCard: ""
   };
+
   componentDidMount() {
     this.loadVideos();
     this.loadUser();
-  }
+  };
+  componentDidUpdate(prevProps, prevState) {
+    this.loadVideos();
+    // console.log(prevProps);
+    // console.log(prevState);
+    // console.log(this.state);
+
+
+
+    // this.loadUser();
+  };
 
   loadUser = () => {
-    // let loggedInUser = window.sessionStorage.getItem("loggedInUser");
-    // console.log(loggedInUser);
+    this.setState({ user: user });
+  };
 
-    API.getUser(window.sessionStorage.getItem("loggedInUser"))
+  loadVideos = () => {
+    API.getUser(loggedInUser)
       .then(res => {
-        res.data.savedVideos != null &&
-          this.setState({ user: res.data, savedVideos: res.data.savedVideos });
+        // console.log(res.data.savedVideos);
+        this.setState({ savedVideos: res.data.savedVideos });
       })
       .catch(err => console.log(err));
   };
 
-  loadVideos = async () => {
-    let res = await API.getVideos();
-    this.setState({ videos: res.data[0].videos });
-  };
-
-  handleSaveFormSubmit = (event, video) => {
+  handleDeleteFormSubmit = (event, video) => {
     event.preventDefault();
-    const vStr = video.url;
-    const vName = video.name;
-    const vImg = video.bigImg;
+    const vStr = video.vStr;
+    const vName = video.vName;
+    console.log(vStr);
+    console.log(vName);
 
-    API.saveVideo(window.sessionStorage.getItem("loggedInUser"), {
-      $push: {
-        savedVideos: { vStr, vName, vImg }
+    API.deleteVideo(user.googleId, {
+      $pull: {
+        savedVideos: { vStr }
       }
     })
-      .then(response => {
-        this.setState({
-          savedVideos: response.data.savedVideo
-        });
+      .then(res => {
+        this.setState({ savedVideos: res.data.savedVideos });
+        console.log("deleted video");
       })
       .catch(err => console.log(err));
-
-    event.target.disabled = true;
   };
 
   constructor() {
@@ -78,8 +84,8 @@ export default class UserWrapper extends React.Component {
     return isItemSelected ? (
       <Iframe name={video.name} url={video.url} id={i} />
     ) : (
-      <Thumbnail img={video.bigImg} id={i} />
-    );
+        <Thumbnail img={video.bigImg} id={i} />
+      );
   }
 
   renderVideos = data => {
@@ -102,13 +108,13 @@ export default class UserWrapper extends React.Component {
             </div>
             <br />
             <Provider template={AlertTemplate} {...options}>
-              <SaveBtn
+              <DeleteBtn
                 value={video.url}
-                key={`${video.url}-save`}
+                key={`${video.url}-delete`}
                 id={video.name}
-                name="saveVid"
+                name="delVid"
                 onClick={event => {
-                  this.handleSaveFormSubmit(event, video);
+                  this.handleDeleteFormSubmit(event, video);
                 }}
               />
             </Provider>
@@ -118,18 +124,54 @@ export default class UserWrapper extends React.Component {
     );
   };
 
-
   render() {
-    return this.state.videos === undefined ? (
-      <div>Loading...</div>
-    ) : (
-      <div className="mainWraper">
-        <h3 className="">Reddit</h3>
-        <Wrapper ID="reddit">
-          {this.renderVideos(this.state.videos.reddit)}
-        </Wrapper>
+
+    return (
+      <div>
+        <Row>
+          <Col size="md-12">
+            <div className="row justify-content-center">
+              <Col size="md-2">
+                <Container fluid>
+                  <img src={user.imageUrl} alt="googleImage" />
+                </Container>
+              </Col>
+              <Col size="md-3">
+                <Container fluid>
+                  <Row fluid>
+                    <Col size="md-12">
+                      <h4>
+                        {user.givenName +
+                          " " +
+                          user.familyName}
+                      </h4>
+                    </Col>
+                  </Row>
+                  <Row fluid>
+                    <Col size="md-12">
+                      <h5>{user.email}</h5>
+                    </Col>
+                  </Row>
+                </Container>
+              </Col>
+            </div>
+          </Col>
+        </Row>
+        <div className="mainWraper">
+          <h3 className="">Saved Videos</h3>
+          <Wrapper ID="saved">
+            {this.state.savedVideos === undefined ? (
+              <h5 classname="text-center">You have no saved videos. Womp Womp!</h5>
+            ) : (
+                <div>
+                  {this.renderVideos(this.state.savedVideos)}
+                </div>
+              )
+            }
+          </Wrapper>
+        </div>
       </div>
     );
+
   }
 }
-

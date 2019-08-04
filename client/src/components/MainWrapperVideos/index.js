@@ -28,7 +28,10 @@ export default class mainWrapper extends React.Component {
   componentDidMount() {
     this.loadVideos();
     this.loadUser();
-  }
+  };
+  // componentDidUpdate(prevProps, prevState) {
+  //   this.loadVideos();
+  // };
 
   loadUser = () => {
     this.setState({ user: user });
@@ -70,8 +73,8 @@ export default class mainWrapper extends React.Component {
     return isItemSelected ? (
       <Iframe name={video.name} url={video.url} id={i} />
     ) : (
-      <Thumbnail alt={video.name} img={video.bigImg} id={i} />
-    );
+        <Thumbnail alt={video.name} img={video.bigImg} id={i} />
+      );
   }
 
   renderVideos = data => {
