@@ -13,7 +13,6 @@ class User extends Component {
     savedVideos: [],
     videos: [],
     movieVideos: []
-    // keyCard: ""
   };
 
   componentDidMount() {
