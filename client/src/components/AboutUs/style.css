@@ -3,6 +3,23 @@
   text-underline-position: below;
 }
 
-.AboutEach {
+.aboutEach {
   margin-bottom: 6rem;
+  margin: 1rem;
+  display: inline;
+}
+
+.headShots {
+  height: 20rem;
+  width: 20rem;
+}
+
+.about-icons {
+  margin-top: 1rem;
+  margin-left: 4rem;
+}
+
+.Description {
+  max-width: 40rem;
+  margin: 1rem;
 }

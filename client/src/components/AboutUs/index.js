@@ -7,78 +7,76 @@ function AboutUS() {
     <div className="About">
       <Container className="fluid">
         <h1 className="text-center aboutHeader">The Dev Team</h1>
-        <Row>
-          <Col size="12">
-            <div className="text-left row AboutEach">
-              <img
-                className="col-12 col-sm-4 col-md-3 headShots mt-2"
-                src="./Images/JacobHeadShot.JPG"
-                alt="placeholder"
-                style={{ height: "250px" }}
-              ></img>
-              <br />
-              <ul className="social-icons">
-                <li>
-                  <a
-                    href="https://github.com/jacobdeleon12"
-                    target="blank"
-                    className="github"
-                  >
-                    <i className="fa fa-github"></i>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.linkedin.com/in/jacob-deleon-65105892/"
-                    target="blank"
-                    className="linkedin"
-                  >
-                    <i className="fa fa-linkedin"></i>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="user-circle"
-                    href="https://jacobdeleonportfolio.herokuapp.com/"
-                    target="blank"
-                  >
-                    <i className="fa fa-user-circle"></i>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="envelope-square"
-                    target="blank"
-                    href="mailto:jacobdeleon122@gmail.com"
-                  >
-                    <i className="fa fa-envelope-square"></i>
-                  </a>
-                </li>
-              </ul>
-              <Row>
-                <p className="col Description">
-                  <h3 className="headerName">Jacob DeLeon</h3>
-                  Full Stack Web Developer with a Background in design and
-                  animation. Attended Both Washington State University and
-                  University of Washington and to obtain a bachelor’s in Digital
-                  Technology and Full Stack Web Development certificate.
-                  Passionate about technology and creativity which led to a path
-                  of schooling, work experience, and teamwork which strengthened
-                  communication skills, and the ability to connect with all
-                  individuals. This combination enabled proficiencies in: Html,
-                  CSS, JavaScript, jQuery, Node, React. As a result, I built
-                  many successful projects. Currently, pursuing a position as a
-                  Full Stack Web Developer molded and sculpted from education
-                  and experience to be one of the very best developers a
-                  technological company would desire.
-                </p>
-              </Row>
-            </div>
-          </Col>
+
+        <Row className="">
+          <div className="text-left aboutEach">
+            <img
+              className="headShots mt-2"
+              src="./Images/JacobHeadShot.JPG"
+              alt="placeholder"
+            ></img>
+            <ul className="icons about-icons">
+              <li>
+                <a
+                  href="https://github.com/jacobdeleon12"
+                  target="blank"
+                  className="github"
+                >
+                  <i className="fab fa-github" aria-hidden="false"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/jacob-deleon-65105892/"
+                  target="blank"
+                  className="linkedin"
+                >
+                  <i className="fab fa-linkedin-in" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  className="user-circle"
+                  href="https://jacobdeleonportfolio.herokuapp.com/"
+                  target="blank"
+                >
+                  <i className="fa fa-user-circle" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  className="envelope-square"
+                  target="blank"
+                  href="mailto:jacobdeleon122@gmail.com"
+                >
+                  <i className="fa fa-envelope-square" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="Description">
+            <h3>Jacob DeLeon</h3>
+            <p>
+              Full Stack Web Developer with a Background in design and
+              animation. Attended Both Washington State University and
+              University of Washington and to obtain a bachelor’s in Digital
+              Technology and Full Stack Web Development certificate. Passionate
+              about technology and creativity which led to a path of schooling,
+              work experience, and teamwork which strengthened communication
+              skills, and the ability to connect with all individuals. This
+              combination enabled proficiencies in: Html, CSS, JavaScript,
+              jQuery, Node, React. As a result, I built many successful
+              projects. Currently, pursuing a position as a Full Stack Web
+              Developer molded and sculpted from education and experience to be
+              one of the very best developers a technological company would
+              desire.
+            </p>
+          </div>
         </Row>
+
         <Row>
           <Col size="12">
-            <div className="text-left row AboutEach">
+            <div className="text-left row aboutEach">
               <img
                 className="col-12 col-sm-4 col-md-3 headShots mt-2"
                 src="./Images/KaiHeadShot.JPG"
@@ -110,7 +108,7 @@ function AboutUS() {
         </Row>
         <Row>
           <Col size="12">
-            <div className="text-left row AboutEach">
+            <div className="text-left row aboutEach">
               <img
                 className="col-12 col-sm-4 col-md-3 headShots mt-2"
                 src="./Images/BlakeHeadShot.png"
@@ -118,11 +116,10 @@ function AboutUS() {
                 style={{ height: "250px" }}
               ></img>
 
+              <h3 className="headerName">
+                Hello world! My name is Blake Marter.
+              </h3>
               <p className="col Description">
-                <h3 className="headerName">
-                  Hello world! My name is Blake Marter.
-                </h3>
-
                 <p>
                   As a driven and tech-savvy Web Developer, I have always had a
                   strong gravitational pull towards technology. I am currently
@@ -146,7 +143,7 @@ function AboutUS() {
         </Row>
         <Row>
           <Col size="12">
-            <div className="text-left row AboutEach">
+            <div className="text-left row aboutEach">
               <img
                 className="col-12 col-sm-4 col-md-3 headShots mt-2"
                 src="./Images/KalebHeadShot.jpg"
@@ -154,8 +151,8 @@ function AboutUS() {
                 style={{ height: "250px" }}
               ></img>
 
+              <h3 className="headerName">Kaleb Merriman</h3>
               <p className="col Description">
-                <h3 className="headerName">Kaleb Merriman</h3>
                 Full stack web developer with great time management skills as
                 well as a great teammate and co-worker. in SQL and Javascript
                 environments. Very adaptive and fast with the intake of new

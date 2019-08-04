@@ -54,11 +54,11 @@
   display: inline-block
 }
 
-.site-footer .social-icons {
+.site-footer .icons {
   text-align: right
 }
 
-.site-footer .social-icons a {
+.site-footer .icons a {
   width: 40px;
   height: 40px;
   line-height: 40px;
@@ -82,23 +82,23 @@
   .site-footer {
     padding-bottom: 0
   }
-  .site-footer .copyright-text, .site-footer .social-icons {
+  .site-footer .copyright-text, .site-footer .icons {
     text-align: center
   }
 }
 
-.social-icons {
+.icons {
   padding-left: 0;
   margin-bottom: 0;
   list-style: none
 }
 
-.social-icons li {
+.icons li {
   display: inline-block;
   margin-bottom: 4px
 }
 
-.social-icons li.title {
+.icons li.title {
   margin-right: 15px;
   text-transform: uppercase;
   color: #96a2b2;
@@ -106,7 +106,7 @@
   font-size: 13px
 }
 
-.social-icons a {
+.icons a {
   background-color: #eceeef;
   color: #818a91;
   font-size: 16px;
@@ -122,36 +122,36 @@
   transition: all .2s linear
 }
 
-.social-icons a:active, .social-icons a:focus, .social-icons a:hover {
+.icons a:active, .icons a:focus, .icons a:hover {
   color: #fff;
   background-color: #29aafe
 }
 
-.social-icons.size-sm a {
+.icons.size-sm a {
   line-height: 34px;
   height: 34px;
   width: 34px;
   font-size: 14px
 }
 
-.social-icons a.user-circle:hover {
+.icons a.user-circle:hover {
   background-color: #3b983b
 }
 
-.social-icons a.envelope-square:hover {
+.icons a.envelope-square:hover {
   background-color: #ff8944
 }
 
-.social-icons a.linkedin:hover {
+.icons a.linkedin:hover {
   background-color: #007bb6
 }
 
-.social-icons a.github:hover {
+.icons a.github:hover {
   background-color: #222
 }
 
 @media (max-width:767px) {
-  .social-icons li.title {
+  .icons li.title {
     display: block;
     margin-right: 0;
     font-weight: 600
