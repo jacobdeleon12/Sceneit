@@ -23,25 +23,26 @@ module.exports = {
         .then(response => {
           for (let i = 0; i < 10; i++) {
            let movie = response.data.results[i]
+           console.log(movie);
            
-           searchId(movie.id)
-           .then(response => {
-            // console.log(response.data);
-                response.data.videos.results[0] &&
-                  urlArray.push({
-                    type: "tmbd",
-                    name: response.data.title,
-                    smlImg: `http://image.tmdb.org/t/p/w500${response.data.poster_path}`,
-                    bigImg: `http://image.tmdb.org/t/p/original${response.data.backdrop_path}`,
-                    url: `https://www.youtube.com/embed/${response.data.videos.results[0].key}?rel=0;&autoplay=1&mute=0&loop=1&playlist=${response.data.videos.results[0].key}`
-                  });
+          //  searchId(movie.id)
+          //  .then(response => {
+          //   // console.log(response.data);
+          //       response.data.videos.results[0] &&
+          //         urlArray.push({
+          //           type: "tmbd",
+          //           name: response.data.title,
+          //           smlImg: `http://image.tmdb.org/t/p/w500${response.data.poster_path}`,
+          //           bigImg: `http://image.tmdb.org/t/p/original${response.data.backdrop_path}`,
+          //           url: `https://www.youtube.com/embed/${response.data.videos.results[0].key}?rel=0;&autoplay=1&mute=0&loop=1&playlist=${response.data.videos.results[0].key}`
+          //         });
 
-                if (urlArray.length === 5) {
-                  // console.log(urlArray);
-                  resolve(urlArray);
-                }
-              })
-              .catch(err => reject(err));
+          //       if (urlArray.length === 5) {
+          //         // console.log(urlArray);
+          //         resolve(urlArray);
+          //       }
+          //     })
+          //     .catch(err => reject(err));
           }
         })
         .catch(err => reject(err));
