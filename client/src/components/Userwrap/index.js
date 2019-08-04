@@ -20,7 +20,7 @@ const loggedInUser = window.sessionStorage.getItem("loggedInUser");
 const user = JSON.parse(sessionStorage.getItem("UserInfo"));
 export default class UserWrapper extends React.Component {
   state = {
-    videos: {},
+    // videos: {},
     user: [],
     savedVideos: [],
     vidStateID: "",
@@ -30,16 +30,6 @@ export default class UserWrapper extends React.Component {
   componentDidMount() {
     this.loadVideos();
     this.loadUser();
-  };
-  componentDidUpdate(prevProps, prevState) {
-    this.loadVideos();
-    // console.log(prevProps);
-    // console.log(prevState);
-    // console.log(this.state);
-
-
-
-    // this.loadUser();
   };
 
   loadUser = () => {
@@ -69,6 +59,7 @@ export default class UserWrapper extends React.Component {
     })
       .then(res => {
         this.setState({ savedVideos: res.data.savedVideos });
+        this.forceUpdate(this.loadVideos);
         console.log("deleted video");
       })
       .catch(err => console.log(err));
@@ -80,25 +71,26 @@ export default class UserWrapper extends React.Component {
   }
 
   determineItemStyle(video, i) {
-    const isItemSelected = this.state.selectedItem === video.url;
+    const isItemSelected = this.state.selectedItem === video.vStr;
     return isItemSelected ? (
-      <Iframe name={video.name} url={video.url} id={i} />
+      <Iframe name={video.vName} url={video.vStr} id={i} />
     ) : (
-        <Thumbnail img={video.bigImg} id={i} />
+        <Thumbnail img={video.vImg} id={i} />
       );
   }
 
   renderVideos = data => {
+
     return (
       <ul>
         {data.map((video, i) => (
           <Tile key={i}>
-            <Title title={video.name} />
+            <Title title={video.vName} />
             <br />
             <div
               className="sml_iframe_container sml_iframe"
               onMouseEnter={() => {
-                this.setState({ selectedItem: video.url });
+                this.setState({ selectedItem: video.vStr });
               }}
               onMouseLeave={() => {
                 this.setState({ selectedItem: "" });
@@ -109,9 +101,9 @@ export default class UserWrapper extends React.Component {
             <br />
             <Provider template={AlertTemplate} {...options}>
               <DeleteBtn
-                value={video.url}
-                key={`${video.url}-delete`}
-                id={video.name}
+                value={video.vStr}
+                key={`${video.vStr}-delete`}
+                id={video.vName}
                 name="delVid"
                 onClick={event => {
                   this.handleDeleteFormSubmit(event, video);
@@ -122,6 +114,15 @@ export default class UserWrapper extends React.Component {
         ))}
       </ul>
     );
+  };
+
+  isEmpty = obj => {
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        return false;
+      }
+    }
+    return true;
   };
 
   render() {
@@ -160,8 +161,10 @@ export default class UserWrapper extends React.Component {
         <div className="mainWraper">
           <h3 className="">Saved Videos</h3>
           <Wrapper ID="saved">
-            {this.state.savedVideos === undefined ? (
-              <h5 classname="text-center">You have no saved videos. Womp Womp!</h5>
+            {this.isEmpty(this.state.savedVideos) === true ? (
+              <div>
+                <h5 classname="load text-center">You have no saved videos. Womp Womp!</h5>
+              </div>
             ) : (
                 <div>
                   {this.renderVideos(this.state.savedVideos)}
