@@ -26,39 +26,37 @@ module.exports = {
   // Queries vimeo list, returns 10 videos
   searchList: function(query) {
     return new Promise(function(resolve, reject) {
-      client
-        .request(
-          /*options*/ {
-            path: `/channels/${query}/videos`,
-            query: {
-              page: 1,
-              per_page: 20,
-              fields: "uri,name,pictures"
-            }
-          },
-          /*callback*/ function(error, body) {
-            if (error) {
-              console.log(error);
-            } else {
-              for (const item of body.data) {
-                let thumbNail = item.pictures.sizes[3].link;
-                let vidID = item.uri.split("/").slice(-1)[0];
-                let name = item.name;
-
-                item.uri &&
-                  urlArray.push({
-                    type: "vimeo",
-                    name: name,
-                    thumb: thumbNail,
-                    url: `https://player.vimeo.com/video/${vidID}?autoplay=1&color=e4ff00&title=0&byline=0&portrait=0`
-                  });
-              }
-              // console.log(urlArray);
-              resolve(urlArray);
-            }
+      client.request(
+        /*options*/ {
+          path: `/channels/${query}/videos`,
+          query: {
+            page: 1,
+            per_page: 20,
+            fields: "uri,name,pictures"
           }
-        )
-        .catch(err => reject(err));
+        },
+        /*callback*/ function(error, body) {
+          if (error) {
+            console.log(error);
+          } else {
+            for (const item of body.data) {
+              let thumbNail = item.pictures.sizes[3].link;
+              let vidID = item.uri.split("/").slice(-1)[0];
+              let name = item.name;
+
+              item.uri &&
+                urlArray.push({
+                  type: "vimeo",
+                  name: name,
+                  thumb: thumbNail,
+                  url: `https://player.vimeo.com/video/${vidID}?autoplay=1&color=e4ff00&title=0&byline=0&portrait=0`
+                });
+            }
+            // console.log(urlArray);
+            resolve(urlArray);
+          }
+        }
+      );
     });
   },
 
@@ -66,41 +64,39 @@ module.exports = {
   // Queries Vimeo videos by name, returns 10 videos
   searchName: function(query) {
     return new Promise(function(resolve, reject) {
-      client
-        .request(
-          /*options*/ {
-            path: `/videos`,
-            query: {
-              page: 1,
-              per_page: 20,
-              query: query,
-              sort: "plays",
-              fields: "uri,name,pictures"
-            }
-          },
-          /*callback*/ function(error, body) {
-            if (error) {
-              console.log(error);
-            } else {
-              for (const item of body.data) {
-                let thumbNail = item.pictures.sizes[3].link;
-                let vidID = item.uri.split("/").slice(-1)[0];
-                let name = item.name;
-
-                item.uri &&
-                  urlArray.push({
-                    type: "vimeo",
-                    name: name,
-                    thumb: thumbNail,
-                    url: `https://player.vimeo.com/video/${vidID}?autoplay=1&color=e4ff00&title=0&byline=0&portrait=0`
-                  });
-              }
-              // console.log(urlArray);
-              resolve(urlArray);
-            }
+      client.request(
+        /*options*/ {
+          path: `/videos`,
+          query: {
+            page: 1,
+            per_page: 20,
+            query: query,
+            sort: "plays",
+            fields: "uri,name,pictures"
           }
-        )
-        .catch(err => reject(err));
+        },
+        /*callback*/ function(error, body) {
+          if (error) {
+            console.log(error);
+          } else {
+            for (const item of body.data) {
+              let thumbNail = item.pictures.sizes[3].link;
+              let vidID = item.uri.split("/").slice(-1)[0];
+              let name = item.name;
+
+              item.uri &&
+                urlArray.push({
+                  type: "vimeo",
+                  name: name,
+                  thumb: thumbNail,
+                  url: `https://player.vimeo.com/video/${vidID}?autoplay=1&color=e4ff00&title=0&byline=0&portrait=0`
+                });
+            }
+            // console.log(urlArray);
+            resolve(urlArray);
+          }
+        }
+      );
     });
   }
 };
