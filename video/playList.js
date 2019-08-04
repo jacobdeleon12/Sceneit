@@ -1,6 +1,7 @@
-require('dotenv').config()
+require("dotenv").config();
 const axios = require("axios");
 
+YOUTUBE_API = "AIzaSyBQaJOdXS5rojwu9fVmBi-JenkMGVMUIec";
 let urlArray = [];
 
 module.exports = {
@@ -10,7 +11,7 @@ module.exports = {
     return new Promise(function(resolve, reject) {
       axios
         .get(
-          `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${query}&key=${process.env.YOUTUBE_API}`
+          `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${query}&key=${YOUTUBE_API}`
         )
         .then(response => {
           for (let obj of response.data.items) {
@@ -20,7 +21,7 @@ module.exports = {
                 name: `${obj.snippet.title.slice(0, 40)}...`,
                 smlImg: obj.snippet.thumbnails.medium.url,
                 bigImg: obj.snippet.thumbnails.maxres.url,
-                url: `https://www.youtube.com/embed/${obj.snippet.resourceId.videoId}`
+                url: `https://www.youtube.com/embed/${obj.id.videoId}?rel=0;&autoplay=1&mute=0&loop=1&playlist=${obj.id.videoId}`
               });
           }
           // console.log(urlArray);
@@ -36,7 +37,7 @@ module.exports = {
     return new Promise(function(resolve, reject) {
       axios
         .get(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=10&q=${query}&key=${process.env.YOUTUBE_API}`
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=10&q=${query}&key=${YOUTUBE_API}`
         )
         .then(response => {
           for (let obj of response.data.items) {
@@ -46,7 +47,7 @@ module.exports = {
                 name: `${obj.snippet.title.slice(0, 40)}...`,
                 smlImg: obj.snippet.thumbnails.medium.url,
                 bigImg: obj.snippet.thumbnails.high.url,
-                url: `https://www.youtube.com/embed/${obj.id.videoId}`
+                url: `https://www.youtube.com/embed/${obj.id.videoId}?rel=0;&autoplay=1&mute=0&loop=1&playlist=${obj.id.videoId}`
               });
           }
           // console.log(urlArray);

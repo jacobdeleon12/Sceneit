@@ -1,16 +1,17 @@
-require('dotenv').config()
+require("dotenv").config();
 const axios = require("axios");
 
+YOUTUBE_API = "AIzaSyBQaJOdXS5rojwu9fVmBi-JenkMGVMUIec";
 let urlArray = [];
 
 module.exports = {
-    // try "mostPopular"
+  // try "mostPopular"
   // Queries YouTube list, returns 10 videos
   searchList: function(query) {
     return new Promise(function(resolve, reject) {
       axios
         .get(
-          `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=${query}&maxResults=10&regionCode=US&key=${process.env.YOUTUBE_API}`
+          `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=${query}&maxResults=10&regionCode=US&key=${YOUTUBE_API}`
         )
         .then(response => {
           for (let obj of response.data.items) {
@@ -22,7 +23,7 @@ module.exports = {
                 name: `${obj.snippet.title.slice(0, 40)}...`,
                 smlImg: obj.snippet.thumbnails.medium.url,
                 bigImg: obj.snippet.thumbnails.high.url,
-                url: `https://www.youtube.com/embed/${obj.id}`
+                url: `https://www.youtube.com/embed/${obj.id}?rel=0;&autoplay=1&mute=0&loop=1&playlist=${obj.id}`
               });
           }
           // console.log(urlArray);
@@ -38,7 +39,7 @@ module.exports = {
     return new Promise(function(resolve, reject) {
       axios
         .get(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${query}&regionCode=US&key=${process.env.YOUTUBE_API}`
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${query}&regionCode=US&key=${YOUTUBE_API}`
         )
         .then(response => {
           for (let obj of response.data.items) {
@@ -48,7 +49,7 @@ module.exports = {
                 name: `${obj.snippet.title.slice(0, 40)}...`,
                 smlImg: obj.snippet.thumbnails.medium.url,
                 bigImg: obj.snippet.thumbnails.high.url,
-                url: `https://www.youtube.com/embed/${obj.id.videoId}`
+                url: `https://www.youtube.com/embed/${obj.id}?rel=0;&autoplay=1&mute=0&loop=1&playlist=${obj.id}`
               });
           }
           // console.log(urlArray);

@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import { Container } from "../components/Grid";
-// import API from "../utils/API";
 import { MainNav } from "../components/Nav";
 import Footer from "../components/Footer";
 import MainWrapper from "../components/MainWrapperVideos";
-import SearchWrapper from "../components/SearchWrapperVideos";
-
 
 const loggedInUser = window.sessionStorage.getItem("loggedInUser");
 const user = JSON.parse(sessionStorage.getItem("UserInfo"));
@@ -14,7 +11,7 @@ class Main extends Component {
   state = {
     user: [],
     savedVideos: [],
-    vidStateID: "",
+    vidStateID: ""
   };
 
   componentDidMount() {
@@ -35,7 +32,6 @@ class Main extends Component {
   };
 
   render() {
-
     console.log(this.state.user);
 
     return (
@@ -45,12 +41,12 @@ class Main extends Component {
           {this.state.user ? (
             <MainWrapper />
           ) : (
-              <h5>
-                You must be logged in to visit this page. Womp Womp! Click
+            <h5>
+              You must be logged in to visit this page. Womp Womp! Click
               <a href="https://sceneitapp.herokuapp.com/">here</a> to visit the
-                                                                    login page.
+              login page.
             </h5>
-            )}
+          )}
         </Container>
         <Footer />
       </div>

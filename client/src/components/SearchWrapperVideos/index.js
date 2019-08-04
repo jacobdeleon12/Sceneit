@@ -14,15 +14,17 @@ const options = {
   position: positions.BOTTOM_CENTER,
   transition: transitions.SCALE
 };
+const loggedInUser = window.sessionStorage.getItem("loggedInUser");
+const user = JSON.parse(sessionStorage.getItem("UserInfo"));
 
-export default class SearchWrapper extends React.Component {
+export default class mainWrapper extends React.Component {
   state = {
     videos: {},
     user: [],
     savedVideos: [],
     vidStateID: "",
-    selectedItem: -1
-    // keyCard: ""
+    selectedItem: -1,
+    searchWord: ""
   };
   componentDidMount() {
     this.loadVideos();
@@ -30,24 +32,18 @@ export default class SearchWrapper extends React.Component {
   }
 
   loadUser = () => {
-    // let loggedInUser = window.sessionStorage.getItem("loggedInUser");
-    // console.log(loggedInUser);
-
-    API.getUser(window.sessionStorage.getItem("loggedInUser"))
-      .then(res => {
-        res.data.savedVideos != null &&
-          this.setState({ user: res.data, savedVideos: res.data.savedVideos });
-      })
-      .catch(err => console.log(err));
+    this.setState({ user: user });
   };
 
   loadVideos = async () => {
-    let res = await API.searchVideos("speed");
-    let path = window.location.pathname
-    // console.log(res.data[0]);
-    console.log(`path: ${path}`);
-    
-    this.setState({ videos: res.data[0] });
+    let pathSnip = window.location.search.substring(1).split("q=")[1];
+    // let pathSnip = fullPath.split("q=")[1];
+    console.log(`searched word: ${pathSnip}`);
+
+    let res = await API.searchVideos(pathSnip);
+    console.log(res.data[0]);
+
+    this.setState({ videos: res.data[0], searchWord: pathSnip });
   };
 
   handleSaveFormSubmit = (event, video) => {
@@ -56,7 +52,7 @@ export default class SearchWrapper extends React.Component {
     const vName = video.name;
     const vImg = video.bigImg;
 
-    API.saveVideo(window.sessionStorage.getItem("loggedInUser"), {
+    API.saveVideo(loggedInUser, {
       $push: {
         savedVideos: { vStr, vName, vImg }
       }
@@ -81,13 +77,13 @@ export default class SearchWrapper extends React.Component {
     return isItemSelected ? (
       <Iframe name={video.name} url={video.url} id={i} />
     ) : (
-      <Thumbnail img={video.bigImg} id={i} />
+      <Thumbnail alt={video.name} img={video.bigImg} id={i} />
     );
   }
 
   renderVideos = data => {
     return (
-      <ul>
+      <div>
         {data.map((video, i) => (
           <Tile key={i}>
             <Title title={video.name} />
@@ -117,35 +113,59 @@ export default class SearchWrapper extends React.Component {
             </Provider>
           </Tile>
         ))}
-      </ul>
+      </div>
     );
   };
 
   render() {
+    let pathSnip = window.location.search.substring(1).split("q=")[1];
+
     return this.state.videos === undefined ? (
-      <div>Loading...</div>
+      <div className="mainWraper">
+        <h1>Searching for: {pathSnip}</h1>
+        <br />
+        <h5 className="load text-center">Loading...</h5>
+      </div>
     ) : (
       <div className="mainWraper">
-        <h3 className="">Reddit</h3>
-        <Wrapper ID="reddit">
-          {this.renderVideos(this.state.videos.reddit)}
-        </Wrapper>
-        <h3 className="">TMDB</h3>
-        <Wrapper ID="tmdb">{this.renderVideos(this.state.videos.tmdb)}</Wrapper>
-        <h3 className="">STEAM</h3>
-        <Wrapper ID="steam">
-          {this.renderVideos(this.state.videos.steam)}
-        </Wrapper>
-        <h3 className="">YOUTUBE</h3>
-        <Wrapper ID="youtube">
-          {this.renderVideos(this.state.videos.youtube)}
-        </Wrapper>
-        <h3 className="">VEVO</h3>
-        <Wrapper ID="vevo">{this.renderVideos(this.state.videos.vevo)}</Wrapper>
-        <h3 className="">VIMEO</h3>
-        <Wrapper ID="vimeo">
-          {this.renderVideos(this.state.videos.vimeo)}
-        </Wrapper>
+        <h1>Results for: {pathSnip}</h1>
+        <br />
+        <div className="row-wrapper">
+          <h3 className="row-title">REDDIT</h3>
+          <Wrapper ID="reddit">
+            {this.renderVideos(this.state.videos.reddit)}
+          </Wrapper>
+        </div>
+        <div className="row-wrapper">
+          <h3 className="">TMDB</h3>
+          <Wrapper ID="tmdb">
+            {this.renderVideos(this.state.videos.tmdb)}
+          </Wrapper>
+        </div>
+        <div className="row-wrapper">
+          <h3 className="">STEAM</h3>
+          <Wrapper ID="steam">
+            {this.renderVideos(this.state.videos.steam)}
+          </Wrapper>
+        </div>
+        <div className="row-wrapper">
+          <h3 className="">YOUTUBE</h3>
+          <Wrapper ID="youtube">
+            {this.renderVideos(this.state.videos.youtube)}
+          </Wrapper>
+        </div>
+        <div className="row-wrapper">
+          <h3 className="">VEVO</h3>
+          <Wrapper ID="vevo">
+            {this.renderVideos(this.state.videos.vevo)}
+          </Wrapper>
+        </div>
+        <div className="row-wrapper">
+          <h3 className="">VIMEO</h3>
+          <Wrapper ID="vimeo">
+            {this.renderVideos(this.state.videos.vimeo)}
+          </Wrapper>
+        </div>
       </div>
     );
   }

@@ -20,6 +20,11 @@ module.exports = {
                   bigImg: obj.data.media.oembed.thumbnail_url,
                   url: `https://www.youtube.com/embed/${obj.data.url
                     .split("v=")[1]
+                    .slice(
+                      0,
+                      11
+                    )}?rel=0;&autoplay=1&mute=0&loop=1&playlist=${obj.data.url
+                    .split("v=")[1]
                     .slice(0, 11)}`
                 });
             } else if (obj.data.domain === "youtu.be") {
@@ -30,6 +35,11 @@ module.exports = {
                   smlImg: obj.data.thumbnail,
                   bigImg: obj.data.media.oembed.thumbnail_url,
                   url: `https://www.youtube.com/embed/${obj.data.url
+                    .split("be/")[1]
+                    .slice(
+                      0,
+                      11
+                    )}?rel=0;&autoplay=1&mute=0&loop=1&playlist=${obj.data.url
                     .split("be/")[1]
                     .slice(0, 11)}`
                 });
@@ -53,7 +63,7 @@ module.exports = {
         .then(response => {
           for (let obj of response.data.data.children) {
             if (obj.data.domain === "youtube.com") {
-              obj.data.url &&
+              obj.data.url.search("v=") != -1 &&
                 urlArray.push({
                   type: "reddit",
                   name: `${obj.data.title.slice(0, 40)}...`,
@@ -61,16 +71,26 @@ module.exports = {
                   bigImg: obj.data.media.oembed.thumbnail_url,
                   url: `https://www.youtube.com/embed/${obj.data.url
                     .split("v=")[1]
+                    .slice(
+                      0,
+                      11
+                    )}?rel=0;&autoplay=1&mute=0&loop=1&playlist=${obj.data.url
+                    .split("v=")[1]
                     .slice(0, 11)}`
                 });
             } else if (obj.data.domain === "youtu.be") {
-              obj.data.url &&
+              obj.data.url.search("be/") != -1 &&
                 urlArray.push({
                   type: "reddit",
                   name: `${obj.data.title.slice(0, 40)}...`,
                   smlImg: obj.data.thumbnail,
                   bigImg: obj.data.media.oembed.thumbnail_url,
                   url: `https://www.youtube.com/embed/${obj.data.url
+                    .split("be/")[1]
+                    .slice(
+                      0,
+                      11
+                    )}?rel=0;&autoplay=1&mute=0&loop=1&playlist=${obj.data.url
                     .split("be/")[1]
                     .slice(0, 11)}`
                 });

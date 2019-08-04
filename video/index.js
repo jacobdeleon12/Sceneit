@@ -19,7 +19,7 @@ const VIMEO = require("./vimeo");
 // REDDIT.searchName("speed");
 // YOUTUBE.searchName("speed");
 // PLAYLIST.searchChannel(vevoChannel, "speed");
-// VIMEO.searchName("speed");
+VIMEO.searchName("speed");
 
 const videoArray = [];
 
@@ -84,7 +84,7 @@ module.exports = {
       const STEAMarr = await STEAM.searchName(searchWord);
       console.log("made it past steam");
       const TMDBarr = await TMDB.searchName(searchWord);
-      console.log("made it past steam");
+      console.log("made it past tmdn");
       const REDDITarr = await REDDIT.searchName(searchWord);
       console.log("made it past reddit");
       const YOUTUBEarr = await YOUTUBE.searchName(searchWord);
