@@ -45,8 +45,7 @@ module.exports = {
                 let vidID = item.uri.split("/").slice(-1)[0];
                 let name = item.name;
 
-                // console.log(response.data.video.thumbs);
-                item.pictures &&
+                item.uri &&
                   urlArray.push({
                     type: "vimeo",
                     name: name,
@@ -88,8 +87,7 @@ module.exports = {
                 let vidID = item.uri.split("/").slice(-1)[0];
                 let name = item.name;
 
-                // console.log(response.data.video.thumbs);
-                item.pictures &&
+                item.uri &&
                   urlArray.push({
                     type: "vimeo",
                     name: name,
