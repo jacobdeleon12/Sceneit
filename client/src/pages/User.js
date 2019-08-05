@@ -34,9 +34,6 @@ class User extends Component {
   render() {
     console.log(user);
 
-
-
-
     return (
       <div>
         <MainNav />

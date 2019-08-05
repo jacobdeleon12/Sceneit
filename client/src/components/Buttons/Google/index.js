@@ -13,11 +13,11 @@ const success = response => {
   const profId = response.profileObj.googleId;
 
   window.sessionStorage.setItem("loggedInUser", profId);
+  // console.log(response.profileObj);
+  window.sessionStorage.setItem("UserInfo", JSON.stringify(response.profileObj));
 
   API.getUser(profId)
     .then(res => {
-      // console.log(JSON.stringify(res.data));
-      window.sessionStorage.setItem("UserInfo", JSON.stringify(res.data));
       if (res.data === null || res.data.googleId !== profId) {
         API.saveUser(response.profileObj)
           .then(res => {
@@ -64,7 +64,7 @@ export function GLogout() {
       onClick={logout}
     >
       {/* <i className="fab fa-google"></i> */}
-       Logout
+      Logout
     </div>
   );
 }
