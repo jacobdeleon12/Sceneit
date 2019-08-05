@@ -10,6 +10,11 @@
   padding: 2rem;
 }
 
+.savedVidTxt {
+  margin: 4rem 5rem;
+  padding: 5rem
+}
+
 @media screen and (min-width: 1000px) {
   @keyframes image-slide {
     0% {
@@ -170,6 +175,11 @@
 }
 
 @media screen and (max-width: 450px) {
+  .savedVidTxt {
+    font-size: 1rem;
+    margin: 4rem 0rem;
+    padding: 2rem;
+  }
   .imageContainer img {
     height: 120px;
   }

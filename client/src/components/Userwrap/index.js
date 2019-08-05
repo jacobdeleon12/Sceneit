@@ -125,6 +125,7 @@ export default class UserWrapper extends React.Component {
   };
 
   render() {
+    window.scrollTo(0, 0);
     return (
       <div className="userPage ">
         <div className="userInfo">
@@ -146,8 +147,8 @@ export default class UserWrapper extends React.Component {
           <Wrapper ID="saved">
             {this.isEmpty(this.state.savedVideos) === true ? (
               <div>
-                <h5 className="load text-center">
-                  You have no saved videos. Womp Womp!
+                <h5 className="savedVidTxt text-center">
+                  You have no saved videos!
                 </h5>
               </div>
             ) : (
