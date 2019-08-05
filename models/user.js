@@ -7,7 +7,11 @@ const userSchema = new Schema({
   givenName: { type: String, required: true },
   googleId: { type: String, required: true },
   imageUrl: { type: String, required: true },
-  savedVideos: Object,
+  savedVideos: {
+    vImg: { type: String, unique: true },
+    vName: { type: String, unique: true },
+    vStr: { type: String, unique: true }
+  },
   date: { type: Date, default: Date.now }
 });
 

@@ -25,7 +25,7 @@ mongoose
     { useNewUrlParser: true, useFindAndModify: false }
   )
   .then(() => {
-    const tmdbQ = "popularity";
+    const tmdbQ = "trailers";
     const steamQ = "popularwishlist";
     const redditQ = "videos";
     const youtubeQ = "mostPopular";

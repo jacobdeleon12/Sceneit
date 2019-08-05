@@ -21,7 +21,7 @@ module.exports = {
                 name: `${obj.snippet.title.slice(0, 40)}...`,
                 smlImg: obj.snippet.thumbnails.medium.url,
                 bigImg: obj.snippet.thumbnails.high.url,
-                url: `https://www.youtube.com/embed/${obj.id}?rel=0;&autoplay=1&mute=0&loop=1&playlist=${obj.id}`
+                url: `https://www.youtube.com/embed/${obj.id}?rel=0;&autoplay=1&mute=0&loop=1`
               });
           }
           // console.log(urlArray);
@@ -35,23 +35,34 @@ module.exports = {
   // Queries Youtube by name, returns 10 videos
   searchName: function(query) {
     return new Promise(function(resolve, reject) {
+      let count = 0;
+
       axios
         .get(
           `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${query}&regionCode=US&key=${YOUTUBE_API}`
         )
         .then(response => {
-          for (let obj of response.data.items) {
-            obj.id &&
-              urlArray.push({
-                type: "youtube",
-                name: `${obj.snippet.title.slice(0, 40)}...`,
-                smlImg: obj.snippet.thumbnails.medium.url,
-                bigImg: obj.snippet.thumbnails.high.url,
-                url: `https://www.youtube.com/embed/${obj.id}?rel=0;&autoplay=1&mute=0&loop=1&playlist=${obj.id}`
-              });
+          if (response.data.items[0]) {
+            for (let obj of response.data.items) {
+              count++;
+              console.log(count);
+
+              obj.id &&
+                urlArray.push({
+                  type: "youtube",
+                  name: `${obj.snippet.title.slice(0, 40)}...`,
+                  smlImg: obj.snippet.thumbnails.medium.url,
+                  bigImg: obj.snippet.thumbnails.high.url,
+                  url: `https://www.youtube.com/embed/${obj.id}??rel=0;&autoplay=1&mute=0&loop=1`
+                });
+            }
+            // console.log(urlArray);
+            resolve(urlArray);
+          } else {
+            console.log("found nothing");
+            // console.log(urlArray);
+            resolve(urlArray);
           }
-          // console.log(urlArray);
-          resolve(urlArray);
         })
         .catch(err => reject(err));
     });

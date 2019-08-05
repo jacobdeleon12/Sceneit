@@ -14,6 +14,10 @@ class Main extends Component {
     vidStateID: ""
   };
 
+  componentWillMount() {
+    this.setState({ user: user });
+  }
+
   componentDidMount() {
     this.loadUser();
   }
@@ -32,21 +36,22 @@ class Main extends Component {
   };
 
   render() {
-    console.log(this.state.user);
+    console.log(user);
+    console.log(this.state);
 
     return (
       <div>
         <MainNav />
         <Container fluid>
-          {this.state.user ? (
+          {loggedInUser ? (
             <MainWrapper />
           ) : (
-            <h5>
-              You must be logged in to visit this page. Womp Womp! Click
-              <a href="https://sceneitapp.herokuapp.com/">here</a> to visit the
-              login page.
+              <h5>
+                You must be logged in to visit this page. Womp Womp! Click
+              <a href="https://sceneitapp.herokuapp.com/"> here </a> to visit the
+                                  login page.
             </h5>
-          )}
+            )}
         </Container>
         <Footer />
       </div>

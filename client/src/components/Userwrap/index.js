@@ -27,9 +27,14 @@ export default class UserWrapper extends React.Component {
     selectedItem: -1
   };
 
-  componentDidMount() {
-    this.loadVideos();
+  componentWillMount() {
     this.loadUser();
+    this.loadVideos();
+  }
+
+  componentDidMount() {
+    this.loadUser();
+    this.loadVideos();
   }
 
   loadUser = () => {
@@ -59,7 +64,7 @@ export default class UserWrapper extends React.Component {
     })
       .then(res => {
         this.setState({ savedVideos: res.data.savedVideos });
-        this.forceUpdate(this.loadVideos);
+        this.forceUpdate(this.loadVideos());
         console.log("deleted video");
       })
       .catch(err => console.log(err));

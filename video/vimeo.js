@@ -71,7 +71,7 @@ module.exports = {
           path: `/videos`,
           query: {
             page: 1,
-            per_page: 20,
+            per_page: 10,
             query: query,
             sort: "plays",
             fields: "uri,name,pictures"
@@ -81,23 +81,33 @@ module.exports = {
           if (error) {
             console.log(error);
           } else {
-            for (const item of body.data) {
-              let smlThumb = item.pictures.sizes[3].link;
-              let bigThumb = item.pictures.sizes[6].link;
-              let vidID = item.uri.split("/").slice(-1)[0];
-              let name = item.name;
+            let count = 0;
+            if (body.data[0]) {
+              for (const item of body.data) {
+                count++;
+                console.log(count);
 
-              item.uri &&
-                urlArray.push({
-                  type: "vimeo",
-                  name: name,
-                  smlImg: smlThumb,
-                  bigImg: bigThumb,
-                  url: `https://player.vimeo.com/video/${vidID}?autoplay=1&color=e4ff00&title=0&byline=0&portrait=0`
-                });
+                let smlThumb = item.pictures.sizes[3].link;
+                let bigThumb = item.pictures.sizes[6].link;
+                let vidID = item.uri.split("/").slice(-1)[0];
+                let name = item.name;
+
+                item.uri &&
+                  urlArray.push({
+                    type: "vimeo",
+                    name: name,
+                    smlImg: smlThumb,
+                    bigImg: bigThumb,
+                    url: `https://player.vimeo.com/video/${vidID}?autoplay=1&color=e4ff00&title=0&byline=0&portrait=0`
+                  });
+              }
+              // console.log(urlArray);
+              resolve(urlArray);
+            } else {
+              console.log("found nothing");
+              // console.log(urlArray);
+              resolve(urlArray);
             }
-            // console.log(urlArray);
-            resolve(urlArray);
           }
         }
       );
