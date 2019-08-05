@@ -80,7 +80,7 @@ module.exports = {
 
                   count++;
                   console.log(count);
-                  console.log(trailerID);
+                  // console.log(trailerID);
 
                   trailerID === "undefined" &&
                     urlArray.push({
