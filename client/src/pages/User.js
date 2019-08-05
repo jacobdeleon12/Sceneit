@@ -11,8 +11,8 @@ class User extends Component {
   state = {
     user: user,
     savedVideos: [],
-    videos: [],
-    movieVideos: []
+    videos: []
+    // movieVideos: []
   };
 
   componentDidMount() {
@@ -33,7 +33,8 @@ class User extends Component {
 
   render() {
 
-    console.log(this.state);
+
+
 
     return (
       <div>
