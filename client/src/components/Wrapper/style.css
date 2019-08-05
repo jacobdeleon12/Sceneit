@@ -16,9 +16,8 @@
   text-align: center;
   overflow-wrap: normal;
   position: relative;
-  <<<<<<< HEAD transition: 250ms all;
-  =======transition: 350ms all;
-  >>>>>>>master -webkit-transform-origin: center left;
+  transition: 350ms all;
+  -webkit-transform-origin: center left;
   transform-origin: center left;
   height: 14rem;
 }
