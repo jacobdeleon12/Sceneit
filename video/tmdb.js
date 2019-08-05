@@ -11,37 +11,43 @@ module.exports = {
   searchList: function(query) {
     return new Promise(function(resolve, reject) {
       axios
-        .get(`https://www.imdb.com/${query}`)
+        .get(`https://www.imdb.com/movies-coming-soon`)
         .then(response => {
           let $ = cheerio.load(response.data);
 
-          $("div.trailer-item").each(function(i, element) {
+          $("td.overview-top").each(function(i, element) {
             const name = $(element)
-              .find("div.trailer-caption")
+              .find("h4")
               .find("a")
-              .text()
-              .trim();
-            const img = $(element)
+              .attr("title");
+            const imdbId = $(element)
+              .find("h4")
               .find("a")
-              .find("img")
-              .attr("src");
-            const imdbId = $(element).attr("data-videoid");
+              .attr("href");
 
-            if (i >= 20) {
-              return false;
-            } else {
-              imdbId &&
-                urlArray.push({
-                  type: "imdb",
-                  name: name,
-                  smlImg: img,
-                  bigImg: img,
-                  url: `https://www.imdb.com/videoembed/${imdbId}`
-                });
-            }
+            axios.get(`https://www.imdb.com${imdbId}`).then(response => {
+              let $ = cheerio.load(response.data);
+              const trailerID = $("a.slate_button").attr("data-video");
+              const poster = $("a.slate_button")
+                .find("img")
+                .attr("src");
+
+              if (i >= 20) {
+                return false;
+              } else {
+                imdbId &&
+                  urlArray.push({
+                    type: "imdb",
+                    name: name,
+                    smlImg: poster,
+                    bigImg: poster,
+                    url: `https://www.imdb.com/videoembed/${trailerID}`
+                  });
+              }
+              // console.log(urlArray);
+              resolve(urlArray);
+            });
           });
-          // console.log(urlArray);
-          resolve(urlArray);
         })
         .catch(err => reject(err));
     });
@@ -60,7 +66,6 @@ module.exports = {
 
           if (movieArr) {
             for (const movie of movieArr) {
-              const img = movie.Poster;
               const name = movie.Title;
               const imdbId = movie.imdbID;
 
@@ -69,13 +74,14 @@ module.exports = {
                 .then(response => {
                   let $ = cheerio.load(response.data);
                   const trailerID = $("a.slate_button").attr("data-video");
-                  const poster = $("img.loadlate").attr("src");
-                  // console.log(poster);
+                  const poster = $("a.slate_button")
+                    .find("img")
+                    .attr("src");
 
                   count++;
                   console.log(count);
 
-                  trailerID === undefined &&
+                  trailerID &&
                     urlArray.push({
                       type: "imbd",
                       name: name,

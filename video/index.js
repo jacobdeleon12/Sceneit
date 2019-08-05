@@ -7,14 +7,14 @@ const YOUTUBE = require("./youtube");
 const PLAYLIST = require("./playList");
 const VIMEO = require("./vimeo");
 
-// TMDB.searchList("trailers");
+TMDB.searchList();
 // STEAM.searchList("popularwishlist");
 // REDDIT.searchList("videos");
 // YOUTUBE.searchList("mostPopular");
 // PLAYLIST.searchPlayList("PL9tY0BWXOZFsPMZczEqnyvD-Z5ugOZrm8");
 // VIMEO.searchList("staffpicks");
 
-// TMDB.searchName("top-gun");
+// TMDB.searchName("top gun");
 // STEAM.searchName("top-gun");
 // REDDIT.searchName("speed");
 // YOUTUBE.searchName("speed");

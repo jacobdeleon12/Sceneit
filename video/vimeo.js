@@ -101,7 +101,7 @@ module.exports = {
                     url: `https://player.vimeo.com/video/${vidID}?autoplay=1&color=e4ff00&title=0&byline=0&portrait=0`
                   });
               }
-              console.log(urlArray);
+              // console.log(urlArray);
               resolve(urlArray);
             } else {
               console.log("found nothing");

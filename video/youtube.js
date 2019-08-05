@@ -56,7 +56,7 @@ module.exports = {
                   url: `https://www.youtube.com/embed/${obj.id}??rel=0;&autoplay=1&mute=0&loop=1`
                 });
             }
-            console.log(urlArray);
+            // console.log(urlArray);
             resolve(urlArray);
           } else {
             console.log("found nothing");
