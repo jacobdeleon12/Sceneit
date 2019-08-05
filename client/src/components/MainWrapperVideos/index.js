@@ -9,6 +9,7 @@ import { JumboIframe } from "../Iframe";
 //NPM alert options
 import { positions, Provider, transitions } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
+
 const options = {
   timeout: 3000,
   position: positions.BOTTOM_CENTER,
@@ -25,13 +26,13 @@ export default class mainWrapper extends React.Component {
     vidStateID: "",
     selectedItem: -1
   };
+  componentWillMount() {
+    this.setState({ user: user });
+  }
   componentDidMount() {
     this.loadVideos();
     this.loadUser();
   }
-  // componentDidUpdate(prevProps, prevState) {
-  //   this.loadVideos();
-  // };
 
   loadUser = () => {
     this.setState({ user: user });
@@ -40,6 +41,21 @@ export default class mainWrapper extends React.Component {
   loadVideos = async () => {
     let res = await API.getVideos();
     this.setState({ videos: res.data[0].videos });
+    API.getUser(loggedInUser)
+      .then(res => {
+        // console.log(res.data.savedVideos);
+        this.setState({ savedVideos: res.data.savedVideos });
+      })
+      .catch(err => console.log(err));
+  };
+
+  isEmpty = obj => {
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        return false;
+      }
+    }
+    return true;
   };
 
   handleSaveFormSubmit = (event, video) => {
@@ -54,9 +70,11 @@ export default class mainWrapper extends React.Component {
       }
     })
       .then(response => {
-        this.setState({
-          savedVideos: response.data.savedVideo
-        });
+        this.setState(
+          {
+            savedVideos: response.data.savedVideo
+          }
+        );
       })
       .catch(err => console.log(err));
 
@@ -73,8 +91,8 @@ export default class mainWrapper extends React.Component {
     return isItemSelected ? (
       <Iframe name={video.name} url={video.url} id={i} />
     ) : (
-      <Thumbnail alt={video.name} img={video.bigImg} id={i} />
-    );
+        <Thumbnail alt={video.name} img={video.bigImg} id={i} />
+      );
   }
 
   renderVideos = data => {
@@ -136,48 +154,50 @@ export default class mainWrapper extends React.Component {
   };
 
   render() {
+    // console.log(this.state);
+
     return this.state.videos === undefined ? (
       <h5 className="load text-center">Loading...</h5>
     ) : (
-      <div className="mainWraper">
-        <JumboTile>{this.renderJumbo(this.state.videos.reddit[0])}</JumboTile>
-        <div className="row-wrapper">
-          <h3 className="row-title">Reddit</h3>
-          <Wrapper ID="reddit">
-            {this.renderVideos(this.state.videos.reddit)}
-          </Wrapper>
-        </div>
-        {/* <div className="row-wrapper">
+        <div className="mainWraper">
+          <JumboTile>{this.renderJumbo(this.state.videos.reddit[0])}</JumboTile>
+          <div className="row-wrapper">
+            <h3 className="row-title">Reddit</h3>
+            <Wrapper ID="reddit">
+              {this.renderVideos(this.state.videos.reddit)}
+            </Wrapper>
+          </div>
+          {/* <div className="row-wrapper">
           <h3 className="">TMDB</h3>
           <Wrapper ID="tmdb">
             {this.renderVideos(this.state.videos.tmdb)}
           </Wrapper>
         </div> */}
-        <div className="row-wrapper">
-          <h3 className="">STEAM</h3>
-          <Wrapper ID="steam">
-            {this.renderVideos(this.state.videos.steam)}
-          </Wrapper>
+          <div className="row-wrapper">
+            <h3 className="">STEAM</h3>
+            <Wrapper ID="steam">
+              {this.renderVideos(this.state.videos.steam)}
+            </Wrapper>
+          </div>
+          <div className="row-wrapper">
+            <h3 className="">YOUTUBE</h3>
+            <Wrapper ID="youtube">
+              {this.renderVideos(this.state.videos.youtube)}
+            </Wrapper>
+          </div>
+          <div className="row-wrapper">
+            <h3 className="">VEVO</h3>
+            <Wrapper ID="vevo">
+              {this.renderVideos(this.state.videos.vevo)}
+            </Wrapper>
+          </div>
+          <div className="row-wrapper">
+            <h3 className="">VIMEO</h3>
+            <Wrapper ID="vimeo">
+              {this.renderVideos(this.state.videos.vimeo)}
+            </Wrapper>
+          </div>
         </div>
-        <div className="row-wrapper">
-          <h3 className="">YOUTUBE</h3>
-          <Wrapper ID="youtube">
-            {this.renderVideos(this.state.videos.youtube)}
-          </Wrapper>
-        </div>
-        <div className="row-wrapper">
-          <h3 className="">VEVO</h3>
-          <Wrapper ID="vevo">
-            {this.renderVideos(this.state.videos.vevo)}
-          </Wrapper>
-        </div>
-        <div className="row-wrapper">
-          <h3 className="">VIMEO</h3>
-          <Wrapper ID="vimeo">
-            {this.renderVideos(this.state.videos.vimeo)}
-          </Wrapper>
-        </div>
-      </div>
-    );
+      );
   }
 }

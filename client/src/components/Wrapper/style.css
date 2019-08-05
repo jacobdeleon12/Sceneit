@@ -21,7 +21,7 @@
   text-align: center;
   overflow-wrap: normal;
   position: relative;
-  transition: 150ms all;
+  transition: 350ms all;
   -webkit-transform-origin: center left;
   transform-origin: center left;
   height: 14rem;
@@ -156,9 +156,9 @@
 
 @media (min-width: 768px) {
   .row__inner {
-    transition: 150ms -webkit-transform;
-    transition: 150ms transform;
-    transition: 150ms transform, 150ms -webkit-transform;
+    transition: 350ms -webkit-transform;
+    transition: 350ms transform;
+    transition: 350ms transform, 350ms -webkit-transform;
     font-size: 0;
     white-space: nowrap;
     margin-bottom: 20px;
@@ -185,7 +185,7 @@
     width: 100%;
     font-size: 10px;
     opacity: 0;
-    transition: 150ms opacity;
+    transition: 350ms opacity;
     z-index: 20;
   }
   /* 
