@@ -26,11 +26,11 @@ export default {
     return axios.put("/api/users/" + _id, videoData);
   },
   // Saves a video to the user model
-  searchVideos: function(searchWord) {
+  searchVideos: function (searchWord) {
     return axios.get("/api/videos/" + searchWord);
   },
   // Saves a video to the user model
-  getVideos: function() {
+  getVideos: function () {
     return axios.get("/api/videos");
   }
 };
