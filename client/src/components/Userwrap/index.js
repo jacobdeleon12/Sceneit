@@ -163,7 +163,7 @@ export default class UserWrapper extends React.Component {
           <Wrapper ID="saved">
             {this.isEmpty(this.state.savedVideos) === true ? (
               <div>
-                <h5 classname="load text-center">You have no saved videos. Womp Womp!</h5>
+                <h5 className="load text-center">You have no saved videos. Womp Womp!</h5>
               </div>
             ) : (
                 <div>
