@@ -86,7 +86,7 @@ export default class UserWrapper extends React.Component {
 
   renderVideos = data => {
     return (
-      <ul>
+      <div className="userVids">
         {data.map((video, i) => (
           <Tile key={i}>
             <Title title={video.vName} />
@@ -116,7 +116,7 @@ export default class UserWrapper extends React.Component {
             </Provider>
           </Tile>
         ))}
-      </ul>
+      </div>
     );
   };
 
