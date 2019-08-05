@@ -53,10 +53,8 @@ module.exports = {
         )
         .then(response => {
           let $ = cheerio.load(response.data);
-          const searchPage = $("a.search_result_container")
-            .find("p")
-            .text();
-          console.log(searchPage);
+          const searchPage = $("a.search_result_row").attr();
+          // console.log(searchPage);
 
           let count = 0;
 
@@ -78,10 +76,8 @@ module.exports = {
                       bigImg: $("img.game_header_image_full").attr("src"),
                       url: $("div.highlight_movie").attr("data-webm-hd-source")
                     });
-                  if (count === 10) {
-                    console.log(urlArray);
-                    resolve(urlArray);
-                  }
+                  // console.log(urlArray);
+                  resolve(urlArray);
                 })
                 .catch(err => reject(err));
               if (i === 9) {
@@ -90,7 +86,7 @@ module.exports = {
             });
           } else {
             console.log("found nothing");
-            console.log(urlArray);
+            // console.log(urlArray);
             resolve(urlArray);
           }
         })

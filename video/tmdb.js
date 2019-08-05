@@ -69,6 +69,9 @@ module.exports = {
                 .then(response => {
                   let $ = cheerio.load(response.data);
                   const trailerID = $("a.slate_button").attr("data-video");
+                  const poster = $("img.loadlate").attr("src");
+                  // console.log(poster);
+
                   count++;
                   console.log(count);
 
@@ -76,14 +79,12 @@ module.exports = {
                     urlArray.push({
                       type: "imbd",
                       name: name,
-                      smlImg: img,
-                      bigImg: img,
+                      smlImg: poster,
+                      bigImg: poster,
                       url: `https://www.imdb.com/videoembed/${trailerID}`
                     });
-                  if (count >= 10) {
-                    // console.log(urlArray);
-                    resolve(urlArray);
-                  }
+                  // console.log(urlArray);
+                  resolve(urlArray);
                 })
                 .catch(err => reject(err));
             }

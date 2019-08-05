@@ -15,10 +15,10 @@ const VIMEO = require("./vimeo");
 // VIMEO.searchList("staffpicks");
 
 // TMDB.searchName("top-gun");
-STEAM.searchName("6512984");
+// STEAM.searchName("top-gun");
 // REDDIT.searchName("speed");
 // YOUTUBE.searchName("speed");
-// PLAYLIST.searchChannel(vevoChannel, "speed");
+// PLAYLIST.searchChannel("UC2pmfLm7iq6Ov1UwYrWYkZA", "speed");
 // VIMEO.searchName("speed");
 
 const videoArray = [];
@@ -57,6 +57,7 @@ module.exports = {
       // console.log(VIMEOarr);
 
       const query = { vidType: "mainPage" };
+
       const update = {
         videos: {
           tmdb: TMDBarr,
