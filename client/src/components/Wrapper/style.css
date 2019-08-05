@@ -133,13 +133,13 @@
     padding: 0px 18px;
   }
   .scroll_menu {
-    height: 16rem;
+    height: 20rem;
   }
 }
 
 @media (min-width: 1024px) {
   .scroll_menu {
-    height: 17rem;
+    height: 21rem;
   }
 }
 
