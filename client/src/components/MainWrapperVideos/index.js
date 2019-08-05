@@ -167,12 +167,12 @@ export default class mainWrapper extends React.Component {
               {this.renderVideos(this.state.videos.reddit)}
             </Wrapper>
           </div>
-          {/* <div className="row-wrapper">
+          <div className="row-wrapper">
           <h3 className="">TMDB</h3>
           <Wrapper ID="tmdb">
             {this.renderVideos(this.state.videos.tmdb)}
           </Wrapper>
-        </div> */}
+        </div>
           <div className="row-wrapper">
             <h3 className="">STEAM</h3>
             <Wrapper ID="steam">

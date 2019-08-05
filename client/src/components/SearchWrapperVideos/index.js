@@ -32,7 +32,7 @@ export default class mainWrapper extends React.Component {
   componentDidMount() {
     this.loadVideos();
     this.loadUser();
-  };
+  }
 
   loadUser = () => {
     this.setState({ user: user });
@@ -42,7 +42,7 @@ export default class mainWrapper extends React.Component {
     let pathSnip = window.location.search.substring(1).split("q=")[1];
     // let pathSnip = fullPath.split("q=")[1];
     console.log(`searched word: ${pathSnip}`);
-    
+
     let res = await API.searchVideos(pathSnip);
     console.log(res.data[0]);
 
@@ -80,12 +80,22 @@ export default class mainWrapper extends React.Component {
     return isItemSelected ? (
       <Iframe name={video.name} url={video.url} id={i} />
     ) : (
-      <Thumbnail alt={video.name} img={video.bigImg} id={i} />
+      <Thumbnail
+        alt={video.name}
+        img={
+          video.bigImg 
+          === "default"
+            ? "http://1.bp.blogspot.com/-Zr0pmj1bLnM/Uhh7kROhGYI/AAAAAAAAGkE/W51xFS75-Ec/s1600/no-thumbnail.png"
+            : video.bigImg
+        }
+        id={i}
+      />
     );
   }
 
   renderVideos = data => {
     return (
+      // data ? <h3>Couldn't find anything for you...</h3> :
       <div>
         {data.map((video, i) => (
           <Tile key={i}>
@@ -139,19 +149,19 @@ export default class mainWrapper extends React.Component {
             {this.renderVideos(this.state.videos.reddit)}
           </Wrapper>
         </div>
-        {/* <div className="row-wrapper">
+        <div className="row-wrapper">
           <h3 className="">TMDB</h3>
           <Wrapper ID="tmdb">
             {this.renderVideos(this.state.videos.tmdb)}
           </Wrapper>
-        </div> */}
+        </div>
         <div className="row-wrapper">
           <h3 className="">STEAM</h3>
           <Wrapper ID="steam">
             {this.renderVideos(this.state.videos.steam)}
           </Wrapper>
         </div>
-        <div className="row-wrapper">
+        {/* <div className="row-wrapper">
           <h3 className="">YOUTUBE</h3>
           <Wrapper ID="youtube">
             {this.renderVideos(this.state.videos.youtube)}
@@ -162,7 +172,7 @@ export default class mainWrapper extends React.Component {
           <Wrapper ID="vevo">
             {this.renderVideos(this.state.videos.vevo)}
           </Wrapper>
-        </div>
+        </div> */}
         <div className="row-wrapper">
           <h3 className="">VIMEO</h3>
           <Wrapper ID="vimeo">
