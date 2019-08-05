@@ -121,8 +121,8 @@
 }
 
 .imageContainer img {
-  -webkit-animation: image-slide 2s cubic-bezier(0.5, 0.5, 0, 1);
-  animation: image-slide 2s cubic-bezier(0.5, 0.5, 0, 1);
+  -webkit-animation: image-slide 1.5s cubic-bezier(0.5, 0.5, 0, 1);
+  animation: image-slide 1.5s cubic-bezier(0.5, 0.5, 0, 1);
   animation-fill-mode: forwards;
   -webkit-animation-fill-mode: forwards;
   -webkit-filter: drop-shadow(-4px 5px 5px rgba(0, 0, 0, 0.6));
@@ -141,7 +141,7 @@
 }
 
 .text-container h1 {
-  font-size: 35px;
+  font-size: 2.4rem;
 }
 
 .text-container .fadingEffect {
@@ -151,8 +151,8 @@
   right: 0;
   width: 100%;
   background: rgb(52, 58, 64);
-  -webkit-animation: text-slide 2s cubic-bezier(0.5, 0.5, 0, 1);
-  animation: text-slide 2.3s cubic-bezier(0.5, 0.5, 0, 1);
+  -webkit-animation: text-slide 1.8s cubic-bezier(0.5, 0.5, 0, 1);
+  animation: text-slide 1.8s cubic-bezier(0.5, 0.5, 0, 1);
   animation-fill-mode: forwards;
   -webkit-animation-fill-mode: forwards;
 }
@@ -177,6 +177,7 @@
     margin-left: -70px;
   }
   .text-container h1 {
-    font-size: 25px;
+    font-size: 1.1rem;
+    margin-left: 5px
   }
 }
