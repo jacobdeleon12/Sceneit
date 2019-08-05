@@ -9,19 +9,14 @@
 
 .scroll_menu {
   background: rgb(52, 58, 64);
-  background: linear-gradient(
-    0deg,
-    rgba(52, 58, 64, 1) 0%,
-    rgba(103, 115, 128, 0.5) 50%,
-    rgba(52, 58, 64, 1) 100%
-  );
+  background: linear-gradient( 0deg, rgba(52, 58, 64, 1) 0%, rgba(103, 115, 128, 0.5) 50%, rgba(52, 58, 64, 1) 100%);
   overflow: auto;
   white-space: nowrap;
   position: relative;
   text-align: center;
   overflow-wrap: normal;
   position: relative;
-  transition: 150ms all;
+  transition: 250ms all;
   -webkit-transform-origin: center left;
   transform-origin: center left;
   height: 14rem;
@@ -156,9 +151,9 @@
 
 @media (min-width: 768px) {
   .row__inner {
-    transition: 150ms -webkit-transform;
-    transition: 150ms transform;
-    transition: 150ms transform, 150ms -webkit-transform;
+    transition: 250ms -webkit-transform;
+    transition: 250ms transform;
+    transition: 250ms transform, 250ms -webkit-transform;
     font-size: 0;
     white-space: nowrap;
     margin-bottom: 20px;
@@ -185,7 +180,7 @@
     width: 100%;
     font-size: 10px;
     opacity: 0;
-    transition: 150ms opacity;
+    transition: 250ms opacity;
     z-index: 20;
   }
   /* 
@@ -232,7 +227,7 @@
     transform: scale(1.5);
     opacity: 1;
   }
-  .tile:hover ~ .tile {
+  .tile:hover~.tile {
     -webkit-transform: translate3d(125px, 0, 0);
     transform: translate3d(125px, 0, 0);
   }
@@ -245,12 +240,7 @@
 .wrapper {
   padding-top: 50px;
   background: rgb(52, 58, 64);
-  background: linear-gradient(
-    0deg,
-    rgba(52, 58, 64, 0.85) 0%,
-    rgba(103, 115, 128, 0.5) 50%,
-    rgba(52, 58, 64, 1) 100%
-  );
+  background: linear-gradient( 0deg, rgba(52, 58, 64, 0.85) 0%, rgba(103, 115, 128, 0.5) 50%, rgba(52, 58, 64, 1) 100%);
   height: 100%;
   display: flex;
   flex-flow: row wrap;
@@ -260,12 +250,7 @@
   overflow: auto;
 }
 
-p,
-h1,
-h2,
-h3,
-h4,
-h5 {
+p, h1, h2, h3, h4, h5 {
   color: deepskyblue;
 }
 

@@ -18,3 +18,21 @@ p, h1, h2, h3, h4, h5 {
 #logo {
   color: deepskyblue;
 }
+
+.userPage {
+  margin-bottom: 10rem;
+}
+
+.userInfo {
+  margin-left: 50rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  padding: 2rem;
+}
+
+.userImg {
+  height: 10rem;
+  width: 10rem;
+}
