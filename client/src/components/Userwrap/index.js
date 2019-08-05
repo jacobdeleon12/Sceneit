@@ -126,14 +126,23 @@ export default class UserWrapper extends React.Component {
 
   render() {
     return (
-      <div className="userPage">
+      <div className="userPage ">
         <div className="userInfo">
-          <img className="userImg" src={user.imageUrl} alt="googleImage" />
-          <h4>{user.givenName + " " + user.familyName}</h4>
-          {/* <h5>{user.email}</h5> */}
+          <h1>Welcome</h1>
+          <h4>{user.givenName}</h4>
         </div>
+        <div className="animationContainer">
+          <div className="imageContainer">
+            <img className="userImg " src={user.imageUrl} alt="googleImage" />
+          </div>
+
+          <div className="text-container">
+            <h1>Your Saved Videos</h1>
+            <div class="fadingEffect"></div>
+          </div>
+        </div>
+
         <div className="mainWraper">
-          <h3 className="">Saved Videos</h3>
           <Wrapper ID="saved">
             {this.isEmpty(this.state.savedVideos) === true ? (
               <div>
