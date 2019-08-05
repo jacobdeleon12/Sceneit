@@ -35,7 +35,7 @@ export default class UserWrapper extends React.Component {
   componentDidMount() {
     this.loadUser();
     this.loadVideos();
-  };
+  }
 
   loadUser = () => {
     this.setState({ user: user });
@@ -80,12 +80,11 @@ export default class UserWrapper extends React.Component {
     return isItemSelected ? (
       <Iframe name={video.vName} url={video.vStr} id={i} />
     ) : (
-        <Thumbnail img={video.vImg} id={i} />
-      );
+      <Thumbnail img={video.vImg} id={i} />
+    );
   }
 
   renderVideos = data => {
-
     return (
       <ul>
         {data.map((video, i) => (
@@ -131,57 +130,38 @@ export default class UserWrapper extends React.Component {
   };
 
   render() {
-    console.log(user);
-
-
+    window.scrollTo(0, 0);
     return (
-      <div>
-        <Row>
-          <Col size="md-12">
-            <div className="row justify-content-center">
-              <Col size="md-2">
-                <Container fluid>
-                  <img src={user.imageUrl} alt="googleImage" />
-                </Container>
-              </Col>
-              <Col size="md-3">
-                <Container fluid>
-                  <Row fluid>
-                    <Col size="md-12">
-                      <h4>
-                        {user.givenName +
-                          " " +
-                          user.familyName}
-                      </h4>
-                    </Col>
-                  </Row>
-                  <Row fluid>
-                    <Col size="md-12">
-                      <h5>{user.email}</h5>
-                    </Col>
-                  </Row>
-                </Container>
-              </Col>
-            </div>
-          </Col>
-        </Row>
+      <div className="userPage ">
+        <div className="userInfo">
+          <h1>Welcome</h1>
+          <h4>{user.givenName}</h4>
+        </div>
+        <div className="animationContainer">
+          <div className="imageContainer">
+            <img className="userImg " src={user.imageUrl} alt="googleImage" />
+          </div>
+
+          <div className="text-container">
+            <h1>Your Saved Videos</h1>
+            <div class="fadingEffect"></div>
+          </div>
+        </div>
+
         <div className="mainWraper">
-          <h3 className="">Saved Videos</h3>
           <Wrapper ID="saved">
             {this.isEmpty(this.state.savedVideos) === true ? (
               <div>
-                <h5 className="load text-center">You have no saved videos. Womp Womp!</h5>
+                <h5 className="savedVidTxt text-center">
+                  You have no saved videos!
+                </h5>
               </div>
             ) : (
-                <div>
-                  {this.renderVideos(this.state.savedVideos)}
-                </div>
-              )
-            }
+              <div>{this.renderVideos(this.state.savedVideos)}</div>
+            )}
           </Wrapper>
         </div>
       </div>
     );
-
   }
 }
