@@ -101,31 +101,6 @@ function Footer() {
                 .
               </p>
             </div>
-
-            <div className="col-md-4 col-sm-6 col-xs-12">
-              <ul className="icons">
-                <li>
-                  <Link className="facebook" to="#">
-                    <i className="fa fa-facebook"></i>
-                  </Link>
-                </li>
-                <li>
-                  <Link className="twitter" to="#">
-                    <i className="fa fa-twitter"></i>
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dribbble" to="#">
-                    <i className="fa fa-dribbble"></i>
-                  </Link>
-                </li>
-                <li>
-                  <Link className="linkedin" to="#">
-                    <i className="fa fa-linkedin"></i>
-                  </Link>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
       </footer>
