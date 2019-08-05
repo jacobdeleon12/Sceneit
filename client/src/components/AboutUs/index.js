@@ -204,9 +204,9 @@ function AboutUS() {
             </ul>
           </div>
           <div className="Description">
-            <h3>Hello world! My name is Blake Marter.</h3>
+            <h3>Blake Marter.</h3>
             <p>
-              As a driven and tech-savvy Web Developer, I have always had a
+              Hello World! As a driven and tech-savvy Web Developer, I have always had a
               strong gravitational pull towards technology. I am currently
               pursuing an intensive Web Development Coding Certification at the
               University of Washington.

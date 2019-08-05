@@ -32,6 +32,7 @@ class User extends Component {
   };
 
   render() {
+    console.log(user);
 
 
 
@@ -40,7 +41,7 @@ class User extends Component {
       <div>
         <MainNav />
         <Container fluid>
-          {this.state.user ? (
+          {loggedInUser ? (
             <Userwrap />
           ) : (
               <h5>

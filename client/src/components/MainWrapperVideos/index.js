@@ -9,6 +9,7 @@ import { JumboIframe } from "../Iframe";
 //NPM alert options
 import { positions, Provider, transitions } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
+
 const options = {
   timeout: 3000,
   position: positions.BOTTOM_CENTER,
@@ -26,15 +27,12 @@ export default class mainWrapper extends React.Component {
     selectedItem: -1
   };
   componentWillMount() {
-    this.forceUpdate(this.loadUser());
+    this.setState({ user: user });
   }
   componentDidMount() {
     this.loadVideos();
     this.loadUser();
   }
-  // componentDidUpdate(prevProps, prevState) {
-  //   this.loadVideos();
-  // };
 
   loadUser = () => {
     this.setState({ user: user });
@@ -51,6 +49,15 @@ export default class mainWrapper extends React.Component {
       .catch(err => console.log(err));
   };
 
+  isEmpty = obj => {
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        return false;
+      }
+    }
+    return true;
+  };
+
   handleSaveFormSubmit = (event, video) => {
     event.preventDefault();
     const vStr = video.url;
@@ -63,38 +70,16 @@ export default class mainWrapper extends React.Component {
       }
     })
       .then(response => {
-        this.setState({
-          savedVideos: response.data.savedVideo
-        });
-        this.forceUpdate(this.loadVideos);
-
+        this.setState(
+          {
+            savedVideos: response.data.savedVideo
+          }
+        );
       })
       .catch(err => console.log(err));
 
-    console.log(this.state.savedVideos);
     event.target.disabled = true;
   };
-
-  // handleSaveFormSubmit = (event, video) => {
-  //   event.preventDefault();
-  //   const vStr = video.url;
-  //   const vName = video.name;
-  //   const vImg = video.bigImg;
-
-  //   API.saveVideo(loggedInUser, {
-  //     $push: {
-  //       savedVideos: { vStr, vName, vImg }
-  //     }
-  //   })
-  //     .then(response => {
-  //       this.setState({
-  //         savedVideos: response.data.savedVideo
-  //       });
-  //     })
-  //     .catch(err => console.log(err));
-
-  //   event.target.disabled = true;
-  // };
 
   constructor() {
     super();
@@ -169,6 +154,8 @@ export default class mainWrapper extends React.Component {
   };
 
   render() {
+    // console.log(this.state);
+
     return this.state.videos === undefined ? (
       <h5 className="load text-center">Loading...</h5>
     ) : (
