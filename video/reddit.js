@@ -74,7 +74,7 @@ module.exports = {
                     type: "reddit",
                     name: `${obj.data.title.slice(0, 40)}...`,
                     smlImg: obj.data.thumbnail,
-                    bigImg: obj.data.media.oembed.thumbnail_url,
+                    bigImg: obj.data.thumbnail,
                     url: `https://www.youtube.com/embed/${obj.data.url
                       .split("v=")[1]
                       .slice(
@@ -90,7 +90,7 @@ module.exports = {
                     type: "reddit",
                     name: `${obj.data.title.slice(0, 40)}...`,
                     smlImg: obj.data.thumbnail,
-                    bigImg: obj.data.media.oembed.thumbnail_url,
+                    bigImg: obj.data.thumbnail,
                     url: `https://www.youtube.com/embed/${obj.data.url
                       .split("be/")[1]
                       .slice(

@@ -92,10 +92,10 @@ module.exports = {
       console.log("made it past steam");
       const REDDITarr = await REDDIT.searchName(searchWord);
       console.log("made it past reddit");
-      const YOUTUBEarr = await YOUTUBE.searchName(searchWord);
-      console.log("made it past youtube");
-      const VEVOarr = await PLAYLIST.searchChannel(vevoChannel, searchWord);
-      console.log("made it past vevo");
+      // const YOUTUBEarr = await YOUTUBE.searchName(searchWord);
+      // console.log("made it past youtube");
+      // const VEVOarr = await PLAYLIST.searchChannel(vevoChannel, searchWord);
+      // console.log("made it past vevo");
       const VIMEOarr = await VIMEO.searchName(searchWord);
       console.log("made it past vimeo");
       const TMDBarr = await TMDB.searchName(searchWord);
@@ -106,8 +106,8 @@ module.exports = {
         tmdb: TMDBarr,
         steam: STEAMarr,
         reddit: REDDITarr,
-        youtube: YOUTUBEarr,
-        vevo: VEVOarr,
+        // youtube: YOUTUBEarr,
+        // vevo: VEVOarr,
         vimeo: VIMEOarr
       });
 

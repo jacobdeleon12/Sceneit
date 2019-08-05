@@ -80,8 +80,9 @@ module.exports = {
 
                   count++;
                   console.log(count);
+                  console.log(trailerID);
 
-                  trailerID &&
+                  trailerID === "undefined" &&
                     urlArray.push({
                       type: "imbd",
                       name: name,
