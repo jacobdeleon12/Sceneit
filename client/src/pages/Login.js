@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { LoginNav } from "../components/Nav";
 import Background from "../components/Splash";
 import Footer from "../components/Footer";
-import Pulse from "../components/Loading";
-import pulse from "../components/Loading";
+// import Pulse from "../components/Loading";
 
 class Login extends Component {
   render() {
@@ -11,7 +10,7 @@ class Login extends Component {
       <div>
         <LoginNav />
         <Background />
-        <Pulse />
+        {/* <Pulse /> */}
         <Footer />
       </div>
     );
