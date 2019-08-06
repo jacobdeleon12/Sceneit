@@ -87,6 +87,8 @@ module.exports = {
   searchByWord: async function(searchWord) {
     const vevoChannel = "UC2pmfLm7iq6Ov1UwYrWYkZA";
 
+    let videoArray = [];
+
     try {
       const STEAMarr = await STEAM.searchName(searchWord);
       console.log("made it past steam");
