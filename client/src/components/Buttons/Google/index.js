@@ -14,7 +14,10 @@ const success = response => {
 
   window.sessionStorage.setItem("loggedInUser", profId);
   // console.log(response.profileObj);
-  window.sessionStorage.setItem("UserInfo", JSON.stringify(response.profileObj));
+  window.sessionStorage.setItem(
+    "UserInfo",
+    JSON.stringify(response.profileObj)
+  );
 
   API.getUser(profId)
     .then(res => {
@@ -50,6 +53,7 @@ export function GLogin() {
       onSuccess={success}
       onFailure={error}
       cookiePolicy={"single_host_origin"}
+      className="gBtn"
     />
   );
 }

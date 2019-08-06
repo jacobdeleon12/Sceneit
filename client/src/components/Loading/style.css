@@ -1,0 +1,56 @@
+.radar {
+    /* background: url(https://gtms03.alicdn.com/tps/i3/TB1Vet9IVXXXXbuapXXb2YSIVXX-567-567.png) no-repeat 50% 50%; */
+    width: 284px;
+    height: 284px;
+    position: relative;
+    background-size: 284px 284px;
+    position: absolute;
+    left: 50%;
+    top: 60.5%;
+    margin-left: -142px;
+    margin-top: -142px;
+    z-index: 1;
+}
+
+.shadow {
+    position: absolute;
+    left: 11%;
+    top: 11%;
+    right: 11%;
+    bottom: 11%;
+    margin: auto;
+    border-radius: 9999px;
+    box-shadow: 0 0 66px 6px deepskyblue!important;
+    -webkit-animation: shadow 1s infinite ease;
+    animation: shadow 1s infinite ease;
+    z-index: 0;
+}
+
+.gBtn {
+    position: absolute top 15rem;
+    left: 50%;
+}
+
+@-webkit-keyframes shadow {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes shadow {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
