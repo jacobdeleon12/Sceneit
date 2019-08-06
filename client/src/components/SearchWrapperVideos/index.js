@@ -29,6 +29,7 @@ export default class mainWrapper extends React.Component {
     selectedItem: -1,
     searchWord: ""
   };
+
   componentDidMount() {
     this.loadVideos();
     this.loadUser();
@@ -44,9 +45,10 @@ export default class mainWrapper extends React.Component {
     console.log(`searched word: ${pathSnip}`);
 
     let res = await API.searchVideos(pathSnip);
-    console.log(res.data[0]);
+    console.log(res.data);
 
     this.setState({ videos: res.data[0], searchWord: pathSnip });
+    console.log(this.state.videos);
   };
 
   handleSaveFormSubmit = (event, video) => {
