@@ -36,6 +36,10 @@
   hyphens: auto;
 }
 
+.title_wrap {
+  opacity: 0;
+}
+
 .big_iframe {
   width: 100%;
   box-shadow: 0 3px 6px #999, 0 3px 6px #999;
