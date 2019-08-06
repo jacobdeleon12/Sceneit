@@ -27,7 +27,7 @@ export default class mainWrapper extends React.Component {
     selectedItem: -1
   };
   componentWillMount() {
-    this.setState({ user: user });
+    this.loadUser();
   }
   componentDidMount() {
     this.loadVideos();
@@ -159,7 +159,7 @@ export default class mainWrapper extends React.Component {
     return this.state.videos === undefined ? (
       <h5 className="load text-center">
         Loading...
-        <i class="fas fa-spinner fa-spin"></i>
+        <i className="fas fa-spinner fa-spin"></i>
       </h5>
     ) : (
         <div className="mainWraper">
@@ -171,11 +171,11 @@ export default class mainWrapper extends React.Component {
             </Wrapper>
           </div>
           <div className="row-wrapper">
-          <h3 className="">TMDB</h3>
-          <Wrapper ID="tmdb">
-            {this.renderVideos(this.state.videos.tmdb)}
-          </Wrapper>
-        </div>
+            <h3 className="">TMDB</h3>
+            <Wrapper ID="tmdb">
+              {this.renderVideos(this.state.videos.tmdb)}
+            </Wrapper>
+          </div>
           <div className="row-wrapper">
             <h3 className="">STEAM</h3>
             <Wrapper ID="steam">

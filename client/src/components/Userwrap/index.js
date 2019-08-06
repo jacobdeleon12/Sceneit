@@ -4,8 +4,6 @@ import Wrapper from "../Wrapper";
 import { DeleteBtn } from "../Buttons/VideoBtns";
 import { Title, Iframe, Thumbnail } from "../Iframe";
 import { Tile } from "../Tile";
-import { Col, Row, Container } from "../Grid";
-// import { JumboIframe } from "../Iframe";
 import "./style.css";
 
 //NPM alert options
@@ -80,8 +78,8 @@ export default class UserWrapper extends React.Component {
     return isItemSelected ? (
       <Iframe name={video.vName} url={video.vStr} id={i} />
     ) : (
-      <Thumbnail img={video.vImg} id={i} />
-    );
+        <Thumbnail img={video.vImg} id={i} />
+      );
   }
 
   renderVideos = data => {
@@ -157,8 +155,8 @@ export default class UserWrapper extends React.Component {
                 </h5>
               </div>
             ) : (
-              <div>{this.renderVideos(this.state.savedVideos)}</div>
-            )}
+                <div>{this.renderVideos(this.state.savedVideos)}</div>
+              )}
           </Wrapper>
         </div>
       </div>
