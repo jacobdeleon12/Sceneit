@@ -67,23 +67,15 @@ function Footer() {
               <h6>Quick Links</h6>
               <ul className="footer-links">
                 <li>
-                  <Link to="/AboutUs">About Us</Link>
+                  <Link to="/AboutUs">About / Contact Us</Link>
                 </li>
                 <li>
-                  <Link to="http://scanfcode.com/contact/">Contact Us</Link>
+                  <Link to="/ContributePg">Contribute</Link>
                 </li>
                 <li>
-                  <Link to="http://scanfcode.com/contribute-at-scanfcode/">
-                    Contribute
-                  </Link>
-                </li>
-                <li>
-                  <Link to="http://scanfcode.com/privacy-policy/">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link to="http://scanfcode.com/sitemap/">Sitemap</Link>
+                  <a href="https://app.termly.io/document/privacy-policy/e875b017-d86a-4ab3-97a7-0c947d088c28">
+                    Privacy-Policy
+                  </a>
                 </li>
               </ul>
             </div>
@@ -94,7 +86,7 @@ function Footer() {
           <div className="row">
             <div className="col-md-8 col-sm-6 col-xs-12">
               <p className="copyright-text">
-                Copyright &copy; 2017 All Rights Reserved by
+                Copyright &copy; 2019 All Rights Reserved by
                 <Link to="https://github.com/jacobdeleon12/Sceneit">
                   {name}
                 </Link>
