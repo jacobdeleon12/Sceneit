@@ -130,22 +130,21 @@ export default class UserWrapper extends React.Component {
   };
 
   render() {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     return (
       <div className="userPage ">
         <div className="userInfo">
-          <h1>Welcome</h1>
-          <h4>{user.givenName}</h4>
-        </div>
-        <div className="animationContainer">
-          <div className="imageContainer">
-            <img className="userImg " src={user.imageUrl} alt="googleImage" />
-          </div>
+          <div className="animationContainer">
+            <div className="imageContainer">
+              <img className="userImg " src={user.imageUrl} alt="googleImage" />
+            </div>
 
-          <div className="text-container">
-            <h1>Your Saved Videos</h1>
-            <div class="fadingEffect"></div>
+            <div className="text-container">
+              <h4>Welcome, {user.givenName}</h4>
+              <div class="fadingEffect"></div>
+            </div>
           </div>
+          <h5>Your Saved Videos</h5>
         </div>
 
         <div className="mainWraper">

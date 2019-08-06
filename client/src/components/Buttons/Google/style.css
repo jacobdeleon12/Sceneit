@@ -5,10 +5,9 @@ logout {
 }
 
 logout:hover {
-    cursor: pointer;
-    background-color: rgb(236, 236, 236);
+  cursor: pointer;
+  background-color: rgb(236, 236, 236);
   color: rgb(102, 102, 102);
-
 }
 
 .logout {
@@ -18,5 +17,5 @@ logout:hover {
 
 .logout:hover {
   cursor: pointer;
-  color:rgb(201, 201, 201);
+  color: rgb(201, 201, 201);
 }

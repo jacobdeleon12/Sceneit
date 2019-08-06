@@ -210,7 +210,10 @@
   margin-top: -115px;
   text-align: center;
 } */
-  .tile:hover .tile__details {
+  .tile:hover .title_wrap {
+    opacity: 1;
+  }
+  .tile:hover .vidBtn {
     opacity: 1;
   }
   .tile__title {
