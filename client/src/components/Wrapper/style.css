@@ -96,6 +96,12 @@
   .scroll_menu {
     height: 15rem;
   }
+  .title_wrap {
+    opacity: 1;
+  }
+  .vidBtn {
+    opacity: 1;
+  }
 }
 
 @media (min-width: 425px) {
@@ -107,6 +113,12 @@
   }
   .scroll_menu {
     height: 15rem;
+  }
+  .title_wrap {
+    opacity: 1;
+  }
+  .vidBtn {
+    opacity: 1;
   }
 }
 

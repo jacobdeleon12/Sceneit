@@ -37,5 +37,6 @@
   .vidBtn {
     font-size: 8px;
     width: 46%;
+    opacity: 1;
   }
 }
