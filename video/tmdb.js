@@ -35,7 +35,7 @@ module.exports = {
               if (i >= 20) {
                 return false;
               } else {
-                imdbId &&
+                poster &&
                   urlArray.push({
                     type: "imdb",
                     name: name,
@@ -56,6 +56,7 @@ module.exports = {
   // try "speed"
   // Queries TMDB name, returns 10 videos
   searchName: function(query) {
+    let urlArray = [];
     return new Promise(function(resolve, reject) {
       axios
         .get(`http://www.omdbapi.com/?s=${query}&type=movie&apikey=${TMDB_API}`)
@@ -82,7 +83,7 @@ module.exports = {
                   console.log(count);
                   // console.log(trailerID);
 
-                  trailerID === "undefined" &&
+                  poster &&
                     urlArray.push({
                       type: "imbd",
                       name: name,

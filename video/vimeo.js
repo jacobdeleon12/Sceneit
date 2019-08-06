@@ -65,6 +65,7 @@ module.exports = {
   // try "speed"
   // Queries Vimeo videos by name, returns 10 videos
   searchName: function(query) {
+    let urlArray = [];
     return new Promise(function(resolve, reject) {
       client.request(
         /*options*/ {

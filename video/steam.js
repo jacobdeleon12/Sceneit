@@ -46,6 +46,7 @@ module.exports = {
 
   // Scrapes game search page, returns 10 videos
   searchName: function(query) {
+    let urlArray = [];
     return new Promise(function(resolve, reject) {
       axios
         .get(

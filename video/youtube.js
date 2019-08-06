@@ -34,6 +34,7 @@ module.exports = {
   // try "speed"
   // Queries Youtube by name, returns 10 videos
   searchName: function(query) {
+    let urlArray = [];
     return new Promise(function(resolve, reject) {
       let count = 0;
 
