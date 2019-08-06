@@ -1,18 +1,18 @@
 import React from "react";
-import Contact from "../components/ContactUs";
+import Contribute from "../components/Contribute";
 import { MainNav } from "../components/Nav";
 import Footer from "../components/Footer";
 
-function ContactUs() {
+function ContributePg() {
   window.scrollTo(0, 0);
 
   return (
     <div>
       <MainNav />
-      <Contact />
+      <Contribute />
       <Footer />
     </div>
   );
 }
 
-export default ContactUs;
+export default ContributePg;
