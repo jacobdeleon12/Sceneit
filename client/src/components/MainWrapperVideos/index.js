@@ -70,11 +70,9 @@ export default class mainWrapper extends React.Component {
       }
     })
       .then(response => {
-        this.setState(
-          {
-            savedVideos: response.data.savedVideo
-          }
-        );
+        this.setState({
+          savedVideos: response.data.savedVideo
+        });
       })
       .catch(err => console.log(err));
 
@@ -91,12 +89,14 @@ export default class mainWrapper extends React.Component {
     return isItemSelected ? (
       <Iframe name={video.name} url={video.url} id={i} />
     ) : (
-        <Thumbnail alt={video.name} img={video.bigImg} id={i} />
-      );
+      <Thumbnail alt={video.name} img={video.bigImg} id={i} />
+    );
   }
 
   renderVideos = data => {
-    return (
+    return data === undefined ? (
+      <h3>Couldn't find anything for you...</h3>
+    ) : (
       <div>
         {data.map((video, i) => (
           <Tile key={i}>
@@ -158,49 +158,48 @@ export default class mainWrapper extends React.Component {
 
     return this.state.videos === undefined ? (
       <h5 className="load text-center">
-        Loading...
-        <i class="fas fa-spinner fa-spin"></i>
+        Loading <i class="fas fa-spinner fa-spin"></i>
       </h5>
     ) : (
-        <div className="mainWraper">
-          <JumboTile>{this.renderJumbo(this.state.videos.reddit[0])}</JumboTile>
-          <div className="row-wrapper">
-            <h3 className="row-title">Reddit</h3>
-            <Wrapper ID="reddit">
-              {this.renderVideos(this.state.videos.reddit)}
-            </Wrapper>
-          </div>
-          <div className="row-wrapper">
-          <h3 className="">TMDB</h3>
+      <div className="mainWraper">
+        <JumboTile>{this.renderJumbo(this.state.videos.reddit[0])}</JumboTile>
+        <div className="row-wrapper">
+          <h3 className="row-title">Hot New Posts from Reddit</h3>
+          <Wrapper ID="reddit">
+            {this.renderVideos(this.state.videos.reddit)}
+          </Wrapper>
+        </div>
+        <div className="row-wrapper">
+          <h3 className="row-title">Latest Movie Trailers from IMDB</h3>
           <Wrapper ID="tmdb">
             {this.renderVideos(this.state.videos.tmdb)}
           </Wrapper>
         </div>
-          <div className="row-wrapper">
-            <h3 className="">STEAM</h3>
-            <Wrapper ID="steam">
-              {this.renderVideos(this.state.videos.steam)}
-            </Wrapper>
-          </div>
-          <div className="row-wrapper">
-            <h3 className="">YOUTUBE</h3>
-            <Wrapper ID="youtube">
-              {this.renderVideos(this.state.videos.youtube)}
-            </Wrapper>
-          </div>
-          <div className="row-wrapper">
-            <h3 className="">VEVO</h3>
-            <Wrapper ID="vevo">
-              {this.renderVideos(this.state.videos.vevo)}
-            </Wrapper>
-          </div>
-          <div className="row-wrapper">
-            <h3 className="">VIMEO</h3>
-            <Wrapper ID="vimeo">
-              {this.renderVideos(this.state.videos.vimeo)}
-            </Wrapper>
-          </div>
+        <div className="row-wrapper">
+          <h3 className="row-title">Upcoming Games from Steam</h3>
+          <Wrapper ID="steam">
+            {this.renderVideos(this.state.videos.steam)}
+          </Wrapper>
         </div>
-      );
+        <div className="row-wrapper">
+          <h3 className="row-title">Trending Videos from YouTube</h3>
+          <Wrapper ID="youtube">
+            {this.renderVideos(this.state.videos.youtube)}
+          </Wrapper>
+        </div>
+        <div className="row-wrapper">
+          <h3 className="row-title">Fresh New Music from Vevo</h3>
+          <Wrapper ID="vevo">
+            {this.renderVideos(this.state.videos.vevo)}
+          </Wrapper>
+        </div>
+        <div className="row-wrapper">
+          <h3 className="row-title">Crisp New Content from Vimeo</h3>
+          <Wrapper ID="vimeo">
+            {this.renderVideos(this.state.videos.vimeo)}
+          </Wrapper>
+        </div>
+      </div>
+    );
   }
 }

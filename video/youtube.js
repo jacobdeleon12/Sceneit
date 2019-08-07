@@ -2,12 +2,12 @@ require("dotenv").config();
 const axios = require("axios");
 
 YOUTUBE_API = "AIzaSyBQaJOdXS5rojwu9fVmBi-JenkMGVMUIec";
-let urlArray = [];
 
 module.exports = {
   // try "mostPopular"
   // Queries YouTube list, returns 10 videos
   searchList: function(query) {
+    let urlArray = [];
     return new Promise(function(resolve, reject) {
       axios
         .get(
@@ -20,8 +20,8 @@ module.exports = {
                 type: "youtube",
                 name: `${obj.snippet.title.slice(0, 40)}...`,
                 smlImg: obj.snippet.thumbnails.medium.url,
-                bigImg: obj.snippet.thumbnails.high.url,
-                url: `https://www.youtube.com/embed/${obj.id}?rel=0;&autoplay=1&mute=0&loop=1`
+                bigImg: obj.snippet.thumbnails.medium.url,
+                url: `https://www.youtube.com/embed/${obj.id}?rel=0;&autoplay=1`
               });
           }
           // console.log(urlArray);
@@ -34,6 +34,7 @@ module.exports = {
   // try "speed"
   // Queries Youtube by name, returns 10 videos
   searchName: function(query) {
+    let urlArray = [];
     return new Promise(function(resolve, reject) {
       let count = 0;
 
@@ -47,20 +48,19 @@ module.exports = {
               count++;
               console.log(count);
 
-              obj.id &&
+              obj.id.videoId &&
                 urlArray.push({
                   type: "youtube",
                   name: `${obj.snippet.title.slice(0, 40)}...`,
                   smlImg: obj.snippet.thumbnails.medium.url,
-                  bigImg: obj.snippet.thumbnails.high.url,
-                  url: `https://www.youtube.com/embed/${obj.id}??rel=0;&autoplay=1&mute=0&loop=1`
+                  bigImg: obj.snippet.thumbnails.medium.url,
+                  url: `https://www.youtube.com/embed/${obj.id.videoId}?rel=0;&autoplay=1`
                 });
             }
             // console.log(urlArray);
             resolve(urlArray);
           } else {
             console.log("found nothing");
-            // console.log(urlArray);
             resolve(urlArray);
           }
         })

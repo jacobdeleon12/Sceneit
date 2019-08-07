@@ -1,11 +1,10 @@
 const axios = require("axios");
 
-let urlArray = [];
-
 module.exports = {
   // try "videos"
   // Queries Reddit sub, returns 10 videos
   searchList: function(query) {
+    let urlArray = [];
     return new Promise(function(resolve, reject) {
       axios
         .get(`https://www.reddit.com/r/${query}/hot.json?limit=20`)
@@ -55,6 +54,7 @@ module.exports = {
   // try "videos"
   // Queries Reddit name, returns 10 videos
   searchName: function(query) {
+    let urlArray = [];
     return new Promise(function(resolve, reject) {
       axios
         .get(

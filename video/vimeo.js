@@ -1,14 +1,6 @@
 require("dotenv").config();
-const axios = require("axios");
-
-let urlArray = [];
 
 let Vimeo = require("vimeo").Vimeo;
-// let client = new Vimeo(
-//   process.env.VIMEO_CLIENT_ID,
-//   process.env.VIMEO_CLIENT_SECRET,
-//   process.env.VIMEO_ACCESS_TOKEN
-// );
 
 VIMEO_CLIENT_ID = "385538f9b231338961848e6c1b87ae3cc55b0b69";
 VIMEO_CLIENT_SECRET =
@@ -25,6 +17,7 @@ module.exports = {
   // try "staffpicks"
   // Queries vimeo list, returns 10 videos
   searchList: function(query) {
+    let urlArray = [];
     return new Promise(function(resolve, reject) {
       client.request(
         /*options*/ {
@@ -44,6 +37,9 @@ module.exports = {
               let bigThumb = item.pictures.sizes[6].link;
               let vidID = item.uri.split("/").slice(-1)[0];
               let name = item.name;
+              if (name.length > 40) {
+                name = `${item.name.slice(0, 40)}...`;
+              }
 
               item.uri &&
                 urlArray.push({
@@ -65,6 +61,7 @@ module.exports = {
   // try "speed"
   // Queries Vimeo videos by name, returns 10 videos
   searchName: function(query) {
+    let urlArray = [];
     return new Promise(function(resolve, reject) {
       client.request(
         /*options*/ {
@@ -91,6 +88,9 @@ module.exports = {
                 let bigThumb = item.pictures.sizes[6].link;
                 let vidID = item.uri.split("/").slice(-1)[0];
                 let name = item.name;
+                if (name.length > 40) {
+                  name = `${item.name.slice(0, 40)}...`;
+                }
 
                 item.uri &&
                   urlArray.push({

@@ -3,12 +3,11 @@ const cheerio = require("cheerio");
 
 TMDB_API = "f156e9ea";
 
-let urlArray = [];
-
 module.exports = {
   // try "trailers"
   // Queries TMDB list, returns 20 videos
   searchList: function(query) {
+    let urlArray = [];
     return new Promise(function(resolve, reject) {
       axios
         .get(`https://www.imdb.com/movies-coming-soon`)
@@ -35,7 +34,7 @@ module.exports = {
               if (i >= 20) {
                 return false;
               } else {
-                imdbId &&
+                trailerID &&
                   urlArray.push({
                     type: "imdb",
                     name: name,
@@ -56,13 +55,14 @@ module.exports = {
   // try "speed"
   // Queries TMDB name, returns 10 videos
   searchName: function(query) {
+    let urlArray = [];
     return new Promise(function(resolve, reject) {
       axios
         .get(`http://www.omdbapi.com/?s=${query}&type=movie&apikey=${TMDB_API}`)
         .then(response => {
           let movieArr = response.data.Search;
           let count = 0;
-          // console.log(response.data.Search);
+          // console.log(movieArr);
 
           if (movieArr) {
             for (const movie of movieArr) {
@@ -82,7 +82,7 @@ module.exports = {
                   console.log(count);
                   // console.log(trailerID);
 
-                  trailerID === "undefined" &&
+                  trailerID &&
                     urlArray.push({
                       type: "imbd",
                       name: name,
@@ -90,8 +90,10 @@ module.exports = {
                       bigImg: poster,
                       url: `https://www.imdb.com/videoembed/${trailerID}`
                     });
-                  // console.log(urlArray);
-                  resolve(urlArray);
+                  if (count >= 9) {
+                    // console.log(urlArray);
+                    resolve(urlArray);
+                  }
                 })
                 .catch(err => reject(err));
             }

@@ -29,6 +29,7 @@ export default class mainWrapper extends React.Component {
     selectedItem: -1,
     searchWord: ""
   };
+
   componentDidMount() {
     this.loadVideos();
     this.loadUser();
@@ -44,9 +45,10 @@ export default class mainWrapper extends React.Component {
     console.log(`searched word: ${pathSnip}`);
 
     let res = await API.searchVideos(pathSnip);
-    console.log(res.data[0]);
+    console.log(res.data);
 
     this.setState({ videos: res.data[0], searchWord: pathSnip });
+    console.log(this.state.videos);
   };
 
   handleSaveFormSubmit = (event, video) => {
@@ -80,22 +82,14 @@ export default class mainWrapper extends React.Component {
     return isItemSelected ? (
       <Iframe name={video.name} url={video.url} id={i} />
     ) : (
-      <Thumbnail
-        alt={video.name}
-        img={
-          video.bigImg 
-          === "default"
-            ? "http://1.bp.blogspot.com/-Zr0pmj1bLnM/Uhh7kROhGYI/AAAAAAAAGkE/W51xFS75-Ec/s1600/no-thumbnail.png"
-            : video.bigImg
-        }
-        id={i}
-      />
+      <Thumbnail alt={video.name} img={video.bigImg} id={i} />
     );
   }
 
   renderVideos = data => {
-    return (
-      // data ? <h3>Couldn't find anything for you...</h3> :
+    return data === undefined ? (
+      <h3>Couldn't find anything for you...</h3>
+    ) : (
       <div>
         {data.map((video, i) => (
           <Tile key={i}>
@@ -137,44 +131,46 @@ export default class mainWrapper extends React.Component {
       <div className="mainWraper">
         <h1>Searching for: {pathSnip}</h1>
         <br />
-        <h5 className="load text-center">Loading...</h5>
+        <h5 className="load text-center">
+          Loading <i class="fas fa-spinner fa-spin"></i>
+        </h5>
       </div>
     ) : (
       <div className="mainWraper">
         <h1>Results for: {pathSnip}</h1>
         <br />
         <div className="row-wrapper">
-          <h3 className="row-title">REDDIT</h3>
+          <h3 className="row-title">Searched Reddit for: {pathSnip}</h3>
           <Wrapper ID="reddit">
             {this.renderVideos(this.state.videos.reddit)}
           </Wrapper>
         </div>
         <div className="row-wrapper">
-          <h3 className="">TMDB</h3>
+          <h3 className="row-title">Searched IMDB for: {pathSnip}</h3>
           <Wrapper ID="tmdb">
             {this.renderVideos(this.state.videos.tmdb)}
           </Wrapper>
         </div>
         <div className="row-wrapper">
-          <h3 className="">STEAM</h3>
+          <h3 className="row-title">Searched Steam for: {pathSnip}</h3>
           <Wrapper ID="steam">
             {this.renderVideos(this.state.videos.steam)}
           </Wrapper>
         </div>
-        {/* <div className="row-wrapper">
-          <h3 className="">YOUTUBE</h3>
+        <div className="row-wrapper">
+          <h3 className="row-title">Searched YouTube for: {pathSnip}</h3>
           <Wrapper ID="youtube">
             {this.renderVideos(this.state.videos.youtube)}
           </Wrapper>
         </div>
         <div className="row-wrapper">
-          <h3 className="">VEVO</h3>
+          <h3 className="row-title">Searched Vevo for: {pathSnip}</h3>
           <Wrapper ID="vevo">
             {this.renderVideos(this.state.videos.vevo)}
           </Wrapper>
-        </div> */}
+        </div>
         <div className="row-wrapper">
-          <h3 className="">VIMEO</h3>
+          <h3 className="row-title">Searched Vimeo for: {pathSnip}</h3>
           <Wrapper ID="vimeo">
             {this.renderVideos(this.state.videos.vimeo)}
           </Wrapper>

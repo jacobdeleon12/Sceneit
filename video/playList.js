@@ -20,8 +20,8 @@ module.exports = {
                 type: obj.snippet.channelTitle,
                 name: `${obj.snippet.title.slice(0, 40)}...`,
                 smlImg: obj.snippet.thumbnails.medium.url,
-                bigImg: obj.snippet.thumbnails.maxres.url,
-                url: `https://www.youtube.com/embed/${obj.snippet.resourceId.videoId}?rel=0;&autoplay=1&mute=0&loop=1`
+                bigImg: obj.snippet.thumbnails.medium.url,
+                url: `https://www.youtube.com/embed/${obj.snippet.resourceId.videoId}?rel=0;&autoplay=1`
               });
           }
           // console.log(urlArray);
@@ -34,6 +34,7 @@ module.exports = {
   // try "speed"
   // Queries Youtube channel by name, returns 10 videos
   searchChannel: function(channelId, query) {
+    let urlArray = [];
     return new Promise(function(resolve, reject) {
       let count = 0;
 
@@ -52,8 +53,8 @@ module.exports = {
                   type: obj.snippet.channelTitle,
                   name: `${obj.snippet.title.slice(0, 40)}...`,
                   smlImg: obj.snippet.thumbnails.medium.url,
-                  bigImg: obj.snippet.thumbnails.high.url,
-                  url: `https://www.youtube.com/embed/${obj.id.videoId}?rel=0;&autoplay=1&mute=0&loop=1`
+                  bigImg: obj.snippet.thumbnails.medium.url,
+                  url: `https://www.youtube.com/embed/${obj.id.videoId}?rel=0;&autoplay=1`
                 });
             }
             // console.log(urlArray);
