@@ -40,3 +40,27 @@
     opacity: 1;
   }
 }
+
+@media (min-width: 375px) {
+  .vidBtn {
+    font-size: 8px;
+    width: 46%;
+    opacity: 1;
+  }
+}
+
+@media (min-width: 425px) {
+  .vidBtn {
+    font-size: 8px;
+    width: 46%;
+    opacity: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .vidBtn {
+    font-size: 8px;
+    width: 46%;
+    opacity: 0;
+  }
+}
