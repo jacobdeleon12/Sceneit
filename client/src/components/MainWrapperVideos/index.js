@@ -97,7 +97,7 @@ export default class mainWrapper extends React.Component {
     return data === undefined ? (
       <h3>Couldn't find anything for you...</h3>
     ) : (
-        <div>
+        <div className="tileMargin">
           {data.map((video, i) => (
             <Tile key={i}>
               <Title title={video.name} />

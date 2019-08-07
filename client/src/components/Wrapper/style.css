@@ -139,6 +139,10 @@
   .scroll_menu {
     height: 20rem;
   }
+
+  .tileMargin {
+    margin-right: 110px;
+  }
 }
 
 @media (min-width: 1024px) {
