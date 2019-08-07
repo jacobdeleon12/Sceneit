@@ -28,6 +28,7 @@ export default class UserWrapper extends React.Component {
   componentWillMount() {
     this.loadUser();
     this.loadVideos();
+    window.scrollTo(0, 0);
   }
 
   componentDidMount() {
@@ -128,7 +129,7 @@ export default class UserWrapper extends React.Component {
   };
 
   render() {
-    // window.scrollTo(0, 0);
+
     return (
       <div className="userPage ">
         <div className="userInfo">
