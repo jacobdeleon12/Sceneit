@@ -4,7 +4,6 @@ import Wrapper from "../Wrapper";
 import { DeleteBtn } from "../Buttons/VideoBtns";
 import { Title, Iframe, Thumbnail } from "../Iframe";
 import { Tile } from "../Tile";
-import { Col, Row, Container } from "../Grid";
 // import { JumboIframe } from "../Iframe";
 import "./style.css";
 

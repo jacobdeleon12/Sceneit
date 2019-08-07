@@ -37,6 +37,9 @@ module.exports = {
               let bigThumb = item.pictures.sizes[6].link;
               let vidID = item.uri.split("/").slice(-1)[0];
               let name = item.name;
+              if (name.length > 40) {
+                name = `${item.name.slice(0, 40)}...`;
+              }
 
               item.uri &&
                 urlArray.push({
@@ -85,6 +88,9 @@ module.exports = {
                 let bigThumb = item.pictures.sizes[6].link;
                 let vidID = item.uri.split("/").slice(-1)[0];
                 let name = item.name;
+                if (name.length > 40) {
+                  name = `${item.name.slice(0, 40)}...`;
+                }
 
                 item.uri &&
                   urlArray.push({
