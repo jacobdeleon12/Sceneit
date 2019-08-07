@@ -36,7 +36,7 @@ mongoose
     videos.addToDb(tmdbQ, steamQ, redditQ, youtubeQ, vevoQ, vimeoQ);
     setInterval(() => {
       console.log(`new videos added on ${new Date()}`);
-      videos.addToDb(tmdbQ, steamQ, redditQ, youtubeQ, vevoQ, vimeoQ);
+      // videos.addToDb(tmdbQ, steamQ, redditQ, youtubeQ, vevoQ, vimeoQ);
     }, 60 * 60 * 1000);
   })
   .catch(err => console.log(err));
