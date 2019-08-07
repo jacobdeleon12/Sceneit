@@ -3,6 +3,6 @@ h1{
 }
 
 .jumbotron{
-  background: rgb(52,58,64);
+background: rgb(52,58,64);
 background: linear-gradient(0deg, rgba(52,58,64,1) 0%, rgba(103,115,128,1) 50%, rgba(52,58,64,1) 100%);
 }

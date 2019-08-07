@@ -2,3 +2,6 @@
   display: flex;
   align-items: center;
 }
+.jumbrotron {
+  background-color: rgb(52, 58, 64) !important;
+}
