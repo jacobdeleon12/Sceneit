@@ -66,6 +66,24 @@
   }
 }
 
+@media (max-width: 320px) {
+  .title_wrap {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 375px) {
+  .title_wrap {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 546px) {
+  .title_wrap {
+    opacity: 1;
+  }
+}
+
 @media (min-width: 375px) {
   .sml_iframe {
     height: 9rem;
