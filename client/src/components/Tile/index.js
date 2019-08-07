@@ -6,6 +6,7 @@ export function Tile(props) {
   return (
     <div
       className="tile"
+      // style={{ paddingTop: "1.2rem", paddingBottom: "13rem" }}
     >
       {props.children}
     </div>
