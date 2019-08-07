@@ -58,7 +58,7 @@ module.exports = {
     return new Promise(function(resolve, reject) {
       axios
         .get(
-          `https://www.reddit.com/r/videos/search.json?q=${query}&restrict_sr=on&limit=10&include_over_18=on&sort=relevance&t=all`
+          `https://www.reddit.com/r/videos/search.json?q=${query}&restrict_sr=on&limit=10&include_over_18=off&sort=relevance&t=all`
         )
         .then(response => {
           let count = 0;
