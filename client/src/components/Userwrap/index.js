@@ -4,6 +4,10 @@ import Wrapper from "../Wrapper";
 import { DeleteBtn } from "../Buttons/VideoBtns";
 import { Title, Iframe, Thumbnail } from "../Iframe";
 import { Tile } from "../Tile";
+<<<<<<< HEAD
+=======
+// import { JumboIframe } from "../Iframe";
+>>>>>>> master
 import "./style.css";
 
 //NPM alert options
