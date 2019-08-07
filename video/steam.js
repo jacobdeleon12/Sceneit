@@ -86,6 +86,9 @@ module.exports = {
                   resolve(urlArray);
                 })
                 .catch(err => reject(err));
+              if (i >= 10) {
+                return false;
+              }
             });
           } else {
             console.log("found nothing");
