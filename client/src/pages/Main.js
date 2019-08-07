@@ -24,7 +24,7 @@ class Main extends Component {
 
   // =======================================
   loadUser = () => {
-    console.log(loggedInUser);
+    // console.log(loggedInUser);
     this.setState({ user: user });
   };
 
@@ -36,8 +36,8 @@ class Main extends Component {
   };
 
   render() {
-    console.log(user);
-    console.log(this.state);
+    // console.log(user);
+    // console.log(this.state);
 
     return (
       <div>
@@ -46,12 +46,12 @@ class Main extends Component {
           {loggedInUser ? (
             <MainWrapper />
           ) : (
-              <h5>
-                You must be logged in to visit this page. Womp Womp! Click
-              <a href="https://sceneitapp.herokuapp.com/"> here </a> to visit the
-                                  login page.
+            <h5>
+              You must be logged in to visit this page. Womp Womp! Click
+              <a href="https://sceneitapp.herokuapp.com/"> here </a> to visit
+              the login page.
             </h5>
-            )}
+          )}
         </Container>
         <Footer />
       </div>
