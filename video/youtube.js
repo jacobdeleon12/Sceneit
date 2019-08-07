@@ -15,13 +15,13 @@ module.exports = {
         )
         .then(response => {
           for (let obj of response.data.items) {
-            obj.id.videoId &&
+            obj.id &&
               urlArray.push({
                 type: "youtube",
                 name: `${obj.snippet.title.slice(0, 40)}...`,
                 smlImg: obj.snippet.thumbnails.medium.url,
-                bigImg: obj.snippet.thumbnails.high.url,
-                url: `https://www.youtube.com/embed/${obj.id.videoId}?rel=0;&autoplay=1`
+                bigImg: obj.snippet.thumbnails.medium.url,
+                url: `https://www.youtube.com/embed/${obj.id}?rel=0;&autoplay=1`
               });
           }
           // console.log(urlArray);
@@ -53,7 +53,7 @@ module.exports = {
                   type: "youtube",
                   name: `${obj.snippet.title.slice(0, 40)}...`,
                   smlImg: obj.snippet.thumbnails.medium.url,
-                  bigImg: obj.snippet.thumbnails.high.url,
+                  bigImg: obj.snippet.thumbnails.medium.url,
                   url: `https://www.youtube.com/embed/${obj.id.videoId}?rel=0;&autoplay=1`
                 });
             }
