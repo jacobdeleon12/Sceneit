@@ -1,4 +1,16 @@
+<<<<<<< HEAD
 /* .tile {
   padding-bottom: 20rem;
   padding-top: 2rem;
 } */
+=======
+.tile {
+  margin-right: 1rem;
+}
+@media (min-width: 768px) {
+  .tile {
+    padding-top: 1.2rem;
+    padding-bottom: 13em;
+  }
+}
+>>>>>>> master
