@@ -64,6 +64,21 @@
   .big_iframe {
     height: 16rem;
   }
+}
+
+@media (max-width: 320px) {
+  .title_wrap {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 375px) {
+  .title_wrap {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 546px) {
   .title_wrap {
     opacity: 1;
   }
@@ -78,9 +93,6 @@
   .sml_title {
     max-width: 150px;
   }
-  .title_wrap {
-    opacity: 1;
-  }
 }
 
 @media (min-width: 425px) {
@@ -94,9 +106,6 @@
   }
   .big_iframe {
     height: 18rem;
-  }
-  .title_wrap {
-    opacity: 1;
   }
 }
 
