@@ -1,12 +1,11 @@
 const cheerio = require("cheerio");
 const axios = require("axios");
 
-let urlArray = [];
-
 module.exports = {
   // try "popularwishlist"
   // Scrapes list page, returns 10 videos
   searchList: function(query) {
+    let urlArray = [];
     return new Promise(function(resolve, reject) {
       axios
         .get(
@@ -69,21 +68,24 @@ module.exports = {
                   count++;
                   console.log(count);
 
-                  $("div.highlight_movie").attr("data-webm-hd-source") &&
-                    urlArray.push({
-                      type: "steam",
-                      name: $("div.apphub_AppName").text(),
-                      smlImg: $("img.movie_thumb").attr("src"),
-                      bigImg: $("img.game_header_image_full").attr("src"),
-                      url: $("div.highlight_movie").attr("data-webm-hd-source")
-                    });
-                  // console.log(urlArray);
+                  if (i >= 10) {
+                    return false;
+                  } else {
+                    $("div.highlight_movie").attr("data-webm-hd-source") &&
+                      urlArray.push({
+                        type: "steam",
+                        name: $("div.apphub_AppName").text(),
+                        smlImg: $("img.movie_thumb").attr("src"),
+                        bigImg: $("img.game_header_image_full").attr("src"),
+                        url: $("div.highlight_movie").attr(
+                          "data-webm-hd-source"
+                        )
+                      });
+                  }
+                  console.log(urlArray);
                   resolve(urlArray);
                 })
                 .catch(err => reject(err));
-              if (i === 9) {
-                return false;
-              }
             });
           } else {
             console.log("found nothing");

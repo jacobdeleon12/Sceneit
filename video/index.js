@@ -7,51 +7,44 @@ const YOUTUBE = require("./youtube");
 const PLAYLIST = require("./playList");
 const VIMEO = require("./vimeo");
 
-TMDB.searchList();
+// TMDB.searchList();
 // STEAM.searchList("popularwishlist");
 // REDDIT.searchList("videos");
 // YOUTUBE.searchList("mostPopular");
 // PLAYLIST.searchPlayList("PL9tY0BWXOZFsPMZczEqnyvD-Z5ugOZrm8");
 // VIMEO.searchList("staffpicks");
 
-// TMDB.searchName("top gun");
-// STEAM.searchName("top-gun");
+// TMDB.searchName("speed");
+STEAM.searchName("top-gun");
 // REDDIT.searchName("speed");
 // YOUTUBE.searchName("speed");
 // PLAYLIST.searchChannel("UC2pmfLm7iq6Ov1UwYrWYkZA", "speed");
 // VIMEO.searchName("speed");
 
-const videoArray = [];
-
 module.exports = {
   addToDb: async function(tmdbQ, steamQ, redditQ, youtubeQ, vevoQ, vimeoQ) {
+    const videoArray = [];
     try {
-      console.log("Hit TMDB");
       const TMDBarr = await TMDB.searchList(tmdbQ);
       console.log("Past TMDB");
       // console.log(TMDBarr);
 
-      console.log("Hit STEAM");
       const STEAMarr = await STEAM.searchList(steamQ);
       console.log("Past STEAM");
       // console.log(STEAMarr);
 
-      console.log("Hit REDDIT");
       const REDDITarr = await REDDIT.searchList(redditQ);
       console.log("Past REDDIT");
       // console.log(REDDITarr);
 
-      console.log("Hit YOUTUBE");
       const YOUTUBEarr = await YOUTUBE.searchList(youtubeQ);
       console.log("Past YOUTUBE");
       // console.log(YOUTUBEarr);
 
-      console.log("Hit PLAYLIST");
       const VEVOarr = await PLAYLIST.searchPlayList(vevoQ);
       console.log("Past PLAYLIST");
       // console.log(VEVOarr);
 
-      console.log("Hit VIMEO");
       const VIMEOarr = await VIMEO.searchList(vimeoQ);
       console.log("Past VIMEO");
       // console.log(VIMEOarr);
@@ -86,7 +79,6 @@ module.exports = {
   },
   searchByWord: async function(searchWord) {
     const vevoChannel = "UC2pmfLm7iq6Ov1UwYrWYkZA";
-
     let videoArray = [];
 
     try {
@@ -94,10 +86,10 @@ module.exports = {
       console.log("made it past steam");
       const REDDITarr = await REDDIT.searchName(searchWord);
       console.log("made it past reddit");
-      // const YOUTUBEarr = await YOUTUBE.searchName(searchWord);
-      // console.log("made it past youtube");
-      // const VEVOarr = await PLAYLIST.searchChannel(vevoChannel, searchWord);
-      // console.log("made it past vevo");
+      const YOUTUBEarr = await YOUTUBE.searchName(searchWord);
+      console.log("made it past youtube");
+      const VEVOarr = await PLAYLIST.searchChannel(vevoChannel, searchWord);
+      console.log("made it past vevo");
       const VIMEOarr = await VIMEO.searchName(searchWord);
       console.log("made it past vimeo");
       const TMDBarr = await TMDB.searchName(searchWord);
@@ -108,8 +100,8 @@ module.exports = {
         tmdb: TMDBarr,
         steam: STEAMarr,
         reddit: REDDITarr,
-        // youtube: YOUTUBEarr,
-        // vevo: VEVOarr,
+        youtube: YOUTUBEarr,
+        vevo: VEVOarr,
         vimeo: VIMEOarr
       });
 

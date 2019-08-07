@@ -2,12 +2,12 @@ require("dotenv").config();
 const axios = require("axios");
 
 YOUTUBE_API = "AIzaSyBQaJOdXS5rojwu9fVmBi-JenkMGVMUIec";
-let urlArray = [];
 
 module.exports = {
   // try "mostPopular"
   // Queries YouTube playlist, returns 10 videos
   searchPlayList: function(query) {
+    let urlArray = [];
     return new Promise(function(resolve, reject) {
       axios
         .get(
