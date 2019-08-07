@@ -82,7 +82,7 @@ module.exports = {
                         )
                       });
                   }
-                  console.log(urlArray);
+                  // console.log(urlArray);
                   resolve(urlArray);
                 })
                 .catch(err => reject(err));

@@ -2,12 +2,12 @@ require("dotenv").config();
 const axios = require("axios");
 
 YOUTUBE_API = "AIzaSyBQaJOdXS5rojwu9fVmBi-JenkMGVMUIec";
+let urlArray = [];
 
 module.exports = {
   // try "mostPopular"
   // Queries YouTube playlist, returns 10 videos
   searchPlayList: function(query) {
-    let urlArray = [];
     return new Promise(function(resolve, reject) {
       axios
         .get(
@@ -21,7 +21,7 @@ module.exports = {
                 name: `${obj.snippet.title.slice(0, 40)}...`,
                 smlImg: obj.snippet.thumbnails.medium.url,
                 bigImg: obj.snippet.thumbnails.maxres.url,
-                url: `https://www.youtube.com/embed/${obj.snippet.resourceId.videoId}?rel=0;&autoplay=1&mute=0&loop=1`
+                url: `https://www.youtube.com/embed/${obj.snippet.resourceId.videoId}?rel=0;&autoplay=1`
               });
           }
           // console.log(urlArray);
@@ -54,7 +54,7 @@ module.exports = {
                   name: `${obj.snippet.title.slice(0, 40)}...`,
                   smlImg: obj.snippet.thumbnails.medium.url,
                   bigImg: obj.snippet.thumbnails.high.url,
-                  url: `https://www.youtube.com/embed/${obj.id.videoId}?rel=0;&autoplay=1&mute=0&loop=1`
+                  url: `https://www.youtube.com/embed/${obj.id.videoId}?rel=0;&autoplay=1`
                 });
             }
             // console.log(urlArray);
