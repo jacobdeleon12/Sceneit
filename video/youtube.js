@@ -48,13 +48,13 @@ module.exports = {
               count++;
               console.log(count);
 
-              obj.id &&
+              obj.id.videoId &&
                 urlArray.push({
                   type: "youtube",
                   name: `${obj.snippet.title.slice(0, 40)}...`,
                   smlImg: obj.snippet.thumbnails.medium.url,
                   bigImg: obj.snippet.thumbnails.medium.url,
-                  url: `https://www.youtube.com/embed/${obj.id}?rel=0;&autoplay=1`
+                  url: `https://www.youtube.com/embed/${obj.id.videoId}?rel=0;&autoplay=1`
                 });
             }
             // console.log(urlArray);
