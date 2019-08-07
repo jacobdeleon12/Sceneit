@@ -24,7 +24,7 @@ function Background({ children }) {
         <Row>
           <Col size="sm-12">
             <div className="m-3 p-3 text-center">
-              {/* <img className="splashImg ball" alt="arrow" src={Img} /> */}
+              <img className="splashImg ball" alt="arrow" src={Img} />
               <br />
               <br />
               <GLogin />
