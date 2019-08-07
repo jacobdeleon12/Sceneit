@@ -29,6 +29,7 @@ export default class UserWrapper extends React.Component {
   componentWillMount() {
     this.loadUser();
     this.loadVideos();
+    window.scrollTo(0, 0);
   }
 
   componentDidMount() {
@@ -79,8 +80,8 @@ export default class UserWrapper extends React.Component {
     return isItemSelected ? (
       <Iframe name={video.vName} url={video.vStr} id={i} />
     ) : (
-      <Thumbnail img={video.vImg} id={i} />
-    );
+        <Thumbnail img={video.vImg} id={i} />
+      );
   }
 
   renderVideos = data => {
@@ -129,7 +130,7 @@ export default class UserWrapper extends React.Component {
   };
 
   render() {
-    // window.scrollTo(0, 0);
+
     return (
       <div className="userPage ">
         <div className="userInfo">
@@ -155,8 +156,8 @@ export default class UserWrapper extends React.Component {
                 </h5>
               </div>
             ) : (
-              <div>{this.renderVideos(this.state.savedVideos)}</div>
-            )}
+                <div>{this.renderVideos(this.state.savedVideos)}</div>
+              )}
           </Wrapper>
         </div>
       </div>
