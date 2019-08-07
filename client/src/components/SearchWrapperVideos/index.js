@@ -132,7 +132,7 @@ export default class mainWrapper extends React.Component {
         <h1>Searching for: {pathSnip}</h1>
         <br />
         <h5 className="load text-center">
-          Loading <i class="fas fa-spinner fa-spin"></i>
+          Loading <i className="fas fa-spinner fa-spin"></i>
         </h5>
       </div>
     ) : (
