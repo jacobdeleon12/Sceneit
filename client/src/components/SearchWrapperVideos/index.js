@@ -157,7 +157,7 @@ export default class mainWrapper extends React.Component {
             {this.renderVideos(this.state.videos.steam)}
           </Wrapper>
         </div>
-        <div className="row-wrapper">
+        {/* <div className="row-wrapper">
           <h3 className="row-title">Searched YouTube for: {pathSnip}</h3>
           <Wrapper ID="youtube">
             {this.renderVideos(this.state.videos.youtube)}
@@ -168,7 +168,7 @@ export default class mainWrapper extends React.Component {
           <Wrapper ID="vevo">
             {this.renderVideos(this.state.videos.vevo)}
           </Wrapper>
-        </div>
+        </div> */}
         <div className="row-wrapper">
           <h3 className="row-title">Searched Vimeo for: {pathSnip}</h3>
           <Wrapper ID="vimeo">

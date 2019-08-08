@@ -3,6 +3,7 @@ const cheerio = require("cheerio");
 
 TMDB_API = "f156e9ea";
 
+
 module.exports = {
   // try "trailers"
   // Queries TMDB list, returns 20 videos
@@ -34,7 +35,7 @@ module.exports = {
               if (i >= 20) {
                 return false;
               } else {
-                trailerID &&
+                poster &&
                   urlArray.push({
                     type: "imdb",
                     name: name,
@@ -62,7 +63,7 @@ module.exports = {
         .then(response => {
           let movieArr = response.data.Search;
           let count = 0;
-          // console.log(movieArr);
+          // console.log(response.data.Search);
 
           if (movieArr) {
             for (const movie of movieArr) {
@@ -82,7 +83,7 @@ module.exports = {
                   console.log(count);
                   // console.log(trailerID);
 
-                  trailerID &&
+                  poster &&
                     urlArray.push({
                       type: "imbd",
                       name: name,
@@ -90,10 +91,8 @@ module.exports = {
                       bigImg: poster,
                       url: `https://www.imdb.com/videoembed/${trailerID}`
                     });
-                  if (count >= 9) {
-                    // console.log(urlArray);
-                    resolve(urlArray);
-                  }
+                  console.log(urlArray);
+                  resolve(urlArray);
                 })
                 .catch(err => reject(err));
             }
