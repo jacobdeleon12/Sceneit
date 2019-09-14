@@ -2,6 +2,7 @@ import "./style.css";
 import React from "react";
 import { Col, Row, Container } from "../Grid";
 import { GLogin } from "../Buttons/Google";
+import { Link } from "react-router-dom";
 
 function Background({ children }) {
   const Logo = "<Scene/ IT>";
@@ -27,6 +28,15 @@ function Background({ children }) {
               <br />
               <br />
               <GLogin />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col size="sm-12">
+            <div className="m-3 p-3 text-center">
+              <Link to="/main">
+                Continue without logging in!
+              </Link>
             </div>
           </Col>
         </Row>

@@ -1,9 +1,10 @@
 import React from "react";
 import "./style.css";
-import { GLogout } from "../Buttons/Google";
+import { GLogin, GLogout } from "../Buttons/Google";
 import { Link } from "react-router-dom";
 
 const Logo = "<Scene/ IT>";
+const loggedInUser = window.sessionStorage.getItem("loggedInUser");
 
 export function LoginNav() {
   return (
@@ -47,7 +48,10 @@ export function MainNav() {
             </Link>
           </li>
           <li className="nav-item">
-            <GLogout />
+            { loggedInUser ? 
+              ( <GLogout /> ) :
+              ( <GLogin /> )
+            }
           </li>
         </ul>
         <form
