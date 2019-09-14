@@ -70,9 +70,9 @@ https://sceneitapp.herokuapp.com/
 
 ## Copyright
 
-<image src='client\public\Images\BlakeHeadShot.png' width='200px' display='inline'>
-<image src='client\public\Images\JacobHeadShot.JPG' width='200px' display='inline'>
-<image src='client\public\Images\KaiHeadShot.jpg' width='200px' display='inline'>
-<image src='client\public\Images\KalebHeadShot.jpg' width='200px' display='inline'>
+<image src='client\public\Images\BlakeHeadShot.png' style='max-width:20%; display: inline;'>
+<image src='client\public\Images\JacobHeadShot.JPG' style='max-width:20%; display: inline;'>
+<image src='client\public\Images\KaiHeadShot.jpg' style='max-width:20%; display: inline;'>
+<image src='client\public\Images\KalebHeadShot.jpg' style='max-width:20%; display: inline;'>
 
 Blake, Jacob, Kai, Kaleb © 2019.  All rights reserved.
