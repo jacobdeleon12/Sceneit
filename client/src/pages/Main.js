@@ -3,6 +3,7 @@ import { Container } from "../components/Grid";
 import { MainNav } from "../components/Nav";
 import Footer from "../components/Footer";
 import MainWrapper from "../components/MainWrapperVideos";
+import Nav2 from "../components/New_Nav";
 
 const loggedInUser = window.sessionStorage.getItem("loggedInUser");
 const user = JSON.parse(sessionStorage.getItem("UserInfo"));
@@ -41,7 +42,8 @@ class Main extends Component {
 
     return (
       <div>
-        <MainNav />
+        {/* <MainNav /> */}
+        <Nav2 />
         <Container fluid>
           {loggedInUser ? (
             <MainWrapper />
