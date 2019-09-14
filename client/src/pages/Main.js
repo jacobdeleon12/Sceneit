@@ -43,15 +43,7 @@ class Main extends Component {
       <div>
         <MainNav />
         <Container fluid>
-          {loggedInUser ? (
             <MainWrapper />
-          ) : (
-            <h5>
-              You must be logged in to visit this page. Womp Womp! Click
-              <a href="https://sceneitapp.herokuapp.com/"> here </a> to visit
-              the login page.
-            </h5>
-          )}
         </Container>
         <Footer />
       </div>
