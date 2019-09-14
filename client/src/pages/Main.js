@@ -42,10 +42,10 @@ class Main extends Component {
 
     return (
       <div>
-        {/* <MainNav /> */}
-        <Nav2 />
+        <MainNav />
+        {/* <Nav2 /> */}
         <Container fluid>
-            <MainWrapper />
+          <MainWrapper />
         </Container>
         <Footer />
       </div>
