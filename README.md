@@ -31,7 +31,9 @@ Developing in React with a "Mobile First" mindset. We are using 12 componants.
 * Video Player
 * Footer
 
-![Wireframe Layout](./deliverables/deliverable_1/wireframe/sceneItWireFrame.png)
+<image src='client\public\Images\Screenshot (31).png'>
+<image src='client\public\Images\Screenshot (32).png'>
+<image src='client\public\Images\Screenshot (33).png'>
 
 ## Responsibilities
 
@@ -67,5 +69,10 @@ Although we all want to learn more about each end so we will all be helping with
 https://sceneitapp.herokuapp.com/
 
 ## Copyright
+
+<image src='client\public\Images\BlakeHeadShot.png' width='200px' display='inline'>
+<image src='client\public\Images\JacobHeadShot.JPG' width='200px' display='inline'>
+<image src='client\public\Images\KaiHeadShot.jpg' width='200px' display='inline'>
+<image src='client\public\Images\KalebHeadShot.jpg' width='200px' display='inline'>
 
 Blake, Jacob, Kai, Kaleb © 2019.  All rights reserved.
