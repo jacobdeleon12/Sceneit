@@ -31,7 +31,7 @@
     "cookie-session": "^1.3.3",
     "dotenv": "^8.0.0",
     "esm": "^3.2.25",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "if-env": "^1.0.4",
     "moment": "^2.24.0",
     "mongoose": "^5.6.8",
